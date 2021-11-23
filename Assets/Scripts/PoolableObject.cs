@@ -8,6 +8,6 @@ public class PoolableObject : MonoBehaviour
     private void OnDisable()
     {
         if(prefab != null)
-            ObjectPooler.Instance.ReleasePooledObject(this);
+            ObjectPooler.instance.ReleasePooledObject(this);
     }
 }

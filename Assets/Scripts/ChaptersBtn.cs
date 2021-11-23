@@ -9,8 +9,11 @@ public class ChaptersBtn : MonoBehaviour
     [SerializeField] private Button btn;
     [SerializeField] private RtlText _text;
 
+
     private void Start()
     { 
-        editBtn.onClick.AddListener(() => UIManager.Instance.SelectChapter());
+        editBtn.onClick.AddListener(() => ManagerUI.Instance.CheapSelect());
+        
+        
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    public static ObjectPooler Instance;
+    public static ObjectPooler instance;
     public List<PrePooledObjects> prePooledObjects;
     private Dictionary<string, Queue<GameObject>> dict = null;
 
@@ -17,9 +17,9 @@ public class ObjectPooler : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             dict = new Dictionary<string, Queue<GameObject>>();
         }
         else
@@ -41,7 +41,6 @@ public class ObjectPooler : MonoBehaviour
 
         foreach(GameObject go in pooledObjects)
         {
-            go.transform.SetParent(transform);
             go.SetActive(false);
         }
     }
@@ -57,15 +56,18 @@ public class ObjectPooler : MonoBehaviour
         {
             return dict[go.name].Dequeue();
         }
-
-        var newGo = Instantiate(go);
-        var po = newGo.GetComponent<PoolableObject>();
-        if( po == null)
+        else
         {
-            po = newGo.AddComponent<PoolableObject>();
+            GameObject newGo = Instantiate(go);
+            PoolableObject po = newGo.GetComponent<PoolableObject>();
+            if( po == null)
+            {
+                po = newGo.AddComponent<PoolableObject>();
+            }
+            po.prefab = go;
+            return newGo;
         }
-        po.prefab = go;
-        return newGo;
+
     }
 
     public void ReleasePooledObject(PoolableObject po)
@@ -75,6 +77,5 @@ public class ObjectPooler : MonoBehaviour
             dict.Add(po.prefab.name, new Queue<GameObject>());
         }
         dict[po.prefab.name].Enqueue(po.gameObject);
-        // po.transform.SetParent(transform);
     }
 }

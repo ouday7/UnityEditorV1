@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -293,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -361,4 +363,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editBtn: {fileID: 4836439067259369641}
   btn: {fileID: 1149008622512790624}
-  text: {fileID: 8558727283003640729}
+  _text: {fileID: 8558727283003640729}
