@@ -4,8 +4,8 @@ using UnityEngine;
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
-    [SerializeField] private List<ObjectPooler> pooledObjects;
-    [SerializeField] private ObjectPooler objectToPool;
+    [SerializeField] private List<EditorButtonBase> pooledObjects;
+    [SerializeField] private EditorButtonBase objectToPool;
     [SerializeField] private int amountToPool;
 
     private Transform _t;
@@ -19,7 +19,7 @@ public class ObjectPooler : MonoBehaviour
 
         _t = transform;
 
-        pooledObjects = new List<ObjectPooler>();
+        pooledObjects = new List<EditorButtonBase>();
         for (var i = 0; i < amountToPool; i++)
         {
             var tmp = Instantiate(objectToPool, _t);
@@ -29,7 +29,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public ObjectPooler GetPooledObject()
+    public EditorButtonBase GetPooledObject()
     {
         if (pooledObjects.Count <= 0) return Instantiate(objectToPool, this.transform);
         var objectToGet = pooledObjects[_lastIndex];
@@ -38,7 +38,7 @@ public class ObjectPooler : MonoBehaviour
         return objectToGet;
     }
 
-    public void ReturnObject(ObjectPooler objectToDeSpawn)
+    public void ReturnObject(EditorButtonBase objectToDeSpawn)
     {
         objectToDeSpawn.transform.SetParent(this.transform);
         objectToDeSpawn.gameObject.SetActive(false);
