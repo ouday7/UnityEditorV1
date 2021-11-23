@@ -5,138 +5,97 @@ using UPersian.Components;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    
     public Button butt;
     [SerializeField] private TextAsset textJson;
-    
     
     [SerializeField] private GameObject levelsPrefab;
     [SerializeField] private GameObject subjectPrefab;
     [SerializeField] private GameObject chaptersPrefab;
     
-    
     [SerializeField] private RectTransform levelsHolder;
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
     
-    public GameObject levelbtn;
-    [SerializeField] private ChaptersBtn _chaptersBtn;
-    [SerializeField] private SubjectsBtn _subjectsBtn;
+    public GameObject selectedLevelBtn;
+    [SerializeField] private ChaptersBtn selectedChaptersBtn;
+    [SerializeField] private SubjectsBtn selectedSubjectsBtn;
 
-    
-    [System.Serializable] public class Levels
-    {
-        public int id;
-        public string name;
-        public int order;
-    }
-    [System.Serializable] public class Subjects
-    {
-        public int id;
-        public string name;
-        public int order;
-        public int levelId;
-    }
-    [System.Serializable] public class Chapters
-    {
-        public int id;
-        public string name;
-        public int order;
-         public int subjectId;
-         public int levelId;
+    public LevelsData infoListLevels = new LevelsData();
+    public ChaptersData infoListChapters = new ChaptersData();
+    public SubjectsData infoListSubjects = new SubjectsData();
 
-    }
-
-    
-    [System.Serializable] public class GetDatalevels
-    {
-        public Levels[] levels;
-    }
-    [System.Serializable] public class GetDatachapters
-    {
-        public Chapters[] chapters;
-    }
-    [System.Serializable] public class GetDatasubjects
-    {
-        public Subjects[] subjects;
-    }
-    
-    
-    public GetDatalevels infoListlevels = new GetDatalevels();
-    public GetDatachapters infoListchapters = new GetDatachapters();
-    public GetDatasubjects infoListsubjects = new GetDatasubjects();
-    
-
-    
+    private JsonData _data;//added
 
     private void Awake()
     {
         if (Instance != null) return;
         Instance = this;
     }
+
     private void Start()
     {
-        infoListlevels = JsonUtility.FromJson<GetDatalevels>(textJson.text);
-        infoListchapters = JsonUtility.FromJson<GetDatachapters>(textJson.text);
-        infoListsubjects = JsonUtility.FromJson<GetDatasubjects>(textJson.text);
+        infoListLevels = JsonUtility.FromJson<LevelsData>(textJson.text);
+        infoListChapters = JsonUtility.FromJson<ChaptersData>(textJson.text);
+        infoListSubjects = JsonUtility.FromJson<SubjectsData>(textJson.text);
+        infoListSubjects.subjects = infoListSubjects.subjects.OrderBy(subject => subject.order).ToArray();
+        _data = JsonUtility.FromJson<JsonData>(textJson.text);//added
         SpawnLevels();
-        
-        
     }
+
     public void SpawnLevels()
     {
-        var list = infoListlevels.levels.OrderBy(tab => tab.order);
-        foreach (var tab in list)
+        var levels = infoListLevels.levels.OrderBy(tab => tab.order);
+        foreach (var level in levels)
         {
-            
+            selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
 
-           levelbtn = ObjectPooler.instance.GetPooledObject(levelsPrefab);
-           
-            if (levelbtn != null)
-            {
-                
-                levelbtn.transform.SetParent(levelsHolder);
-                levelbtn.SetActive(true);
-                levelbtn.name = tab.name;
-                levelbtn.GetComponentInChildren<RtlText>().text = tab.name;
-                levelbtn.GetComponent<Button>().onClick.AddListener(() => ShowSubjects(tab.id));
-                
-            }
-
+            if (selectedLevelBtn == null) continue;
+            var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();
+            newBtn.Initialize();
+            newBtn.BindData(level);
+            selectedLevelBtn.transform.SetParent(levelsHolder);
+            selectedLevelBtn.SetActive(true);//initialize
+            selectedLevelBtn.name = level.name;//initialize
+            selectedLevelBtn.GetComponentInChildren<RtlText>().text = level.name;//initialize
+            selectedLevelBtn.GetComponent<Button>().onClick.AddListener(() => ShowSubjects(level.id));//initialize
         }
+        ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
     }
-    public void ShowSubjects(int i)
+
+    private void ShowSubjects(int id)
     {
-
-        GameObject subjectBtn = ObjectPooler.instance.GetPooledObject(subjectPrefab);
-
-
-
+        //split into 3section
         foreach (Transform child in subjectsHolder.transform) 
         {
-            GameObject.Destroy(child.gameObject);
-          //  subjectBtn.gameObject.SetActive(false);
-
+            // Destroy(child.gameObject);
+            //  subjectBtn.gameObject.SetActive(false);
+            ObjectPooler.Instance.ReleasePooledObject(child.GetComponent<PoolableObject>());
         }
-        var list = infoListsubjects.subjects.OrderBy(tab => tab.order);
-
-        foreach (var t in list)
+        
+        foreach (var subject in infoListSubjects.subjects)
         {
-
-            
-            if (t.levelId != i) continue;
-            if (subjectBtn != null)
+            if (subject.levelId != id) continue;
+            var subjectBtn = ObjectPooler.Instance.GetPooledObject(subjectPrefab);
+            if (subjectBtn == null) continue;
+            subjectBtn.transform.SetParent(subjectsHolder);
+            subjectBtn.SetActive(true);
+            subjectBtn.GetComponentInChildren<RtlText>().text = subject.name;
+            subjectBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
-                
-                subjectBtn.transform.SetParent(subjectsHolder);
-                subjectBtn.SetActive(true);
-                subjectBtn.GetComponentInChildren<RtlText>().text = t.name;
-               subjectBtn.GetComponent<Button>().onClick.AddListener(() => ShowChaperte(i));
-                
-            }
-            
+                Debug.Log($"Select Subject[{subject.id}], from level[{id}]");
+                ShowChapter(id);
+            });
+        }
+
+        var subjectToSelect = infoListSubjects.subjects.FirstOrDefault(subject => subject.levelId == id);
+        if (subjectToSelect != null)
+        {
+            Debug.Log($"Select Subject[{subjectToSelect.id}], from level[{id}]");
+            ShowChapter(subjectToSelect.id);
         }
     }
-    private void ShowChaperte(int i)
+    private void ShowChapter(int id)
     {
        // GameObject chapterbtn = ObjectPooler.instance.GetPooledObject(chaptersPrefab);
 
@@ -144,36 +103,41 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        for (var j = 0; j < infoListchapters.chapters.Length; j++)
+        
+        for (var i = 0; i < infoListChapters.chapters.Length; i++)
         {
-            if (infoListchapters.chapters[j].levelId != i) continue;
+            if (infoListChapters.chapters[i].levelId != id) continue;
              
-           var chapterbtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
+            var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
 
             //chapterbtn.transform.SetParent(chaptersHolder);
-            chapterbtn.GetComponentInChildren<RtlText>().text = infoListchapters.chapters[j].name;
-            var j1 = j;
-            chapterbtn.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                Debug.Log(infoListchapters.chapters[j1].name);
-            });
+            chapterBtn.GetComponentInChildren<RtlText>().text = infoListChapters.chapters[i].name;
+            chapterBtn.GetComponent<Button>().onClick.AddListener(() => OnClickChapter(infoListChapters.chapters[i].id));
         }
     }
 
-    public void Updatedata(Text oldname, string newname)
+    private void OnClickChapter(int chapterId)
     {
-        foreach (var lvl in infoListlevels.levels)
+        Debug.Log($"Click Chapter: {chapterId}");
+    }
+
+    public void UpdateData(Text oldname, string newname)
+    {
+        foreach (var lvl in infoListLevels.levels)
         {
             if(lvl.name!=oldname.text) continue;
             lvl.name = newname;
             SaveToJson();
         }
-        
     }
 
     private void SaveToJson()
     {
-        
-        
+        var jsonString = JsonUtility.ToJson(_data);
+    }
+
+    public void LogJson()
+    {
+        Debug.Log(JsonUtility.ToJson(infoListLevels));
     }
 }
