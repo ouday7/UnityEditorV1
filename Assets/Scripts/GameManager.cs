@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Button butt;
     [SerializeField] private TextAsset textJson;
     
-    [SerializeField] private GameObject levelsPrefab;
+    [SerializeField] private EditorButtonBase levelsPrefab;
     [SerializeField] private GameObject subjectPrefab;
     [SerializeField] private GameObject chaptersPrefab;
     
@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
     
-    public GameObject selectedLevelBtn;
-    [SerializeField] private ChaptersBtn selectedChaptersBtn;
-    [SerializeField] private SubjectsBtn selectedSubjectsBtn;
+    [SerializeField] private EditorButtonBase selectedLevelBtn;
+    [SerializeField] private EditorButtonBase selectedChaptersBtn;
+    [SerializeField] private EditorButtonBase selectedSubjectsBtn;
 
     public LevelsData infoListLevels = new LevelsData();
     public ChaptersData infoListChapters = new ChaptersData();
@@ -48,17 +48,11 @@ public class GameManager : MonoBehaviour
         var levels = infoListLevels.levels.OrderBy(tab => tab.order);
         foreach (var level in levels)
         {
-            selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
-
-            if (selectedLevelBtn == null) continue;
-            var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();
-            newBtn.Initialize();
-            newBtn.BindData(level);
+            selectedLevelBtn = ObjectPooler.Instance.GetPooledObject();
+            
+            selectedChaptersBtn.Initialize();
+            selectedChaptersBtn.BindData(level);
             selectedLevelBtn.transform.SetParent(levelsHolder);
-            selectedLevelBtn.SetActive(true);//initialize
-            selectedLevelBtn.name = level.name;//initialize
-            selectedLevelBtn.GetComponentInChildren<RtlText>().text = level.name;//initialize
-            selectedLevelBtn.GetComponent<Button>().onClick.AddListener(() => ShowSubjects(level.id));//initialize
         }
         ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
     }
