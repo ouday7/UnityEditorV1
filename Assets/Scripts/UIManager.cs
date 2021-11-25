@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UPersian.Components;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,11 +25,13 @@ public class UIManager : MonoBehaviour
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
     private ChaptersBtn _selectChaptersBtnBtnButton;
-   
-    public TMP_Dropdown _DropdownChapter;
-    public TMP_Dropdown _DropdownSubjects;
+    public TMP_Dropdown subjectsDropDown;
+    public TMP_Dropdown levelsDropDown;
+    private List<Subject> _availableSubjects;
+    private List<Level> _availableLevels;
 
-
+    private Subject _selectedSubject;
+    private Level _SelectedLevel;
 
     private void Awake()
     {
@@ -40,8 +44,6 @@ public class UIManager : MonoBehaviour
         closeBtn.onClick.AddListener(ClosePanel);
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
-
-
     }
     void ClosePanel()
     {
@@ -56,6 +58,9 @@ public class UIManager : MonoBehaviour
         commonSection.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
+        inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
+
+
     }
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
@@ -65,8 +70,10 @@ public class UIManager : MonoBehaviour
         commonSection.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(true);
         subjectSection.gameObject.SetActive(false);
-        SetDropDownSubjectsValues();
-        SetDropDownChaptersValues();
+        SetLevelDropDown();
+        SetSubjectsDropDown();
+        inputfiledName.placeholder.GetComponent<RtlText>().text = subjectsBtn.Data.name;
+
     }
     public void ChapterEdit(ChaptersBtn chapter)
     {
@@ -77,8 +84,9 @@ public class UIManager : MonoBehaviour
         commonSection.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(true);
         subjectSection.gameObject.SetActive(true);
-        SetDropDownSubjectsValues();
-        SetDropDownChaptersValues();
+        SetLevelDropDown();
+        SetSubjectsDropDown();
+        inputfiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
         
     }
@@ -91,11 +99,11 @@ public class UIManager : MonoBehaviour
                 break;
             case EditedData.Level:
                 Debug.Log("Editing a Button");
-                NewUpdateLevel(inputfiledName.text, inputfilOrder.text);
+                NewUpdateLevel(inputfiledName.text, inputfilOrder.text,_SelectedLevel);
+                
                 break;
             case EditedData.Subject:
                 NewUpdateSubject(inputfiledName.text, inputfilOrder.text);
-
                 break;
             case EditedData.Chapter:
                 NewUpdateChapter(inputfiledName.text, inputfilOrder.text);
@@ -113,9 +121,9 @@ public class UIManager : MonoBehaviour
 
         
     }
-    private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
+    private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText,Level newLevel)
     {
-        _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
+        _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText,newLevel);
     }
     private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
@@ -125,38 +133,49 @@ public class UIManager : MonoBehaviour
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
-    private void SetDropDownChaptersValues()
+    private void SetSubjectsDropDown()
     {
-        _DropdownChapter.options.Clear();
-
-        var subjectsOrders = new List<int>();
+        subjectsDropDown.options.Clear();
+        _availableSubjects = GameManager.Instance.infoListSubjects.subjects.ToList();
         
-        for (int i = 0; i < GameManager.Instance.infoListLevels.levels.Length; i++)
+        for (var i = 0; i < _availableSubjects.Count; i++)
         {
-            subjectsOrders.Add(GameManager.Instance.infoListLevels.levels[i].id);
+            var subject = _availableSubjects[i];
+            subjectsDropDown.options.Add(
+                new TMP_Dropdown.OptionData {text = subject.name});
         }
-
-        foreach (var subjectsOrder in subjectsOrders)
-        {
-            _DropdownChapter.options.Add(new TMP_Dropdown.OptionData(){text = subjectsOrder.ToString()});
-        }
+        
+        subjectsDropDown.onValueChanged.AddListener(SelectSubject);
     }
-    private void SetDropDownSubjectsValues()
+
+    private void SelectSubject(int selectedIndex)
     {
-        _DropdownSubjects.options.Clear();
-
-        var subjectsOrders = new List<int>();
-        
-        for (int i = 0; i < GameManager.Instance.infoListSubjects.subjects.Length; i++)
-        {
-            subjectsOrders.Add(GameManager.Instance.infoListSubjects.subjects[i].order);
-        }
-
-        foreach (var subjectsOrder in subjectsOrders)
-        {
-            _DropdownSubjects.options.Add(new TMP_Dropdown.OptionData(){text = subjectsOrder.ToString()});
-        }
+        _selectedSubject = _availableSubjects[selectedIndex];
     }
+
+    private void SetLevelDropDown()
+    {
+        levelsDropDown.options.Clear();
+        _availableLevels = GameManager.Instance.infoListLevels.levels.ToList();
+        
+        for (var i = 0; i < _availableLevels.Count; i++)
+        {
+            var level = _availableLevels[i];
+            _availableLevels.Add(level);
+            levelsDropDown.options.Add(
+                new TMP_Dropdown.OptionData {text = level.name});
+        }
+        
+        levelsDropDown.onValueChanged.AddListener(SelectChapter);
+    }
+    private void SelectChapter(int selectedIndex)
+    {
+        _SelectedLevel = _availableLevels[selectedIndex];
+    }
+    private void SelectLevel(int levelIndex)
+    {
+    }
+
     private void Verif()
     {
        // if (inputfiledName.text=="")&&(_DropdownChapter.se)
