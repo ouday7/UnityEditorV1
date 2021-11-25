@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnLevels()
     {
-        var levels = infoListLevels.levels.OrderBy(tab => tab.order);
+        var levels = infoListLevels.levels.OrderBy(tab => tab.order).ToList();
         foreach (var level in levels)
         {
             var selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
@@ -47,75 +48,62 @@ public class GameManager : MonoBehaviour
             newBtn.Initialize();
             newBtn.BindData(level);
             selectedLevelBtn.transform.SetParent(levelsHolder);
-           // selectedLevelBtn.GetComponent<Button>().onClick.AddListener(() => ShowSubjects(level.id));
         }
-        ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
+        ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.subjectsId,levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
     }
-    public void ShowSubjects(int id)
+    public void ShowSubjects(List<int> id,int lvlid)
     {
         //split into 3section
-        foreach (Transform child in subjectsHolder.transform) 
+        foreach (Transform child in subjectsHolder.transform)
         {
-            // Destroy(child.gameObject);
-            //  subjectBtn.gameObject.SetActive(false);
-            ObjectPooler.Instance.ReleasePooledObject(child.GetComponent<PoolableObject>());
+          //ObjectPooler.Instance.ReleasePooledObject(child.GetComponent<PoolableObject>());
+          Destroy(child.gameObject);
         }
         
         foreach (var subject in infoListSubjects.subjects)
         {
-            if (subject.levelId != id) continue;
+            if (!id.Contains((subject.id))) continue;
            
             var subjectBtn = ObjectPooler.Instance.GetPooledObject(subjectPrefab);
-            if (subjectBtn == null) continue;
-            
             var newBtn = subjectBtn.GetComponent<SubjectsBtn>();
             newBtn.Initialize();
             newBtn.BindData(subject);
-            
-            subjectBtn.transform.SetParent(subjectsHolder);
-
-            /*
-            subjectBtn.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                Debug.Log($"Select Subject[{subject.id}], from level[{id}]");
-                ShowChapter(id);
-            });
-            */
+            newBtn.transform.SetParent(subjectsHolder);
+            newBtn.GetComponent<Button>().onClick.AddListener(() => ShowChapter(subject.id, lvlid));
         }
 
-        var subjectToSelect = infoListSubjects.subjects.FirstOrDefault(subject => subject.levelId == id);
+      /*  var subjectToSelect = infoListSubjects.subjects.FirstOrDefault();
         if (subjectToSelect != null)
         {
-            Debug.Log($"Select Subject[{subjectToSelect.id}], from level[{id}]");
-            ShowChapter(subjectToSelect.id);
-        }
+            ShowChapter(subjectToSelect.id,id);
+        }*/
     }
 
-    public void ShowChapter(int id)
+    public void ShowChapter(int Subjectid,int lvlid)
     {
-        // GameObject chapterbtn = ObjectPooler.instance.GetPooledObject(chaptersPrefab);
-
         foreach (Transform child in chaptersHolder.transform) 
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
 
         foreach (var t in infoListChapters.chapters)
         {
-            if (t.levelId != id) continue;
-             
-            var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
+            if (t.subjectId != Subjectid || t.levelId!=lvlid )continue;
 
-                        
+            Debug.Log(t.subjectId);
+            Debug.Log(t.levelId+" this ");
+            
+            
+            var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
             var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
             newBtn.Initialize();
             newBtn.BindData(t);
-            chapterBtn.GetComponent<Button>().onClick.AddListener(() => OnClickChapter(t.id));
+            //chapterBtn.GetComponent<Button>().onClick.AddListener(() => OnClickChapter(t.id));
         }
     }
     private void OnClickChapter(int chapterId)
     {
-        Debug.Log($"Click Chapter: {chapterId}");
+       // Debug.Log($"Click Chapter: {chapterId}");
     }
 
   /*

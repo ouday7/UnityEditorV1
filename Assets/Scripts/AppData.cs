@@ -5,13 +5,13 @@
     public int id;
     public string name;
     public int order;
+    public List<int> subjectsId;
 }
 [System.Serializable] public class Subject
 {
     public int id;
     public string name;
     public int order;
-    public int levelId;
 }
 [System.Serializable] public class Chapter
 {
