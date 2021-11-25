@@ -7,14 +7,12 @@ public class ObjectPooler : MonoBehaviour
     public static ObjectPooler Instance;
     public List<PrePooledObjects> prePooledObjects;
     private Dictionary<string, Queue<GameObject>> dict = null;
-
     [Serializable]
     public struct PrePooledObjects
     {
         public GameObject gameObject;
         public int count;
     }
-
     void Awake()
     {
         if (Instance == null)
@@ -27,7 +25,6 @@ public class ObjectPooler : MonoBehaviour
             Destroy(this);
         }
     }
-
     private void Start()
     {
         List<GameObject> pooledObjects = new List<GameObject>();
@@ -45,7 +42,6 @@ public class ObjectPooler : MonoBehaviour
             go.SetActive(false);
         }
     }
-
     public GameObject GetPooledObject(GameObject go)
     {
         if (!dict.ContainsKey(go.name))
@@ -67,7 +63,6 @@ public class ObjectPooler : MonoBehaviour
         po.prefab = go;
         return newGo;
     }
-
     public void ReleasePooledObject(PoolableObject po)
     {
         if (!dict.ContainsKey(po.prefab.name))
