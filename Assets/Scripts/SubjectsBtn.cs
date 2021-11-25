@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -23,17 +24,8 @@ public class SubjectsBtn : EditorButtonBase
             gameObject.SetActive(true);
         });
         _isInitialized = true;
-        
-        
-        btn.GetComponent<Button>().onClick.AddListener(() =>
-        {
-          //  Debug.Log($"Select Subject[{subject.id}], from level[{id}]"); ;
-            
-            btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowChapter(_data.id));
-
-        });
     }
-    public void BindData(Subject subject )
+    public void BindData(Subject subject)
     {
         _data = subject;
         _text.text = _data.name;

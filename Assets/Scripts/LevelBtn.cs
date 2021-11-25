@@ -26,7 +26,7 @@ public class LevelBtn : EditorButtonBase
             gameObject.SetActive(true);
         });
         _isInitialized = true;
-         btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.id));
+         btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.subjectsId,_data.id));
     }
     public void BindData(Level level)
     {
