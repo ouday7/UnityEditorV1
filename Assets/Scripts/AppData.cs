@@ -21,7 +21,6 @@
     public int subjectId;
     public int levelId;
 }
-
 [System.Serializable] public class LevelsData
 {
     public Level[] levels;
@@ -35,7 +34,7 @@
     public Subject[] subjects;
 }
 
-public class JsonData//added
+public class JsonData
 {
     public List<Level> levels;
     public List<Subject> subjects;
