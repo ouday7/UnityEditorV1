@@ -1,48 +1,75 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
-    [SerializeField] private List<EditorButtonBase> pooledObjects;
-    [SerializeField] private EditorButtonBase objectToPool;
-    [SerializeField] private int amountToPool;
-
-    private Transform _t;
-
-    private int _lastIndex = -1;
-
-    private void Awake()
+    public List<PrePooledObjects> prePooledObjects;
+    private Dictionary<string, Queue<GameObject>> dict = null;
+    [Serializable]
+    public struct PrePooledObjects
     {
-        if (Instance != null) return;
-        Instance = this;
-
-        _t = transform;
-
-        pooledObjects = new List<EditorButtonBase>();
-        for (var i = 0; i < amountToPool; i++)
+        public GameObject gameObject;
+        public int count;
+    }
+    void Awake()
+    {
+        if (Instance == null)
         {
-            var tmp = Instantiate(objectToPool, _t);
-            tmp.gameObject.SetActive(false);
-            pooledObjects.Add(tmp);
-            _lastIndex++;
+            Instance = this;
+            dict = new Dictionary<string, Queue<GameObject>>();
+        }
+        else
+        {
+            Destroy(this);
         }
     }
-
-    public EditorButtonBase GetPooledObject()
+    private void Start()
     {
-        if (pooledObjects.Count <= 0) return Instantiate(objectToPool, this.transform);
-        var objectToGet = pooledObjects[_lastIndex];
-        pooledObjects.RemoveAt(_lastIndex);
-        _lastIndex--;
-        return objectToGet;
+        List<GameObject> pooledObjects = new List<GameObject>();
+        foreach(PrePooledObjects prePoolObj in prePooledObjects)
+        {
+            for(int i = 0; i<prePoolObj.count; i++)
+            {
+                pooledObjects.Add(GetPooledObject(prePoolObj.gameObject));
+            }
+        }
+
+        foreach(GameObject go in pooledObjects)
+        {
+            go.transform.SetParent(transform);
+            go.SetActive(false);
+        }
     }
-
-    public void ReturnObject(EditorButtonBase objectToDeSpawn)
+    public GameObject GetPooledObject(GameObject go)
     {
-        objectToDeSpawn.transform.SetParent(this.transform);
-        objectToDeSpawn.gameObject.SetActive(false);
-        pooledObjects.Add(objectToDeSpawn);
-        _lastIndex++;
+        if (!dict.ContainsKey(go.name))
+        {
+            dict.Add(go.name, new Queue<GameObject>());
+        }
+
+        if (dict[go.name].Count > 0)
+        {
+            return dict[go.name].Dequeue();
+        }
+
+        var newGo = Instantiate(go);
+        var po = newGo.GetComponent<PoolableObject>();
+        if( po == null)
+        {
+            po = newGo.AddComponent<PoolableObject>();
+        }
+        po.prefab = go;
+        return newGo;
+    }
+    public void ReleasePooledObject(PoolableObject po)
+    {
+        if (!dict.ContainsKey(po.prefab.name))
+        {
+            dict.Add(po.prefab.name, new Queue<GameObject>());
+        }
+        dict[po.prefab.name].Enqueue(po.gameObject);
+        // po.transform.SetParent(transform);
     }
 }

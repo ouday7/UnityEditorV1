@@ -1,63 +1,57 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UPersian.Components;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public Button butt;
     [SerializeField] private TextAsset textJson;
-    
-    [SerializeField] private EditorButtonBase levelsPrefab;
+    [SerializeField] private GameObject levelsPrefab;
     [SerializeField] private GameObject subjectPrefab;
     [SerializeField] private GameObject chaptersPrefab;
     
     [SerializeField] private RectTransform levelsHolder;
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
-    
-    [SerializeField] private EditorButtonBase selectedLevelBtn;
-    [SerializeField] private EditorButtonBase selectedChaptersBtn;
-    [SerializeField] private EditorButtonBase selectedSubjectsBtn;
 
     public LevelsData infoListLevels = new LevelsData();
     public ChaptersData infoListChapters = new ChaptersData();
     public SubjectsData infoListSubjects = new SubjectsData();
 
-    private JsonData _data;//added
+    private JsonData _data;
 
     private void Awake()
     {
         if (Instance != null) return;
         Instance = this;
     }
-
     private void Start()
     {
+
         infoListLevels = JsonUtility.FromJson<LevelsData>(textJson.text);
         infoListChapters = JsonUtility.FromJson<ChaptersData>(textJson.text);
         infoListSubjects = JsonUtility.FromJson<SubjectsData>(textJson.text);
         infoListSubjects.subjects = infoListSubjects.subjects.OrderBy(subject => subject.order).ToArray();
-        _data = JsonUtility.FromJson<JsonData>(textJson.text);//added
+        _data = JsonUtility.FromJson<JsonData>(textJson.text);
         SpawnLevels();
     }
-
     public void SpawnLevels()
     {
         var levels = infoListLevels.levels.OrderBy(tab => tab.order);
         foreach (var level in levels)
         {
-            selectedLevelBtn = ObjectPooler.Instance.GetPooledObject();
-            
-            selectedChaptersBtn.Initialize();
-            selectedChaptersBtn.BindData(level);
+            var selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
+            if (selectedLevelBtn == null) continue;
+            var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();
+            newBtn.Initialize();
+            newBtn.BindData(level);
             selectedLevelBtn.transform.SetParent(levelsHolder);
+           // selectedLevelBtn.GetComponent<Button>().onClick.AddListener(() => ShowSubjects(level.id));
         }
         ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
     }
-
-    private void ShowSubjects(int id)
+    public void ShowSubjects(int id)
     {
         //split into 3section
         foreach (Transform child in subjectsHolder.transform) 
@@ -70,16 +64,23 @@ public class GameManager : MonoBehaviour
         foreach (var subject in infoListSubjects.subjects)
         {
             if (subject.levelId != id) continue;
+           
             var subjectBtn = ObjectPooler.Instance.GetPooledObject(subjectPrefab);
             if (subjectBtn == null) continue;
+            
+            var newBtn = subjectBtn.GetComponent<SubjectsBtn>();
+            newBtn.Initialize();
+            newBtn.BindData(subject);
+            
             subjectBtn.transform.SetParent(subjectsHolder);
-            subjectBtn.SetActive(true);
-            subjectBtn.GetComponentInChildren<RtlText>().text = subject.name;
+
+            /*
             subjectBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 Debug.Log($"Select Subject[{subject.id}], from level[{id}]");
                 ShowChapter(id);
             });
+            */
         }
 
         var subjectToSelect = infoListSubjects.subjects.FirstOrDefault(subject => subject.levelId == id);
@@ -89,32 +90,35 @@ public class GameManager : MonoBehaviour
             ShowChapter(subjectToSelect.id);
         }
     }
-    private void ShowChapter(int id)
+
+    public void ShowChapter(int id)
     {
-       // GameObject chapterbtn = ObjectPooler.instance.GetPooledObject(chaptersPrefab);
+        // GameObject chapterbtn = ObjectPooler.instance.GetPooledObject(chaptersPrefab);
 
         foreach (Transform child in chaptersHolder.transform) 
         {
             GameObject.Destroy(child.gameObject);
         }
-        
-        for (var i = 0; i < infoListChapters.chapters.Length; i++)
+
+        foreach (var t in infoListChapters.chapters)
         {
-            if (infoListChapters.chapters[i].levelId != id) continue;
+            if (t.levelId != id) continue;
              
             var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
 
-            //chapterbtn.transform.SetParent(chaptersHolder);
-            chapterBtn.GetComponentInChildren<RtlText>().text = infoListChapters.chapters[i].name;
-            chapterBtn.GetComponent<Button>().onClick.AddListener(() => OnClickChapter(infoListChapters.chapters[i].id));
+                        
+            var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
+            newBtn.Initialize();
+            newBtn.BindData(t);
+            chapterBtn.GetComponent<Button>().onClick.AddListener(() => OnClickChapter(t.id));
         }
     }
-
     private void OnClickChapter(int chapterId)
     {
         Debug.Log($"Click Chapter: {chapterId}");
     }
 
+  /*
     public void UpdateData(Text oldname, string newname)
     {
         foreach (var lvl in infoListLevels.levels)
@@ -124,14 +128,40 @@ public class GameManager : MonoBehaviour
             SaveToJson();
         }
     }
-
-    private void SaveToJson()
+*/
+  /*   public void UpdateDataSubect(Text oldname, string newname)
+     {
+         foreach (var lvl in infoListSubjects.subjects)
+         {
+             if(lvl.name!=oldname.text) continue;
+             lvl.name = newname;
+             SaveToJson();
+         }
+     }
+     */
+  /* 
+ public void UpdateDataChapter(Text oldname, string newname)
+    {
+        foreach (var lvl in infoListChapters.chapters)
+        {
+            if(lvl.name!=oldname.text) continue;
+            lvl.name = newname;
+            SaveToJson();
+        }
+    }
+  
+    
+   */ 
+    public void SaveToJson()
     {
         var jsonString = JsonUtility.ToJson(_data);
     }
-
     public void LogJson()
     {
         Debug.Log(JsonUtility.ToJson(infoListLevels));
     }
+    
+    
+
+
 }
