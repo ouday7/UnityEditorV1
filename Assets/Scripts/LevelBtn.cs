@@ -24,6 +24,7 @@ public class LevelBtn : EditorButtonBase
             UIManager.Instance.LevelEdit(this);
             text.text = _data.name;
             gameObject.SetActive(true);
+            
         });
         _isInitialized = true;
          btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.subjectsId,_data.id));
@@ -34,9 +35,10 @@ public class LevelBtn : EditorButtonBase
         text.text = _data.name;
         transform.SetSiblingIndex(level.order);
     }
-    public void UpdateData(string newName, string newOrderText)
+    public void UpdateData(string newName, string newOrderText,Level newLevel)
     {
         _data.name = newName;
+        _data.subjectsId = newLevel.subjectsId;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
         GameManager.Instance.LogJson();
