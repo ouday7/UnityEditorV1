@@ -38,6 +38,15 @@ public class ChaptersBtn : EditorButtonBase
 
     public void UpdateData(string newName, string newOrderText)
     {
+        if (newName.Length == 0)
+        {
+            newName = _data.name;
+        }
+        if (newOrderText.Length == 0)
+        {
+            newOrderText = _data.order.ToString();
+          
+        }
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);

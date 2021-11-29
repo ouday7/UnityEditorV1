@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         var levels = infoListLevels.levels.OrderBy(tab => tab.order).ToList();
         foreach (var level in levels)
         {
+            Debug.Log(level.order+"level order est");
             var selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
             if (selectedLevelBtn == null) continue;
             var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -24,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject popUpPanel;
     [SerializeField] private Button Prefab;
     [SerializeField] private Transform parent;
+
+    [SerializeField] private GameObject subjectPanel;
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public TMP_Dropdown levelsDropDown;
     private List<Subject> _availableSubjects;
     private List<Level> _availableLevels;
+    
 
     private Subject _selectedSubject;
     private Level _SelectedLevel;
@@ -55,6 +56,7 @@ public class UIManager : MonoBehaviour
     void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
+        Verif();
     }
     public void LevelEdit(LevelBtn levelBtn)
     {
@@ -68,6 +70,8 @@ public class UIManager : MonoBehaviour
         commonSection.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
+        subjectPanel.gameObject.SetActive(true);
+
         inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
 
         
@@ -98,10 +102,11 @@ public class UIManager : MonoBehaviour
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
         commonSection.gameObject.SetActive(true);
-        levelSection.gameObject.SetActive(true);
-        subjectSection.gameObject.SetActive(false);
-        SetLevelDropDown();
-        SetSubjectsDropDown();
+        subjectPanel.gameObject.SetActive(false);
+        //levelSection.gameObject.SetActive(true);
+        //subjectSection.gameObject.SetActive(false);
+        //SetLevelDropDown();
+        //SetSubjectsDropDown();
         inputfiledName.placeholder.GetComponent<RtlText>().text = subjectsBtn.Data.name;
 
     }
@@ -112,10 +117,12 @@ public class UIManager : MonoBehaviour
         _editing = EditedData.Chapter;
         popUpPanel.gameObject.SetActive(true);
         commonSection.gameObject.SetActive(true);
-        levelSection.gameObject.SetActive(true);
-        subjectSection.gameObject.SetActive(true);
-        SetLevelDropDown();
-        SetSubjectsDropDown();
+       // levelSection.gameObject.SetActive(true);
+       // subjectSection.gameObject.SetActive(true);
+        
+        subjectPanel.gameObject.SetActive(false);
+        //SetLevelDropDown();
+        //SetSubjectsDropDown();
         inputfiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
         
@@ -156,6 +163,8 @@ public class UIManager : MonoBehaviour
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
         
         if(SubjectinLevel) _selectedLevelButton.UpdateDataSubjectOfLevel(buttonId);
+        
+            // if(SubjectinLevel) _selectedLevelButton.UpdateDataSubjectOfLevel(buttonId);
     }
     private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
@@ -179,12 +188,10 @@ public class UIManager : MonoBehaviour
         
         subjectsDropDown.onValueChanged.AddListener(SelectSubject);
     }
-
     private void SelectSubject(int selectedIndex)
     {
         _selectedSubject = _availableSubjects[selectedIndex];
     }
-
     private void SetLevelDropDown()
     {
         levelsDropDown.options.Clear();
@@ -204,12 +211,14 @@ public class UIManager : MonoBehaviour
     {
         _SelectedLevel = _availableLevels[selectedIndex];
     }
- 
-
     private void Verif()
     {
        // if (inputfiledName.text=="")&&(_DropdownChapter.se)
-        
+       inputfiledName.text = "";
+       inputfilOrder.text = "";
+       
+
+
     }
 }   
   

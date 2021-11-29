@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  bodyTransform: {fileID: 0}
+  bodyTransform: {fileID: 4302892115872104600}
   editBtn: {fileID: 4836439067259369641}
   btn: {fileID: 1149008622512790624}
   _text: {fileID: 8558727283003640729}
