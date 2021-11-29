@@ -58,12 +58,14 @@ public class UIManager : MonoBehaviour
         popUpPanel.gameObject.SetActive(false);
         Verif();
     }
+
     public void LevelEdit(LevelBtn levelBtn)
     {
-        foreach(Transform child in parent.transform)
+        foreach (Transform child in parent.transform)
         {
             Destroy(child.gameObject);
         }
+
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
@@ -74,28 +76,42 @@ public class UIManager : MonoBehaviour
 
         inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
 
-        
+
         foreach (var subject in GameManager.Instance.infoListSubjects.subjects)
         {
             Button sub;
-            if (!levelBtn.Data.subjectsId.Contains(subject.id))
+            {
+                sub = Instantiate(Prefab, parent);
+                if (levelBtn.Data.subjectsId.Contains(subject.id))
                 {
-                    sub = Instantiate(Prefab, parent);
-                    sub.GetComponentInChildren<Text>().text=subject.name;
-                    sub.interactable = true;
-                    sub.onClick.AddListener(() => SubjectinLevel=true);
-                    buttonId = 2;
-
+                    sub.GetComponent<Image>().color = Color.red;
                 }
                 else
                 {
-                    sub = Instantiate(Prefab, parent);
-                    sub.GetComponentInChildren<Text>().text=subject.name;
-                    sub.interactable = false;
-                    buttonId = 1;
+                    sub.GetComponent<Image>().color = Color.green;
                 }
+                sub.GetComponentInChildren<Text>().text = subject.name;
+                var currentSubid=subject.id;
+                sub.onClick.AddListener(()=>SubjectsManipulaiton(currentSubid,levelBtn,sub));
+                buttonId = 2;
+            }
         }
     }
+
+    private void SubjectsManipulaiton(int currentSubid,LevelBtn lvlbtn,Button sub)
+    {
+        if (lvlbtn.Data.subjectsId.Contains(currentSubid))
+        {
+            lvlbtn.Data.subjectsId.Remove(currentSubid);
+            sub.GetComponent<Image>().color = Color.green;
+        }
+        else
+        {
+            lvlbtn.Data.subjectsId.Add(currentSubid); 
+            sub.GetComponent<Image>().color = Color.red;
+        }
+    }
+
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         _selectSubjectsBtnButton = subjectsBtn;
