@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -8,7 +10,6 @@ using UPersian.Components;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-
     private enum EditedData
     {
         None, Level, Subject, Chapter
@@ -21,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button closeBtn;
     [SerializeField] private Button submitBTn;
     [SerializeField] private GameObject popUpPanel;
+    [SerializeField] private Button Prefab;
+    [SerializeField] private Transform parent;
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
@@ -32,15 +35,19 @@ public class UIManager : MonoBehaviour
 
     private Subject _selectedSubject;
     private Level _SelectedLevel;
-
+    private bool SubjectinLevel=false;
+    private int buttonId=0;
     private void Awake()
     {
         
         if (Instance != null) return;
         Instance = this;
+        
+        
     }
     void Start()
     {
+        SubjectinLevel=false;
         closeBtn.onClick.AddListener(ClosePanel);
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
@@ -51,7 +58,10 @@ public class UIManager : MonoBehaviour
     }
     public void LevelEdit(LevelBtn levelBtn)
     {
-
+        foreach(Transform child in parent.transform)
+        {
+            Destroy(child.gameObject);
+        }
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
@@ -60,7 +70,27 @@ public class UIManager : MonoBehaviour
         subjectSection.gameObject.SetActive(false);
         inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
 
+        
+        foreach (var subject in GameManager.Instance.infoListSubjects.subjects)
+        {
+            Button sub;
+            if (!levelBtn.Data.subjectsId.Contains(subject.id))
+                {
+                    sub = Instantiate(Prefab, parent);
+                    sub.GetComponentInChildren<Text>().text=subject.name;
+                    sub.interactable = true;
+                    sub.onClick.AddListener(() => SubjectinLevel=true);
+                    buttonId = 2;
 
+                }
+                else
+                {
+                    sub = Instantiate(Prefab, parent);
+                    sub.GetComponentInChildren<Text>().text=subject.name;
+                    sub.interactable = false;
+                    buttonId = 1;
+                }
+        }
     }
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
@@ -99,7 +129,7 @@ public class UIManager : MonoBehaviour
                 break;
             case EditedData.Level:
                 Debug.Log("Editing a Button");
-                NewUpdateLevel(inputfiledName.text, inputfilOrder.text,_SelectedLevel);
+                NewUpdateLevel(inputfiledName.text, inputfilOrder.text);
                 
                 break;
             case EditedData.Subject:
@@ -121,9 +151,11 @@ public class UIManager : MonoBehaviour
 
         
     }
-    private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText,Level newLevel)
+    private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
     {
-        _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText,newLevel);
+        _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
+        
+        if(SubjectinLevel) _selectedLevelButton.UpdateDataSubjectOfLevel(buttonId);
     }
     private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
@@ -166,15 +198,13 @@ public class UIManager : MonoBehaviour
                 new TMP_Dropdown.OptionData {text = level.name});
         }
         
-        levelsDropDown.onValueChanged.AddListener(SelectChapter);
+        levelsDropDown.onValueChanged.AddListener(SelectLevel);
     }
-    private void SelectChapter(int selectedIndex)
+    private void SelectLevel(int selectedIndex)
     {
         _SelectedLevel = _availableLevels[selectedIndex];
     }
-    private void SelectLevel(int levelIndex)
-    {
-    }
+ 
 
     private void Verif()
     {
