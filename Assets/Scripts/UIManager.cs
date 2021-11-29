@@ -22,29 +22,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject popUpPanel;
     [SerializeField] private Button Prefab;
     [SerializeField] private Transform parent;
+    [SerializeField] private Transform InChaptersparent;
+    [SerializeField] private Transform IChaptersparent;
 
     [SerializeField] private GameObject subjectPanel;
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
     private ChaptersBtn _selectChaptersBtnBtnButton;
-    public TMP_Dropdown subjectsDropDown;
-    public TMP_Dropdown levelsDropDown;
     private List<Subject> _availableSubjects;
     private List<Level> _availableLevels;
     
-
-    private Subject _selectedSubject;
-    private Level _SelectedLevel;
     private bool SubjectinLevel=false;
-    private int buttonId=0;
+    private Button currentButton;
+   
     private void Awake()
     {
-        
         if (Instance != null) return;
         Instance = this;
-        
-        
     }
     void Start()
     {
@@ -84,16 +79,15 @@ public class UIManager : MonoBehaviour
                 sub = Instantiate(Prefab, parent);
                 if (levelBtn.Data.subjectsId.Contains(subject.id))
                 {
-                    sub.GetComponent<Image>().color = Color.red;
+                    sub.GetComponent<Image>().color = Color.green;
                 }
                 else
                 {
-                    sub.GetComponent<Image>().color = Color.green;
+                    sub.GetComponent<Image>().color = Color.red;
                 }
                 sub.GetComponentInChildren<Text>().text = subject.name;
                 var currentSubid=subject.id;
                 sub.onClick.AddListener(()=>SubjectsManipulaiton(currentSubid,levelBtn,sub));
-                buttonId = 2;
             }
         }
     }
@@ -103,12 +97,12 @@ public class UIManager : MonoBehaviour
         if (lvlbtn.Data.subjectsId.Contains(currentSubid))
         {
             lvlbtn.Data.subjectsId.Remove(currentSubid);
-            sub.GetComponent<Image>().color = Color.green;
+            sub.GetComponent<Image>().color = Color.red;
         }
         else
         {
             lvlbtn.Data.subjectsId.Add(currentSubid); 
-            sub.GetComponent<Image>().color = Color.red;
+            sub.GetComponent<Image>().color = Color.green;
         }
     }
 
@@ -126,23 +120,63 @@ public class UIManager : MonoBehaviour
         inputfiledName.placeholder.GetComponent<RtlText>().text = subjectsBtn.Data.name;
 
     }
+
     public void ChapterEdit(ChaptersBtn chapter)
     {
-        
+        foreach (Transform child in IChaptersparent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in InChaptersparent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         _selectChaptersBtnBtnButton = chapter;
         _editing = EditedData.Chapter;
         popUpPanel.gameObject.SetActive(true);
         commonSection.gameObject.SetActive(true);
-       // levelSection.gameObject.SetActive(true);
-       // subjectSection.gameObject.SetActive(true);
-        
         subjectPanel.gameObject.SetActive(false);
-        //SetLevelDropDown();
-        //SetSubjectsDropDown();
         inputfiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
-        
+        foreach (var level in GameManager.Instance.infoListLevels.levels)
+        {
+            Button sub;
+            sub = Instantiate(Prefab, InChaptersparent);
+                if (chapter.Data.levelId == level.id)
+                {
+                    sub.GetComponent<Image>().color = Color.green;
+                    currentButton = sub;
+                    sub.interactable = false;
+                }
+                else
+                {
+                    sub.GetComponent<Image>().color = Color.red;
+                }
+
+                sub.GetComponentInChildren<Text>().text = level.name;
+                sub.onClick.AddListener(() =>
+                {
+                    ChangeChaptertoLevel(level.id, chapter, sub, currentButton);
+                    currentButton = sub;
+                });
+        }
     }
+
+    private void ChangeChaptertoLevel(int levelid,ChaptersBtn chapter, Button sub,Button currentButton)
+    {
+        foreach (Transform child in IChaptersparent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        chapter.Data.levelId = levelid;
+        sub.GetComponent<Image>().color = Color.green;
+        sub.interactable = false;
+        currentButton.GetComponent<Image>().color = Color.red;
+        currentButton.interactable = true;
+    }
+
     private void Submit()
     {
         Debug.Log("On Click Submit");
@@ -177,10 +211,6 @@ public class UIManager : MonoBehaviour
     private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
-        
-        if(SubjectinLevel) _selectedLevelButton.UpdateDataSubjectOfLevel(buttonId);
-        
-            // if(SubjectinLevel) _selectedLevelButton.UpdateDataSubjectOfLevel(buttonId);
     }
     private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
@@ -190,51 +220,11 @@ public class UIManager : MonoBehaviour
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
-    private void SetSubjectsDropDown()
-    {
-        subjectsDropDown.options.Clear();
-        _availableSubjects = GameManager.Instance.infoListSubjects.subjects.ToList();
-        
-        for (var i = 0; i < _availableSubjects.Count; i++)
-        {
-            var subject = _availableSubjects[i];
-            subjectsDropDown.options.Add(
-                new TMP_Dropdown.OptionData {text = subject.name});
-        }
-        
-        subjectsDropDown.onValueChanged.AddListener(SelectSubject);
-    }
-    private void SelectSubject(int selectedIndex)
-    {
-        _selectedSubject = _availableSubjects[selectedIndex];
-    }
-    private void SetLevelDropDown()
-    {
-        levelsDropDown.options.Clear();
-        _availableLevels = GameManager.Instance.infoListLevels.levels.ToList();
-        
-        for (var i = 0; i < _availableLevels.Count; i++)
-        {
-            var level = _availableLevels[i];
-            _availableLevels.Add(level);
-            levelsDropDown.options.Add(
-                new TMP_Dropdown.OptionData {text = level.name});
-        }
-        
-        levelsDropDown.onValueChanged.AddListener(SelectLevel);
-    }
-    private void SelectLevel(int selectedIndex)
-    {
-        _SelectedLevel = _availableLevels[selectedIndex];
-    }
     private void Verif()
     {
        // if (inputfiledName.text=="")&&(_DropdownChapter.se)
        inputfiledName.text = "";
        inputfilOrder.text = "";
-       
-
-
     }
 }   
   
