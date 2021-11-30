@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
@@ -35,7 +34,6 @@ public class ObjectPooler : MonoBehaviour
                 pooledObjects.Add(GetPooledObject(prePoolObj.gameObject));
             }
         }
-
         foreach(GameObject go in pooledObjects)
         {
             go.transform.SetParent(transform);
@@ -53,7 +51,6 @@ public class ObjectPooler : MonoBehaviour
         {
             return dict[go.name].Dequeue();
         }
-
         var newGo = Instantiate(go);
         var po = newGo.GetComponent<PoolableObject>();
         if( po == null)
@@ -70,6 +67,5 @@ public class ObjectPooler : MonoBehaviour
             dict.Add(po.prefab.name, new Queue<GameObject>());
         }
         dict[po.prefab.name].Enqueue(po.gameObject);
-        // po.transform.SetParent(transform);
     }
 }

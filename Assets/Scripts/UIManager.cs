@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
@@ -24,16 +22,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform parent;
     [SerializeField] private Transform InChaptersparent;
     [SerializeField] private Transform IChaptersparent;
-
     [SerializeField] private GameObject subjectPanel;
+    
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
     private ChaptersBtn _selectChaptersBtnBtnButton;
     private List<Subject> _availableSubjects;
     private List<Level> _availableLevels;
-    
-    private bool SubjectinLevel=false;
     private Button currentButton;
    
     private void Awake()
@@ -43,7 +39,6 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        SubjectinLevel=false;
         closeBtn.onClick.AddListener(ClosePanel);
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
@@ -53,14 +48,12 @@ public class UIManager : MonoBehaviour
         popUpPanel.gameObject.SetActive(false);
         Verif();
     }
-
     public void LevelEdit(LevelBtn levelBtn)
     {
         foreach (Transform child in parent.transform)
         {
             Destroy(child.gameObject);
         }
-
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
@@ -68,10 +61,8 @@ public class UIManager : MonoBehaviour
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
         subjectPanel.gameObject.SetActive(true);
-
         inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
-
-
+        
         foreach (var subject in GameManager.Instance.infoListSubjects.subjects)
         {
             Button sub;
@@ -105,7 +96,6 @@ public class UIManager : MonoBehaviour
             sub.GetComponent<Image>().color = Color.green;
         }
     }
-
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         _selectSubjectsBtnButton = subjectsBtn;
@@ -113,14 +103,11 @@ public class UIManager : MonoBehaviour
         popUpPanel.gameObject.SetActive(true);
         commonSection.gameObject.SetActive(true);
         subjectPanel.gameObject.SetActive(false);
-        //levelSection.gameObject.SetActive(true);
-        //subjectSection.gameObject.SetActive(false);
-        //SetLevelDropDown();
-        //SetSubjectsDropDown();
+        subjectSection.gameObject.SetActive(false);
+        levelSection.gameObject.SetActive(false);
+        
         inputfiledName.placeholder.GetComponent<RtlText>().text = subjectsBtn.Data.name;
-
     }
-
     public void ChapterEdit(ChaptersBtn chapter)
     {
         foreach (Transform child in IChaptersparent.transform)
@@ -131,12 +118,14 @@ public class UIManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
         _selectChaptersBtnBtnButton = chapter;
         _editing = EditedData.Chapter;
         popUpPanel.gameObject.SetActive(true);
         commonSection.gameObject.SetActive(true);
+        subjectSection.gameObject.SetActive(true);
         subjectPanel.gameObject.SetActive(false);
+        levelSection.gameObject.SetActive(false);
+        
         inputfiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
         foreach (var level in GameManager.Instance.infoListLevels.levels)
@@ -200,7 +189,6 @@ public class UIManager : MonoBehaviour
             });
         }
     }
-
     private void Submit()
     {
         Debug.Log("On Click Submit");
@@ -221,16 +209,6 @@ public class UIManager : MonoBehaviour
                 break;
         }
         ClosePanel();
-        return;
-        
-       /* 
-        if (inputfiledName.text != "")
-        {
-            Text oldname = GameManager.Instance.selectedLevelBtn.GetComponentInChildren<Text>();
-            GameManager.Instance.UpdateData(oldname, inputfiledName.text);
-        }*/
-
-        
     }
     private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
     {
@@ -246,9 +224,8 @@ public class UIManager : MonoBehaviour
     }
     private void Verif()
     {
-       // if (inputfiledName.text=="")&&(_DropdownChapter.se)
-       inputfiledName.text = "";
-       inputfilOrder.text = "";
+        inputfiledName.text = "";
+        inputfilOrder.text = "";
     }
 }   
   

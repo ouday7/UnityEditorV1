@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-
-
 public class SubjectsBtn : EditorButtonBase
 {
     [SerializeField] private Button editBtn;
@@ -13,12 +10,12 @@ public class SubjectsBtn : EditorButtonBase
     private Subject _data;
     private bool _isInitialized=false;
     public Subject Data => _data;
+    
     public override void Initialize()
     {
         if(_isInitialized) return;
         editBtn.onClick.AddListener(() =>
         {
-            Debug.Log("Click Edit");
             UIManager.Instance.SubjectEdit(this);
             _text.text = _data.name;
             gameObject.SetActive(true);
@@ -33,8 +30,6 @@ public class SubjectsBtn : EditorButtonBase
     }
     public void UpdateData(string newName, string newOrderText)
     {
-        
-        
         if (newName.Length == 0)
         {
             newName = _data.name;
@@ -48,9 +43,5 @@ public class SubjectsBtn : EditorButtonBase
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
         GameManager.Instance.LogJson();
-    }
-    public void  UpdateLevelData()
-    {
-     
     }
 }

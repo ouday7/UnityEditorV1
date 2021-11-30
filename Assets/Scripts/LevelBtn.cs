@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-
-
 public class LevelBtn : EditorButtonBase
 {
     [SerializeField] private Button editBtn;
@@ -14,9 +12,6 @@ public class LevelBtn : EditorButtonBase
     private GameManager _gameManager;
 
     public Level Data => _data;
-
-   
-    
     public override void Initialize()
     {
         if(_isInitialized) return;
@@ -25,8 +20,6 @@ public class LevelBtn : EditorButtonBase
             UIManager.Instance.LevelEdit(this);
             text.text = _data.name;
             gameObject.SetActive(true);
-            
-
         });
         _isInitialized = true;
          btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.subjectsId,_data.id));
@@ -39,8 +32,6 @@ public class LevelBtn : EditorButtonBase
     }
     public void UpdateData(string newName, string newOrderText)
     {
-      
-        
         if (newName.Length == 0)
         {
             newName = _data.name;
@@ -48,18 +39,14 @@ public class LevelBtn : EditorButtonBase
         if (newOrderText.Length == 0)
         {
             newOrderText = _data.order.ToString();
-          
         }
-
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
         GameManager.Instance.LogJson();
     }
-
     public void UpdateDataSubjectOfLevel(int newSubject)
     {
-        _data.subjectsId.Add(newSubject);
-        // GameManager.Instance.LogJson();
+        _data.subjectsId.Add(newSubject); 
     }
 }
