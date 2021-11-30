@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,9 +18,9 @@ public class GameManager : MonoBehaviour
     public LevelsData infoListLevels = new LevelsData();
     public ChaptersData infoListChapters = new ChaptersData();
     public SubjectsData infoListSubjects = new SubjectsData();
-
     private JsonData _data;
 
+    
     private void Awake()
     {
         if (Instance != null) return;
@@ -79,7 +78,6 @@ public class GameManager : MonoBehaviour
             ShowChapter(subjectToSelect.id,id);
         }*/
     }
-
     public void ShowChapter(int Subjectid,int lvlid)
     {
         foreach (Transform child in chaptersHolder.transform) 
@@ -105,20 +103,20 @@ public class GameManager : MonoBehaviour
     private void OnClickChapter(int chapterId)
     {
        // Debug.Log($"Click Chapter: {chapterId}");
-    }
-
-  /*
-    public void UpdateData(Text oldname, string newname)
-    {
-        foreach (var lvl in infoListLevels.levels)
-        {
-            if(lvl.name!=oldname.text) continue;
-            lvl.name = newname;
-            SaveToJson();
-        }
-    }
-*/
-  /*   public void UpdateDataSubect(Text oldname, string newname)
+    } 
+    
+    /*
+      public void UpdateData(Text oldname, string newname)
+      {
+          foreach (var lvl in infoListLevels.levels)
+          {
+              if(lvl.name!=oldname.text) continue;
+              lvl.name = newname;
+              SaveToJson();
+          }
+      }
+  */
+    /*   public void UpdateDataSubect(Text oldname, string newname)
      {
          foreach (var lvl in infoListSubjects.subjects)
          {
@@ -128,7 +126,7 @@ public class GameManager : MonoBehaviour
          }
      }
      */
-  /* 
+    /* 
  public void UpdateDataChapter(Text oldname, string newname)
     {
         foreach (var lvl in infoListChapters.chapters)
@@ -149,8 +147,4 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(JsonUtility.ToJson(infoListLevels));
     }
-    
-    
-
-
 }
