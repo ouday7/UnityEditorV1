@@ -148,33 +148,57 @@ public class UIManager : MonoBehaviour
                     sub.GetComponent<Image>().color = Color.green;
                     currentButton = sub;
                     sub.interactable = false;
+                    foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+                    {
+                        if (!level.subjectsId.Contains(subj.id)) continue;
+                        var subject = Instantiate(Prefab, IChaptersparent);
+                        subject.GetComponentInChildren<Text>().text = subj.name;
+                        subject.GetComponent<Image>().color = Color.green;
+                        subject.onClick.AddListener(() =>
+                        {
+                            subject.GetComponent<Image>().color = Color.red;
+                            chapter.Data.subjectId = subj.id;
+                            chapter.Data.levelId = level.id;
+                        });
+                    }
                 }
                 else
                 {
                     sub.GetComponent<Image>().color = Color.red;
                 }
-
                 sub.GetComponentInChildren<Text>().text = level.name;
                 sub.onClick.AddListener(() =>
                 {
-                    ChangeChaptertoLevel(level.id, chapter, sub, currentButton);
+                    ChangeChaptertoLevel(level.id, chapter, sub, currentButton,level);
                     currentButton = sub;
                 });
         }
     }
 
-    private void ChangeChaptertoLevel(int levelid,ChaptersBtn chapter, Button sub,Button currentButton)
+    private void ChangeChaptertoLevel(int levelid,ChaptersBtn chapter, Button sub,Button currentButton,Level level)
     {
         foreach (Transform child in IChaptersparent.transform)
         {
             Destroy(child.gameObject);
         }
-        
-        chapter.Data.levelId = levelid;
         sub.GetComponent<Image>().color = Color.green;
         sub.interactable = false;
         currentButton.GetComponent<Image>().color = Color.red;
         currentButton.interactable = true;
+        
+        foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+        {
+            if (!level.subjectsId.Contains(subj.id)) continue;
+            var subject = Instantiate(Prefab, IChaptersparent);
+            subject.GetComponentInChildren<Text>().text = subj.name;
+            subject.GetComponent<Image>().color = Color.green;
+            subject.onClick.AddListener(() =>
+            {
+                subject.GetComponent<Image>().color = Color.red;
+                chapter.Data.subjectId = subj.id;
+                chapter.Data.levelId = levelid;
+            });
+        }
     }
 
     private void Submit()
