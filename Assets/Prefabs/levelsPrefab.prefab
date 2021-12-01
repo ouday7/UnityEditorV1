@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 5861629626002038181}
   - component: {fileID: 1149008622512790624}
   - component: {fileID: 3528721903486518959}
-  - component: {fileID: 614483321335462724}
   - component: {fileID: 5626149630643214493}
   m_Layer: 5
   m_Name: levelsPrefab
@@ -334,19 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4728b011492ad4c981d2e16136bad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &614483321335462724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9118646454835490253}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894e018efbb6f63498eb2594f349cd0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 9118646454835490253}
 --- !u!114 &5626149630643214493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,9 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd22c7da145c124d869de95990bb048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  bodyTransform: {fileID: 0}
   editBtn: {fileID: 4836439067259369641}
   btn: {fileID: 1149008622512790624}
   text: {fileID: 8558727283003640729}
-  subjectsButton: {fileID: 3600809672620393226, guid: 216fc8ce24637bb40ba7df6ac75a512e, type: 3}

@@ -11,7 +11,7 @@
         {
             "id": 2,
             "name": "سنة ثانية",
-            "order": 1,
+            "order": 2,
             "subjectsId": [
                 1,
                 2
@@ -20,7 +20,7 @@
         {
             "id": 3,
             "name": "سنة ثالثة",
-            "order": 1,
+            "order": 3,
             "subjectsId": [
                 1
             ]
@@ -28,7 +28,7 @@
         {
             "id": 4,
             "name": "سنة رابعة",
-            "order": 1,
+            "order": 4,
             "subjectsId": [
                 1,
                 2
@@ -37,7 +37,7 @@
         {
             "id": 5,
             "name": "سنة خامسة",
-            "order": 1,
+            "order": 5,
             "subjectsId": [
                 1
             ]
@@ -45,7 +45,7 @@
         {
             "id": 6,
             "name": "سنة سادسة",
-            "order": 1,
+            "order": 6,
             "subjectsId": [
                 1
             ]

@@ -28,7 +28,7 @@ public class LevelBtn : EditorButtonBase
     {
         _data = level;
         text.text = _data.name;
-        transform.SetSiblingIndex(level.order);
+        transform.SetSiblingIndex(level.order - 1);
     }
     public void UpdateData(string newName, string newOrderText)
     {
@@ -41,7 +41,9 @@ public class LevelBtn : EditorButtonBase
             newOrderText = _data.order.ToString();
         }
         _data.name = newName;
-        if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
+        var newOrder = _data.order;
+        if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
+        Debug.Log($"//. New Order = {newOrder}");
         BindData(_data);
         GameManager.Instance.LogJson();
     }

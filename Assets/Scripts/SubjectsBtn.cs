@@ -20,14 +20,26 @@ public class SubjectsBtn : EditorButtonBase
             _text.text = _data.name;
             gameObject.SetActive(true);
         });
+
         _isInitialized = true;
     }
-    public void BindData(Subject subject)
+    
+    public void BindData(Subject subject, int inLevelId)
+    {
+        _data = subject;
+        _text.text = _data.name;
+        transform.SetSiblingIndex(subject.order);
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() => GameManager.Instance.ShowChapter(_data.id, inLevelId));
+    }
+
+    private void BindData(Subject subject)
     {
         _data = subject;
         _text.text = _data.name;
         transform.SetSiblingIndex(subject.order);
     }
+    
     public void UpdateData(string newName, string newOrderText)
     {
         if (newName.Length == 0)

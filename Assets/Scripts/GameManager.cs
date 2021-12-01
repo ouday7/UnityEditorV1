@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -14,85 +14,81 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
 
-    public LevelsData infoListLevels = new LevelsData();
-    public ChaptersData infoListChapters = new ChaptersData();
-    public SubjectsData infoListSubjects = new SubjectsData();
+    private JsonData _jsonData;
 
-    private JsonData _data;
-    
-    private void Awake()
+    public JsonData Data => _jsonData;
+
+    public void Initialize()
     {
         if (Instance != null) return;
         Instance = this;
     }
-    private void Start()
+
+    public void StartGame()
     {
-        infoListLevels = JsonUtility.FromJson<LevelsData>(textJson.text);
-        infoListChapters = JsonUtility.FromJson<ChaptersData>(textJson.text);
-        infoListSubjects = JsonUtility.FromJson<SubjectsData>(textJson.text);
-        infoListSubjects.subjects = infoListSubjects.subjects.OrderBy(subject => subject.order).ToArray();
-        _data = JsonUtility.FromJson<JsonData>(textJson.text);
+        _jsonData = JsonUtility.FromJson<JsonData>(textJson.text);
+        _jsonData.subjects = _jsonData.subjects.OrderBy(subject => subject.order).ToList();
         SpawnLevels();
     }
-    public void SpawnLevels()
+
+    private void SpawnLevels()
     {
-        var levels = infoListLevels.levels.OrderBy(tab => tab.order).ToList();
+        var levels = _jsonData.levels.OrderBy(tab => tab.order).ToList();
+
         foreach (var level in levels)
         {
-            Debug.Log(level.order+"level order est");
-            var selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
-            if (selectedLevelBtn == null) continue;
-            var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();
-            newBtn.Initialize();
-            newBtn.BindData(level);
-            selectedLevelBtn.transform.SetParent(levelsHolder);
+            // Debug.Log($"Level Order = {level.order}");
+            var newLevelBtn = PoolSystem.Instance.Spawn<LevelBtn>(PoolType.Level);
+            newLevelBtn.Initialize();
+            newLevelBtn.BindData(level);
+            newLevelBtn.transform.SetParent(levelsHolder);
         }
-        ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.subjectsId,levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
+
+        ShowSubjects(levels[0].subjectsId, levels[0].id);
     }
-    public void ShowSubjects(List<int> id,int lvlid)
+
+    public void ShowSubjects(List<int> levelSubjects,int lvlId)
     {
-        //split into section
         foreach (Transform child in subjectsHolder.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (var subject in infoListSubjects.subjects)
+
+        foreach (var subject in _jsonData.subjects)
         {
-            if (!id.Contains((subject.id))) continue;
-           
-            var subjectBtn = ObjectPooler.Instance.GetPooledObject(subjectPrefab);
-            var newBtn = subjectBtn.GetComponent<SubjectsBtn>();
-            newBtn.Initialize();
-            newBtn.BindData(subject);
-            newBtn.transform.SetParent(subjectsHolder);
-            newBtn.GetComponent<Button>().onClick.AddListener(() => ShowChapter(subject.id, lvlid));
+            if (!levelSubjects.Contains(subject.id)) continue;
+            var subjectBtn = PoolSystem.Instance.Spawn<SubjectsBtn>(PoolType.Subject);
+            subjectBtn.Initialize();
+            subjectBtn.BindData(subject, lvlId);
+            subjectBtn.transform.SetParent(subjectsHolder);
         }
     }
-    public void ShowChapter(int Subjectid,int lvlid)
+
+    public void ShowChapter(int subjectId,int lvlId)
     {
-        foreach (Transform child in chaptersHolder.transform) 
+        foreach (Transform child in chaptersHolder.transform)
         {
-            Destroy(child.gameObject);
+            PoolSystem.Instance.DeSpawn(child.GetComponent<ChaptersBtn>());
         }
-        foreach (var t in infoListChapters.chapters)
+        
+        foreach (var chapter in _jsonData.chapters)
         {
-            if (t.subjectId != Subjectid || t.levelId!=lvlid )continue;
-            
-            var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
-            var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
-            newBtn.Initialize();
-            newBtn.BindData(t);
+            if (chapter.subjectId != subjectId || chapter.levelId!=lvlId )continue;
+
+            var chapterBtn = PoolSystem.Instance.Spawn<ChaptersBtn>(PoolType.Chapter);
+            chapterBtn.Initialize();
+            chapterBtn.BindData(chapter);
+            chapterBtn.Transform.SetParent(chaptersHolder);
         }
     }
+
     public void SaveToJson()
     {
-        var jsonString = JsonUtility.ToJson(_data);
+        var jsonString = JsonUtility.ToJson(_jsonData);
     }
+
     public void LogJson()
     {
+        //see changes
     }
-    
-    
-
-
 }

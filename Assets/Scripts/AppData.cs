@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-[System.Serializable] public class Level
+[Serializable] public class Level
 {
     public int id;
     public string name;
     public int order;
     public List<int> subjectsId;
 }
-[System.Serializable] public class Subject
+[Serializable] public class Subject
 {
     public int id;
     public string name;
     public int order;
 }
-[System.Serializable] public class Chapter
+[Serializable] public class Chapter
 {
     public int id;
     public string name;
@@ -21,20 +22,8 @@
     public int subjectId;
     public int levelId;
 }
-[System.Serializable] public class LevelsData
-{
-    public Level[] levels;
-}
-[System.Serializable] public class ChaptersData
-{
-    public Chapter[] chapters;
-}
-[System.Serializable] public class SubjectsData
-{
-    public Subject[] subjects;
-}
 
-public class JsonData
+[Serializable] public class JsonData
 {
     public List<Level> levels;
     public List<Subject> subjects;
