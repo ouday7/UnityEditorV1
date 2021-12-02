@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
      */
     public JsonData Data { get; set; }
     
-    public List<Transform> subjList;
+    private List<Transform> _subjList;
+    private List<Transform> _chapList;
 
     public void Init()
     {
@@ -29,7 +30,8 @@ public class GameManager : MonoBehaviour
     }
     public void Begin()
     {
-       subjList=new List<Transform>();
+       _subjList=new List<Transform>();
+       _chapList=new List<Transform>() ;
         const string filepath = "F:\\2\\GitProjects\\UnityEditorV1\\Assets\\JsonFile.txt";
         using (var streamReader = new StreamReader(filepath))
         {
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
     }
     public void ShowSubjects(List<int> id,int lvlid)
     {
-        foreach (Transform child in subjList)
+        foreach (var child in _subjList)
         {
             ObjectPooler.Instance.DeSpawn(child);
         }
@@ -69,13 +71,13 @@ public class GameManager : MonoBehaviour
             newBtn.Initialize();
             newBtn.BindData(subject);
             newBtn.transform.SetParent(subjectsHolder);
-            subjList.Add(newBtn.transform);
+            _subjList.Add(newBtn.transform);
             newBtn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowChapter(subject.id,lvlid));
         }
     }
     public void ShowChapter(int Subjectid,int lvlid)
     {
-        foreach (Transform child in chaptersHolder.transform) 
+        foreach (var child in _chapList) 
         {
             ObjectPooler.Instance.DeSpawn(child);
         }
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
             var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
             newBtn.Initialize();
             newBtn.BindData(t);
+            _chapList.Add(newBtn.transform);
         }
     }
     public void SaveToJson()
