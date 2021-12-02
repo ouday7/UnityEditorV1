@@ -360,5 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052e3a8431812c149b0136caf24ea567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  t: {fileID: 4302892115872104600}
   editBtn: {fileID: 4836439067259369641}
   _text: {fileID: 8558727283003640729}
