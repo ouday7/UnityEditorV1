@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
 
                 sub.GetComponentInChildren<Text>().text = subject.name;
                 var currentSubid = subject.id;
-                sub.onClick.AddListener(() => SubjectsManipulaiton(currentSubid, levelBtn, sub));
+                //sub.onClick.AddListener(() => SubjectsManipulaiton(currentSubid, levelBtn, sub));
             }
         }
     }

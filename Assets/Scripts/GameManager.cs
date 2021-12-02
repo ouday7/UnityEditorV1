@@ -15,13 +15,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform chaptersHolder;
 
     [SerializeField] private string fileName= "JsonFile.txt";
-
     
     /*
        private JsonData _jsonData;
        public JsonData Data =>_jsonData 
      */
     public JsonData Data { get; set; }
+
+    private List<Transform> subjList;
+    private List<Transform> chapList;
 
     public void Init()
     {
@@ -31,24 +33,11 @@ public class GameManager : MonoBehaviour
     }
     public void Begin()
     {
-
-        
-        
-        
-        var data= File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
-        Debug.Log("x");
-       
-        
-        Data = JsonUtility.FromJson<JsonData>(data);
-        
-       
-        
-        
-        
-        // File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", data);
-        
-    
-        Data.subjects = Data.subjects.OrderBy(subject => subject.order).ToList();
+        subjList=new List<Transform>();
+        chapList=new List<Transform>();
+       var data= File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
+       Data = JsonUtility.FromJson<JsonData>(data);
+       Data.subjects = Data.subjects.OrderBy(subject => subject.order).ToList();
         SpawnLevels();
     }
  
@@ -70,10 +59,9 @@ public class GameManager : MonoBehaviour
     }
     public void ShowSubjects(List<int> id,int lvlid)
     {
-        foreach (PoolableObject child in subjectsHolder.transform)
+        foreach (Transform child in subjList)
         {
-            Debug.Log("enter to despawn");
-            ObjectPooler.Instance.DeSpawn(child.GetComponent<PoolableObject>());
+            ObjectPooler.Instance.DeSpawn(child);
         }
         foreach (var subject in Data.subjects)
         {
@@ -84,12 +72,13 @@ public class GameManager : MonoBehaviour
             newBtn.Initialize();
             newBtn.BindData(subject);
             newBtn.transform.SetParent(subjectsHolder);
+            subjList.Add(newBtn.transform);
             newBtn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowChapter(subject.id,lvlid));
         }
     }
     public void ShowChapter(int Subjectid,int lvlid)
     {
-        foreach (PoolableObject child in chaptersHolder.transform) 
+        foreach (Transform child in chapList) 
         {
             ObjectPooler.Instance.DeSpawn(child);
         }
@@ -101,13 +90,12 @@ public class GameManager : MonoBehaviour
             var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
             newBtn.Initialize();
             newBtn.BindData(t);
+            chapList.Add(newBtn.transform);
         }
     }
     public void SaveToJson()
     {
         var jsonString = JsonUtility.ToJson(Data);
         File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", jsonString);
-        
-
     }
 }
