@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-public class SubjectsBtn : EditorButtonBase
+public class SubjectsBtn : PoolableObject
 {
     public static SubjectsBtn Instance;
     [SerializeField] private Button editBtn;
@@ -12,7 +12,7 @@ public class SubjectsBtn : EditorButtonBase
     private bool _isInitialized=false;
     public Subject Data => _data;
     
-    public override void Initialize()
+    public void Initialize()
     {
         if(_isInitialized) return;
         editBtn.onClick.AddListener(() =>

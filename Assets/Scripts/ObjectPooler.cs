@@ -7,7 +7,7 @@ using UnityEngine;
 
 public enum ObjectToPoolType
 {
-    Level, Subject, Chapter, ToggleSelect
+    Level, Subject, Chapter, Toggle
 }
 public class ObjectPooler : MonoBehaviour
 {
@@ -23,12 +23,12 @@ public class ObjectPooler : MonoBehaviour
  
     public static ObjectPooler Instance;
 
-    private void Awake()
+    public void Initialize()
     {
         if (Instance != null) return;
         Instance = this;
     }
-    private void Start()
+    public void Begin()
     {
         InitPool();
     }

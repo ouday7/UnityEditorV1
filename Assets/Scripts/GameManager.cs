@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
      */
     public JsonData Data { get; set; }
 
-    private void Awake()
+    public void Init()
     {
         if (Instance != null) return;
         Instance = this;
     }
-    private void Start()
+    public void Begin()
     {
         const string filepath = "F:\\2\\GitProjects\\UnityEditorV1\\Assets\\JsonFile.txt";
         using (var streamReader = new StreamReader(filepath))
@@ -55,9 +55,10 @@ public class GameManager : MonoBehaviour
     }
     public void ShowSubjects(List<int> id,int lvlid)
     {
-        foreach (Transform child in subjectsHolder.transform)
+        foreach (PoolableObject child in subjectsHolder.transform)
         {
-            Destroy(child.gameObject);
+            Debug.Log("enter to despawn");
+            ObjectPooler.Instance.DeSpawn(child.GetComponent<PoolableObject>());
         }
         foreach (var subject in Data.subjects)
         {
@@ -73,9 +74,9 @@ public class GameManager : MonoBehaviour
     }
     public void ShowChapter(int Subjectid,int lvlid)
     {
-        foreach (Transform child in chaptersHolder.transform) 
+        foreach (PoolableObject child in chaptersHolder.transform) 
         {
-            Destroy(child.gameObject);
+            ObjectPooler.Instance.DeSpawn(child);
         }
         foreach (var t in Data.chapters)
         {
