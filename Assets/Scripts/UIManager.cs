@@ -211,7 +211,7 @@ public class UIManager : MonoBehaviour
                 break;
             case EditedData.Level:
                 Debug.Log("Editing a Button");
-                NewUpdateLevel(inputFiledName.text, inputFilOrder.text);
+                NewUpdateLevel(inputFiledName.text,inputFilOrder.text);
                 break;
             case EditedData.Subject:
                 NewUpdateSubject(inputFiledName.text, inputFilOrder.text);

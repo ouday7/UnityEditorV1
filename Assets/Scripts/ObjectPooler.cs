@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -46,7 +47,8 @@ public class ObjectPooler : MonoBehaviour
     }
     public T Spawn<T>(ObjectToPoolType type) where T:Component
     {
-        Debug .Log("enter pool test");
+        Debug.Log($"Spawn");
+
         var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
         if (poolItem != null)
         {
@@ -55,15 +57,15 @@ public class ObjectPooler : MonoBehaviour
             obj.gameObject.SetActive(true);
             return obj;
         }
-        Debug .Log("Object is null");
         GenerateElement(type);
         return Spawn<T>(type);
     }
-    public void DeSpawn(PoolableObject objectToDeSpawn)
+    public void DeSpawn(Transform objectToDeSpawn)
     {
+        Debug.Log($"Despawn");
+        objectToDeSpawn.SetParent(transform);
         objectToDeSpawn.gameObject.SetActive(false);
-        objectToDeSpawn.Transform.SetParent(transform);
-        currentPoolObjects.Add(objectToDeSpawn);
+        currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
     }
     
     private void GenerateElement(ObjectToPoolType type)

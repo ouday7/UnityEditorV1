@@ -23,7 +23,7 @@ public class ChaptersBtn : PoolableObject
     {
         _data = chapter;
         _text.text = _data.name;
-        transform.SetSiblingIndex(chapter.order);
+        transform.SetSiblingIndex(chapter.order-1);
     }
     public void UpdateData(string newName, string newOrderText)
     {

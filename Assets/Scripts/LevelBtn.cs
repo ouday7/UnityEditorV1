@@ -28,7 +28,7 @@ public class LevelBtn :PoolableObject
     {
         _data = level;
         text.text = _data.name;
-        transform.SetSiblingIndex(level.order);
+        transform.SetSiblingIndex(level.order-1);
     }
     public void UpdateData(string newName, string newOrderText)
     {

@@ -28,7 +28,7 @@ public class SubjectsBtn : PoolableObject
     {
         _data = subject;
         _text.text = _data.name;
-        transform.SetSiblingIndex(subject.order);
+        transform.SetSiblingIndex(subject.order-1);
     }
     public void UpdateData(string newName, string newOrderText)
     {
