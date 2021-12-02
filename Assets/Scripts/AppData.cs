@@ -21,18 +21,6 @@
     public int subjectId;
     public int levelId;
 }
-[System.Serializable] public class LevelsData
-{
-    public Level[] levels;
-}
-[System.Serializable] public class ChaptersData
-{
-    public Chapter[] chapters;
-}
-[System.Serializable] public class SubjectsData
-{
-    public Subject[] subjects;
-}
 
 public class JsonData
 {

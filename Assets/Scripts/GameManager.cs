@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    [SerializeField] private TextAsset textJson;
     [SerializeField] private GameObject levelsPrefab;
     [SerializeField] private GameObject subjectPrefab;
     [SerializeField] private GameObject chaptersPrefab;
@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
 
-    public LevelsData infoListLevels = new LevelsData();
-    public ChaptersData infoListChapters = new ChaptersData();
-    public SubjectsData infoListSubjects = new SubjectsData();
+    /*
+       private JsonData _jsonData;
+       public JsonData Data =>_jsonData 
+     */
+    public JsonData Data { get; set; }
 
-    private JsonData _data;
-    
     private void Awake()
     {
         if (Instance != null) return;
@@ -27,45 +27,48 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        infoListLevels = JsonUtility.FromJson<LevelsData>(textJson.text);
-        infoListChapters = JsonUtility.FromJson<ChaptersData>(textJson.text);
-        infoListSubjects = JsonUtility.FromJson<SubjectsData>(textJson.text);
-        infoListSubjects.subjects = infoListSubjects.subjects.OrderBy(subject => subject.order).ToArray();
-        _data = JsonUtility.FromJson<JsonData>(textJson.text);
+        const string filepath = "F:\\2\\GitProjects\\UnityEditorV1\\Assets\\JsonFile.txt";
+        using (var streamReader = new StreamReader(filepath))
+        {
+            var json = streamReader.ReadToEnd();
+            Data = JsonUtility.FromJson<JsonData>(json);
+        }
+        Data.subjects = Data.subjects.OrderBy(subject => subject.order).ToList();
         SpawnLevels();
     }
-    public void SpawnLevels()
+ 
+    private void SpawnLevels()
     {
-        var levels = infoListLevels.levels.OrderBy(tab => tab.order).ToList();
+        var levels = Data.levels.OrderBy(tab => tab.order).ToList();
+
         foreach (var level in levels)
         {
-            Debug.Log(level.order+"level order est");
-            var selectedLevelBtn = ObjectPooler.Instance.GetPooledObject(levelsPrefab);
-            if (selectedLevelBtn == null) continue;
-            var newBtn = selectedLevelBtn.GetComponent<LevelBtn>();
+            var newLevelBtn = ObjectPooler.Instance.Spawn<LevelBtn>(ObjectToPoolType.Level);
+            if(newLevelBtn==null) Debug.Log("null new btn");
+            var newBtn = newLevelBtn.GetComponent<LevelBtn>();
             newBtn.Initialize();
             newBtn.BindData(level);
-            selectedLevelBtn.transform.SetParent(levelsHolder);
+            newBtn.transform.SetParent(levelsHolder);
         }
-        ShowSubjects(levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.subjectsId,levelsHolder.GetChild(0).GetComponent<LevelBtn>().Data.id);
+        ShowSubjects(levels[0].subjectsId, levels[0].id);
+        ShowChapter(Data.subjects[0].id,levels[0].id);
     }
     public void ShowSubjects(List<int> id,int lvlid)
     {
-        //split into section
         foreach (Transform child in subjectsHolder.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (var subject in infoListSubjects.subjects)
+        foreach (var subject in Data.subjects)
         {
             if (!id.Contains((subject.id))) continue;
            
-            var subjectBtn = ObjectPooler.Instance.GetPooledObject(subjectPrefab);
+            var subjectBtn = ObjectPooler.Instance.Spawn<SubjectsBtn>(ObjectToPoolType.Subject);
             var newBtn = subjectBtn.GetComponent<SubjectsBtn>();
             newBtn.Initialize();
             newBtn.BindData(subject);
             newBtn.transform.SetParent(subjectsHolder);
-            newBtn.GetComponent<Button>().onClick.AddListener(() => ShowChapter(subject.id, lvlid));
+            newBtn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowChapter(subject.id,lvlid));
         }
     }
     public void ShowChapter(int Subjectid,int lvlid)
@@ -74,7 +77,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (var t in infoListChapters.chapters)
+        foreach (var t in Data.chapters)
         {
             if (t.subjectId != Subjectid || t.levelId!=lvlid )continue;
             
@@ -86,13 +89,6 @@ public class GameManager : MonoBehaviour
     }
     public void SaveToJson()
     {
-        var jsonString = JsonUtility.ToJson(_data);
+        var jsonString = JsonUtility.ToJson(Data);
     }
-    public void LogJson()
-    {
-    }
-    
-    
-
-
 }

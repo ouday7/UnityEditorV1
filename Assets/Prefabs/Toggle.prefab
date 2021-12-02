@@ -184,8 +184,9 @@ GameObject:
   - component: {fileID: 4860968608046998857}
   - component: {fileID: 8794631762126498740}
   - component: {fileID: 3600809672620393226}
+  - component: {fileID: 4423496385651933694}
   m_Layer: 5
-  m_Name: SubsInLevels
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,3 +293,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4423496385651933694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069981839043682113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894e018efbb6f63498eb2594f349cd0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  t: {fileID: 1137125453590196721}

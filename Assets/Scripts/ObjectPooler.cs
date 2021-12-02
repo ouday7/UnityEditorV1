@@ -1,71 +1,77 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+
+public enum ObjectToPoolType
+{
+    Level, Subject, Chapter, ToggleSelect
+}
 public class ObjectPooler : MonoBehaviour
 {
-    public static ObjectPooler Instance;
-    public List<PrePooledObjects> prePooledObjects;
-    private Dictionary<string, Queue<GameObject>> dict = null;
-    [Serializable]
-    public struct PrePooledObjects
+    [Serializable] private struct PoolObject
     {
-        public GameObject gameObject;
-        public int count;
+        public ObjectToPoolType type;
+        public PoolableObject objectReference;
+        public int _amount;
     }
-    void Awake()
+    [SerializeField] private List<PoolObject> poolObjects;
+    [SerializeField] private List<PoolableObject> currentPoolObjects;
+    
+ 
+    public static ObjectPooler Instance;
+
+    private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            dict = new Dictionary<string, Queue<GameObject>>();
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if (Instance != null) return;
+        Instance = this;
     }
     private void Start()
     {
-        List<GameObject> pooledObjects = new List<GameObject>();
-        foreach(PrePooledObjects prePoolObj in prePooledObjects)
+        InitPool();
+    }
+    private void InitPool()
+    {
+        foreach (var obj in poolObjects)
         {
-            for(int i = 0; i<prePoolObj.count; i++)
+            for (var i = 0; i <obj._amount; i++)
             {
-                pooledObjects.Add(GetPooledObject(prePoolObj.gameObject));
+                var newObj = Instantiate(obj.objectReference, transform, true);
+                newObj.gameObject.SetActive(false);
+                currentPoolObjects.Add(newObj);
             }
         }
-        foreach(GameObject go in pooledObjects)
-        {
-            go.transform.SetParent(transform);
-            go.SetActive(false);
-        }
     }
-    public GameObject GetPooledObject(GameObject go)
+    public T Spawn<T>(ObjectToPoolType type) where T:Component
     {
-        if (!dict.ContainsKey(go.name))
+        Debug .Log("enter pool test");
+        var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
+        if (poolItem != null)
         {
-            dict.Add(go.name, new Queue<GameObject>());
+            var obj = poolItem.GetComponent<T>();
+            currentPoolObjects.Remove(poolItem);
+            obj.gameObject.SetActive(true);
+            return obj;
         }
-
-        if (dict[go.name].Count > 0)
-        {
-            return dict[go.name].Dequeue();
-        }
-        var newGo = Instantiate(go);
-        var po = newGo.GetComponent<PoolableObject>();
-        if( po == null)
-        {
-            po = newGo.AddComponent<PoolableObject>();
-        }
-        po.prefab = go;
-        return newGo;
+        Debug .Log("Object is null");
+        GenerateElement(type);
+        return Spawn<T>(type);
     }
-    public void ReleasePooledObject(PoolableObject po)
+    public void DeSpawn(PoolableObject objectToDeSpawn)
     {
-        if (!dict.ContainsKey(po.prefab.name))
-        {
-            dict.Add(po.prefab.name, new Queue<GameObject>());
-        }
-        dict[po.prefab.name].Enqueue(po.gameObject);
+        objectToDeSpawn.gameObject.SetActive(false);
+        objectToDeSpawn.Transform.SetParent(transform);
+        currentPoolObjects.Add(objectToDeSpawn);
+    }
+    
+    private void GenerateElement(ObjectToPoolType type)
+        //create an element if the pool is empty
+    {
+        var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
+        var item = Instantiate(poolItem.objectReference, transform);
+        item.gameObject.SetActive(false);
+        currentPoolObjects.Add(item);
     }
 }

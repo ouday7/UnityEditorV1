@@ -1,11 +1,8 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-    public enum ButtonTypes
-    {
-        Level, Subject, Chapter
-    }
+  
+
+    
 
     public abstract class EditorButtonBase : MonoBehaviour
     {

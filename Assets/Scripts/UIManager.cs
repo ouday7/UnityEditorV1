@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
-        Verif();
+        Reset();
     }
     public void LevelEdit(LevelBtn levelBtn)
     {
@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
         subjectPanel.gameObject.SetActive(true);
         inputfiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
         
-        foreach (var subject in GameManager.Instance.infoListSubjects.subjects)
+        foreach (var subject in GameManager.Instance.Data.subjects)
         {
             Button sub;
             {
@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
         
         inputfiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
-        foreach (var level in GameManager.Instance.infoListLevels.levels)
+        foreach (var level in GameManager.Instance.Data.levels)
         {
             Button sub;
             sub = Instantiate(Prefab, InChaptersparent);
@@ -137,7 +137,7 @@ public class UIManager : MonoBehaviour
                     sub.GetComponent<Image>().color = Color.green;
                     currentButton = sub;
                     sub.interactable = false;
-                    foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+                    foreach (var subj in GameManager.Instance.Data.subjects)
                     {
                         if (!level.subjectsId.Contains(subj.id)) continue;
                         var subject = Instantiate(Prefab, IChaptersparent);
@@ -175,7 +175,7 @@ public class UIManager : MonoBehaviour
         currentButton.GetComponent<Image>().color = Color.red;
         currentButton.interactable = true;
         
-        foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+        foreach (var subj in GameManager.Instance.Data.subjects)
         {
             if (!level.subjectsId.Contains(subj.id)) continue;
             var subject = Instantiate(Prefab, IChaptersparent);
@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
-    private void Verif()
+    private void Reset()
     {
         inputfiledName.text = "";
         inputfilOrder.text = "";

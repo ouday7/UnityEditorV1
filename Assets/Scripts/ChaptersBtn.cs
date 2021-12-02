@@ -38,6 +38,6 @@ public class ChaptersBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.LogJson();
+        GameManager.Instance.SaveToJson();
     }
 }

@@ -405,13 +405,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb767296710bb54ea26dbd317d8d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prePooledObjects:
-  - gameObject: {fileID: 9118646454835490253, guid: e007fbb899ccbb54fbec79c5130a79b0, type: 3}
-    count: 6
-  - gameObject: {fileID: 9118646454835490253, guid: b8c66557a76eb6440b63efea90cdc26f, type: 3}
-    count: 1
-  - gameObject: {fileID: 9118646454835490253, guid: c51f7aa931de4dc419c74395efc4e6f3, type: 3}
-    count: 8
+  poolObjects:
+  - type: 0
+    objectReference: {fileID: 614483321335462724, guid: e007fbb899ccbb54fbec79c5130a79b0, type: 3}
+    _amount: 6
+  - type: 1
+    objectReference: {fileID: 7568468601379003649, guid: b8c66557a76eb6440b63efea90cdc26f, type: 3}
+    _amount: 2
+  - type: 2
+    objectReference: {fileID: 5589082541348618693, guid: c51f7aa931de4dc419c74395efc4e6f3, type: 3}
+    _amount: 20
+  - type: 3
+    objectReference: {fileID: 4423496385651933694, guid: 216fc8ce24637bb40ba7df6ac75a512e, type: 3}
+    _amount: 20
+  currentPoolObjects: []
 --- !u!4 &1295490903
 Transform:
   m_ObjectHideFlags: 0
@@ -679,6 +686,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8057889620231802611, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620459235283, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620459235283, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620459235283, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620523164531, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620523164531, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620523164531, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620607002798, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620607002798, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057889620607002798, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
