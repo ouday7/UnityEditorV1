@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-public class ChaptersBtn : EditorButtonBase
+public class ChaptersBtn : PoolableObject
 {
     [SerializeField] private Button editBtn;
     [SerializeField] private RtlText _text;
     private Chapter _data;
     private bool _isInitialized=false;
     public Chapter Data => _data;
-    public override void Initialize()
+    public void Initialize()
     {
         if(_isInitialized) return;
         editBtn.onClick.AddListener(() =>
@@ -38,6 +38,6 @@ public class ChaptersBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.LogJson();
+        GameManager.Instance.SaveToJson();
     }
 }

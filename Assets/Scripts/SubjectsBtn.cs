@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-public class SubjectsBtn : EditorButtonBase
+public class SubjectsBtn : PoolableObject
 {
+    public static SubjectsBtn Instance;
     [SerializeField] private Button editBtn;
     [SerializeField] private Button btn;
     [SerializeField] private RtlText _text;
@@ -11,7 +12,7 @@ public class SubjectsBtn : EditorButtonBase
     private bool _isInitialized=false;
     public Subject Data => _data;
     
-    public override void Initialize()
+    public void Initialize()
     {
         if(_isInitialized) return;
         editBtn.onClick.AddListener(() =>
@@ -21,6 +22,7 @@ public class SubjectsBtn : EditorButtonBase
             gameObject.SetActive(true);
         });
         _isInitialized = true;
+        
     }
     public void BindData(Subject subject)
     {
@@ -42,6 +44,6 @@ public class SubjectsBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.LogJson();
+        GameManager.Instance.SaveToJson();
     }
 }

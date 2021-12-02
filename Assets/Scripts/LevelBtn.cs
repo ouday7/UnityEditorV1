@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
-public class LevelBtn : EditorButtonBase
+public class LevelBtn :PoolableObject
 {
     [SerializeField] private Button editBtn;
     [SerializeField] private Button btn;
@@ -12,7 +12,7 @@ public class LevelBtn : EditorButtonBase
     private GameManager _gameManager;
 
     public Level Data => _data;
-    public override void Initialize()
+    public void Initialize()
     {
         if(_isInitialized) return;
         editBtn.onClick.AddListener(() =>
@@ -43,7 +43,7 @@ public class LevelBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.LogJson();
+        GameManager.Instance.SaveToJson();
     }
     public void UpdateDataSubjectOfLevel(int newSubject)
     {

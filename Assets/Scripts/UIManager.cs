@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -53,7 +54,7 @@ public class UIManager : MonoBehaviour
     private void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
-        ResetPopUp();
+        Reset();
     }
 
     public void LevelEdit(LevelBtn levelBtn)
@@ -90,7 +91,6 @@ public class UIManager : MonoBehaviour
                 sub.onClick.AddListener(() => SubjectsManipulaiton(currentSubid, levelBtn, sub));
             }
         }
-        
     }
 
     private void SubjectsManipulaiton(int currentSubid, LevelBtn lvlbtn, Button sub)
@@ -235,7 +235,7 @@ public class UIManager : MonoBehaviour
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
-    private void ResetPopUp()
+    private void Reset()
     {
         inputFiledName.text = "";
         inputFilOrder.text = "";

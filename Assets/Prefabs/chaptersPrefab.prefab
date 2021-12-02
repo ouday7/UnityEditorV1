@@ -346,7 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894e018efbb6f63498eb2594f349cd0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 9118646454835490253}
+  type: 2
+  t: {fileID: 4302892115872104600}
 --- !u!114 &7572448648591995012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,8 +360,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052e3a8431812c149b0136caf24ea567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  bodyTransform: {fileID: 0}
   editBtn: {fileID: 4836439067259369641}
-  btn: {fileID: 1149008622512790624}
   _text: {fileID: 8558727283003640729}
