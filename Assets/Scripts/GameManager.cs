@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
 
+    [SerializeField] private string fileName= "JsonFile.txt";
+
+    
     /*
        private JsonData _jsonData;
        public JsonData Data =>_jsonData 
@@ -24,15 +27,27 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null) return;
         Instance = this;
+        
     }
     public void Begin()
     {
-        const string filepath = "F:\\2\\GitProjects\\UnityEditorV1\\Assets\\JsonFile.txt";
-        using (var streamReader = new StreamReader(filepath))
-        {
-            var json = streamReader.ReadToEnd();
-            Data = JsonUtility.FromJson<JsonData>(json);
-        }
+
+        
+        
+        
+        var data= File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
+        Debug.Log("x");
+       
+        
+        Data = JsonUtility.FromJson<JsonData>(data);
+        
+       
+        
+        
+        
+        // File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", data);
+        
+    
         Data.subjects = Data.subjects.OrderBy(subject => subject.order).ToList();
         SpawnLevels();
     }
@@ -91,5 +106,8 @@ public class GameManager : MonoBehaviour
     public void SaveToJson()
     {
         var jsonString = JsonUtility.ToJson(Data);
+        File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", jsonString);
+        
+
     }
 }

@@ -748,16 +748,16 @@ MonoBehaviour:
   poolObjects:
   - type: 0
     objectReference: {fileID: 614483321335462724, guid: e007fbb899ccbb54fbec79c5130a79b0, type: 3}
-    _amount: 0
+    _amount: 6
   - type: 1
     objectReference: {fileID: 7568468601379003649, guid: b8c66557a76eb6440b63efea90cdc26f, type: 3}
-    _amount: 0
+    _amount: 2
   - type: 2
     objectReference: {fileID: 5589082541348618693, guid: c51f7aa931de4dc419c74395efc4e6f3, type: 3}
-    _amount: 0
+    _amount: 10
   - type: 3
     objectReference: {fileID: 7018296770654228063, guid: 216fc8ce24637bb40ba7df6ac75a512e, type: 3}
-    _amount: 0
+    _amount: 2
   currentPoolObjects: []
 --- !u!4 &1295490903
 Transform:
@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: chaptersHolder
       value: 
       objectReference: {fileID: 796418020}
+    - target: {fileID: 3179385648376320847, guid: 6acebf95f66a7454399fa43bd1cf4584, type: 3}
+      propertyPath: fileName
+      value: JsonFile.txt
+      objectReference: {fileID: 0}
     - target: {fileID: 4346257135304189250, guid: 6acebf95f66a7454399fa43bd1cf4584, type: 3}
       propertyPath: m_Name
       value: GameManager
