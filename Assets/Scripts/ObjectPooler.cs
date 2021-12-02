@@ -62,7 +62,6 @@ public class ObjectPooler : MonoBehaviour
     }
     public void DeSpawn(Transform objectToDeSpawn)
     {
-        Debug.Log($"Despawn");
         objectToDeSpawn.SetParent(transform);
         objectToDeSpawn.gameObject.SetActive(false);
         currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());

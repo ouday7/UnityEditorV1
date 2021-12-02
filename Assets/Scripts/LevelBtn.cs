@@ -41,12 +41,9 @@ public class LevelBtn :PoolableObject
             newOrderText = _data.order.ToString();
         }
         _data.name = newName;
-        if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
+        var newOrder = _data.order;
+        if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
         GameManager.Instance.SaveToJson();
-    }
-    public void UpdateDataSubjectOfLevel(int newSubject)
-    {
-        _data.subjectsId.Add(newSubject); 
     }
 }

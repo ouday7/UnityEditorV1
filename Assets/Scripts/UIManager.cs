@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -10,11 +9,9 @@ public class UIManager : MonoBehaviour
 
     private enum EditedData
     {
-        None,
-        Level,
-        Subject,
-        Chapter
+        None, Level, Subject, Chapter
     }
+
     [SerializeField] private GameObject popUpPanel;
     [SerializeField] private InputField inputFiledName;
     [SerializeField] private InputField inputFilOrder;
@@ -22,18 +19,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelSection;
     [SerializeField] private GameObject subjectSection;
 
-    
+
     [SerializeField] private Button closeBtn;
     [SerializeField] private Button submitBTn;
 
-    
+
     [SerializeField] private Button Prefab;
     [SerializeField] private Transform holderSubject;
     [SerializeField] private Transform InChaptersparent;
     [SerializeField] private Transform holderLevel;
 
-    
-    
+
+
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsBtnButton;
@@ -41,54 +38,67 @@ public class UIManager : MonoBehaviour
     private List<Subject> _availableSubjects;
     private List<Level> _availableLevels;
     private Button currentButton;
+    private RtlText namePlaceHolder;
 
-    private void Awake()
+    private List<int> selectedSubjects;
+
+    public void Initialize()
     {
         if (Instance != null) return;
         Instance = this;
         closeBtn.onClick.AddListener(ClosePanel);
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
+        namePlaceHolder = inputFiledName.placeholder.GetComponent<RtlText>();
     }
     private void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
-        Reset();
+        ResetPopup();
     }
 
     public void LevelEdit(LevelBtn levelBtn)
     {
-        foreach (Transform child in holderSubject.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
+        Debug.Log("test");
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(true);
-       inputFiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
-       
+        namePlaceHolder.text = levelBtn.Data.name;
+        selectedSubjects = _selectedLevelButton.Data.subjectsId;
+
+        foreach (Transform child in holderSubject)
+        {
+            ObjectPooler.Instance.DeSpawn(child.transform);
+        }
         foreach (var subject in GameManager.Instance.Data.subjects)
         {
-            Button sub;
-            {
-                sub = Instantiate(Prefab, holderSubject);
-                if (levelBtn.Data.subjectsId.Contains(subject.id))
-                {
-                    sub.GetComponent<Image>().color = Color.green;
-                }
-                else
-                {
-                    sub.GetComponent<Image>().color = Color.red;
-                }
+            var toggleButton = ObjectPooler.Instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
+            toggleButton.Transform.SetParent(holderSubject.transform);
+            toggleButton.Initialize();
+            toggleButton.BindData(subject.name, subject.id);
+            toggleButton.isToggle = true;
+            toggleButton.OnSelectToggleButton += OnSelectSubjectToggleButton;
+            toggleButton.MarkSelected(_selectedLevelButton.Data.subjectsId);
+        }
+        
+    }
 
-                sub.GetComponentInChildren<Text>().text = subject.name;
-                var currentSubid = subject.id;
-                //sub.onClick.AddListener(() => SubjectsManipulaiton(currentSubid, levelBtn, sub));
-            }
+    private ToggleButton _selectedLevelButtonX;
+    
+    private void OnSelectSubjectToggleButton(ToggleButton inNewSelectedSubjectButton)
+    {
+        if (selectedSubjects.Contains(inNewSelectedSubjectButton.Id))
+        {
+            selectedSubjects.Remove(inNewSelectedSubjectButton.Id);
+            inNewSelectedSubjectButton.Unselect();
+        }
+        else
+        {
+            selectedSubjects.Add(inNewSelectedSubjectButton.Id);
+            inNewSelectedSubjectButton.Select();
         }
     }
     
@@ -100,19 +110,20 @@ public class UIManager : MonoBehaviour
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
-        inputFiledName.placeholder.GetComponent<RtlText>().text = subjectsBtn.Data.name;
+
+        namePlaceHolder.text = subjectsBtn.Data.name;
     }
 
     public void ChapterEdit(ChaptersBtn chapter)
     {
-        foreach (Transform child in holderLevel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
         foreach (Transform child in InChaptersparent.transform)
         {
-            Destroy(child.gameObject);
+            ObjectPooler.Instance.DeSpawn(child);
+        }
+
+        foreach (Transform child in holderSubject)
+        {
+            ObjectPooler.Instance.DeSpawn(child);
         }
 
         _selectChaptersBtnBtnButton = chapter;
@@ -122,7 +133,7 @@ public class UIManager : MonoBehaviour
         levelSection.gameObject.SetActive(true);
         subjectSection.gameObject.SetActive(true);
 
-        inputFiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
+        namePlaceHolder.text = chapter.Data.name;
 
         foreach (var level in GameManager.Instance.Data.levels)
         {
@@ -163,7 +174,7 @@ public class UIManager : MonoBehaviour
 
     private void ChangeChaptertoLevel(int levelid, ChaptersBtn chapter, Button sub, Button currentButton, Level level)
     {
-        foreach (Transform child in holderLevel.transform)
+        foreach (Transform child in holderSubject.transform)
         {
             Destroy(child.gameObject);
         }
@@ -176,7 +187,7 @@ public class UIManager : MonoBehaviour
         foreach (var subj in GameManager.Instance.Data.subjects)
         {
             if (!level.subjectsId.Contains(subj.id)) continue;
-            var subject = Instantiate(Prefab, holderLevel);
+            var subject = Instantiate(Prefab, holderSubject);
             subject.GetComponentInChildren<Text>().text = subj.name;
             subject.GetComponent<Image>().color = Color.green;
             subject.onClick.AddListener(() =>
@@ -187,6 +198,7 @@ public class UIManager : MonoBehaviour
             });
         }
     }
+
     private void Submit()
     {
         Debug.Log("On Click Submit");
@@ -196,7 +208,8 @@ public class UIManager : MonoBehaviour
                 break;
             case EditedData.Level:
                 Debug.Log("Editing a Button");
-                NewUpdateLevel(inputFiledName.text,inputFilOrder.text);
+                NewUpdateLevel(inputFiledName.text, inputFilOrder.text);
+
                 break;
             case EditedData.Subject:
                 NewUpdateSubject(inputFiledName.text, inputFilOrder.text);
@@ -208,19 +221,23 @@ public class UIManager : MonoBehaviour
 
         ClosePanel();
     }
+
     private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
+
     private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectSubjectsBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
+
     private void NewUpdateChapter(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
-    private void Reset()
+
+    private void ResetPopup()
     {
         inputFiledName.text = "";
         inputFilOrder.text = "";

@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
 
-public class ToggleButoon : PoolableObject
+public class ToggleButton : PoolableObject
 {
-    public event Action<ToggleButoon> OnSelectToggleButton;
+    public event Action<ToggleButton> OnSelectToggleButton;
 
     public bool isToggle;
         
-    [SerializeField] private Text label;
+    [SerializeField] private RtlText label;
     [SerializeField] private Button mainButton;
     [SerializeField] private Image mainImage;
 
