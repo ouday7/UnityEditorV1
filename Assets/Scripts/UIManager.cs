@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
         subjectSection.gameObject.SetActive(true);
        inputFiledName.placeholder.GetComponent<RtlText>().text = levelBtn.Data.name;
        
-        foreach (var subject in GameManager.Instance.infoListSubjects.subjects)
+        foreach (var subject in GameManager.Instance.Data.subjects)
         {
             Button sub;
             {
@@ -139,7 +139,7 @@ public class UIManager : MonoBehaviour
 
         inputFiledName.placeholder.GetComponent<RtlText>().text = chapter.Data.name;
 
-        foreach (var level in GameManager.Instance.infoListLevels.levels)
+        foreach (var level in GameManager.Instance.Data.levels)
         {
             Button sub;
             sub = Instantiate(Prefab, InChaptersparent);
@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
                 sub.GetComponent<Image>().color = Color.green;
                 currentButton = sub;
                 sub.interactable = false;
-                foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+                foreach (var subj in GameManager.Instance.Data.subjects)
                 {
                     if (!level.subjectsId.Contains(subj.id)) continue;
                     var subject = Instantiate(Prefab, holderLevel);
@@ -188,7 +188,7 @@ public class UIManager : MonoBehaviour
         currentButton.GetComponent<Image>().color = Color.red;
         currentButton.interactable = true;
 
-        foreach (var subj in GameManager.Instance.infoListSubjects.subjects)
+        foreach (var subj in GameManager.Instance.Data.subjects)
         {
             if (!level.subjectsId.Contains(subj.id)) continue;
             var subject = Instantiate(Prefab, holderLevel);
