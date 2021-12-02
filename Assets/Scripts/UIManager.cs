@@ -50,7 +50,6 @@ public class UIManager : MonoBehaviour
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
     }
-
     private void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
@@ -92,21 +91,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
-    private void SubjectsManipulaiton(int currentSubid, LevelBtn lvlbtn, Button sub)
-    {
-        if (lvlbtn.Data.subjectsId.Contains(currentSubid))
-        {
-            lvlbtn.Data.subjectsId.Remove(currentSubid);
-            sub.GetComponent<Image>().color = Color.red;
-        }
-        else
-        {
-            lvlbtn.Data.subjectsId.Add(currentSubid);
-            sub.GetComponent<Image>().color = Color.green;
-        }
-    }
-
+    
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         _selectSubjectsBtnButton = subjectsBtn;
