@@ -86,10 +86,11 @@ public class GameManager : MonoBehaviour
         {
             if (t.subjectId != Subjectid || t.levelId!=lvlid )continue;
             
-            var chapterBtn = Instantiate(chaptersPrefab, chaptersHolder.transform, false);
+            var chapterBtn = ObjectPooler.Instance.Spawn<ChaptersBtn>(ObjectToPoolType.Chapter);
             var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
             newBtn.Initialize();
             newBtn.BindData(t);
+            newBtn.transform.SetParent(chaptersHolder);
             chapList.Add(newBtn.transform);
         }
     }
