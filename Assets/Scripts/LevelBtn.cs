@@ -1,35 +1,38 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UPersian.Components;
-public class LevelBtn :PoolableObject
+using System;
+
+public class LevelBtn : EditorButtonBase
 {
-    [SerializeField] private Button editBtn;
-    [SerializeField] private Button btn;
-    [SerializeField] private RtlText text;
+    public event Action<LevelBtn> OnSelectLevelButton;
     
     private Level _data;
-    private bool _isInitialized=false;
-    private GameManager _gameManager;
-
     public Level Data => _data;
-    public void Initialize()
+    
+    
+    private void OnDestroy()
+    {
+        OnSelectLevelButton = null;
+    }
+    
+    public override void Initialize()
     {
         if(_isInitialized) return;
-        editBtn.onClick.AddListener(() =>
-        {
-            UIManager.Instance.LevelEdit(this);
-            text.text = _data.name;
-            gameObject.SetActive(true);
-        });
-        _isInitialized = true;
-         btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.subjectsId,_data.id));
+        base.Initialize();
+        editBtn.onClick.AddListener(() => UIManager.Instance.LevelEdit(this));
+        OnSelectAction += LevelButtonSelected;
     }
+
     public void BindData(Level level)
     {
         _data = level;
         text.text = _data.name;
         transform.SetSiblingIndex(level.order-1);
     }
+
+    public void LevelButtonSelected()
+    {
+        OnSelectLevelButton?.Invoke(this);
+    }
+
     public void UpdateData(string newName, string newOrderText)
     {
         if (newName.Length == 0)
@@ -44,6 +47,6 @@ public class LevelBtn :PoolableObject
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.SaveToJson();
+        GameDataManager.Instance.SaveToJson();
     }
 }

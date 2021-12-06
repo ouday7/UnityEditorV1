@@ -1,30 +1,28 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UPersian.Components;
-public class ChaptersBtn : PoolableObject
+using System;
+
+public class ChaptersBtn : EditorButtonBase
 {
-    [SerializeField] private Button editBtn;
-    [SerializeField] private RtlText _text;
     private Chapter _data;
-    private bool _isInitialized=false;
     public Chapter Data => _data;
-    public void Initialize()
+
+    public override void Initialize()
     {
         if(_isInitialized) return;
-        editBtn.onClick.AddListener(() =>
-        {
-            UIManager.Instance.ChapterEdit(this);
-            _text.text = _data.name;
-            gameObject.SetActive(true);
-        });
-        _isInitialized = true;
+        editBtn.onClick.AddListener(() => UIManager.Instance.ChapterEdit(this));
+        OnSelectAction += OnSelectChapterButton;
     }
+
     public void BindData(Chapter chapter )
     {
         _data = chapter;
-        _text.text = _data.name;
+        text.text = _data.name;
         transform.SetSiblingIndex(chapter.order-1);
     }
+
+    private void OnSelectChapterButton()
+    {
+    }
+
     public void UpdateData(string newName, string newOrderText)
     {
         if (newName.Length == 0)
@@ -38,6 +36,6 @@ public class ChaptersBtn : PoolableObject
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.SaveToJson();
+        GameDataManager.Instance.SaveToJson();
     }
 }

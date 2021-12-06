@@ -28,11 +28,9 @@ public class ObjectPooler : MonoBehaviour
     {
         if (Instance != null) return;
         Instance = this;
-    }
-    public void Begin()
-    {
         InitPool();
     }
+    
     private void InitPool()
     {
         foreach (var obj in poolObjects)
@@ -47,8 +45,6 @@ public class ObjectPooler : MonoBehaviour
     }
     public T Spawn<T>(ObjectToPoolType type) where T:Component
     {
-        Debug.Log($"Spawn");
-
         var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
         if (poolItem != null)
         {

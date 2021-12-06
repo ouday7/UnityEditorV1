@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
                ObjectPooler.Instance.DeSpawn(child);
              }
         
-        foreach (var subject in GameManager.Instance.Data.subjects)
+        foreach (var subject in GameDataManager.Instance.Data.subjects)
         {
             var toggleButton = ObjectPooler.Instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             var newBtn = toggleButton.GetComponent<ToggleButton>();
@@ -147,7 +147,7 @@ public class UIManager : MonoBehaviour
         subjectSection.gameObject.SetActive(true);
         namePlaceHolder.text = chapter.Data.name;
 
-        foreach (var lvl in GameManager.Instance.Data.levels)
+        foreach (var lvl in GameDataManager.Instance.Data.levels)
         {
             var toggleButton = ObjectPooler.Instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             var newBtn = toggleButton.GetComponent<ToggleButton>();
