@@ -14,13 +14,13 @@ public class EditorButtonsManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // LevelBtn.OnSelectLevelButton -= OnSelectLevelButton;
+       LevelBtn.Instance.OnSelectLevelButton -= OnSelectLevelButton;
         SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
     }
 
     public void Initialize()
     {
-        // LevelBtn.OnSelectLevelButton += OnSelectLevelButton;
+        // LevelBtn.Instance.OnSelectLevelButton += OnSelectLevelButton;
         SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
 
         subjectsList = new List<Transform>();
@@ -53,7 +53,7 @@ public class EditorButtonsManager : MonoBehaviour
         ShowSubjects(_selectedLevel.Data);
     }
 
-    public void ShowSubjects(Level inLevelData)
+    private void ShowSubjects(Level inLevelData)
     {
         ResetSubjectsHolder();
         for (var i = 0; i < inLevelData.subjects.Count; i++)
@@ -81,7 +81,7 @@ public class EditorButtonsManager : MonoBehaviour
         ShowChapter(_selectedSubject.Data);
     }
 
-    public void ShowChapter(Subject inSubject)
+    private void ShowChapter(Subject inSubject)
     {
         ResetChaptersHolder();
 

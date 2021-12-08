@@ -20,6 +20,7 @@ public class ToggleButton : PoolableObject
     
     private int _id;
     private bool _isInitialized;
+    public bool IsSelected { get; private set; }
 
     public int Id => _id;
 
@@ -44,10 +45,10 @@ public class ToggleButton : PoolableObject
     }
     private void SelectButton() => OnClickToggle?.Invoke(this);
 
-    public void MarkSelected(List<int> dataSubjectsId)
+    public void MarkSelected(bool isSelected)
     {
-        if (dataSubjectsId.Contains(_id)) 
-        Select();
+        if (isSelected) 
+            Select();
         
         else Unselect();
     }
@@ -56,19 +57,14 @@ public class ToggleButton : PoolableObject
     {
         if(!_isToggle) toggleButton.interactable = false;
         mainImage.color = selectedCase;
+        IsSelected = true;
     }
 
     public void Unselect()
     {
         if(!_isToggle) toggleButton.interactable = true;
         mainImage.color = unselectedCase;
+        IsSelected = false;
     }
     
-    public void MarkSelectedChapterToSubject(int chaptersubjId,int x )
-    {
-        if (chaptersubjId!=x) 
-            Select();
-        
-        else Unselect();
-    }
 }
