@@ -2,12 +2,24 @@ using System;
 
 public class ChaptersBtn : EditorButtonBase
 {
+
+    public static event Action<ChaptersBtn> OnSelectChaptersButton;
+
     private Chapter _data;
     public Chapter Data => _data;
 
+    
+    
+    
+    private void OnDestroy()
+    {
+        OnSelectChaptersButton = null;
+    }
     public override void Initialize()
     {
         if(_isInitialized) return;
+        base.Initialize();
+
         editBtn.onClick.AddListener(() => UIManager.Instance.ChapterEdit(this));
         OnSelectAction += OnSelectChapterButton;
     }
@@ -21,6 +33,9 @@ public class ChaptersBtn : EditorButtonBase
 
     private void OnSelectChapterButton()
     {
+        
+        OnSelectChaptersButton?.Invoke(this);
+
     }
 
     public void UpdateData(string newName, string newOrderText)

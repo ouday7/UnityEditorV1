@@ -28,13 +28,11 @@ public abstract class EditorButtonBase : PoolableObject
         btn.onClick.AddListener(OnClickMainButton);
         _isInitialized = true;
     }
-
     private void OnClickMainButton()
     {
         Select();
         OnSelectAction?.Invoke();
     }
-
     public void Select()
     {
         _isOpen = true;
@@ -42,7 +40,6 @@ public abstract class EditorButtonBase : PoolableObject
         editBtn.gameObject.SetActive(true);
         btn.interactable = false;
     }
-
     public void Unselect()
     {
         _isOpen = false;

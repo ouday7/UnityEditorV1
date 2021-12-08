@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -48,6 +47,9 @@ public class UIManager : MonoBehaviour
     
     private List<int> _levelSubjects;
     private List<int> _selectedSubjects;
+
+    private int _chapterLevel;
+    private int _selectedLevels;
 
     public void Initialize()
     {
@@ -118,7 +120,24 @@ public class UIManager : MonoBehaviour
             newSubjectButton.Select();
         }
     }
-    
+
+    private void OnClickLevelToggle(ToggleButton newLevelButton)
+    {
+        if (newLevelButton.IsSelected)
+        {
+            if (_selectedLevels==newLevelButton.Id)
+            {
+                _selectedLevels = -1;
+            }
+            newLevelButton.Unselect();
+        }
+        else
+        {
+            _selectedLevels=newLevelButton.Id;
+            newLevelButton.Select();
+        }
+        
+    }
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         subjectSection.transform.position = subjectsholderposition;
@@ -134,37 +153,43 @@ public class UIManager : MonoBehaviour
 
     public void ChapterEdit(ChaptersBtn chapter)
     {
-        subjectSection.transform.position = subjectsholderposition;
-        
-        foreach (var child in currentLevelsToggle)
-        {
-            ObjectPooler.Instance.DeSpawn(child);
-        }
-
-        foreach (var child in currentSubjectsToggle)
-        {
-            ObjectPooler.Instance.DeSpawn(child);
-        }
-
         _selectChaptersBtnBtnButton = chapter;
-        _editing = EditedData.Chapter;
-        popUpPanel.gameObject.SetActive(true);
-        dataInput.gameObject.SetActive(true);
-        levelSection.gameObject.SetActive(true);
-        subjectSection.gameObject.SetActive(true);
-        namePlaceHolder.text = chapter.Data.name;
+         _editing = EditedData.Chapter;
+         popUpPanel.gameObject.SetActive(true);
+         dataInput.gameObject.SetActive(true);
+         levelSection.gameObject.SetActive(true);
+         subjectSection.gameObject.SetActive(true);
+         namePlaceHolder.text = chapter.Data.name;
+         subjectSection.transform.position = subjectsholderposition;
+         
+         _chapterLevel = _selectChaptersBtnBtnButton.Data.levelId;
+         Debug.Log(_chapterLevel);
+         
+         foreach (var child in currentLevelsToggle)
+         {
+             ObjectPooler.Instance.DeSpawn(child);
+         }
+ 
+         foreach (var child in currentSubjectsToggle)
+         {
+             ObjectPooler.Instance.DeSpawn(child);
+         }
+         
+         
+         foreach (var lvl in GameDataManager.Instance.Data.levels)
+         {
+             var newBtn = ObjectPooler.Instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
+             newBtn.CheckToggleState(lvl.id,chapter.Data.levelId);
+             newBtn.Initialize();
+             newBtn.BindData(lvl.name, lvl.id);
+             newBtn._isToggle = true;
+             newBtn.Transform.SetParent(holderLevel.transform);
+             currentLevelsToggle.Add(newBtn.transform);
+             newBtn.OnClickToggle += OnClickLevelToggle;
+         }
+         
+    }
 
-        foreach (var lvl in GameDataManager.Instance.Data.levels)
-        {
-            var newBtn = ObjectPooler.Instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
-            newBtn.CheckToggleState(lvl.id,chapter.Data.levelId);
-            newBtn.Initialize();
-            newBtn.BindData(lvl.name, lvl.id);
-            newBtn._isToggle = true;
-            newBtn.Transform.SetParent(holderLevel.transform);
-            currentLevelsToggle.Add(newBtn.transform);
-        }
-}
     private void Submit()
     {
         switch (_editing)
@@ -173,22 +198,22 @@ public class UIManager : MonoBehaviour
                 break;
             
             case EditedData.Level:
-                NewUpdateLevel(inputFiledName.text, inputFieldOrder.text);
+                UpdateLevel(inputFiledName.text, inputFieldOrder.text);
                 break;
             
             case EditedData.Subject:
-                NewUpdateSubject(inputFiledName.text, inputFieldOrder.text);
+                UpdateSubject(inputFiledName.text, inputFieldOrder.text);
                 break;
             
             case EditedData.Chapter:
-                NewUpdateChapter(inputFiledName.text, inputFieldOrder.text);
+                UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
 
         ClosePanel();
     }
 
-    private void NewUpdateLevel(string inputFieldNameText, string inputFieldOrderText)
+    private void UpdateLevel(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
 
@@ -216,14 +241,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void NewUpdateSubject(string inputFieldNameText, string inputFieldOrderText)
+    private void UpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectSubjectsBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
 
-    private void NewUpdateChapter(string inputFieldNameText, string inputFieldOrderText)
+    private void UpdateChapter(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectChaptersBtnBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
+        
+         _chapterLevel = _selectedLevels;
+         
+        
+         Debug.Log(_chapterLevel);
     }
 
     private void ResetPopup()
@@ -231,4 +261,5 @@ public class UIManager : MonoBehaviour
         inputFiledName.text = "";
         inputFieldOrder.text = "";
     }
+    
 }
