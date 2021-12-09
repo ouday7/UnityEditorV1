@@ -43,6 +43,14 @@ public class ToggleButton : PoolableObject
         
         else Unselect();
     }
+    public void CheckToggle(int subId,int chapterInSubjectId)
+    {
+        if(subId==chapterInSubjectId) Select();
+        else
+        {
+            Unselect();
+        }
+    }
     private void SelectButton() => OnClickToggle?.Invoke(this);
 
     public void MarkSelected(bool isSelected)
