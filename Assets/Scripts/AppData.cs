@@ -33,3 +33,32 @@ using System.Collections.Generic;
     public List<SubjectData> subjects;
     public List<ChapterData> chapters;
 }
+
+[Serializable]
+public class QuizFieldData
+{
+    public int id;
+    public string type;
+}
+
+[Serializable] public class QuestionData
+{
+    public string mainQst;
+    public string subQst;
+    public List<QuizFieldData> quizFields;
+    public int templateId;
+    public string situationData;
+}
+[Serializable] public class ExerciseData
+{
+    public int chapterId;
+    public List<QuestionData> questions;
+}
+
+[Serializable] public class TemplateData
+{
+    public int templateId;
+    public string templateName;
+}
+
+    
