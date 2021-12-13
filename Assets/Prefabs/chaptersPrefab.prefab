@@ -346,5 +346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  btn: {fileID: 1149008622512790624}
+  text: {fileID: 8558727283003640729}
+  background: {fileID: 5861629626002038181}
   editBtn: {fileID: 4836439067259369641}
-  _text: {fileID: 8558727283003640729}
+  selectedColor: {r: 0.447, g: 0.447, b: 0.447, a: 1}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}

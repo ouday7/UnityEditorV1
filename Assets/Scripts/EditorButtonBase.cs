@@ -53,5 +53,5 @@ public abstract class EditorButtonBase : PoolableObject
         btn.interactable = true;
     }
 
-    public void InvokeUpdateChaptersOrder() => OnUpdateIndex?.Invoke();
+    protected void InvokeUpdateChaptersOrder() => OnUpdateIndex?.Invoke();
 }
