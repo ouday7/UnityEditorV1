@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -12,6 +13,7 @@ public abstract class EditorButtonBase : PoolableObject
     [SerializeField] protected RtlText text;
     [SerializeField] protected Image background;
     [SerializeField] protected Button editBtn;
+    
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
     
@@ -43,6 +45,7 @@ public abstract class EditorButtonBase : PoolableObject
         _isOpen = true;
         background.color = selectedColor;
         editBtn.gameObject.SetActive(true);
+    
         btn.interactable = false;
     }
     public void Unselect()

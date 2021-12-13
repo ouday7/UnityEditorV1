@@ -24,7 +24,6 @@ public class SubjectsBtn : EditorButtonBase
     
     public void SubjectButtonSelected()
     {
-        
         OnSelectSubjectButton?.Invoke(this);
     }
     

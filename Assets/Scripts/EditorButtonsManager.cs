@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EditorButtonsManager : MonoBehaviour
 {
     [SerializeField] private RectTransform levelsHolder;
     [SerializeField] private RectTransform subjectsHolder;
     [SerializeField] private RectTransform chaptersHolder;
-
+    
+    
+    
     private List<Transform> _subjectsList;
     private List<Transform> _chapList;
     private LevelBtn _selectedLevel;
@@ -105,9 +108,14 @@ public class EditorButtonsManager : MonoBehaviour
     
     private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
     {
-        if (_selectedChapter != null) _selectedChapter.Unselect();
+        if (_selectedChapter != null)
+        {
+            _selectedChapter.Unselect();
+            _selectedChapter.configBtn.gameObject.SetActive(false);
+        }
         _selectedChapter = inNewSelectedChapterButton;
         _selectedChapter.Select();
+        _selectedChapter.configBtn.gameObject.SetActive(true);
     }
 
     private void ResetSubjectsHolder()
