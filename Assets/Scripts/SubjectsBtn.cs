@@ -1,43 +1,31 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UPersian.Components;
+using System;
+
 public class SubjectsBtn : EditorButtonBase
 {
-    [SerializeField] private Button editBtn;
-    [SerializeField] private Button btn;
-    [SerializeField] private RtlText _text;
+    public static event Action<SubjectsBtn> OnSelectSubjectButton;
     
     private Subject _data;
-    private bool _isInitialized=false;
     public Subject Data => _data;
     
     public override void Initialize()
     {
         if(_isInitialized) return;
-        editBtn.onClick.AddListener(() =>
-        {
-            UIManager.Instance.SubjectEdit(this);
-            _text.text = _data.name;
-            gameObject.SetActive(true);
-        });
+        base.Initialize();
+        editBtn.onClick.AddListener(() => UIManager.Instance.SubjectEdit(this));
+        OnSelectAction += SubjectButtonSelected;
+    }
 
-        _isInitialized = true;
+    public void BindData(Subject subject)
+    {
+        _data = subject;
+        text.text = _data.name;
+        transform.SetSiblingIndex(subject.order-1);
     }
     
-    public void BindData(Subject subject, int inLevelId)
+    public void SubjectButtonSelected()
     {
-        _data = subject;
-        _text.text = _data.name;
-        transform.SetSiblingIndex(subject.order);
-        btn.onClick.RemoveAllListeners();
-        btn.onClick.AddListener(() => GameManager.Instance.ShowChapter(_data.id, inLevelId));
-    }
-
-    private void BindData(Subject subject)
-    {
-        _data = subject;
-        _text.text = _data.name;
-        transform.SetSiblingIndex(subject.order);
+        
+        OnSelectSubjectButton?.Invoke(this);
     }
     
     public void UpdateData(string newName, string newOrderText)
@@ -49,11 +37,10 @@ public class SubjectsBtn : EditorButtonBase
         if (newOrderText.Length == 0)
         {
             newOrderText = _data.order.ToString();
-
         }
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameManager.Instance.LogJson();
+        GameDataManager.Instance.SaveToJson();
     }
 }

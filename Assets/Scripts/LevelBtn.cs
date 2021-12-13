@@ -1,35 +1,38 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UPersian.Components;
+using System;
+
 public class LevelBtn : EditorButtonBase
 {
-    [SerializeField] private Button editBtn;
-    [SerializeField] private Button btn;
-    [SerializeField] private RtlText text;
+    public static LevelBtn Instance;
+    public event Action<LevelBtn> OnSelectLevelButton;
     
     private Level _data;
-    private bool _isInitialized=false;
-    private GameManager _gameManager;
-
     public Level Data => _data;
+    private void OnDestroy()
+    {
+        OnSelectLevelButton = null;
+    }
+    
     public override void Initialize()
     {
+        Instance = this;
         if(_isInitialized) return;
-        editBtn.onClick.AddListener(() =>
-        {
-            UIManager.Instance.LevelEdit(this);
-            text.text = _data.name;
-            gameObject.SetActive(true);
-        });
-        _isInitialized = true;
-         btn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.ShowSubjects(_data.subjectsId,_data.id));
+        base.Initialize();
+        editBtn.onClick.AddListener(() => UIManager.Instance.LevelEdit(this));
+        OnSelectAction += LevelButtonSelected;
     }
+
     public void BindData(Level level)
     {
         _data = level;
         text.text = _data.name;
-        transform.SetSiblingIndex(level.order - 1);
+        transform.SetSiblingIndex(level.order-1);
     }
+
+    public void LevelButtonSelected()
+    {
+        OnSelectLevelButton?.Invoke(this);
+    }
+
     public void UpdateData(string newName, string newOrderText)
     {
         if (newName.Length == 0)
@@ -43,12 +46,7 @@ public class LevelBtn : EditorButtonBase
         _data.name = newName;
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
-        Debug.Log($"//. New Order = {newOrder}");
         BindData(_data);
-        GameManager.Instance.LogJson();
-    }
-    public void UpdateDataSubjectOfLevel(int newSubject)
-    {
-        _data.subjectsId.Add(newSubject); 
+        GameDataManager.Instance.SaveToJson();
     }
 }
