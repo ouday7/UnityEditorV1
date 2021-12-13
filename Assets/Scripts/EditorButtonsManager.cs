@@ -14,6 +14,7 @@ public class EditorButtonsManager : MonoBehaviour
 
     private ChaptersBtn _selectedChapter;
 
+    public static SubjectsBtn selectedSubjectbtn;
     private void OnDestroy()
     {
        LevelBtn.Instance.OnSelectLevelButton -= OnSelectLevelButton;
@@ -85,6 +86,8 @@ public class EditorButtonsManager : MonoBehaviour
             if(i != 0) continue;
             subjectBtn.Select();
             subjectBtn.SubjectButtonSelected();
+
+            selectedSubjectbtn = subjectBtn;
         }
         
     }

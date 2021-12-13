@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
-    private SubjectsBtn _selectSubjectsBtnButton;
+    private SubjectsBtn _selectSubjectsButton;
     private ChaptersBtn _selectChaptersButton;
     private List<Subject> _availableSubjects;
     private List<Level> _availableLevels;
@@ -48,8 +48,8 @@ public class UIManager : MonoBehaviour
     private List<int> _levelSubjects;
     private List<int> _selectedSubjects;
 
-    private int selectedLevel;
-    private int selectedSubject;
+    private int selectedLevelId;
+    private int selectedSubjectId;
 
     private ToggleButton oldLevelBtn;
     private ToggleButton oldSubjectBtn;
@@ -126,7 +126,7 @@ public class UIManager : MonoBehaviour
 
     private void OnClickLevelToggle(ToggleButton newLevelButton)
     {
-        selectedLevel = newLevelButton.Id;
+        selectedLevelId = newLevelButton.Id;
         if(oldLevelBtn!=null) oldLevelBtn.Unselect();
         newLevelButton.Select();
         newLevelButton._isToggle = false;
@@ -146,6 +146,7 @@ public class UIManager : MonoBehaviour
             newBtn._isToggle = true;
             if (newBtn.IsSelected)
             {
+                selectedSubjectId = newBtn.Id;
                 oldSubjectBtn = newBtn;
                 newBtn._isToggle = false;
             }
@@ -156,7 +157,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnClickSubjectLevel(ToggleButton newSubjectButton)
     {
-        selectedSubject = newSubjectButton.Id;
+        selectedSubjectId = newSubjectButton.Id;
         if(oldSubjectBtn!=null) oldSubjectBtn.Unselect();
         newSubjectButton.Select();
         newSubjectButton._isToggle = false;
@@ -166,7 +167,7 @@ public class UIManager : MonoBehaviour
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         subjectSection.transform.position = subjectsholderposition;
-        _selectSubjectsBtnButton = subjectsBtn;
+        _selectSubjectsButton = subjectsBtn;
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
         dataInput.gameObject.SetActive(true);
@@ -179,7 +180,7 @@ public class UIManager : MonoBehaviour
     public void ChapterEdit(ChaptersBtn chapter)
     {
         _selectChaptersButton = chapter;
-         _editing = EditedData.Chapter;
+        _editing = EditedData.Chapter;
          popUpPanel.gameObject.SetActive(true);
          dataInput.gameObject.SetActive(true);
          levelSection.gameObject.SetActive(true);
@@ -209,6 +210,7 @@ public class UIManager : MonoBehaviour
              currentLevelsToggle.Add(newBtn.transform);
              if (newBtn.IsSelected)
              {
+                 selectedLevelId = newBtn.Id;
                  oldLevelBtn = newBtn;
                  newBtn._isToggle = false;
              }
@@ -270,23 +272,22 @@ public class UIManager : MonoBehaviour
 
     private void UpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
-        _selectSubjectsBtnButton.UpdateData(inputFieldNameText, inputFieldOrderText);
+        _selectSubjectsButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
 
     private void UpdateChapter(string inputFieldNameText, string inputFieldOrderText)
     {
         _selectChaptersButton.UpdateData(inputFieldNameText, inputFieldOrderText);
         
-        Debug.Log(_selectSubjectsBtnButton.Data.chapters);
-        _selectSubjectsBtnButton.Data.chapters.Remove(_selectChaptersButton.Data);
+       
+        _selectChaptersButton.Data.levelId = selectedLevelId;
+        _selectChaptersButton.Data.subjectId = selectedSubjectId;
         
-        foreach (var lvl in GameDataManager.Instance.Data.levels)
-        {
-            if (lvl.id != selectedLevel || !lvl.subjectsId.Contains(selectedSubject)) continue;
-            _selectSubjectsBtnButton.Data.chapters.Add(_selectChaptersButton.Data);
-        }
-        _selectChaptersButton.Data.levelId = selectedLevel;
-        _selectChaptersButton.Data.subjectId = selectedSubject;
+        EditorButtonsManager.selectedSubjectbtn.Data.chapters.Remove(_selectChaptersButton.Data);
+        var subject = GameDataManager.Instance.Data.levels.
+            FirstOrDefault(lvl => lvl.id == selectedLevelId).subjects.FirstOrDefault(sub => sub.id == selectedSubjectId);
+        
+        subject.chapters.Add(_selectChaptersButton.Data);
     }
 
     private void ResetPopup()
