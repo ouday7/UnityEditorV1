@@ -4,22 +4,22 @@ public class SubjectsBtn : EditorButtonBase
 {
     public static event Action<SubjectsBtn> OnSelectSubjectButton;
     
-    private Subject _data;
-    public Subject Data => _data;
+    private SubjectData _data;
+    public SubjectData Data => _data;
     
     public override void Initialize()
     {
         if(_isInitialized) return;
         base.Initialize();
-        editBtn.onClick.AddListener(() => UIManager.Instance.SubjectEdit(this));
+        editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
         OnSelectAction += SubjectButtonSelected;
     }
 
-    public void BindData(Subject subject)
+    public void BindData(SubjectData subjectData)
     {
-        _data = subject;
+        _data = subjectData;
         text.text = _data.name;
-        transform.SetSiblingIndex(subject.order-1);
+        transform.SetSiblingIndex(subjectData.order-1);
     }
     
     public void SubjectButtonSelected()
@@ -41,6 +41,6 @@ public class SubjectsBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 }

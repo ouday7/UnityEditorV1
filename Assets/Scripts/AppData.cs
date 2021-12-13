@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
-[Serializable] public class Level
+[Serializable] public class LevelData
 {
     public int id;
     public string name;
     public int order;
     public List<int> subjectsId;
+    public Dictionary<int, SubjectData> subjects;
 }
-[Serializable] public class Subject
+
+[Serializable] public class SubjectData
 {
     public int id;
     public string name;
     public int order;
+    public List<ChapterData> chapters;
 }
-[Serializable] public class Chapter
+
+[Serializable] public class ChapterData
 {
     public int id;
     public string name;
@@ -26,7 +29,7 @@ using Unity.VisualScripting;
 
 [Serializable] public class JsonData
 {
-    public List<Level> levels;
-    public List<Subject> subjects;
-    public List<Chapter> chapters;
+    public List<LevelData> levels;
+    public List<SubjectData> subjects;
+    public List<ChapterData> chapters;
 }

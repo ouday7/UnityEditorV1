@@ -5,8 +5,8 @@ public class LevelBtn : EditorButtonBase
     public static LevelBtn Instance;
     public event Action<LevelBtn> OnSelectLevelButton;
     
-    private Level _data;
-    public Level Data => _data;
+    private LevelData _data;
+    public LevelData Data => _data;
     private void OnDestroy()
     {
         OnSelectLevelButton = null;
@@ -17,15 +17,15 @@ public class LevelBtn : EditorButtonBase
         Instance = this;
         if(_isInitialized) return;
         base.Initialize();
-        editBtn.onClick.AddListener(() => UIManager.Instance.LevelEdit(this));
+        editBtn.onClick.AddListener(() => UIManager.instance.LevelEdit(this));
         OnSelectAction += LevelButtonSelected;
     }
 
-    public void BindData(Level level)
+    public void BindData(LevelData levelData)
     {
-        _data = level;
+        _data = levelData;
         text.text = _data.name;
-        transform.SetSiblingIndex(level.order-1);
+        transform.SetSiblingIndex(levelData.order-1);
     }
 
     public void LevelButtonSelected()
@@ -47,6 +47,6 @@ public class LevelBtn : EditorButtonBase
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 }

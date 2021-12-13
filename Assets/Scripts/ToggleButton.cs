@@ -9,25 +9,23 @@ public class ToggleButton : PoolableObject
 {
     public event Action<ToggleButton> OnClickToggle;
 
-    [SerializeField] internal bool _isToggle;
-        
+    [HideInInspector] public bool isToggle; //determines if this button can be checked and unchecked => toggle state
+    
     [SerializeField] private RtlText toggleText;
     [SerializeField] private Button toggleButton;
     [SerializeField] private Image mainImage;
-
     [SerializeField] private Color selectedCase;
     [SerializeField] private Color unselectedCase;
     
     private int _id;
     private bool _isInitialized;
     public bool IsSelected { get; private set; }
-
     public int Id => _id;
 
     public void Initialize()
     {
         if(_isInitialized) return;
-        toggleButton.onClick.AddListener(SelectButton);
+        toggleButton.onClick.AddListener(() => OnClickToggle?.Invoke(this));
         _isInitialized = true;
     }
 
@@ -37,42 +35,35 @@ public class ToggleButton : PoolableObject
         toggleText.text = inLabel;
     }
 
-    public void CheckToggleState(int lvlid,int lvlidInChapter)
+    public void CheckToggleState(int inIdToCompare)
     {
-        if(lvlid==lvlidInChapter) Select();
-        
-        else Unselect();
-    }
-    public void CheckToggle(int subId,int chapterInSubjectId)
-    {
-        if(subId==chapterInSubjectId) Select();
-        else
-        {
+        if (_id == inIdToCompare) 
+            Select();
+        else 
             Unselect();
-        }
     }
-    private void SelectButton() => OnClickToggle?.Invoke(this);
 
     public void MarkSelected(bool isSelected)
     {
         if (isSelected) 
             Select();
-        
-        else Unselect();
+        else 
+            Unselect();
     }
 
     public void Select()
     {
-        if(!_isToggle) toggleButton.interactable = false;
+        if(!isToggle) toggleButton.interactable = false;
         mainImage.color = selectedCase;
         IsSelected = true;
     }
 
     public void Unselect()
     {
-        if(!_isToggle) toggleButton.interactable = true;
+        if(!isToggle) toggleButton.interactable = true;
         mainImage.color = unselectedCase;
         IsSelected = false;
     }
-    
+
+    public void RemoveEventListeners() => OnClickToggle = null;
 }

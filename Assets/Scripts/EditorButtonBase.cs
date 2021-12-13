@@ -6,6 +6,7 @@ using UPersian.Components;
 public abstract class EditorButtonBase : PoolableObject
 {
     protected event Action OnSelectAction;
+    protected static event Action OnUpdateIndex;
     
     [SerializeField] protected Button btn;
     [SerializeField] protected RtlText text;
@@ -26,8 +27,12 @@ public abstract class EditorButtonBase : PoolableObject
     {
         if(_isInitialized) return;
         btn.onClick.AddListener(OnClickMainButton);
+        OnUpdateIndex += UpdateDataIndex;
         _isInitialized = true;
     }
+
+    protected virtual void UpdateDataIndex() { }
+
     private void OnClickMainButton()
     {
         Select();
@@ -47,4 +52,6 @@ public abstract class EditorButtonBase : PoolableObject
         editBtn.gameObject.SetActive(false);
         btn.interactable = true;
     }
+
+    public void InvokeUpdateChaptersOrder() => OnUpdateIndex?.Invoke();
 }

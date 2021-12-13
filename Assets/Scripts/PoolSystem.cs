@@ -2,97 +2,68 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public enum PoolType
-{
-    Level, Subject, Chapter, ToggleSelect
-}
 
+public enum ObjectToPoolType
+{
+    Level, Subject, Chapter, Toggle
+}
 public class PoolSystem : MonoBehaviour
 {
-    [Serializable] private struct PoolObjectData
+    [Serializable] private struct PoolObject
     {
-        public PoolType type;
-        public PoolObjectBase objectReference;
-        public int preloadedAmount;
+        public ObjectToPoolType type;
+        public PoolableObject objectReference;
+        public int amount;
     }
+    [SerializeField] private List<PoolObject> poolObjects;
+    [SerializeField] private List<PoolableObject> currentPoolObjects;
     
-    public static PoolSystem Instance;
-    
-    [SerializeField] private List<PoolObjectData> poolObjects;
-    [SerializeField] private List<PoolObjectBase> currentPool;
+    public static PoolSystem instance;
 
     public void Initialize()
     {
-        if(Instance != null) return;
-        Instance = this;
-        PopulatePool();
+        if (instance != null) return;
+        instance = this;
+        InitPool();
     }
-
-    private void PopulatePool()
+    
+    private void InitPool()
     {
-        for (var i = 0; i < poolObjects.Count; i++)
+        foreach (var obj in poolObjects)
         {
-            for (var j = 0; j < poolObjects[i].preloadedAmount; j++)
+            for (var i = 0; i <obj.amount; i++)
             {
-                GenerateElement(poolObjects[i].type);
+                var newObj = Instantiate(obj.objectReference, transform, true);
+                newObj.gameObject.SetActive(false);
+                currentPoolObjects.Add(newObj);
             }
         }
     }
-
-    public T Spawn<T>(PoolType inType) where T : Component
+    public T Spawn<T>(ObjectToPoolType type) where T:Component
     {
-        var poolItem = currentPool.FirstOrDefault(pI => pI.Type == inType);
+        var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
         if (poolItem != null)
         {
             var obj = poolItem.GetComponent<T>();
-            if (obj == null)
-            {
-                Debug.Log($"//. Object is Null {inType}");
-            }
-            currentPool.Remove(poolItem);
+            currentPoolObjects.Remove(poolItem);
             obj.gameObject.SetActive(true);
             return obj;
         }
-        GenerateElement(inType);
-        return Spawn<T>(inType);
-        //- Map example
-        /*
-        if (poolMap.ContainsKey(inType))
-        {
-            var item = poolMap[inType].Dequeue();
-            if (item != null) return item.GetComponent<T>();
-            GenerateElement(inType);
-            return Spawn<T>(inType);
-        }
-        else
-        {
-            throw new Exception($"Pool doesn't contain Element with key: {inType}");
-        }
-        */
+        GenerateElement(type);
+        return Spawn<T>(type);
     }
-
-    public Transform Spawn(PoolType inType)
+    public void DeSpawn(Transform objectToDeSpawn)
     {
-        var poolItem = currentPool.FirstOrDefault(pI => pI.Type == inType);
-        if (poolItem != null) return poolItem.Transform;
-        GenerateElement(inType);
-        return Spawn(inType);
-    }
-
-    public void DeSpawn(PoolObjectBase objectToDeSpawn)
-    {
-        objectToDeSpawn.Transform.SetParent(transform);
+        objectToDeSpawn.SetParent(transform);
         objectToDeSpawn.gameObject.SetActive(false);
-        currentPool.Add(objectToDeSpawn);
+        currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
     }
-
-    private void GenerateElement(PoolType inType) //create element if pool is empty
+    
+    private void GenerateElement(ObjectToPoolType type) //create an element if the pool is empty
     {
-        var poolItemData = poolObjects.FirstOrDefault(poolObject => poolObject.type == inType);
-        var item = Instantiate(poolItemData.objectReference, transform);
+        var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
+        var item = Instantiate(poolItem.objectReference, transform);
         item.gameObject.SetActive(false);
-        currentPool.Add(item);
+        currentPoolObjects.Add(item);
     }
-
-    private List<ChaptersBtn> spawnedChapters = new List<ChaptersBtn>();
 }
