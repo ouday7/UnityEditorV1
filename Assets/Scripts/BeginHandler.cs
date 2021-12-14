@@ -6,7 +6,7 @@ public class BeginHandler : MonoBehaviour
     [SerializeField]private GameDataManager gm;
     [SerializeField] private UIManager ui;
     [SerializeField] private EditorButtonsManager editorButtons;
-    
+
     private void Awake()
     {
         pool.Initialize();

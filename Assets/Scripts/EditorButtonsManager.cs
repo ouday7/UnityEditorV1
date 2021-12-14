@@ -95,8 +95,7 @@ public class EditorButtonsManager : MonoBehaviour
 
         foreach (var chapter in inSubjectData.chapters)
         {
-            var chapterBtn = PoolSystem.instance.Spawn<ChaptersBtn>(ObjectToPoolType.Chapter);
-            var newBtn = chapterBtn.GetComponent<ChaptersBtn>();
+            var newBtn = PoolSystem.instance.Spawn<ChaptersBtn>(ObjectToPoolType.Chapter);
             newBtn.Initialize();
             newBtn.BindData(chapter, this);
             newBtn.Unselect();

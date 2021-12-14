@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectToPoolType
 {
-    Level, Subject, Chapter, Toggle
+    Level, Subject, Chapter, Toggle,Exercise
 }
 public class PoolSystem : MonoBehaviour
 {
@@ -22,8 +22,13 @@ public class PoolSystem : MonoBehaviour
 
     public void Initialize()
     {
-        if (instance != null) return;
-        instance = this;
+        if (instance != null && instance != this)
+            Destroy(this.gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         InitPool();
     }
     

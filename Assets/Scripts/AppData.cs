@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable] public class LevelData
 {
@@ -39,6 +41,13 @@ public class QuizFieldData
 {
     public int id;
     public string type;
+    public string textOne;
+    public string textTwo;
+    public Sprite imageOne;
+    public Sprite imageTwo;
+    public Button toggleOne;
+    public Button toggleTwo;
+
 }
 
 [Serializable] public class QuestionData

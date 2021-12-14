@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4544337683012450121}
   - component: {fileID: 3374933604779408174}
   - component: {fileID: 5122175430824026750}
+  - component: {fileID: 3670465814252709798}
   m_Layer: 5
   m_Name: ConfigureBtn
   m_TagString: Untagged
@@ -35,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 114.146545, y: 117.919556}
+  m_AnchoredPosition: {x: 7.5, y: -0.25}
+  m_SizeDelta: {x: 106.64502, y: 104.413666}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4544337683012450121
 CanvasRenderer:
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6b5f31a806cd8ce45a0df357c9d1823a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d1950e0341367f489dd7712359f494b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -119,6 +120,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3670465814252709798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606597925948107539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90831c51ddf1034895e88e6bb581cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configBtn: {fileID: 5122175430824026750}
+  newScene: ChapterConfig
 --- !u!1 &968776924009317115
 GameObject:
   m_ObjectHideFlags: 0
