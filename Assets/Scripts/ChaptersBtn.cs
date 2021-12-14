@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ChaptersBtn : EditorButtonBase
 {
-    public static ChaptersBtn Instance;
     public static event Action<ChaptersBtn> OnSelectChaptersButton;
     
     private ChapterData _data;
