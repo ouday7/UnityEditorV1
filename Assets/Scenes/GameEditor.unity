@@ -634,6 +634,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8057889620523164530, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8057889620523164531, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
