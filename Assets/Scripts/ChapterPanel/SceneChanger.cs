@@ -1,20 +1,19 @@
-﻿using UnityEngine;
+﻿using UnityEditor.SceneManagement;
+using UnityEngine;  
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-namespace ChapterPanel
+public class SceneChanger : MonoBehaviour
 {
-    public class SceneChanger : MonoBehaviour
+    [SerializeField] private string configScene;
+    [SerializeField] private string mainScene;
+    
+    public void OpenConfigScene()
     {
-        [SerializeField] private string configScene;
-        [SerializeField] private string mainScene;
-
-        public void OpenConfigScene()
-        {
-            SceneManager.LoadScene(configScene);
-        }
-        public void OpenMainScene()
-        {
-            SceneManager.LoadScene(mainScene);
-        }
+        SceneManager.LoadScene(configScene);
+    }
+    public void OpenMainScene()
+    {
+        SceneManager.LoadScene(mainScene);
     }
 }

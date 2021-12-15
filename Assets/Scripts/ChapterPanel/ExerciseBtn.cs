@@ -10,9 +10,6 @@ namespace ChapterPanel
         private bool _isInitialized;
         private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
-        private ExerciseData _data;
-        
-        public ExerciseData Data => _data;
         
         public  void Initialize()
         {

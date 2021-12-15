@@ -5,11 +5,10 @@ namespace ChapterPanel
 {
     public class QuestionBtn : PoolableObject
     {
-        [SerializeField] private Transform btnPrefab;
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
         
-        private const string _exName = "  سؤال  ";
+        private const string _qstName = "  سؤال  ";
 
         private void Start()
         {
@@ -18,19 +17,19 @@ namespace ChapterPanel
         public  void Initialize()
         {
             const int newId = 1;
-            this.btnName.text = _exName + newId ;
+            this.btnName.text = _qstName + newId ;
         }
 
         public void ContinueInit(int qstNbr)
         {
             var newId = qstNbr + 1;
-            btnName.text = _exName + newId;
+            btnName.text = _qstName + newId;
         }
         private void DeleteQst()
         {
             var exBtn = deleteQstBtn.transform.parent;
             PoolSystem.instance.DeSpawn(exBtn);
-            AddNewQuestion._currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
+            ExerciseController.instance._currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
         }
 
         

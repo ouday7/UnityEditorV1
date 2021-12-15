@@ -2474,7 +2474,6 @@ GameObject:
   - component: {fileID: 2803324594667092630}
   - component: {fileID: 2370448342346194661}
   - component: {fileID: 6217631353654369619}
-  - component: {fileID: 2179360779304555072}
   m_Layer: 5
   m_Name: AddExercise
   m_TagString: Untagged
@@ -2583,20 +2582,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2179360779304555072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886756964354185152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66347fd25f8805b4191764d68b827516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addExbtn: {fileID: 6217631353654369619}
-  exerciseHolder: {fileID: 2272578194511623692}
 --- !u!1 &4937884507718036517
 GameObject:
   m_ObjectHideFlags: 0
@@ -4841,6 +4826,7 @@ GameObject:
   - component: {fileID: 6325267850268256122}
   - component: {fileID: 4689633119824576236}
   - component: {fileID: 2533865469865638501}
+  - component: {fileID: 5020574623002235986}
   m_Layer: 5
   m_Name: ChapterConfig
   m_TagString: Untagged
@@ -4907,6 +4893,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5020574623002235986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8737565626253171113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009cd3597f141154ba0363e1e14b6d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showQstsBtn: {fileID: 0}
+  addQstBtn: {fileID: 0}
+  exScrollRect: {fileID: 0}
+  qstHolder: {fileID: 0}
+  _currentQstList: []
 --- !u!1 &8952766398499837603
 GameObject:
   m_ObjectHideFlags: 0
