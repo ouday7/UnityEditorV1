@@ -883,6 +883,9 @@ MonoBehaviour:
   - type: 4
     objectReference: {fileID: 8946268062337356198, guid: 6553d6b1b7fc3a54f8ca38cfab839709, type: 3}
     amount: 10
+  - type: 5
+    objectReference: {fileID: 2642254180913290276, guid: b452176c718213c41a1cda3c391e6925, type: 3}
+    amount: 20
   currentPoolObjects: []
 --- !u!4 &1295490903
 Transform:

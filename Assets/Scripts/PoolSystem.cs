@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ObjectToPoolType
 {
-    Level, Subject, Chapter, Toggle,Exercise
+    Level, Subject, Chapter, Toggle,Exercise,Question
 }
 public class PoolSystem : MonoBehaviour
 {

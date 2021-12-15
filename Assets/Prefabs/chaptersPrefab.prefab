@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4544337683012450121}
   - component: {fileID: 3374933604779408174}
   - component: {fileID: 5122175430824026750}
-  - component: {fileID: 3670465814252709798}
+  - component: {fileID: 2976379260328142320}
   m_Layer: 5
   m_Name: ConfigureBtn
   m_TagString: Untagged
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 7.5, y: -0.25}
-  m_SizeDelta: {x: 106.64502, y: 104.413666}
+  m_AnchoredPosition: {x: 11.33, y: 0.45}
+  m_SizeDelta: {x: 99.22229, y: 102.48901}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4544337683012450121
 CanvasRenderer:
@@ -119,8 +119,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3374933604779408174}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3670465814252709798
+      m_Calls:
+      - m_Target: {fileID: 2976379260328142320}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OpenConfigScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2976379260328142320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90831c51ddf1034895e88e6bb581cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configBtn: {fileID: 5122175430824026750}
-  newScene: ChapterConfig
+  configScene: ChapterConfig
+  mainScene: GameEditor
 --- !u!1 &968776924009317115
 GameObject:
   m_ObjectHideFlags: 0

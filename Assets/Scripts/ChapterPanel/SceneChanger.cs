@@ -5,20 +5,15 @@ using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] private Button configBtn;
-    [SerializeField] private string newScene;
-    
-    private void Start()
-    {
-        configBtn.onClick.AddListener(OpenConfigScene);
-    }
+    [SerializeField] private string configScene;
+    [SerializeField] private string mainScene;
 
-    private void OpenConfigScene()
+    public void OpenConfigScene()
     {
-        var y = SceneManager. GetActiveScene(). buildIndex;
-        SceneManager.UnloadSceneAsync(y);
-        
-        SceneManager.LoadScene(newScene);
+        SceneManager.LoadScene(configScene);
     }
-    
+    public void OpenMainScene()
+    {
+        SceneManager.LoadScene(mainScene);
+    }
 }

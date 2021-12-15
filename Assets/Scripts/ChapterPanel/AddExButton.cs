@@ -12,9 +12,6 @@ namespace ChapterPanel
         private ExerciseData _data;
         public ExerciseData Data => _data;
         
-        private List<Transform> _currentExercisesList;
-        
-
         public void Start()
         {
             addExbtn.onClick.AddListener( AddExercise);

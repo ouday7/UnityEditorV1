@@ -136,7 +136,6 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
             return;
         }
         
-        Debug.Log($"//. Generate {level.subjects.Count} subjects");        
         foreach (var sub in level.subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
