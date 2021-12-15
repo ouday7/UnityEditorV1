@@ -6,15 +6,18 @@ namespace ChapterPanel
 {
     public class AddExButton : MonoBehaviour
     {
-        [SerializeField] private Button addExbtn;
+        [SerializeField] private Button addExBtn;
         [SerializeField] private Transform exerciseHolder;
 
         private ExerciseData _data;
         public ExerciseData Data => _data;
-        
+
+        private List<ExerciseBtn> _currentExList;
+
         public void Start()
         {
-            addExbtn.onClick.AddListener( AddExercise);
+            _currentExList=new List<ExerciseBtn>();
+            addExBtn.onClick.AddListener(AddExercise);
         }
 
         private void AddExercise()
@@ -23,6 +26,7 @@ namespace ChapterPanel
             newExBtn.Initialize();
             newExBtn.transform.localScale = Vector3.one;
             newExBtn.transform.SetParent(exerciseHolder.transform);
+            _currentExList.Add(newExBtn);
         }
         
     }

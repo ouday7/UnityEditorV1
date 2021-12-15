@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChapterPanel
@@ -9,7 +8,7 @@ namespace ChapterPanel
         [SerializeField] private Text btnName;
 
         private bool _isInitialized;
-        private static int _exercicseNbr=1;
+        private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
         private ExerciseData _data;
         
@@ -18,8 +17,8 @@ namespace ChapterPanel
         public  void Initialize()
         {
             if(_isInitialized) return;
-            this.btnName.text = _exName + _exercicseNbr;
-            _exercicseNbr++;
+            this.btnName.text = _exName + _exerciseNbr;
+            _exerciseNbr++;
             _isInitialized = true;
         }
     }

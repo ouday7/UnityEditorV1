@@ -528,7 +528,6 @@ MonoBehaviour:
   addQstBtn: {fileID: 4634283763195730917}
   exScrollRect: {fileID: 7236367490564923327}
   qstHolder: {fileID: 2398826570559717889}
-  deleteQstBtn: {fileID: 0}
 --- !u!1 &3431900625732270547
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,9 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  btnPrefab: {fileID: 7528231426477299480}
   btnName: {fileID: 8846281711758085566}
-  showQstsBtn: {fileID: 2143638317444439814}
 --- !u!1 &4041001837996180627
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +927,7 @@ GameObject:
   - component: {fileID: 6944045261360771390}
   - component: {fileID: 3852902880972682239}
   m_Layer: 5
-  m_Name: order
+  m_Name: Order
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1522,7 +1519,7 @@ GameObject:
   - component: {fileID: 4860186232968728799}
   - component: {fileID: 2735168802839238950}
   m_Layer: 5
-  m_Name: dragBtn
+  m_Name: DragBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
