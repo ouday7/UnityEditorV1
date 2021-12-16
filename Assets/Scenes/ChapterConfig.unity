@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1496710282204506532, guid: cd8ce9ebe2453a842842a54c27dbe131, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 2272578194511623692, guid: cd8ce9ebe2453a842842a54c27dbe131, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
