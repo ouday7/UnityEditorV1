@@ -771,7 +771,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  btnName: {fileID: 8846281711758085566}
+  titleTxt: {fileID: 8846281711758085566}
+  addQuestions: {fileID: 4634283763195730917}
+  dragBtn: {fileID: 8478510726187000678}
 --- !u!114 &2083407987623668554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1521,7 @@ GameObject:
   - component: {fileID: 7644085741339192227}
   - component: {fileID: 4860186232968728799}
   - component: {fileID: 2735168802839238950}
+  - component: {fileID: 8478510726187000678}
   m_Layer: 5
   m_Name: DragBtn
   m_TagString: Untagged
@@ -1627,3 +1630,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8478510726187000678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978348599632471431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17812f9142ef7fb49b0f7dd8574edd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
