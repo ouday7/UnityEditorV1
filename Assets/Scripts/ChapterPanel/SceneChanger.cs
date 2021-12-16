@@ -7,7 +7,7 @@ namespace ChapterPanel
     {
         [SerializeField] private string configScene;
         [SerializeField] private string mainScene;
-
+    
         public void OpenConfigScene()
         {
             SceneManager.LoadScene(configScene);

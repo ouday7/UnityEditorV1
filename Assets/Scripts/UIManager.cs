@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
     //holders
     [SerializeField] private Transform holderSubject;
     [SerializeField] private Transform holderLevel;
-    
+
     private EditedData _editing;
     private LevelBtn _selectedLevelButton;
     private SubjectsBtn _selectSubjectsButton;

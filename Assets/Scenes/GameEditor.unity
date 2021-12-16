@@ -670,6 +670,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8057889621042016565, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+      propertyPath: popUpPanel
+      value: 
+      objectReference: {fileID: 1475828295}
     - target: {fileID: 8519256422784993449, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1
@@ -718,7 +722,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8057889621042016565, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
   m_PrefabInstance: {fileID: 1092984966}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1475828295}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1e77ab5fc2f10b4680007a0eccf6110, type: 3}
@@ -901,3 +905,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1475828295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8057889621042016563, guid: b750e508e7cf2a945a793f108b6c3722, type: 3}
+  m_PrefabInstance: {fileID: 1092984966}
+  m_PrefabAsset: {fileID: 0}
