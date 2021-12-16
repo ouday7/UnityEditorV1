@@ -6,20 +6,21 @@ namespace ChapterPanel
 {
     public class ExerciseController : MonoBehaviour
     {
+        public static ExerciseController instance;
+        
         [SerializeField] private Button showQstsBtn;
         [SerializeField] private Button addQstBtn;
         [SerializeField] private GameObject exScrollRect;
         [SerializeField] private Transform qstHolder;
 
         private int _qstNbr;
-        public List<QuestionBtn> _currentQstList;
+        
         private ExerciseData _data;
         public ExerciseData Data => _data;
 
         private List<ExerciseBtn> _currentExList;
-
-        public static ExerciseController instance;
-
+        public List<QuestionBtn> _currentQstList;
+        
         public void Begin()
         {
             if (instance != null && instance != this)
@@ -73,7 +74,7 @@ namespace ChapterPanel
             if (_qstNbr == 0)
                 newQst.Initialize();
             else
-                newQst.ContinueInit(_qstNbr);
+                newQst.Init(_qstNbr);
 
             newQst.transform.SetParent(qstHolder);
             _currentQstList.Add(newQst);

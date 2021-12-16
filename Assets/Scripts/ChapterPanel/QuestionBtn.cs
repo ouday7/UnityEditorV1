@@ -20,7 +20,7 @@ namespace ChapterPanel
             this.btnName.text = _qstName + newId ;
         }
 
-        public void ContinueInit(int qstNbr)
+        public void Init(int qstNbr)
         {
             var newId = qstNbr + 1;
             btnName.text = _qstName + newId;
