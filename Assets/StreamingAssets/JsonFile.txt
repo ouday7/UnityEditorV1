@@ -36,18 +36,18 @@
             ]
         },
         {
-            "id": 5,
-            "name": "سنة خامسة",
-            "order": 5,
+            "id": 6,
+            "name": "سنة سادسة",
+            "order": 1,
             "subjectsId": [
                 1,
                 2
             ]
         },
         {
-            "id": 6,
-            "name": "سنة سادسة",
-            "order": 1,
+            "id": 5,
+            "name": "سنة خامسة",
+            "order": 5,
             "subjectsId": [
                 1,
                 2
@@ -116,7 +116,7 @@
             "name": "Wx",
             "order": 0,
             "subjectId": 1,
-            "levelId": 1
+            "levelId": 4
         },
         {
             "id": 8,
@@ -164,8 +164,8 @@
             "id": 14,
             "name": "التنفس لدى الانسان",
             "order": 0,
-            "subjectId": 1,
-            "levelId": 2
+            "subjectId": 2,
+            "levelId": 5
         },
         {
             "id": 15,

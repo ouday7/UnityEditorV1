@@ -30,19 +30,22 @@ namespace ChapterPanel
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
-        }
-
-        public void Start()
-        {
+            
             _currentExList = new List<ExerciseBtn>();
             _currentQstList = new List<QuestionBtn>();
+            
             addQstBtn.onClick.AddListener(() =>
             {
                 _qstNbr = addQstBtn.transform.parent.Find("Scroll View").Find("Viewport").Find("Content").childCount;
                 //qstNbr = addQstBtn.transform.parent.GetComponent<ScrollRect>().content.childCount;
-                AddNewQst();
-            });
-            showQstsBtn.onClick.AddListener(ShowQsts);
+                 AddNewQst();
+              });
+                showQstsBtn.onClick.AddListener(ShowQsts);
+        }
+
+        public void Start()
+        {
+            
         }
 
         public void AddExercise()
@@ -61,7 +64,6 @@ namespace ChapterPanel
                 exScrollRect.SetActive(false);
                 return;
             }
-
             exScrollRect.SetActive(true);
         }
 

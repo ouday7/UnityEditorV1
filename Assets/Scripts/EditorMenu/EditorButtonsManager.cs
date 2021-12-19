@@ -18,7 +18,7 @@ namespace EditorMenu
 
         private void OnDestroy()
         {
-            LevelBtn.Instance.OnSelectLevelButton -= OnSelectLevelButton;
+          
             SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton -= OnSelectChapterButton;
         }
@@ -114,6 +114,8 @@ namespace EditorMenu
             _selectedChapter.Select();
             _selectedChapter.configBtn.gameObject.SetActive(true);
             PlayerPrefs.SetString("chapterName",_selectedChapter.Data.name);
+            PlayerPrefs.SetString("levelName",_selectedLevel.Data.name);
+            PlayerPrefs.SetString("subjectName",_selectedSubject.Data.name);
         }
 
         private void ResetSubjectsHolder()

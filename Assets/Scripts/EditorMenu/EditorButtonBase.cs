@@ -19,7 +19,7 @@ public abstract class EditorButtonBase : PoolableObject
     
     protected bool _isInitialized;
     private bool _isOpen;
-
+    
     private void OnDestroy()
     {
         OnSelectAction = null;
