@@ -7,6 +7,10 @@ namespace ChapterPanel
     {
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
+        [SerializeField] private InputField mainQuestion; 
+        [SerializeField] private  InputField subQuestion;
+        [SerializeField] private InputField HelpQuestion;
+        
         
         private const string _qstName = "  سؤال  ";
 
@@ -19,7 +23,6 @@ namespace ChapterPanel
             const int newId = 1;
             this.btnName.text = _qstName + newId ;
         }
-
         public void Init(int qstNbr)
         {
             var newId = qstNbr + 1;

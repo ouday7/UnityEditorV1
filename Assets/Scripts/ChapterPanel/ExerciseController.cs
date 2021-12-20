@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ChapterPanel
@@ -18,7 +19,7 @@ namespace ChapterPanel
         private ExerciseData _data;
         public ExerciseData Data => _data;
 
-        private List<ExerciseBtn> _currentExList;
+        [FormerlySerializedAs("_currentExList")] public List<ExerciseBtn> currentExList;
         public List<QuestionBtn> _currentQstList;
         
         public void Begin()
@@ -30,31 +31,28 @@ namespace ChapterPanel
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
-            
-            _currentExList = new List<ExerciseBtn>();
-            _currentQstList = new List<QuestionBtn>();
-            
-            addQstBtn.onClick.AddListener(() =>
-            {
-                _qstNbr = addQstBtn.transform.parent.Find("Scroll View").Find("Viewport").Find("Content").childCount;
-                //qstNbr = addQstBtn.transform.parent.GetComponent<ScrollRect>().content.childCount;
-                 AddNewQst();
-              });
-                showQstsBtn.onClick.AddListener(ShowQsts);
         }
 
         public void Start()
         {
-            
+            currentExList = new List<ExerciseBtn>();
+            _currentQstList = new List<QuestionBtn>();
+            addQstBtn.onClick.AddListener(() =>
+            {
+                _qstNbr = addQstBtn.transform.parent.Find("Scroll View").Find("Viewport").Find("Content").childCount;
+                //qstNbr = addQstBtn.transform.parent.GetComponent<ScrollRect>().content.childCount;
+                AddNewQst();
+            });
+            showQstsBtn.onClick.AddListener(ShowQsts);
         }
 
         public void AddExercise()
         {
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.Initialize();
-            newExBtn.transform.localScale = Vector3.one;
             newExBtn.transform.SetParent(EditController.instance.exerciseHolder.transform);
-            _currentExList.Add(newExBtn);
+            newExBtn.transform.localScale = Vector3.one;
+            currentExList.Add(newExBtn);
         }
 
         private void ShowQsts()
@@ -64,21 +62,26 @@ namespace ChapterPanel
                 exScrollRect.SetActive(false);
                 return;
             }
+
             exScrollRect.SetActive(true);
         }
 
         private void AddNewQst()
         {
-            exScrollRect.SetActive(true);
+           // exScrollRect.SetActive(true);
             var newQst = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
-            newQst.transform.localScale = Vector3.one;
+            //newQst.transform.localScale = Vector3.one;
 
             if (_qstNbr == 0)
                 newQst.Initialize();
             else
                 newQst.Init(_qstNbr);
 
-            newQst.transform.SetParent(qstHolder);
+           newQst.transform.SetParent(transform.parent);
+           // newQst.transform.SetParent(qstHolder);
+            Debug.Log("Spawn !");
+            //newQst.Transform.localScale = Vector3.one;
+
             _currentQstList.Add(newQst);
         }
     }

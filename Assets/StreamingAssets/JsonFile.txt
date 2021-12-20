@@ -109,7 +109,7 @@
             "name": "Wxc",
             "order": 0,
             "subjectId": 1,
-            "levelId": 1
+            "levelId": 6
         },
         {
             "id": 7,

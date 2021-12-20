@@ -47,7 +47,6 @@ public class QuizFieldData
     public Sprite imageTwo;
     public Button toggleOne;
     public Button toggleTwo;
-
 }
 
 [Serializable] public class QuestionData
