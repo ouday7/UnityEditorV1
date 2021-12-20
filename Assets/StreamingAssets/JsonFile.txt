@@ -36,18 +36,18 @@
             ]
         },
         {
-            "id": 5,
-            "name": "سنة خامسة",
-            "order": 5,
+            "id": 6,
+            "name": "سنة سادسة",
+            "order": 1,
             "subjectsId": [
                 1,
                 2
             ]
         },
         {
-            "id": 6,
-            "name": "سنة سادسة",
-            "order": 1,
+            "id": 5,
+            "name": "سنة خامسة",
+            "order": 5,
             "subjectsId": [
                 1,
                 2
@@ -109,7 +109,7 @@
             "name": "Wxc",
             "order": 0,
             "subjectId": 1,
-            "levelId": 1
+            "levelId": 6
         },
         {
             "id": 7,

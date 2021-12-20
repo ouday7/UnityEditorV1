@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Envast.Components.GridLayout.Helpers;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Envast.Components.GridLayout
+namespace Components.GridLayout
 {
-    public class CustomGridLayout : BaseMonoBehaviour
+    public class CustomGridLayout : MonoBehaviour
     {
         public Alignment alignment;
         public Vector2 padding;
@@ -35,12 +34,8 @@ namespace Envast.Components.GridLayout
         
         [SerializeField] private string newLineTag = "LayoutNewLine";
         public string NewLineTag => newLineTag;
-
-        
-        
-        
-        //change here
-        public override void ReleaseReferences()
+    
+        private void ReleaseReferences()
         {
             _rt = null;
             _linesWidthList?.Clear();
@@ -66,7 +61,7 @@ namespace Envast.Components.GridLayout
             }
         }
     
-        [Button("Update Layout", ButtonSizes.Medium)]
+        // [Button("Update Layout", ButtonSizes.Medium)]
         public void UpdateLayout()
         {
             if (RectTransform.childCount == 0) return;
@@ -110,7 +105,7 @@ namespace Envast.Components.GridLayout
             RestoreOriginalAnchor();
         }
 
-        [Button("Shuffle", ButtonSizes.Medium)]
+        // [Button("Shuffle", ButtonSizes.Medium)]
         public void ShuffleLayout()
         {
             if (RectTransform.childCount == 0) return;

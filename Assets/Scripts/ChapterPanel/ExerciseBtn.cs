@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Envast.Layouts;
+using UnityEngine;
 using UnityEngine.UI;
-using UPersian.Components;
 
 namespace ChapterPanel
 {
@@ -9,26 +9,30 @@ namespace ChapterPanel
 
         [SerializeField] private Text titleTxt;
         [SerializeField] private Button addQuestions;
+        [SerializeField] private Button showElement;
+        [SerializeField] private Text order;
+        
         private ExerciseBtn _targetBtn;
-
-        
-        
-        
-        private bool _isOpen;
-       
         private Color _startColor;
-        private int _startIndex;
-        private bool _isRemove;
-
-        private bool _isInitialized;
+        private Color _endColor;
         
+        
+        private bool isDraggable;
+        private bool isDragging;
+        
+        private int _startIndex;
+        private int _endIndex;
+        
+        private bool _isRemove;
+        private bool _isInitialized;
         private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
         private ExerciseData _data; 
         public ExerciseData Data => _data;
         
         [SerializeField] private DraggBtn dragBtn;
-
+     
+        
         
         public  void Initialize()
         {
@@ -39,7 +43,6 @@ namespace ChapterPanel
             dragBtn.Initialize(this);
 
         }
-        
         public void OnStartDrag()
         {
             
@@ -49,14 +52,15 @@ namespace ChapterPanel
         }
         public void OnDrag(Vector3 pos)
         {
-            transform.position = new Vector2(transform.position.x, pos.y);
-          
+            var transform1 = transform;
+            transform1.position = new Vector2(transform1.position.x, pos.y);
         }
         public void OnEndDrag()
         {
             if (this._targetBtn != null)
             {
-                Permutation();
+                PermutationOrder();
+                _startColor=Color.black;
             }
         
             else
@@ -65,14 +69,49 @@ namespace ChapterPanel
             
             }
         
-            _isRemove = false;
+            
            
         }
-        
-        private void Permutation()
+        private void PermutationOrder()
         {
-           
+          
+            
             
         }
+        private void Remove()
+        {
+        
+                PoolSystem.instance.DeSpawn(this.transform);
+                _exerciseNbr--;
+                ExerciseController.instance.currentExList.Remove(transform.GetComponent<ExerciseBtn>());
+           
+    
+        }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Remove"))
+            {
+                _isRemove = true;
+                Remove();
+            };
+            if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
+            this._targetBtn = other.GetComponent<ExerciseBtn>();
+            Remove();
+
+        }
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Remove"))
+            {
+                _isRemove = false;
+                Remove();
+
+            };
+            if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
+            this._targetBtn = null;
+        }
     }
+    
+    
+ 
 }
