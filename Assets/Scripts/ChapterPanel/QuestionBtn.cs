@@ -7,34 +7,39 @@ namespace ChapterPanel
     {
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
-        [SerializeField] private InputField mainQuestion; 
-        [SerializeField] private  InputField subQuestion;
-        [SerializeField] private InputField HelpQuestion;
-        
-        
+
+        private QuestionData Data;
+
         private const string _qstName = "  سؤال  ";
 
-        private void Start()
+        public  void UpdateName()
+        {
+            this.btnName.text = _qstName + transform.GetSiblingIndex();
+        }
+        
+        public void Initialize(QuestionBtn btn)
         {
             deleteQstBtn.onClick.AddListener(DeleteQst);
-        } 
-        public  void Initialize()
-        {
-            const int newId = 1;
-            this.btnName.text = _qstName + newId ;
+
+            btn.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                EditController.instance.mainContent.gameObject.SetActive(true);
+            });
         }
-        public void Init(int qstNbr)
+
+        public void BindData(QuestionData quesData)
         {
-            var newId = qstNbr + 1;
-            btnName.text = _qstName + newId;
+            Data = quesData;
+            Data.mainQst = quesData.mainQst;
+            Data.subQst = quesData.subQst;
+            Data.templateId = quesData.templateId;
+            Data.situationData = quesData.situationData;
         }
         private void DeleteQst()
         {
             var exBtn = deleteQstBtn.transform.parent;
             PoolSystem.instance.DeSpawn(exBtn);
-            ExerciseController.instance._currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
+            EditController.instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
         }
-
-        
     }
 }
