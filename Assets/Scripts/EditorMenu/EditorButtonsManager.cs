@@ -5,6 +5,7 @@ namespace EditorMenu
 {
     public class EditorButtonsManager : MonoBehaviour
     {
+        public static EditorButtonsManager instance;
         [SerializeField] private RectTransform levelsHolder;
         [SerializeField] private RectTransform subjectsHolder;
         [SerializeField] private RectTransform chaptersHolder;
@@ -25,6 +26,13 @@ namespace EditorMenu
 
         public void Initialize()
         {
+            if (instance != null && instance != this)
+                Destroy(this.gameObject);
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton += OnSelectChapterButton;
 
@@ -113,7 +121,9 @@ namespace EditorMenu
             _selectedChapter = inNewSelectedChapterButton;
             _selectedChapter.Select();
             _selectedChapter.configBtn.gameObject.SetActive(true);
+            
             PlayerPrefs.SetString("chapterName",_selectedChapter.Data.name);
+            PlayerPrefs.SetInt("chapterId",_selectedChapter.Data.id);
             PlayerPrefs.SetString("levelName",_selectedLevel.Data.name);
             PlayerPrefs.SetString("subjectName",_selectedSubject.Data.name);
         }

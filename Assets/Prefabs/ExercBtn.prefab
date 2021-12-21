@@ -780,7 +780,6 @@ GameObject:
   - component: {fileID: 5932927077363680443}
   - component: {fileID: 8434124493264060780}
   - component: {fileID: 8946268062337356198}
-  - component: {fileID: 2083407987623668554}
   - component: {fileID: 3715385973706018646}
   - component: {fileID: 1086418456292776908}
   m_Layer: 5
@@ -911,29 +910,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  titleTxt: {fileID: 8846281711758085566}
-  addQuestions: {fileID: 4634283763195730917}
-  showElement: {fileID: 2143638317444439814}
-  order: {fileID: 0}
-  dragBtn: {fileID: 8478510726187000678}
---- !u!114 &2083407987623668554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3725523145961556333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009cd3597f141154ba0363e1e14b6d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   showQstsBtn: {fileID: 2143638317444439814}
   addQstBtn: {fileID: 4634283763195730917}
   exScrollRect: {fileID: 7236367490564923327}
-  qstHolder: {fileID: 4125356701795884417}
-  currentExList: []
-  _currentQstList: []
+  titleTxt: {fileID: 8846281711758085566}
+  dragBtn: {fileID: 8478510726187000678}
 --- !u!50 &3715385973706018646
 Rigidbody2D:
   serializedVersion: 4
@@ -968,7 +949,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 15.8567505, y: 1.5861816}
+  m_Offset: {x: -0.9958191, y: -0.0031433105}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -979,7 +960,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 366.7345, y: 59.125244}
+  m_Size: {x: 400.43964, y: 94.06879}
   m_EdgeRadius: 0
 --- !u!1 &4041001837996180627
 GameObject:

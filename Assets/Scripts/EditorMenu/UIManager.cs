@@ -133,7 +133,6 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         
         if (level == null)
         {
-            Debug.Log("Game Break level is null");
             return;
         }
         
