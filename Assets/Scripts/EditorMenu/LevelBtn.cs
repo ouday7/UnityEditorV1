@@ -2,7 +2,7 @@ using System;
 
 public class LevelBtn : EditorButtonBase
 {
-    public static LevelBtn Instance;
+   
     public event Action<LevelBtn> OnSelectLevelButton;
     
     private LevelData _data;
@@ -14,7 +14,7 @@ public class LevelBtn : EditorButtonBase
     
     public override void Initialize()
     {
-        Instance = this;
+       
         if(_isInitialized) return;
         base.Initialize();
         editBtn.onClick.AddListener(() => UIManager.instance.LevelEdit(this));
