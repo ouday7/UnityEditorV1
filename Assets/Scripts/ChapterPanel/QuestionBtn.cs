@@ -1,15 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using EditorMenu;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChapterPanel
 {
     public class QuestionBtn : PoolableObject
     {
+        public static event Action<QuestionBtn> OnClickQuestion; 
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
 
         private QuestionData Data;
-
+        private bool _isInitialized=false;
         private const string _qstName = "  سؤال  ";
 
         public  void UpdateName()
@@ -19,12 +23,14 @@ namespace ChapterPanel
         
         public void Initialize(QuestionBtn btn)
         {
+            if(_isInitialized) return;
             deleteQstBtn.onClick.AddListener(DeleteQst);
-
             btn.GetComponent<Button>().onClick.AddListener(() =>
             {
-                EditController.instance.mainContent.gameObject.SetActive(true);
+                OnClickQuestion?.Invoke(btn);
+                MenuController.instance.mainContent.gameObject.SetActive(true);
             });
+            _isInitialized = true;
         }
 
         public void BindData(QuestionData quesData)
@@ -39,7 +45,7 @@ namespace ChapterPanel
         {
             var exBtn = deleteQstBtn.transform.parent;
             PoolSystem.instance.DeSpawn(exBtn);
-            EditController.instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
+            MenuController.instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
         }
     }
 }

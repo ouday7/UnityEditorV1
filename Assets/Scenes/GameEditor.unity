@@ -268,7 +268,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &963194225
@@ -449,6 +449,7 @@ MonoBehaviour:
     levels: []
     subjects: []
     chapters: []
+    exercises: []
 --- !u!114 &1092984973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +465,7 @@ MonoBehaviour:
   levelsHolder: {fileID: 8057889620807549663}
   subjectsHolder: {fileID: 8057889620420859086}
   chaptersHolder: {fileID: 8057889621200307477}
+  _selectedChapter: {fileID: 0}
 --- !u!1 &1200219769
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ MonoBehaviour:
     objectReference: {fileID: 7018296770654228063, guid: 64748d64d69714c4a88f07bb6171b38c, type: 3}
     amount: 6
   - type: 4
-    objectReference: {fileID: 8946268062337356198, guid: 6553d6b1b7fc3a54f8ca38cfab839709, type: 3}
+    objectReference: {fileID: 1875916904166460901, guid: 6553d6b1b7fc3a54f8ca38cfab839709, type: 3}
     amount: 10
   - type: 5
     objectReference: {fileID: 2642254180913290276, guid: b452176c718213c41a1cda3c391e6925, type: 3}
