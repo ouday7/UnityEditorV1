@@ -103,9 +103,9 @@ namespace ChapterPanel
             {
                 transform.GetComponent<Image>().color=Color.red;
             };
-            if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
+            /*if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
             this._targetBtn = other.GetComponent<ExerciseBtn>();
-            Remove();
+            Remove();*/
 
         }
         private void OnTriggerExit2D(Collider2D other)

@@ -20,7 +20,7 @@ namespace ChapterPanel
         public  List<QuestionBtn> currentQstList;
 
         private ExerciseData Data { get; set; }
-        private ExerciseBtn currentExbtn;
+        public ExerciseBtn currentExbtn;
         public QuestionData qstData;
 
         private void Awake()
