@@ -26,7 +26,6 @@ namespace ChapterPanel
         {
             if(_isInitialized) return;
             deleteQstBtn.onClick.AddListener(DeleteQst);
-            btn.GetComponent<Button>().onClick.AddListener(() =>
             qstBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 OnClickQuestion?.Invoke(qstBtn);
