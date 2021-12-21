@@ -39,7 +39,7 @@ namespace ChapterPanel
             
             addQstBtn.onClick.AddListener(() =>
             {
-                MenuController.instance.AddNewQst();
+                MenuController.instance.AddNewQst(addQstBtn);
             });
             showQstsBtn.onClick.AddListener(ShowQsts);
         }

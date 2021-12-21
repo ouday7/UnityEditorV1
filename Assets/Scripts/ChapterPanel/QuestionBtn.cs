@@ -9,6 +9,7 @@ namespace ChapterPanel
     public class QuestionBtn : PoolableObject
     {
         public static event Action<QuestionBtn> OnClickQuestion; 
+        
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
 
@@ -21,13 +22,13 @@ namespace ChapterPanel
             this.btnName.text = _qstName + transform.GetSiblingIndex();
         }
         
-        public void Initialize(QuestionBtn btn)
+        public void Initialize(QuestionBtn qstBtn)
         {
             if(_isInitialized) return;
             deleteQstBtn.onClick.AddListener(DeleteQst);
-            btn.GetComponent<Button>().onClick.AddListener(() =>
+            qstBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
-                OnClickQuestion?.Invoke(btn);
+                OnClickQuestion?.Invoke(qstBtn);
                 MenuController.instance.mainContent.gameObject.SetActive(true);
             });
             _isInitialized = true;
