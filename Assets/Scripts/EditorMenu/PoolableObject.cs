@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class PoolableObject : MonoBehaviour
+namespace EditorMenu
 {
-   [SerializeField] protected ObjectToPoolType type;
-       public ObjectToPoolType Type => type;
+    public class PoolableObject : MonoBehaviour
+    {
+        [SerializeField] protected ObjectToPoolType type;
+        public ObjectToPoolType Type => type;
        
-       private Transform _t;
-       public Transform Transform
-       {
-           get
-           {
-               if (_t == null) _t = transform;
-               return _t;
-           }
-       }
+        private Transform _t;
+        public Transform Transform
+        {
+            get
+            {
+                if (_t == null) _t = transform;
+                return _t;
+            }
+        }
+    }
 }

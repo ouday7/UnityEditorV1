@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +39,7 @@ namespace ChapterPanel
             
             addQstBtn.onClick.AddListener(() =>
             {
-                EditController.instance.AddNewQst();
+                MenuController.instance.AddNewQst();
             });
             showQstsBtn.onClick.AddListener(ShowQsts);
         }
@@ -95,7 +95,7 @@ namespace ChapterPanel
         {
             PoolSystem.instance.DeSpawn(this.transform);
             _exerciseNbr--;
-            EditController.instance.currentExList.Remove(transform.GetComponent<ExerciseBtn>());
+            MenuController.instance.currentExList.Remove(transform.GetComponent<ExerciseBtn>());
         }
         private void OnTriggerEnter2D(Collider2D other)
         {

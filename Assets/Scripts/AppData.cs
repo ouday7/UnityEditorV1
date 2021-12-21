@@ -34,7 +34,7 @@ using UnityEngine.UI;
     public List<LevelData> levels;
     public List<SubjectData> subjects;
     public List<ChapterData> chapters;
-    
+    public List<ExerciseData> exercises;
 }
 
 [Serializable]

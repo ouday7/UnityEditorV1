@@ -959,6 +959,8 @@ MonoBehaviour:
   mainContent: {fileID: 771405413367778087}
   mainQst: {fileID: 7876811533257167409}
   subQst: {fileID: 5957901731581477468}
+  templateId: {fileID: 9020440082999043112}
+  situationData: {fileID: 2672516159349660439}
   currentExList: []
   currentQstList: []
   qstData:
