@@ -9,17 +9,18 @@ namespace ChapterPanel
         public static MenuController instance; 
         
         [SerializeField] private Button addExBtn;
-        [SerializeField] public Transform exerciseHolder;
+        [SerializeField] private Transform exerciseHolder;
         [SerializeField] private Text chapterName;
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
         [SerializeField] public GameObject mainContent;
+        
 
         public  List<ExerciseBtn> currentExList;
         public  List<QuestionBtn> currentQstList;
 
         private ExerciseData Data { get; set; }
-
+        private ExerciseBtn currentExbtn;
         public QuestionData qstData;
 
         private void Awake()
@@ -53,12 +54,14 @@ namespace ChapterPanel
             newExBtn.transform.SetParent(exerciseHolder.transform);
             newExBtn.transform.localScale = Vector3.one;
             newExBtn.BindData(Data);
+            currentExbtn = newExBtn;
         }
-        public void AddNewQst()
+        public void AddNewQst(Button addqstBtn)
         {
              var newQst = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
              newQst.UpdateName();
-             newQst.transform.SetParent(exerciseHolder.transform);
+             newQst.transform.SetParent(exerciseHolder);
+             currentExbtn = addqstBtn.transform.parent.GetComponent<ExerciseBtn>();
              currentQstList.Add(newQst);
              newQst.BindData(qstData);
              
