@@ -489,5 +489,6 @@
             "subjectId": 1,
             "levelId": 6
         }
-    ]
+    ],
+    "exercises": []
 }

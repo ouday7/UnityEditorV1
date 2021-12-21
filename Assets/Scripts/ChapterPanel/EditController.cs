@@ -18,14 +18,14 @@ namespace ChapterPanel
         [SerializeField] public GameObject mainContent;
         [SerializeField] public InputField mainQst;
         [SerializeField] public InputField subQst;
-        private InputField templateId;
-        private InputField situationData;
+        [SerializeField] private InputField templateId;
+        [SerializeField] private InputField situationData;
         
         public  List<ExerciseBtn> currentExList;
         public  List<QuestionBtn> currentQstList;
 
-        private ExerciseData _data;
-        private ExerciseData Data => _data;
+        private ExerciseData Data { get; set; }
+
         public QuestionData qstData;
 
         private void Awake()
@@ -53,6 +53,7 @@ namespace ChapterPanel
 
         private void AddExercise()
         {
+            Data = new ExerciseData();
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.Initialize();
             newExBtn.transform.SetParent(exerciseHolder.transform);
@@ -71,7 +72,7 @@ namespace ChapterPanel
 
              newQst.UpdateName();
              newQst.Initialize(newQst);
-            // newQst.transform.SetParent();
+             newQst.transform.SetParent(exerciseHolder.transform);
              currentQstList.Add(newQst);
             
              LoadData();
@@ -83,7 +84,9 @@ namespace ChapterPanel
         {
             qstData.mainQst =mainQst.text;
             qstData.subQst= subQst.text;
-            qstData.templateId=int.Parse(templateId.text);
+            
+            if(templateId.text.Length!=0)  qstData.templateId=int.Parse(templateId.text);
+           
             qstData.situationData=situationData.text;
         }
         
