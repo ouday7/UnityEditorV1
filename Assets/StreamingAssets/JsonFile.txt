@@ -36,18 +36,18 @@
             ]
         },
         {
-            "id": 6,
-            "name": "سنة سادسة",
-            "order": 1,
+            "id": 5,
+            "name": "سنة خامسة",
+            "order": 5,
             "subjectsId": [
                 1,
                 2
             ]
         },
         {
-            "id": 5,
-            "name": "سنة خامسة",
-            "order": 5,
+            "id": 6,
+            "name": "سنة سادسة",
+            "order": 6,
             "subjectsId": [
                 1,
                 2
@@ -93,7 +93,7 @@
         {
             "id": 4,
             "name": "النموّ",
-            "order": 0,
+            "order": 1,
             "subjectId": 1,
             "levelId": 6
         },
@@ -107,7 +107,7 @@
         {
             "id": 6,
             "name": "Wxc",
-            "order": 0,
+            "order": 12,
             "subjectId": 1,
             "levelId": 6
         },
@@ -422,70 +422,70 @@
         {
             "id": 51,
             "name": "التَّبادُلِ الْغَازِيِّ",
-            "order": 0,
+            "order": 2,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 53,
             "name": "تركيبة الدم\r\n",
-            "order": 0,
+            "order": 3,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 54,
             "name": "التغذية عند الأنسان",
-            "order": 0,
+            "order": 4,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 55,
             "name": "الأمراض الناتجة عن سوء التغذية",
-            "order": 0,
+            "order": 5,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 56,
             "name": " السلسلة الغذائية",
-            "order": 0,
+            "order": 6,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 57,
             "name": "الأوساط المائيّة ",
-            "order": 0,
+            "order": 7,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 58,
             "name": " الهواء",
-            "order": 0,
+            "order": 8,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 59,
             "name": "الاحتراق في الهواء",
-            "order": 0,
+            "order": 9,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 60,
             "name": " المغناطيس",
-            "order": 0,
+            "order": 10,
             "subjectId": 1,
             "levelId": 6
         },
         {
             "id": 61,
             "name": " البوصلة\r\n",
-            "order": 0,
+            "order": 11,
             "subjectId": 1,
             "levelId": 6
         }

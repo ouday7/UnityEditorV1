@@ -58,10 +58,16 @@ namespace ChapterPanel
         }
         public void AddNewQst(Button addqstBtn)
         {
+            var parent = addqstBtn.transform.parent;
+            
+            parent.transform.Find("Scroll View").gameObject.SetActive(true);
              var newQst = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
              newQst.UpdateName();
-             newQst.transform.SetParent(exerciseHolder);
-             currentExbtn = addqstBtn.transform.parent.GetComponent<ExerciseBtn>();
+             
+             newQst.transform.SetParent(parent.transform.Find("Scroll View").
+                 Find("Viewport").Find("Content")); 
+             
+             currentExbtn = parent.GetComponent<ExerciseBtn>();
              currentQstList.Add(newQst);
              newQst.BindData(qstData);
              

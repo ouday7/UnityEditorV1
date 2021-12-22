@@ -16,17 +16,18 @@ namespace ChapterPanel
         private Color _startColor;
         private Color _endColor;
         
+        private bool _isDragging=false;
+        private bool _removable;
+        private bool _changePos;
         
-        private bool isDraggable;
-        private bool isDragging;
         
         private int _startIndex;
         private int _endIndex;
         
-        private bool _isRemove;
         private bool _isInitialized;
         private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
+        private Vector2 startPos;
      
         private ExerciseData _data;
         public  void Initialize()
@@ -64,33 +65,30 @@ namespace ChapterPanel
         public void OnStartDrag()
         {
             _startIndex = transform.GetSiblingIndex();
-            transform.SetAsLastSibling();
+            startPos = transform.position;
         }
         public void OnDrag(Vector3 pos)
         {
+            _isDragging=true;
             var transform1 = transform;
             transform1.position = new Vector2(transform1.position.x, pos.y);
         }
         public void OnEndDrag()
         {
-            if (this._targetBtn != null)
+            if (_removable)
             {
-                PermutationOrder();
-                _startColor=Color.black;
+                Remove();
             }
-        
-            else
+            else if (_changePos)
             {
-                transform.SetSiblingIndex(_startIndex);
+                var x = _targetBtn.transform.position;
+                _targetBtn.transform.position = startPos;
+                transform.position = x;
             }
+            else transform.position = startPos;
+            _isDragging = false;
         }
         
-        private void PermutationOrder()
-        {
-          
-            
-            
-        }
         private void Remove()
         {
             PoolSystem.instance.DeSpawn(this.transform);
@@ -99,25 +97,31 @@ namespace ChapterPanel
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Remove"))
+            if (other.gameObject.CompareTag("Remove")&& _isDragging)
             {
                 transform.GetComponent<Image>().color=Color.red;
-            };
-            /*if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
-            this._targetBtn = other.GetComponent<ExerciseBtn>();
-            Remove();*/
+                _removable = true;
+            }
+
+            if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
+            
+            this.transform.GetComponent<Image>().color=Color.yellow;
+            other.transform.GetComponent<Image>().color=Color.white;
+            _changePos = true;
+            _targetBtn = other.GetComponent<ExerciseBtn>();
 
         }
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Remove"))
+            if (other.gameObject.CompareTag("Remove") )
             {
-                _isRemove = false;
-                Remove();
+               transform.GetComponent<Image>().color=Color.white;
+               _removable = false;
+            }
 
-            };
             if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
-            this._targetBtn = null;
+            transform.GetComponent<Image>().color=Color.white;
+            _changePos = false;
         }
     }
 }
