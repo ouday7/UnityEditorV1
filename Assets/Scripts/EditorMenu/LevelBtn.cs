@@ -47,6 +47,6 @@ public class LevelBtn : EditorButtonBase
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.instance.SaveToJson();
+        GameDataManager.Instance.SaveToJson();
     }
 }
