@@ -1,6 +1,5 @@
 ﻿using System;
 using EditorMenu;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +12,14 @@ namespace ChapterPanel
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
 
-        private QuestionData Data;
+        public QuestionData data;
         private bool _isInitialized=false;
-        private const string _qstName = "  سؤال  ";
+        private const string QstName = "  سؤال  ";
 
         public  void UpdateName()
         {
-            this.btnName.text = _qstName + transform.GetSiblingIndex();
+            this.btnName.text = QstName + transform.GetSiblingIndex();
         }
-        
         public void Initialize(QuestionBtn qstBtn)
         {
             if(_isInitialized) return;
@@ -29,24 +27,28 @@ namespace ChapterPanel
             qstBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 OnClickQuestion?.Invoke(qstBtn);
-                MenuController.instance.mainContent.gameObject.SetActive(true);
+
+                MenuController.Instance.mainContent.gameObject.SetActive(true);
+
+                OnClickQuestion?.Invoke(this);
             });
             _isInitialized = true;
         }
-
         public void BindData(QuestionData quesData)
         {
-            Data = quesData;
-            Data.mainQst = quesData.mainQst;
-            Data.subQst = quesData.subQst;
-            Data.templateId = quesData.templateId;
-            Data.situationData = quesData.situationData;
+            data = quesData;
+            data.questionId = 1;
+            data.mainQst = quesData.mainQst;
+            data.subQst = quesData.subQst;
+            data.helpQst = quesData.helpQst;
+            data.templateId = quesData.templateId;
+            data.situationData = quesData.situationData;
         }
         private void DeleteQst()
         {
             var exBtn = deleteQstBtn.transform.parent;
             PoolSystem.instance.DeSpawn(exBtn);
-            MenuController.instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
+            MenuController.Instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
         }
     }
 }

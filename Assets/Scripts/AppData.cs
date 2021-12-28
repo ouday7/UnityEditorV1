@@ -9,7 +9,7 @@ using UnityEngine.UI;
     public string name;
     public int order;
     public List<int> subjectsId;
-    public Dictionary<int, SubjectData> subjects;
+    public Dictionary<int, SubjectData> Subjects;
 }
 
 [Serializable] public class SubjectData
@@ -50,24 +50,40 @@ public class QuizFieldData
     public Button toggleTwo;
 }
 
-[Serializable] public class QuestionData
+[Serializable]
+public class QuestionData
 {
+    public int questionId;
     public string mainQst;
     public string subQst;
+    public string helpQst;
     public List<QuizFieldData> quizFields;
     public int templateId;
     public string situationData;
 }
-[Serializable] public class ExerciseData
+
+[Serializable]
+public class ExerciseData
 {
     public int chapterId;
+    public int exerciseId;
     public List<QuestionData> questions;
 }
 
-[Serializable] public class TemplateData
+[Serializable]
+public class TemplateData
 {
     public int templateId;
     public string templateName;
+    
+}
+
+[Serializable]
+public class CategorieData
+{
+    public int categorieId;
+    public string categorieName;
+    public List<TemplateData> template;
 }
 
     
