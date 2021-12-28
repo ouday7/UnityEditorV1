@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 //using Envast.MenuEditor;
-using Sirenix.OdinInspector;
+//using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Envast.Layouts
@@ -27,7 +27,7 @@ namespace Envast.Layouts
         }
         private void Start()
         {
-         //   if (subscribeToEditorMenuEvent) EditorMenu.OnSelectQuestion += UpdateSize;
+          //  if (subscribeToEditorMenuEvent) EditorMenu.OnSelectQuestion += UpdateSize;
             _startSize = RectTransform.sizeDelta.y;
             if(autoUpdate) UpdateSize();
         }
@@ -36,11 +36,9 @@ namespace Envast.Layouts
         {
             Invoke(nameof(UpdateSize), delay);
         }
-       [Button("Update Size", ButtonSizes.Medium)]
+       // [Button("Update Size", ButtonSizes.Medium)]
         public void UpdateSize()
         {
-           
-            Debug.Log("Clicked !");
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, _startSize);
             var totalWidth = 0f;
             if (RectTransform.childCount > 0)

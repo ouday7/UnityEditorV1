@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Envast.Components.GridLayout.Helpers;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Components.GridLayout
@@ -106,7 +105,7 @@ namespace Components.GridLayout
             RestoreOriginalAnchor();
         }
 
-        [Button("Shuffle", ButtonSizes.Medium)]
+        // [Button("Shuffle", ButtonSizes.Medium)]
         public void ShuffleLayout()
         {
             if (RectTransform.childCount == 0) return;

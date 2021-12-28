@@ -40,6 +40,6 @@ public class SubjectsBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 }

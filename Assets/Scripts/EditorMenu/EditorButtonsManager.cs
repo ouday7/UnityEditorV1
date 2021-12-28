@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Envast.Layouts;
 using UnityEngine;
+
 namespace EditorMenu
 {
     public class EditorButtonsManager : MonoBehaviour
     {
-        public static EditorButtonsManager Instance;
+        public static EditorButtonsManager instance;
         [SerializeField] private RectTransform levelsHolder;
         [SerializeField] private RectTransform subjectsHolder;
         [SerializeField] private RectTransform chaptersHolder;
@@ -14,25 +14,23 @@ namespace EditorMenu
         private List<Transform> _chapList;
         private LevelBtn _selectedLevel;
         private SubjectsBtn _selectedSubject;
-        public ChaptersBtn selectedChapter;
+        public ChaptersBtn _selectedChapter;
         public SubjectData SelectedSubject => _selectedSubject.Data;
-
-
-        private CustomSizeFitter _custom;
 
         private void OnDestroy()
         {
+          
             SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton -= OnSelectChapterButton;
         }
 
         public void Initialize()
         {
-            if (Instance != null && Instance != this)
+            if (instance != null && instance != this)
                 Destroy(this.gameObject);
             else
             {
-                Instance = this;
+                instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
@@ -57,11 +55,9 @@ namespace EditorMenu
                 if (i != 0) continue;
                 newLevelBtn.Select();
                 newLevelBtn.LevelButtonSelected();
-                //_custom.UpdateSize();
-                
-               // Debug.Log(_custom.spacing);
             }
         }
+
         private void OnSelectLevelButton(LevelBtn inNewSelectedLevelButton)
         {
             if (_selectedLevel != null) _selectedLevel.Unselect();
@@ -69,11 +65,12 @@ namespace EditorMenu
             _selectedLevel.Select();
             ShowSubjects(_selectedLevel.Data);
         }
+
         private void ShowSubjects(LevelData inLevelDataData)
         {
             ResetSubjectsHolder();
             var isFirst = true;
-            foreach (var subjectPair in inLevelDataData.Subjects)
+            foreach (var subjectPair in inLevelDataData.subjects)
             {
                 var subject = subjectPair.Value;
                 var subjectBtn = PoolSystem.instance.Spawn<SubjectsBtn>(ObjectToPoolType.Subject);
@@ -116,17 +113,17 @@ namespace EditorMenu
     
         private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
         {
-            if (selectedChapter != null)
+            if (_selectedChapter != null)
             {
-                selectedChapter.Unselect();
-                selectedChapter.configBtn.gameObject.SetActive(false);
+                _selectedChapter.Unselect();
+                _selectedChapter.configBtn.gameObject.SetActive(false);
             }
-            selectedChapter = inNewSelectedChapterButton;
-            selectedChapter.Select();
-            selectedChapter.configBtn.gameObject.SetActive(true);
+            _selectedChapter = inNewSelectedChapterButton;
+            _selectedChapter.Select();
+            _selectedChapter.configBtn.gameObject.SetActive(true);
             
-            PlayerPrefs.SetString("chapterName",selectedChapter.Data.name);
-            PlayerPrefs.SetInt("chapterId",selectedChapter.Data.id);
+            PlayerPrefs.SetString("chapterName",_selectedChapter.Data.name);
+            PlayerPrefs.SetInt("chapterId",_selectedChapter.Data.id);
             PlayerPrefs.SetString("levelName",_selectedLevel.Data.name);
             PlayerPrefs.SetString("subjectName",_selectedSubject.Data.name);
         }

@@ -10,7 +10,7 @@ public class ToggleButton : PoolableObject
 {
     public event Action<ToggleButton> OnClickToggle;
 
-    [HideInInspector] public bool isToggle; 
+    [HideInInspector] public bool isToggle; //determines if this button can be checked and unchecked => toggle state
     
     [SerializeField] private RtlText toggleText;
     [SerializeField] private Button toggleButton;

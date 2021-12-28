@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
 
-
-public class UIManager : MonoBehaviour 
+//Split level/subject/Chapter edits into 3 scripts
+public class UIManager : MonoBehaviour // UI manager => manages all scene/game ui => PopUpManager
 {
     public static UIManager instance;
 
@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
            PoolSystem.instance.DeSpawn(child);
         }
         
-        foreach (var subject in GameDataManager.Instance.Data.subjects)
+        foreach (var subject in GameDataManager.instance.Data.subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
         }
         _currentSubjectsToggle?.Clear();
 
-        var level = GameDataManager.Instance.Data.levels.
+        var level = GameDataManager.instance.Data.levels.
             FirstOrDefault(lev => lev.id == _selectedLevelBtn.Id);
         
         if (level == null)
@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
             return;
         }
         
-        foreach (var sub in level.Subjects)
+        foreach (var sub in level.subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -194,7 +194,7 @@ public class UIManager : MonoBehaviour
              PoolSystem.instance.DeSpawn(child);
          }
 
-         foreach (var lvl in GameDataManager.Instance.Data.levels)
+         foreach (var lvl in GameDataManager.instance.Data.levels)
          {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -236,22 +236,22 @@ public class UIManager : MonoBehaviour
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
 
-        foreach (var subject in GameDataManager.Instance.Data.subjects)
+        foreach (var subject in GameDataManager.instance.Data.subjects)
         {
             if (_selectedSubjects.Contains(subject.id))
             {
                 if (_levelSubjects.Contains(subject.id)) continue;
                 _levelSubjects.Add(subject.id);
-                _selectedLevelButton.Data.Subjects.Add(subject.id, subject);
+                _selectedLevelButton.Data.subjects.Add(subject.id, subject);
                 continue;
             }
 
             if (_selectedSubjects.Contains(subject.id)) continue;
             if (!_levelSubjects.Contains(subject.id)) continue;
 
-            if (_selectedLevelButton.Data.Subjects.ContainsKey(subject.id))
+            if (_selectedLevelButton.Data.subjects.ContainsKey(subject.id))
             {
-                _selectedLevelButton.Data.Subjects.Remove(subject.id);
+                _selectedLevelButton.Data.subjects.Remove(subject.id);
                 _levelSubjects.Remove(subject.id);
             }
         }
@@ -267,7 +267,7 @@ public class UIManager : MonoBehaviour
         _selectChaptersButton.UpdateName(inputFieldNameText);
         _selectChaptersButton.UpdateOrder(inputFieldOrderText);
         UpdateChapterRoot();
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 
     private void UpdateChapterRoot()
@@ -279,19 +279,19 @@ public class UIManager : MonoBehaviour
         _selectChaptersButton.Data.subjectId = _selectedSubjectId;
 
         _selectChaptersButton.GetSelectedSubjectData().chapters.Remove(_selectChaptersButton.Data);
-        var levelToUpdate = GameDataManager.Instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
+        var levelToUpdate = GameDataManager.instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
         if (levelToUpdate == null)
         {
             Debug.Log("//. Level Is Null");
             return;
         }
 
-        if (!levelToUpdate.Subjects.ContainsKey(_selectedSubjectId))
+        if (!levelToUpdate.subjects.ContainsKey(_selectedSubjectId))
         {
             Debug.Log("//. Game Break no Subject found");
             return;
         }
-        var subjectToUpdate = levelToUpdate.Subjects[_selectedSubjectId];
+        var subjectToUpdate = levelToUpdate.subjects[_selectedSubjectId];
         subjectToUpdate.chapters.Add(_selectChaptersButton.Data);
         PoolSystem.instance.DeSpawn(_selectChaptersButton.Transform);
         _selectChaptersButton = null;

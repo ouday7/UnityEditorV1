@@ -28,7 +28,7 @@ namespace ChapterPanel
         private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
      
-        public ExerciseData _data;
+        private ExerciseData _data;
         public  void Initialize()
         {
             if(_isInitialized) return;
@@ -39,7 +39,7 @@ namespace ChapterPanel
             
             addQstBtn.onClick.AddListener(() =>
             {
-                MenuController.Instance.AddNewQst(addQstBtn);
+                MenuController.instance.AddNewQst(addQstBtn);
             });
             showQstsBtn.onClick.AddListener(ShowQsts);
         }
@@ -48,7 +48,6 @@ namespace ChapterPanel
         {
             _data = newExerciseData;
             _data.chapterId = newExerciseData.chapterId;
-            _data.exerciseId = newExerciseData.exerciseId;
             _data.questions = newExerciseData.questions;
         }
         
@@ -96,7 +95,7 @@ namespace ChapterPanel
         {
             PoolSystem.instance.DeSpawn(this.transform);
             _exerciseNbr--;
-            MenuController.Instance.currentExList.Remove(transform.GetComponent<ExerciseBtn>());
+            MenuController.instance.currentExList.Remove(transform.GetComponent<ExerciseBtn>());
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
