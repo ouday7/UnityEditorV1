@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance;
-    public GameSettings GameSettings;
+    public GameSettingsData GameSettingsData;
 
     [SerializeField] private string fileName = "JsonFile.txt";
 
@@ -19,9 +19,10 @@ public class GameDataManager : MonoBehaviour
         Instance = this;
         Begin();
     }
-
     private void Begin()
     {
+
+        JsontoScriptableObject();
         var data = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
         jsonData = JsonUtility.FromJson<JsonData>(data);
        
@@ -31,7 +32,6 @@ public class GameDataManager : MonoBehaviour
         Data.levels = Data.levels.OrderBy(level => level.order).ToList();
         Data.subjects = Data.subjects.OrderBy(subject => subject.order).ToList();
     }
-
     private void LinkData()
     {
         for (var i = 0; i < Data.levels.Count; i++)
@@ -56,12 +56,15 @@ public class GameDataManager : MonoBehaviour
             }
         }
     }
-  
-
     public void SaveToJson()
     {
         var jsonString = JsonUtility.ToJson(Data, true);
         File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", jsonString);
     }
-    
+    private void JsontoScriptableObject()
+    {
+        var x = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
+        GameSettingsData.dataGameSettintgs = JsonUtility.FromJson<JsonData>(x);
+        
+    }
 }

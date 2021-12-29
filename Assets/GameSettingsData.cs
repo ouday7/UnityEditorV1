@@ -6,7 +6,7 @@ using System.IO;
 [CreateAssetMenu(fileName = "DataGame", menuName = "DataGameManager", order = 1)]
 
 
-public class GameSettings : ScriptableObject
+public class GameSettingsData : ScriptableObject
 {
     public JsonData dataGameSettintgs;
     
