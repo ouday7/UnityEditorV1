@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Sorting
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 21300000, guid: 8c02f65c481d459479ce07c38a2e615a, type: 3}
+  icon: {fileID: 21300000, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
   category: 0

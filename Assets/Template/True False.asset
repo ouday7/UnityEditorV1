@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: True False
   m_EditorClassIdentifier: 
   id: 1
-  templateName: 0
-  category: 0
-  icon: {fileID: 21300000, guid: 01ac0e7db409e5741bbacb1c26ac685b, type: 3}
+  templateName: 2
+  name: 
+  category: 2
+  icon: {fileID: 21300010, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
   maxFields: 5
   minFields: 2
   templateFields: 0000000000000000

@@ -1,16 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TemplateBtn : MonoBehaviour
 {
-    [SerializeField] public Image icon;
-    [SerializeField] public Text title;
-    private Button _btn;
+    
+    
+    
+    public static event Action<TemplateBtn> onSelect;
+    public static event Action<TemplateBtn, TemplateDataInformation> onSubmit;
+    
+    private bool _submitted;
 
     
+    [SerializeField] public Image icon;
+    [SerializeField] public Text title;
+    [SerializeField] private Button selectBtn;
+
+    private Button _btn;
     
-    private TemplateDataInformation _template;
-    public TemplateDataInformation Template => _template;
     private Button button
     {
         get
@@ -22,35 +30,58 @@ public class TemplateBtn : MonoBehaviour
 
     private TemplateDataInformation _data;
     public TemplateDataInformation Data => _data;
-
-    public void  Initialize(TemplateDataInformation template)
+    public void  Initialize(TemplateDataInformation data)
     {
-        this._template = _template;
-        Debug.Log(_template.id);
-        this.title.text = _template.name;
-        this.icon.sprite = _template.icon;
-        Unselect();
+
+        this._data = data;
+        this.icon.sprite = _data.icon;
+        this.title.text = _data.templateName.ToString();
+        selectBtn.onClick.AddListener(OnSubmitTemplate);
         button.onClick.AddListener(OnSelectTemplate);
+
+       
     }
-
-
     private void OnSelectTemplate()
     {
-        // onSelect?.Invoke(this);
+        onSelect?.Invoke(this);
     }
 
     private void OnSubmitTemplate()
     {
-        // onSubmit?.Invoke(this, this._data);
+        selectBtn.interactable = false;
+        onSubmit?.Invoke(this,this._data);
     }
 
     public void Select()
     {
+        selectBtn.gameObject.SetActive(true);
     }
 
     public void Unselect()
     {
+        if(_submitted) return;
+            
+        selectBtn.interactable = true;
+        selectBtn.gameObject.SetActive(false);
+    }
+
+    public void SetVisibility(bool status)
+    {
+        this.gameObject.SetActive(status);
+    }
     
+    public void SetMarkStatus(bool status)
+    {
+        if(!_submitted) selectBtn.interactable = status;
+    }
+
+    public void Submitted(bool status)
+    {
+        this._submitted = status;
+        if (!status)
+        {
+            Unselect();
+        }
     }
     
 }

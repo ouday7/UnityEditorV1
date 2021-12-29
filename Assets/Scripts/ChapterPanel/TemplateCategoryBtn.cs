@@ -11,6 +11,14 @@ public class TemplateCategoryBtn : MonoBehaviour
 
      private Button _btn;
      
+     
+     
+     
+     
+     
+     public delegate void CategoriesEvents(TemplateCategoryBtn btn, TemplateCategory category);
+     public static event CategoriesEvents onClick;
+     
 
        private Button Button
         {
@@ -29,22 +37,25 @@ public class TemplateCategoryBtn : MonoBehaviour
             this.title.text = this._category.name;
             Button.onClick.AddListener(OnButtonClicked);
             Unselect();
+            
         }
-
+        
+    
+        
+        
         private void OnButtonClicked()
         {
-          //  onClick?.Invoke(this, this._category);
+            onClick?.Invoke(this, this._category);
         }
 
         public void Select()
         {
-            Button.interactable = false;
+            _btn.interactable = false;
         }
 
         public void Unselect()
         {
-            Button.interactable = true;
+            _btn.interactable = true;
         }
-    
  
 }

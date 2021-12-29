@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance;
+    public GameSettings GameSettings;
 
     [SerializeField] private string fileName = "JsonFile.txt";
 
@@ -23,6 +24,7 @@ public class GameDataManager : MonoBehaviour
     {
         var data = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
         jsonData = JsonUtility.FromJson<JsonData>(data);
+       
 
         LinkData();
 
@@ -35,6 +37,7 @@ public class GameDataManager : MonoBehaviour
         for (var i = 0; i < Data.levels.Count; i++)
         {
             var level = Data.levels[i];
+            
             level.Subjects = new Dictionary<int, SubjectData>();
             for (var j = 0; j < Data.subjects.Count; j++)
             {
@@ -53,6 +56,7 @@ public class GameDataManager : MonoBehaviour
             }
         }
     }
+  
 
     public void SaveToJson()
     {

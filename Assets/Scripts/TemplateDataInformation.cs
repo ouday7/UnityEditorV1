@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 public enum TemplatesNames
 {
@@ -45,12 +46,13 @@ public class TemplateDataInformation : ScriptableObject
     public int maxFields;
     public int minFields;
     public List<FieldTypes> templateFields;
-    private void GenerateId()
+    public void GenerateId()
     {
         this.id = (int) templateName;
     }
-    
-    
+    public void GetName()
+    {
+    }
     
 }
   

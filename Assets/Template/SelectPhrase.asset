@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SelectPhrase
   m_EditorClassIdentifier: 
   id: 2
-  templateName: 1
-  category: 0
-  icon: {fileID: 21300000, guid: 87c1a6898a6b7af4f8c9f21469f7ceb8, type: 3}
+  templateName: 3
+  name: 
+  category: 4
+  icon: {fileID: 21300030, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
   maxFields: 0
   minFields: 0
-  templateFields: 
+  templateFields: 0000000001000000

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cc8b1db807d28146aaca8dad6c493e3, type: 3}
-  m_Name: Connecting
+  m_Name: Completing
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 21300000, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
-  category: 1
+  icon: {fileID: 21300028, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
+  category: 7
