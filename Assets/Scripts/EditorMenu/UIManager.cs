@@ -1,16 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
+using ChapterPanel;
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
 
-//Split level/subject/Chapter edits into 3 scripts
-public class UIManager : MonoBehaviour // UI manager => manages all scene/game ui => PopUpManager
+
+public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    private enum EditedData { None, Level, Subject, Chapter }
+    private enum EditedData
+    {
+        None,
+        Level,
+        Subject,
+        Chapter
+    }
 
     //game objects
     [SerializeField] private GameObject popUpPanel;
@@ -23,7 +30,7 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
     //buttons
     [SerializeField] private Button closeBtn;
     [SerializeField] private Button submitBTn;
-    
+
     //holders
     [SerializeField] private Transform holderSubject;
     [SerializeField] private Transform holderLevel;
@@ -46,7 +53,7 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
     private ToggleButton _selectedLevelBtn;
     private ToggleButton _oldSubjectBtn;
     private ToggleButton _currentChapter;
-    
+
     public void Initialize()
     {
         if (instance != null) return;
@@ -55,18 +62,19 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         popUpPanel.gameObject.SetActive(false);
         submitBTn.onClick.AddListener(Submit);
         _namePlaceHolder = inputFiledName.placeholder.GetComponent<RtlText>();
-        
+
         _subjectsHolderPosition = subjectSection.transform.position;
-        _currentSubjectsToggle=new List<Transform>();
-        _currentLevelsToggle=new List<Transform>();
+        _currentSubjectsToggle = new List<Transform>();
+        _currentLevelsToggle = new List<Transform>();
     }
+
     private void ClosePanel()
     {
         popUpPanel.gameObject.SetActive(false);
         ResetPopup();
     }
 
-    public void LevelEdit(LevelBtn levelBtn)//remove spawn and deSpawn of level everytime
+    public void LevelEdit(LevelBtn levelBtn) //remove spawn and deSpawn of level everytime
     {
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
@@ -76,16 +84,16 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         subjectSection.gameObject.SetActive(true);
         subjectSection.transform.position = levelSection.transform.position;
         _namePlaceHolder.text = levelBtn.Data.name;
-        
+
         _levelSubjects = _selectedLevelButton.Data.subjectsId;
         _selectedSubjects = new List<int>(_levelSubjects);
-        
+
         foreach (var child in _currentSubjectsToggle)
         {
-           PoolSystem.instance.DeSpawn(child);
+            PoolSystem.instance.DeSpawn(child);
         }
-        
-        foreach (var subject in GameDataManager.instance.Data.subjects)
+
+        foreach (var subject in GameDataManager.Instance.Data.subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -126,17 +134,17 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         {
             PoolSystem.instance.DeSpawn(sub);
         }
+
         _currentSubjectsToggle?.Clear();
 
-        var level = GameDataManager.instance.Data.levels.
-            FirstOrDefault(lev => lev.id == _selectedLevelBtn.Id);
-        
+        var level = GameDataManager.Instance.Data.levels.FirstOrDefault(lev => lev.id == _selectedLevelBtn.Id);
+
         if (level == null)
         {
             return;
         }
-        
-        foreach (var sub in level.subjects)
+
+        foreach (var sub in level.Subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -150,14 +158,15 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
             if (newBtn.IsSelected) OnClickSubjectLevel(newBtn);
         }
     }
+
     private void OnClickSubjectLevel(ToggleButton newSubjectButton)
     {
         _selectedSubjectId = newSubjectButton.Id;
-        if(_oldSubjectBtn!=null) _oldSubjectBtn.Unselect();
+        if (_oldSubjectBtn != null) _oldSubjectBtn.Unselect();
         newSubjectButton.Select();
         _oldSubjectBtn = newSubjectButton;
-
     }
+
     public void SubjectEdit(SubjectsBtn subjectsBtn)
     {
         subjectSection.transform.position = _subjectsHolderPosition;
@@ -175,27 +184,27 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
     {
         _selectChaptersButton = chapter;
         _editing = EditedData.Chapter;
-         popUpPanel.gameObject.SetActive(true);
-         dataInput.gameObject.SetActive(true);
-         levelSection.gameObject.SetActive(true);
-         subjectSection.gameObject.SetActive(true);
-         _namePlaceHolder.text = _selectChaptersButton.Data.name;
-         subjectSection.transform.position = _subjectsHolderPosition;
-         _selectedLevelId = _selectChaptersButton.Data.levelId;
-         _selectedSubjectId = _selectChaptersButton.Data.subjectId;
-        
-         foreach (var child in _currentLevelsToggle)
-         {
-             PoolSystem.instance.DeSpawn(child);
-         }
- 
-         foreach (var child in _currentSubjectsToggle)
-         {
-             PoolSystem.instance.DeSpawn(child);
-         }
+        popUpPanel.gameObject.SetActive(true);
+        dataInput.gameObject.SetActive(true);
+        levelSection.gameObject.SetActive(true);
+        subjectSection.gameObject.SetActive(true);
+        _namePlaceHolder.text = _selectChaptersButton.Data.name;
+        subjectSection.transform.position = _subjectsHolderPosition;
+        _selectedLevelId = _selectChaptersButton.Data.levelId;
+        _selectedSubjectId = _selectChaptersButton.Data.subjectId;
 
-         foreach (var lvl in GameDataManager.instance.Data.levels)
-         {
+        foreach (var child in _currentLevelsToggle)
+        {
+            PoolSystem.instance.DeSpawn(child);
+        }
+
+        foreach (var child in _currentSubjectsToggle)
+        {
+            PoolSystem.instance.DeSpawn(child);
+        }
+
+        foreach (var lvl in GameDataManager.Instance.Data.levels)
+        {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
             newBtn.BindData(lvl.name, lvl.id);
@@ -207,7 +216,7 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
             newBtn.OnClickToggle += OnClickLevelToggle;
             if (!newBtn.IsSelected) continue;
             OnClickLevelToggle(newBtn);
-         }
+        }
     }
 
     private void Submit()
@@ -216,19 +225,20 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         {
             case EditedData.None:
                 break;
-            
+
             case EditedData.Level:
                 UpdateLevel(inputFiledName.text, inputFieldOrder.text);
                 break;
-            
+
             case EditedData.Subject:
                 UpdateSubject(inputFiledName.text, inputFieldOrder.text);
                 break;
-            
+
             case EditedData.Chapter:
                 UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
+
         ClosePanel();
     }
 
@@ -236,22 +246,22 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
 
-        foreach (var subject in GameDataManager.instance.Data.subjects)
+        foreach (var subject in GameDataManager.Instance.Data.subjects)
         {
             if (_selectedSubjects.Contains(subject.id))
             {
                 if (_levelSubjects.Contains(subject.id)) continue;
                 _levelSubjects.Add(subject.id);
-                _selectedLevelButton.Data.subjects.Add(subject.id, subject);
+                _selectedLevelButton.Data.Subjects.Add(subject.id, subject);
                 continue;
             }
 
             if (_selectedSubjects.Contains(subject.id)) continue;
             if (!_levelSubjects.Contains(subject.id)) continue;
 
-            if (_selectedLevelButton.Data.subjects.ContainsKey(subject.id))
+            if (_selectedLevelButton.Data.Subjects.ContainsKey(subject.id))
             {
-                _selectedLevelButton.Data.subjects.Remove(subject.id);
+                _selectedLevelButton.Data.Subjects.Remove(subject.id);
                 _levelSubjects.Remove(subject.id);
             }
         }
@@ -267,7 +277,7 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         _selectChaptersButton.UpdateName(inputFieldNameText);
         _selectChaptersButton.UpdateOrder(inputFieldOrderText);
         UpdateChapterRoot();
-        GameDataManager.instance.SaveToJson();
+        GameDataManager.Instance.SaveToJson();
     }
 
     private void UpdateChapterRoot()
@@ -279,19 +289,20 @@ public class UIManager : MonoBehaviour // UI manager => manages all scene/game u
         _selectChaptersButton.Data.subjectId = _selectedSubjectId;
 
         _selectChaptersButton.GetSelectedSubjectData().chapters.Remove(_selectChaptersButton.Data);
-        var levelToUpdate = GameDataManager.instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
+        var levelToUpdate = GameDataManager.Instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
         if (levelToUpdate == null)
         {
             Debug.Log("//. Level Is Null");
             return;
         }
 
-        if (!levelToUpdate.subjects.ContainsKey(_selectedSubjectId))
+        if (!levelToUpdate.Subjects.ContainsKey(_selectedSubjectId))
         {
             Debug.Log("//. Game Break no Subject found");
             return;
         }
-        var subjectToUpdate = levelToUpdate.subjects[_selectedSubjectId];
+
+        var subjectToUpdate = levelToUpdate.Subjects[_selectedSubjectId];
         subjectToUpdate.chapters.Add(_selectChaptersButton.Data);
         PoolSystem.instance.DeSpawn(_selectChaptersButton.Transform);
         _selectChaptersButton = null;
