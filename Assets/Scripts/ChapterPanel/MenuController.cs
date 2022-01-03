@@ -17,10 +17,8 @@ namespace ChapterPanel
 
         public  List<ExerciseBtn> currentExList;
         public  List<QuestionBtn> currentQstList;
-        
         public JsonData allData;
         private ExerciseData Data { get; set; }
-        
         public ExerciseBtn currentExbtn;
         public QuestionData qstData;
 

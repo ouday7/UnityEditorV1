@@ -9,17 +9,13 @@ public class EditManager : MonoBehaviour
 {
     [SerializeField] private Text minFieldsTxt;
     [SerializeField] private QuestionFields questionFields;
-    [SerializeField] private SelectTemplate _selectTemplate;
+    [SerializeField] private SelectTemplate selectTemplate;
     [SerializeField] private CustomSizeFitter holder;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private TemplateCategory currentTemplate;
-
     [SerializeField] private Button openPanel;
     [SerializeField] private GameObject panelPopUp;
-    
-    
     [SerializeField] private SelectTemplateButton selectTemplateBtn;
-
     [SerializeField] private TemplateDataInformation _currentTemplate;
 
 
