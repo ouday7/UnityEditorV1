@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Components.GridLayout;
 using UnityEngine;
 
 namespace EditorMenu
@@ -6,9 +7,9 @@ namespace EditorMenu
     public class EditorButtonsManager : MonoBehaviour
     {
         public static EditorButtonsManager instance;
-        [SerializeField] private RectTransform levelsHolder;
-        [SerializeField] private RectTransform subjectsHolder;
-        [SerializeField] private RectTransform chaptersHolder;
+        [SerializeField] private CustomGridLayout levelsHolder;
+        [SerializeField] private CustomGridLayout subjectsHolder;
+        [SerializeField] private CustomGridLayout chaptersHolder;
     
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
@@ -27,7 +28,7 @@ namespace EditorMenu
         public void Initialize()
         {
             if (instance != null && instance != this)
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             else
             {
                 instance = this;
@@ -50,12 +51,13 @@ namespace EditorMenu
                 newLevelBtn.Initialize();
                 newLevelBtn.BindData(inData.levels[i]);
                 newLevelBtn.Unselect();
-                newLevelBtn.Transform.SetParent(levelsHolder);
+                newLevelBtn.Transform.SetParent(levelsHolder.RectTransform);
                 newLevelBtn.Transform.localScale = Vector3.one;
                 if (i != 0) continue;
                 newLevelBtn.Select();
                 newLevelBtn.LevelButtonSelected();
             }
+            levelsHolder.UpdateLayout();
         }
 
         private void OnSelectLevelButton(LevelBtn inNewSelectedLevelButton)
@@ -77,7 +79,7 @@ namespace EditorMenu
                 subjectBtn.Initialize();
                 subjectBtn.BindData(subject);
                 subjectBtn.Unselect();
-                subjectBtn.Transform.SetParent(subjectsHolder);
+                subjectBtn.Transform.SetParent(subjectsHolder.RectTransform);
                 subjectBtn.Transform.localScale = Vector3.one;
                 _subjectsList.Add(subjectBtn.Transform);
                 if(!isFirst) continue;
@@ -85,6 +87,7 @@ namespace EditorMenu
                 subjectBtn.SubjectButtonSelected();
                 isFirst = false;
             }
+            subjectsHolder.UpdateLayout();
         }
 
         private void OnSelectSubjectButton(SubjectsBtn inNewSubjectButton)
@@ -105,10 +108,17 @@ namespace EditorMenu
                 newBtn.Initialize();
                 newBtn.BindData(chapter, this);
                 newBtn.Unselect();
-                newBtn.Transform.SetParent(chaptersHolder);
+                newBtn.Transform.SetParent(chaptersHolder.RectTransform);
                 newBtn.Transform.localScale = Vector3.one;
                 _chapList.Add(newBtn.Transform);
             }
+            var nbChild = chaptersHolder.RectTransform.childCount;
+            if (nbChild> 6)
+            {
+                chaptersHolder.RectTransform.sizeDelta = new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
+                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 100));
+            }
+            chaptersHolder.UpdateLayout();
         }
     
         private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)

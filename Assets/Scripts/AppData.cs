@@ -57,6 +57,15 @@ public class QuizFieldData
     public List<QuizFieldData> quizFields;
     public int templateId;
     public string situationData;
+
+    public QuestionData()
+    {
+        mainQst = "";
+        subQst = "";
+        quizFields = new List<QuizFieldData>();
+        templateId = 0;
+        situationData = "init";
+    }
 }
 [Serializable] public class ExerciseData
 {

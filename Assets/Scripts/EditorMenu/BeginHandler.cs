@@ -1,19 +1,21 @@
-﻿using EditorMenu;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BeginHandler : MonoBehaviour
+namespace EditorMenu
 {
-    [SerializeField]private PoolSystem pool;
-    [SerializeField]private GameDataManager gm;
-    [SerializeField] private UIManager ui;
-    [SerializeField] private EditorButtonsManager editorButtons;
-
-    private void Awake()
+    public class BeginHandler : MonoBehaviour
     {
-        pool.Initialize();
-        gm.Initialize();
-        ui.Initialize();
-        editorButtons.Initialize();
-        editorButtons.StartEditor(gm.Data);
+        [SerializeField]private PoolSystem pool;
+        [SerializeField]private GameDataManager gm;
+        [SerializeField] private UIManager ui;
+        [SerializeField] private EditorButtonsManager editorButtons;
+
+        private void Awake()
+        {
+            pool.Initialize();
+            gm.Initialize();
+            ui.Initialize();
+            editorButtons.Initialize();
+            editorButtons.StartEditor(gm.Data);
+        }
     }
 }
