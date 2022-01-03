@@ -1,4 +1,5 @@
 using System;
+using ChapterPanel;
 
 public class SubjectsBtn : EditorButtonBase
 {
@@ -9,7 +10,7 @@ public class SubjectsBtn : EditorButtonBase
     
     public override void Initialize()
     {
-        if(_isInitialized) return;
+        if(isInitialized) return;
         base.Initialize();
         editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
         OnSelectAction += SubjectButtonSelected;

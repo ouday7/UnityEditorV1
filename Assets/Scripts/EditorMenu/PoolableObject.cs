@@ -6,8 +6,9 @@ namespace EditorMenu
     {
         [SerializeField] protected ObjectToPoolType type;
         public ObjectToPoolType Type => type;
-       
+
         private Transform _t;
+
         public Transform Transform
         {
             get

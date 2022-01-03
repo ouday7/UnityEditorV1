@@ -1,4 +1,5 @@
 using System;
+using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ namespace EditorMenu
 
         public override void Initialize()
         {
-            if (_isInitialized) return;
+            if (isInitialized) return;
             base.Initialize();
 
             editBtn.onClick.AddListener(() => UIManager.instance.ChapterEdit(this));

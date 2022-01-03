@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Envast.Layouts;
+using ChapterPanel;
 using UnityEngine;
 namespace EditorMenu
 {
@@ -9,7 +9,6 @@ namespace EditorMenu
         [SerializeField] private RectTransform levelsHolder;
         [SerializeField] private RectTransform subjectsHolder;
         [SerializeField] private RectTransform chaptersHolder;
-    
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
         private LevelBtn _selectedLevel;
@@ -18,7 +17,6 @@ namespace EditorMenu
         public SubjectData SelectedSubject => _selectedSubject.Data;
 
 
-        private CustomSizeFitter _custom;
 
         private void OnDestroy()
         {

@@ -1,0 +1,368 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97437a783a49c5747808cb1651a5ece6, type: 3}
+  m_Name: DataGame
+  m_EditorClassIdentifier: 
+  dataGameSettintgs:
+    levels:
+    - id: 1
+      name: "\u0633\u0646\u0629 \u0623\u0648\u0644\u0649"
+      order: 1
+      subjectsId: 0100000002000000
+    - id: 2
+      name: "\u0633\u0646\u0629 \u062B\u0627\u0646\u064A\u0629"
+      order: 1
+      subjectsId: 0100000002000000
+    - id: 3
+      name: "\u0633\u0646\u0629 \u062B\u0627\u0644\u062B\u0629"
+      order: 1
+      subjectsId: 01000000
+    - id: 4
+      name: "\u0633\u0646\u0629 \u0631\u0627\u0628\u0639\u0629"
+      order: 1
+      subjectsId: 0100000002000000
+    - id: 6
+      name: "\u0633\u0646\u0629 \u0633\u0627\u062F\u0633\u0629"
+      order: 1
+      subjectsId: 0100000002000000
+    - id: 5
+      name: "\u0633\u0646\u0629 \u062E\u0627\u0645\u0633\u0629"
+      order: 5
+      subjectsId: 0100000002000000
+    subjects:
+    - id: 1
+      name: "\u0625\u064A\u0642\u0627\u0638 \u0639\u0644\u0645\u064A"
+      order: 1
+      chapters: []
+    - id: 2
+      name: "\u0631\u064A\u0627\u0636\u064A\u0627\u062A"
+      order: 2
+      chapters: []
+    chapters:
+    - id: 1
+      name: "\u0627\u0644\u0645\u062D\u0627\u0641\u0638\u0629 \u0639\u0644\u0649
+        \u0623\u0639\u0636\u0627\u0621 \u0627\u0644\u062D\u0633"
+      order: 0
+      subjectId: 0
+      levelId: 2
+    - id: 2
+      name: "\u0631\u0628\u0637 \u0639\u0636\u0648 \u0627\u0644\u062D\u0633 \u0628\u0648\u0638\u064A\u0641\u062A\u0647"
+      order: 0
+      subjectId: 0
+      levelId: 6
+    - id: 3
+      name: "\u0627\u0644\u062A\u0651\u064E\u063A\u0652\u0630\u0650\u064A\u064E\u0629
+        \u0650\u0639\u0650\u0646\u0652\u062F \u0627\u0644\u0625\u0646\u0652\u0633\u064E\u0627\u0646
+        \u0648 \u0627\u0644\u062D\u064E\u064A\u064E\u0648\u064E\u0627\u0646"
+      order: 0
+      subjectId: 0
+      levelId: 6
+    - id: 4
+      name: "\u0627\u0644\u0646\u0645\u0648\u0651"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 5
+      name: Ghj
+      order: 1
+      subjectId: 2
+      levelId: 2
+    - id: 6
+      name: Wxc
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 7
+      name: Wx
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 8
+      name: "\u0627\u0644\u0642\u0648\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 1
+    - id: 9
+      name: "\u0627\u0644\u0632\u0645\u0646"
+      order: 0
+      subjectId: 1
+      levelId: 1
+    - id: 10
+      name: "\u0627\u0644\u0645\u0627\u062F\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 1
+    - id: 11
+      name: "\u0627\u0644\u062D\u064A\u0648\u0627\u0646\u0627\u062A \u0627\u0644\u0623\u0644\u064A\u0641\u0629
+        \u0648 \u0627\u0644\u0628\u0631\u064A\u0651\u0629"
+      order: 0
+      subjectId: 6
+      levelId: 6
+    - id: 12
+      name: "\u0627\u0644\u0623\u063A\u0630\u064A\u0629"
+      order: 0
+      subjectId: 0
+      levelId: 3
+    - id: 13
+      name: "\u0627\u0644\u062A\u0646\u0642\u0644 \u0639\u0646\u062F \u0627\u0644\u062D\u064A\u0648\u0627\u0646"
+      order: 0
+      subjectId: 1
+      levelId: 2
+    - id: 14
+      name: "\u0627\u0644\u062A\u0646\u0641\u0633 \u0644\u062F\u0649 \u0627\u0644\u0627\u0646\u0633\u0627\u0646"
+      order: 0
+      subjectId: 2
+      levelId: 5
+    - id: 15
+      name: "\u062C\u0633\u0645 \u0627\u0644\u0627\u0646\u0633\u0627\u0646"
+      order: 0
+      subjectId: 1
+      levelId: 2
+    - id: 16
+      name: "\u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0627\u0644\u0638\u0627\u0647\u0631\u064A\u0629"
+      order: 0
+      subjectId: 2
+      levelId: 2
+    - id: 17
+      name: " \u0627\u0644\u0623\u062D\u062F\u0627\u062B \u0627\u0644\u062F\u0648\u0631\u064A\u0629
+        \u0648\u0627\u0644\u063A\u064A\u0631 \u062F\u0648\u0631\u064A\u0629\r\n"
+      order: 0
+      subjectId: 2
+      levelId: 2
+    - id: 18
+      name: "\u0627\u0644\u062D\u0627\u0644\u0627\u062A \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0626\u064A\u0629
+        \u0644\u0644\u0645\u0627\u062F\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 2
+    - id: 19
+      name: "\u062A\u062D\u0631\u064A\u0643 \u0627\u0644\u0623\u062C\u0633\u0627\u0645"
+      order: 0
+      subjectId: 1
+      levelId: 2
+    - id: 20
+      name: Wxc
+      order: 0
+      subjectId: 2
+      levelId: 2
+    - id: 21
+      name: "\u0627\u0644\u062A\u0646\u0642\u0644 \u0641\u064A \u0627\u0644\u0645\u0627\u0621"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 22
+      name: "\u062A\u0646\u0648\u0651\u0639 \u0627\u0644\u0623\u063A\u0630\u064A\u0629
+        \u0628\u0627\u0644\u0646\u0633\u0628\u0629 \u0644\u0644\u0625\u0646\u0633\u0627\u0646"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 23
+      name: "\u0627\u0644\u062A\u0651\u064E\u0643\u0627\u062B\u064F\u0631\u064F \u0639\u0650\u0646\u0652\u062F\u064E
+        \u0627\u0644\u062D\u064E\u064A\u064E\u0648\u064E\u0627\u0646\u064E\u0627\u062A\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 24
+      name: "\u0627\u0644\u0642\u064E\u0648\u0627\u0639\u0650\u062F\u064F \u0627\u0644\u0635\u0651\u0650\u062D\u0651\u0650\u064A\u0651\u064E\u0629\u064F
+        \u0644\u0650\u0644\u062A\u0651\u064E\u0646\u064E\u0641\u0651\u064F\u0633\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 25
+      name: " \u062F\u064E\u0627\u0621\u064F \u0627\u0644\u0643\u064E\u0644\u0652\u0628\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 26
+      name: "\u0623\u0647\u0645\u064A\u0651\u0629 \u0627\u0644\u0634\u062C\u0631\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 27
+      name: "\u0632\u0651\u064E\u0645\u064E\u0646\u064F \u0627\u0644\u0633\u0651\u0627\u0639\u064E\u0629\u064F"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 28
+      name: "\u0623\u064E\u0646\u0652\u0648\u0627\u0639\u064F \u0627\u0644\u0637\u0651\u064E\u0627\u0642\u064E\u0629\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 29
+      name: "\u0627\u0644\u062A\u0628\u062E\u0631 \u0648 \u0627\u0644\u0625\u0633\u0627\u0644\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 30
+      name: "\u0627\u0644\u0627\u0646\u0635\u0647\u0627\u0631 \u0648 \u0627\u0644\u062A\u062C\u0645\u062F"
+      order: 0
+      subjectId: 1
+      levelId: 3
+    - id: 31
+      name: "\u0648\u0638\u0627\u0626\u0641\u064F \u0627\u0644\u062C\u0644\u062F\u0650
+        \u0648\u0648\u0642\u0627\u064A\u064E\u062A\u064F\u0647\u064F"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 32
+      name: " \u0627\u0644\u062A\u0651\u0646\u064E\u0642\u0651\u064F\u0644\u0650\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 33
+      name: "\u0627\u0644\u062A\u063A\u0630\u064A\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 34
+      name: "\u0627\u0644\u062A\u0651\u064E\u0643\u0627\u062B\u064F\u0631\u064F \u0648
+        \u0627\u0644\u0646\u0651\u064F\u0645\u0648\u0651\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 35
+      name: "\u0627\u0644\u062A\u0646\u0641\u0633"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 36
+      name: "\u0627\u0644\u0632\u0651\u0645\u0646 "
+      order: 0
+      subjectId: 2
+      levelId: 4
+    - id: 37
+      name: "\u0627\u062B\u0651\u0650\u0628\u0627\u062A\u064F \u0648\u064F\u062C\u0648\u062F\u0650
+        \u0627\u0644\u0647\u064E\u0648\u064E\u0627\u0621\u0650"
+      order: 0
+      subjectId: 2
+      levelId: 4
+    - id: 38
+      name: " \u0642\u064A\u0633 \u0627\u0644\u0643\u062A\u0644"
+      order: 0
+      subjectId: 2
+      levelId: 4
+    - id: 39
+      name: "\u0627\u0644\u0646\u0651\u0627\u0642\u0650\u0644\u064F \u0627\u0644\u062D\u064E\u0631\u0627\u0631\u064A\u0651\u064F
+        \u0648\u064E \u0627\u0644\u0639\u0627\u0632\u0650\u0644\u064F \u0627\u0644\u062D\u064E\u0631\u0627\u0631\u064A\u0651\u064F"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 40
+      name: " \u062A\u0623\u062B\u064A\u0631 \u0627\u0644\u0637\u0627\u0642\u0629
+        \u0627\u0644\u062D\u0631\u0627\u0631\u064A\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 4
+    - id: 41
+      name: " \u0627\u0644\u0623\u0648\u0633\u0627\u0637"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 42
+      name: "\u062A\u0643\u0648\u0651\u0646 \u0627\u0644\u0638\u0644\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 43
+      name: "\u0627\u0644\u0645\u0641\u0627\u0635\u0644"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 44
+      name: "\u0623\u0646\u0648\u0627\u0639 \u0627\u0644\u0639\u0638\u0627\u0645\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 45
+      name: "\u0627\u0644\u062C\u0647\u0627\u0632 \u0627\u0644\u062A\u0646\u0641\u0633\u064A"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 46
+      name: "\u0627\u0644\u062F\u0651\u0627\u0631\u0629 \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0626\u064A\u0629 "
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 47
+      name: "\u0627\u0644\u0645\u0648\u0627\u062F \u0627\u0644\u0646\u0627\u0642\u0644\u0629
+        \u0648 \u0627\u0644\u0639\u0627\u0632\u0644\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 48
+      name: "\u0627\u0644\u062A\u0631\u0628\u0629 \u0648\u0645\u0643\u0648\u0651\u0646\u0627\u062A\u0647\u0627\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 49
+      name: "\u0627\u0644\u0645\u0627\u0621 \u0627\u0644\u0635\u0627\u0644\u062D
+        \u0644\u0644\u0634\u0631\u0627\u0628 "
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 50
+      name: "\u0627\u0644\u062A\u0643\u0627\u062B\u0631 \u0628\u0627\u0644\u0628\u0630\u0648\u0631 "
+      order: 0
+      subjectId: 1
+      levelId: 5
+    - id: 51
+      name: "\u0627\u0644\u062A\u0651\u064E\u0628\u0627\u062F\u064F\u0644\u0650 \u0627\u0644\u0652\u063A\u064E\u0627\u0632\u0650\u064A\u0651\u0650"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 53
+      name: "\u062A\u0631\u0643\u064A\u0628\u0629 \u0627\u0644\u062F\u0645\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 54
+      name: "\u0627\u0644\u062A\u063A\u0630\u064A\u0629 \u0639\u0646\u062F \u0627\u0644\u0623\u0646\u0633\u0627\u0646"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 55
+      name: "\u0627\u0644\u0623\u0645\u0631\u0627\u0636 \u0627\u0644\u0646\u0627\u062A\u062C\u0629
+        \u0639\u0646 \u0633\u0648\u0621 \u0627\u0644\u062A\u063A\u0630\u064A\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 56
+      name: " \u0627\u0644\u0633\u0644\u0633\u0644\u0629 \u0627\u0644\u063A\u0630\u0627\u0626\u064A\u0629"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 57
+      name: "\u0627\u0644\u0623\u0648\u0633\u0627\u0637 \u0627\u0644\u0645\u0627\u0626\u064A\u0651\u0629 "
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 58
+      name: " \u0627\u0644\u0647\u0648\u0627\u0621"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 59
+      name: "\u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0642 \u0641\u064A \u0627\u0644\u0647\u0648\u0627\u0621"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 60
+      name: " \u0627\u0644\u0645\u063A\u0646\u0627\u0637\u064A\u0633"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    - id: 61
+      name: " \u0627\u0644\u0628\u0648\u0635\u0644\u0629\r\n"
+      order: 0
+      subjectId: 1
+      levelId: 6
+    exercises: []

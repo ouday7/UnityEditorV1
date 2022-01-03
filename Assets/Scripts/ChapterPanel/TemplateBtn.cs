@@ -4,21 +4,18 @@ using UnityEngine.UI;
 
 public class TemplateBtn : MonoBehaviour
 {
-    
-    
-    
     public static event Action<TemplateBtn> onSelect;
     public static event Action<TemplateBtn, TemplateDataInformation> onSubmit;
-    
-    private bool _submitted;
 
-    
+    private bool _submitted;
     [SerializeField] public Image icon;
     [SerializeField] public Text title;
     [SerializeField] private Button selectBtn;
-
-    private Button _btn;
     
+    private TemplateDataInformation _data;
+    public TemplateDataInformation Data => _data;
+    private Button _btn;
+
     private Button button
     {
         get
@@ -28,19 +25,20 @@ public class TemplateBtn : MonoBehaviour
         }
     }
 
-    private TemplateDataInformation _data;
-    public TemplateDataInformation Data => _data;
-    public void  Initialize(TemplateDataInformation data)
-    {
 
+    
+    public void Initialize(TemplateDataInformation data)
+    {
         this._data = data;
         this.icon.sprite = _data.icon;
-        this.title.text = _data.templateName.ToString();
+        this.title.text = _data.name;
+        _submitted = false;
+        Unselect();
         selectBtn.onClick.AddListener(OnSubmitTemplate);
         button.onClick.AddListener(OnSelectTemplate);
-
-       
     }
+
+
     private void OnSelectTemplate()
     {
         onSelect?.Invoke(this);
@@ -68,20 +66,6 @@ public class TemplateBtn : MonoBehaviour
     public void SetVisibility(bool status)
     {
         this.gameObject.SetActive(status);
-    }
-    
-    public void SetMarkStatus(bool status)
-    {
-        if(!_submitted) selectBtn.interactable = status;
-    }
-
-    public void Submitted(bool status)
-    {
-        this._submitted = status;
-        if (!status)
-        {
-            Unselect();
-        }
     }
     
 }

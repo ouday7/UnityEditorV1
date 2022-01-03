@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum TemplatesNames
 {
-    SortingPhrases, 
-    SelectPhrases, 
-    TrueOrFalse, 
-    SelectPictures, 
-    SortingPictures, 
-    ConnectImageToImage, 
-    ConnectTextToText, 
-    ConnectImageToText, 
-    CompleteParagraphByWriting, 
+    SortingPhrases,
+    SelectPhrases,
+    TrueOrFalse,
+    SelectPictures,
+    SortingPictures,
+    ConnectImageToImage,
+    ConnectTextToText,
+    ConnectImageToText,
+    CompleteParagraphByWriting,
     CompleteParagraphBySentence,
     CorrectMistake,
     InstallOnPicture,
@@ -46,16 +48,6 @@ public class TemplateDataInformation : ScriptableObject
     public int maxFields;
     public int minFields;
     public List<FieldTypes> templateFields;
-    public void GenerateId()
-    {
-        this.id = (int) templateName;
-    }
-    public void GetName()
-    {
-    }
+
     
 }
-  
-    
-   
-

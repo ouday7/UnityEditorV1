@@ -1,6 +1,5 @@
 ﻿using System;
 using EditorMenu;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
@@ -17,9 +16,9 @@ public abstract class EditorButtonBase : PoolableObject
     
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
-    
-    protected bool _isInitialized;
-    private bool _isOpen;
+
+    public bool isInitialized;
+    [SerializeField] private bool _isOpen;
     
     private void OnDestroy()
     {
@@ -28,10 +27,10 @@ public abstract class EditorButtonBase : PoolableObject
 
     public virtual void Initialize()
     {
-        if(_isInitialized) return;
+        if(isInitialized) return;
         btn.onClick.AddListener(OnClickMainButton);
         OnUpdateIndex += UpdateDataIndex;
-        _isInitialized = true;
+        isInitialized = true;
     }
 
     protected virtual void UpdateDataIndex() { }

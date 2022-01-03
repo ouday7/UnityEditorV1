@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97437a783a49c5747808cb1651a5ece6, type: 3}
-  m_Name: DataGame
+  m_Script: {fileID: 11500000, guid: eb8c25dceebc70345856a544a8681f3f, type: 3}
+  m_Name: True False
   m_EditorClassIdentifier: 
-  dataGameSettintgs:
-    levels: []
-    subjects: []
-    chapters: []
-    exercises: []
+  id: 0
+  templateName: 2
+  category: 2
+  icon: {fileID: 21300008, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
+  maxFields: 5
+  minFields: 2
+  templateFields: 0600000006000000

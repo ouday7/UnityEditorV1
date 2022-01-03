@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 public enum TemplatesCategories
 {
     Sorting,
@@ -18,11 +19,4 @@ public class TemplateCategory : ScriptableObject
     public Sprite icon;
     public TemplatesCategories category;
     
-    
-    
-
-
-
-
-
 }

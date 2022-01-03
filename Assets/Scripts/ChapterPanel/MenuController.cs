@@ -24,7 +24,7 @@ namespace ChapterPanel
         public ExerciseBtn currentExbtn;
         public QuestionData qstData;
 
-        private static int exId;
+        private static int _exId;
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -37,7 +37,7 @@ namespace ChapterPanel
                 DontDestroyOnLoad(gameObject);
             }
 
-            exId = 1;
+            _exId = 1;
             Begin();
         }
         private void Begin()
@@ -58,15 +58,15 @@ namespace ChapterPanel
             newExBtn.transform.localScale = Vector3.one;
             
             Data.chapterId = EditorButtonsManager.Instance.selectedChapter.Data.id;
-            Data.exerciseId = exId;
-            exId++;
+            Data.exerciseId = _exId;
+            _exId++;
             Data.questions = new List<QuestionData>();
 
-            newExBtn.BindData(newExBtn._data);
+            newExBtn.BindData(newExBtn.data);
             
             GameDataManager.Instance.SaveToJson();
 
-            Debug.Log(Data.questions);
+            // Debug.Log(Data.questions);
             allData.exercises.Add(Data); //no assgin
             // Data.Add(new ExerciseData());
             allData.exercises.Add(Data);
@@ -75,7 +75,7 @@ namespace ChapterPanel
             // GameDataManager.instance.SaveToJson();
             
             
-         Debug.Log($"Taille : +{allData.exercises.Count}");   
+         // Debug.Log($"Taille : +{allData.exercises.Count}");   
         }
         public void AddNewQst(Button addqstBtn)
         {

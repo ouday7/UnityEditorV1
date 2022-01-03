@@ -15,28 +15,24 @@ public class QuestionFields : MonoBehaviour
 
     private EditManager _editManager;
     public JsonData data;
-    //public QuestionData Data;
-    
+
     public void Start()
     {
         QuestionBtn.OnClickQuestion += QuestionClick;
-      //  saveBtn.onClick.AddListener(SaveData);
+        //  saveBtn.onClick.AddListener(SaveData);
     }
-    
+
     private void QuestionClick(QuestionBtn qstBtn)
     {
-      //  if(qstBtn.Data.mainQst=="")  
+        //  if(qstBtn.Data.mainQst=="")  
 
-       // saveBtn.onClick.AddListener(SaveData);
-
-
-
+        // saveBtn.onClick.AddListener(SaveData);
     }
-   public void SaveData()
+
+    public void SaveData()
     {
         GameDataManager.Instance.SaveToJson();
     }
-
 
     private void OnUpdateFields(QuestionBtn btn)
     {
@@ -45,35 +41,23 @@ public class QuestionFields : MonoBehaviour
         helpQuestionText.text = btn.data.helpQst;
     }
 
-    private void  AddDataField()
+    private void AddDataField()
     {
         foreach (var exBtn in MenuController.Instance.currentExList)
         {
-            if (MenuController.Instance.currentExbtn._data.exerciseId !=
-                exBtn._data.exerciseId)
+            if (MenuController.Instance.currentExbtn.data.exerciseId !=
+                exBtn.data.exerciseId)
             {
-                data.exercises.Add(MenuController.Instance.currentExbtn._data);
-                    
+                data.exercises.Add(MenuController.Instance.currentExbtn.data);
             }
         }
     }
 
-    private void SetDatafiled()
-    {
-        for (int i = 0; i < MenuController.Instance.currentExList.Count; i++)
-        {
-            
-        }
-    }
 
-
-    
     public void Clear()
     {
         mainQuestionText.text = "";
         subQuestionText.text = "";
         helpQuestionText.text = "";
     }
-
-  
 }

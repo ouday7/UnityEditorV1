@@ -1,21 +1,21 @@
 using System;
+using ChapterPanel;
 
 public class LevelBtn : EditorButtonBase
 {
-   
     public event Action<LevelBtn> OnSelectLevelButton;
-    
+
     private LevelData _data;
     public LevelData Data => _data;
+
     private void OnDestroy()
     {
         OnSelectLevelButton = null;
     }
-    
+
     public override void Initialize()
     {
-       
-        if(_isInitialized) return;
+        if (isInitialized) return;
         base.Initialize();
         editBtn.onClick.AddListener(() => UIManager.instance.LevelEdit(this));
         OnSelectAction += LevelButtonSelected;
@@ -25,7 +25,7 @@ public class LevelBtn : EditorButtonBase
     {
         _data = levelData;
         text.text = _data.name;
-        transform.SetSiblingIndex(levelData.order-1);
+        transform.SetSiblingIndex(levelData.order - 1);
     }
 
     public void LevelButtonSelected()
@@ -39,10 +39,12 @@ public class LevelBtn : EditorButtonBase
         {
             newName = _data.name;
         }
+
         if (newOrderText.Length == 0)
         {
             newOrderText = _data.order.ToString();
         }
+
         _data.name = newName;
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
