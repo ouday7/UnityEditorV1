@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,48 +7,57 @@ namespace ChapterPanel
 {
     public class QuestionBtn : PoolableObject
     {
-        public static event Action<QuestionBtn> OnClickQuestion; 
+        public delegate void QstClick(QuestionBtn qstBtn);
+        public static event QstClick OnClickQuestion; 
         
         [SerializeField] private Text btnName;
         [SerializeField] private Button deleteQstBtn;
 
-        public QuestionData data;
+        private QuestionData _data;
+        public QuestionData Data=>_data;
         private bool _isInitialized=false;
-        private const string QstName = "  سؤال  ";
+        private const string _qstName = "  سؤال  ";
 
         public  void UpdateName()
         {
-            this.btnName.text = QstName + transform.GetSiblingIndex();
+            this.btnName.text = _qstName + transform.GetSiblingIndex();
         }
-        public void Initialize(QuestionBtn qstBtn)
+        
+        public void Initialize()
         {
             if(_isInitialized) return;
-            deleteQstBtn.onClick.AddListener(DeleteQst);
-            qstBtn.GetComponent<Button>().onClick.AddListener(() =>
+            deleteQstBtn.onClick.AddListener(()=>DeleteQst(this.transform.
+                parent.transform.parent.transform.GetComponent<ExerciseBtn>()));
+            this.GetComponent<Button>().onClick.AddListener(() =>
             {
-                OnClickQuestion?.Invoke(qstBtn);
-
-                MenuController.Instance.mainContent.gameObject.SetActive(true);
-
                 OnClickQuestion?.Invoke(this);
+                MenuController.instance.mainContent.gameObject.SetActive(true);
             });
             _isInitialized = true;
         }
+
         public void BindData(QuestionData quesData)
         {
-            data = quesData;
-            data.questionId = 1;
-            data.mainQst = quesData.mainQst;
-            data.subQst = quesData.subQst;
-            data.helpQst = quesData.helpQst;
-            data.templateId = quesData.templateId;
-            data.situationData = quesData.situationData;
+            _data = quesData;
+            Data.mainQst = quesData.mainQst;
+            Data.subQst = quesData.subQst;
+            Data.quizFields = quesData.quizFields;
+            Data.templateId = quesData.templateId;
+            Data.situationData = quesData.situationData;
         }
-        private void DeleteQst()
+        private void DeleteQst(ExerciseBtn inExerciseBtn)
         {
-            var exBtn = deleteQstBtn.transform.parent;
-            PoolSystem.instance.DeSpawn(exBtn);
-            MenuController.Instance.currentQstList.Remove(exBtn.GetComponent<QuestionBtn>());
+            var qstBtn = deleteQstBtn.transform.parent;
+            PoolSystem.instance.DeSpawn(qstBtn);
+            MenuController.instance.currentQstList.Remove(qstBtn.GetComponent<QuestionBtn>());
+            inExerciseBtn.Data.questions.Remove(qstBtn.GetComponent<QuestionBtn>().Data);
+            GameDataManager.instance.SaveToJson();
+            
+            MenuController.instance.UpdateExercisesHolderSize(-1);
+            inExerciseBtn.MaximiseHolderSize(inExerciseBtn.QstHolder.transform.childCount);
+            inExerciseBtn.MaximiseExerciseSize(inExerciseBtn.QstHolder);
+            inExerciseBtn.QstHolder.UpdateLayout();
+          
         }
     }
 }

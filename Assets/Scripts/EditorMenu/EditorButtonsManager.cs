@@ -1,36 +1,37 @@
 ﻿using System.Collections.Generic;
-using ChapterPanel;
+using Components.GridLayout;
 using UnityEngine;
+
 namespace EditorMenu
 {
     public class EditorButtonsManager : MonoBehaviour
     {
-        public static EditorButtonsManager Instance;
-        [SerializeField] private RectTransform levelsHolder;
-        [SerializeField] private RectTransform subjectsHolder;
-        [SerializeField] private RectTransform chaptersHolder;
+        public static EditorButtonsManager instance;
+        [SerializeField] private CustomGridLayout levelsHolder;
+        [SerializeField] private CustomGridLayout subjectsHolder;
+        [SerializeField] private CustomGridLayout chaptersHolder;
+    
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
         private LevelBtn _selectedLevel;
         private SubjectsBtn _selectedSubject;
-        public ChaptersBtn selectedChapter;
+        public ChaptersBtn _selectedChapter;
         public SubjectData SelectedSubject => _selectedSubject.Data;
-
-
 
         private void OnDestroy()
         {
+          
             SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton -= OnSelectChapterButton;
         }
 
         public void Initialize()
         {
-            if (Instance != null && Instance != this)
-                Destroy(this.gameObject);
+            if (instance != null && instance != this)
+                Destroy(gameObject);
             else
             {
-                Instance = this;
+                instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
@@ -50,16 +51,15 @@ namespace EditorMenu
                 newLevelBtn.Initialize();
                 newLevelBtn.BindData(inData.levels[i]);
                 newLevelBtn.Unselect();
-                newLevelBtn.Transform.SetParent(levelsHolder);
+                newLevelBtn.Transform.SetParent(levelsHolder.RectTransform);
                 newLevelBtn.Transform.localScale = Vector3.one;
                 if (i != 0) continue;
                 newLevelBtn.Select();
                 newLevelBtn.LevelButtonSelected();
-                //_custom.UpdateSize();
-                
-               // Debug.Log(_custom.spacing);
             }
+            levelsHolder.UpdateLayout();
         }
+
         private void OnSelectLevelButton(LevelBtn inNewSelectedLevelButton)
         {
             if (_selectedLevel != null) _selectedLevel.Unselect();
@@ -67,18 +67,19 @@ namespace EditorMenu
             _selectedLevel.Select();
             ShowSubjects(_selectedLevel.Data);
         }
+
         private void ShowSubjects(LevelData inLevelDataData)
         {
             ResetSubjectsHolder();
             var isFirst = true;
-            foreach (var subjectPair in inLevelDataData.Subjects)
+            foreach (var subjectPair in inLevelDataData.subjects)
             {
                 var subject = subjectPair.Value;
                 var subjectBtn = PoolSystem.instance.Spawn<SubjectsBtn>(ObjectToPoolType.Subject);
                 subjectBtn.Initialize();
                 subjectBtn.BindData(subject);
                 subjectBtn.Unselect();
-                subjectBtn.Transform.SetParent(subjectsHolder);
+                subjectBtn.Transform.SetParent(subjectsHolder.RectTransform);
                 subjectBtn.Transform.localScale = Vector3.one;
                 _subjectsList.Add(subjectBtn.Transform);
                 if(!isFirst) continue;
@@ -86,6 +87,7 @@ namespace EditorMenu
                 subjectBtn.SubjectButtonSelected();
                 isFirst = false;
             }
+            subjectsHolder.UpdateLayout();
         }
 
         private void OnSelectSubjectButton(SubjectsBtn inNewSubjectButton)
@@ -106,25 +108,32 @@ namespace EditorMenu
                 newBtn.Initialize();
                 newBtn.BindData(chapter, this);
                 newBtn.Unselect();
-                newBtn.Transform.SetParent(chaptersHolder);
+                newBtn.Transform.SetParent(chaptersHolder.RectTransform);
                 newBtn.Transform.localScale = Vector3.one;
                 _chapList.Add(newBtn.Transform);
             }
+            var nbChild = chaptersHolder.RectTransform.childCount;
+            if (nbChild> 6)
+            {
+                chaptersHolder.RectTransform.sizeDelta = new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
+                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 100));
+            }
+            chaptersHolder.UpdateLayout();
         }
     
         private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
         {
-            if (selectedChapter != null)
+            if (_selectedChapter != null)
             {
-                selectedChapter.Unselect();
-                selectedChapter.configBtn.gameObject.SetActive(false);
+                _selectedChapter.Unselect();
+                _selectedChapter.configBtn.gameObject.SetActive(false);
             }
-            selectedChapter = inNewSelectedChapterButton;
-            selectedChapter.Select();
-            selectedChapter.configBtn.gameObject.SetActive(true);
+            _selectedChapter = inNewSelectedChapterButton;
+            _selectedChapter.Select();
+            _selectedChapter.configBtn.gameObject.SetActive(true);
             
-            PlayerPrefs.SetString("chapterName",selectedChapter.Data.name);
-            PlayerPrefs.SetInt("chapterId",selectedChapter.Data.id);
+            PlayerPrefs.SetString("chapterName",_selectedChapter.Data.name);
+            PlayerPrefs.SetInt("chapterId",_selectedChapter.Data.id);
             PlayerPrefs.SetString("levelName",_selectedLevel.Data.name);
             PlayerPrefs.SetString("subjectName",_selectedSubject.Data.name);
         }

@@ -1,75 +1,77 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EditorMenu;
 using UnityEngine;
 
-public enum ObjectToPoolType
+namespace EditorMenu
 {
-    Level, Subject, Chapter, Toggle,Exercise,Question,Categorie
-}
-public class PoolSystem : MonoBehaviour
-{
-    [Serializable] private struct PoolObject
+    public enum ObjectToPoolType
     {
-        public ObjectToPoolType type;
-        public PoolableObject objectReference;
-        public int amount;
+        Level, Subject, Chapter, Toggle,Exercise,Question
     }
-    [SerializeField] private List<PoolObject> poolObjects;
-    [SerializeField] private List<PoolableObject> currentPoolObjects;
-    
-    public static PoolSystem instance;
-
-    public void Initialize()
+    public class PoolSystem : MonoBehaviour
     {
-        if (instance != null && instance != this)
-            Destroy(this.gameObject);
-        else
+        [Serializable] private struct PoolObject
         {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            public ObjectToPoolType type;
+            public PoolableObject objectReference;
+            public int amount;
         }
-        InitPool();
-    }
+        [SerializeField] private List<PoolObject> poolObjects;
+        [SerializeField] private List<PoolableObject> currentPoolObjects;
     
-    private void InitPool()
-    {
-        foreach (var obj in poolObjects)
+        public static PoolSystem instance;
+
+        public void Initialize()
         {
-            for (var i = 0; i <obj.amount; i++)
+            if (instance != null && instance != this)
+                Destroy(this.gameObject);
+            else
             {
-                var newObj = Instantiate(obj.objectReference, transform, true);
-                newObj.gameObject.SetActive(false);
-                currentPoolObjects.Add(newObj);
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+            InitPool();
+        }
+    
+        private void InitPool()
+        {
+            foreach (var obj in poolObjects)
+            {
+                for (var i = 0; i <obj.amount; i++)
+                {
+                    var newObj = Instantiate(obj.objectReference, transform, true);
+                    newObj.gameObject.SetActive(false);
+                    currentPoolObjects.Add(newObj);
+                }
             }
         }
-    }
-    public T Spawn<T>(ObjectToPoolType type) where T:Component
-    {
-        var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
-        if (poolItem != null)
+        public T Spawn<T>(ObjectToPoolType type) where T:Component
         {
-            var obj = poolItem.GetComponent<T>();
-            currentPoolObjects.Remove(poolItem);
-            obj.gameObject.SetActive(true);
-            return obj;
+            var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
+            if (poolItem != null)
+            {
+                var obj = poolItem.GetComponent<T>();
+                currentPoolObjects.Remove(poolItem);
+                obj.gameObject.SetActive(true);
+                return obj;
+            }
+            GenerateElement(type);
+            return Spawn<T>(type);
         }
-        GenerateElement(type);
-        return Spawn<T>(type);
-    }
-    public void DeSpawn(Transform objectToDeSpawn)
-    {
-        objectToDeSpawn.SetParent(transform);
-        objectToDeSpawn.gameObject.SetActive(false);
-        currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
-    }
+        public void DeSpawn(Transform objectToDeSpawn)
+        {
+            objectToDeSpawn.SetParent(transform);
+            objectToDeSpawn.gameObject.SetActive(false);
+            currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
+        }
     
-    private void GenerateElement(ObjectToPoolType type) //create an element if the pool is empty
-    {
-        var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
-        var item = Instantiate(poolItem.objectReference, transform);
-        item.gameObject.SetActive(false);
-        currentPoolObjects.Add(item);
+        private void GenerateElement(ObjectToPoolType type) //create an element if the pool is empty
+        {
+            var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
+            var item = Instantiate(poolItem.objectReference, transform);
+            item.gameObject.SetActive(false);
+            currentPoolObjects.Add(item);
+        }
     }
 }

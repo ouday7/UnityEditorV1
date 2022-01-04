@@ -1,5 +1,5 @@
 using System;
-using ChapterPanel;
+using EditorMenu;
 
 public class SubjectsBtn : EditorButtonBase
 {
@@ -10,7 +10,7 @@ public class SubjectsBtn : EditorButtonBase
     
     public override void Initialize()
     {
-        if(isInitialized) return;
+        if(_isInitialized) return;
         base.Initialize();
         editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
         OnSelectAction += SubjectButtonSelected;
@@ -41,6 +41,6 @@ public class SubjectsBtn : EditorButtonBase
         _data.name = newName;
         if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 }
