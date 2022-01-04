@@ -1,36 +1,45 @@
-﻿using System;
-using ChapterPanel;
+﻿using EditorMenu;
 using Envast.Layouts;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class EditManager : MonoBehaviour
+namespace ChapterPanel
 {
-    [SerializeField] private Text minFieldsTxt;
-    [SerializeField] private QuestionFields questionFields;
-    [SerializeField] private SelectTemplate selectTemplate;
-    [SerializeField] private CustomSizeFitter holder;
-    [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private TemplateCategory currentTemplate;
-    [SerializeField] private Button openPanel;
-    [SerializeField] private GameObject panelPopUp;
-    [SerializeField] private SelectTemplateButton selectTemplateBtn;
-    [SerializeField] private TemplateDataInformation _currentTemplate;
-
-
-    
-
-    public void Start()
+    public class EditManager : MonoBehaviour
     {
-        openPanel.onClick.AddListener(OpenPanel);
+        [SerializeField] private Text minFieldsTxt;
+        [SerializeField] private QuestionFields questionFields;
+        [SerializeField] private SelectTemplate selectTemplate;
+        [SerializeField] private CustomSizeFitter holder;
+        [SerializeField] private ScrollRect scrollRect;
+        [SerializeField] private TemplateCategory currentTemplate;
+        [SerializeField] private Button openPanel;
+        [SerializeField] private GameObject panelPopUp;
+        [SerializeField] private SelectTemplateButton selectTemplateBtn;
+        [SerializeField] private TemplateDataInformation _currentTemplate;
+        [SerializeField] private InputField mainQuestion;
+        [SerializeField] private InputField subQuestion;
+        [SerializeField] private InputField helpQuestion;
+        public void Start()
+        {
+            QuestionBtn.OnClickQuestion += ClickQuestion;
+        }
 
-    }
+        private void ClickQuestion(QuestionBtn qstBtn)
+        { 
+            mainQuestion.text = qstBtn.Data.mainQst;
+            subQuestion.text = qstBtn.Data.subQst;
+            helpQuestion.text = qstBtn.Data.subQst;
 
-
-
-    private void OpenPanel()
-    {
-        panelPopUp.SetActive(true);
+            SaveNewQuestionData(qstBtn);
+   
+        }
+        private void SaveNewQuestionData(QuestionBtn qstBtn)
+        {
+             qstBtn.Data.mainQst = mainQuestion.text;
+             qstBtn.Data.subQst = subQuestion.text;
+             qstBtn.Data.helpQst = helpQuestion.text;
+             GameDataManager.Instance.SaveToJson();
+        }
     }
 }

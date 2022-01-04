@@ -36,18 +36,18 @@
             ]
         },
         {
-            "id": 6,
-            "name": "سنة سادسة",
-            "order": 1,
+            "id": 5,
+            "name": "سنة خامسة",
+            "order": 5,
             "subjectsId": [
                 1,
                 2
             ]
         },
         {
-            "id": 5,
-            "name": "سنة خامسة",
-            "order": 5,
+            "id": 6,
+            "name": "سنة سادسة",
+            "order": 6,
             "subjectsId": [
                 1,
                 2
@@ -493,59 +493,76 @@
     "exercises": [
         {
             "chapterId": 8,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -554,38 +571,49 @@
         },
         {
             "chapterId": 10,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -594,14 +622,18 @@
         },
         {
             "chapterId": 10,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 8,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -610,14 +642,18 @@
         },
         {
             "chapterId": 8,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 23,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -626,59 +662,75 @@
         },
         {
             "chapterId": 23,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 23,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 25,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 25,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 25,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 48,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 48,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 10,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -687,28 +739,36 @@
         },
         {
             "chapterId": 10,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 10,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -717,45 +777,58 @@
         },
         {
             "chapterId": 13,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -764,17 +837,22 @@
         },
         {
             "chapterId": 13,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -783,36 +861,46 @@
         },
         {
             "chapterId": 13,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 13,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 39,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 39,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -821,39 +909,50 @@
         },
         {
             "chapterId": 39,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 39,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 33,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -862,24 +961,31 @@
         },
         {
             "chapterId": 33,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -888,25 +994,32 @@
         },
         {
             "chapterId": 33,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 33,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 7,
+            "exerciseId": 0,
             "questions": [
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
                 },
                 {
+                    "questionId": 0,
                     "mainQst": "",
                     "subQst": "",
+                    "helpQst": "",
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
@@ -915,30 +1028,66 @@
         },
         {
             "chapterId": 7,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 8,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 8,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 38,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 38,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 38,
+            "exerciseId": 0,
             "questions": []
         },
         {
             "chapterId": 38,
+            "exerciseId": 0,
+            "questions": []
+        },
+        {
+            "chapterId": 61,
+            "exerciseId": 0,
+            "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                }
+            ]
+        },
+        {
+            "chapterId": 61,
+            "exerciseId": 0,
             "questions": []
         }
     ]

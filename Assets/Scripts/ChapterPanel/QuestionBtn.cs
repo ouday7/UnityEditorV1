@@ -30,8 +30,8 @@ namespace ChapterPanel
                 parent.transform.parent.transform.GetComponent<ExerciseBtn>()));
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
-                OnClickQuestion?.Invoke(this);
                 MenuController.instance.mainContent.gameObject.SetActive(true);
+                OnClickQuestion?.Invoke(this);
             });
             _isInitialized = true;
         }
@@ -51,7 +51,7 @@ namespace ChapterPanel
             PoolSystem.instance.DeSpawn(qstBtn);
             MenuController.instance.currentQstList.Remove(qstBtn.GetComponent<QuestionBtn>());
             inExerciseBtn.Data.questions.Remove(qstBtn.GetComponent<QuestionBtn>().Data);
-            GameDataManager.instance.SaveToJson();
+            GameDataManager.Instance.SaveToJson();
             
             MenuController.instance.UpdateExercisesHolderSize(-1);
             inExerciseBtn.MaximiseHolderSize(inExerciseBtn.QstHolder.transform.childCount);

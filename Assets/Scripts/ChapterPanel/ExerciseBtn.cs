@@ -1,6 +1,6 @@
 ﻿using System;
-using Components.GridLayout;
 using EditorMenu;
+using Envast.Components.GridLayout;
 using Envast.Layouts;
 using UnityEditor;
 using UnityEngine;
@@ -27,12 +27,10 @@ namespace ChapterPanel
         private float _startSize;
         private int _startIndex;
         private int _endIndex;
-        private string fileName = "JsonFile.txt";
         private bool _isInitialized;
         private static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
         private Vector2 startPos;
-        private int _k=0;
         private ExerciseData _data;
         private bool updateSize;
         private int qstHeight = 85;
@@ -118,8 +116,8 @@ namespace ChapterPanel
             MaximiseHolderSize(-1);
             MaximiseExerciseSize(qstHolder);
             MenuController.instance.currentExList.Remove(toDeleteBtn);
-            GameDataManager.instance.Data.exercises.Remove(toDeleteBtn.Data);
-            GameDataManager.instance.SaveToJson();
+            GameDataManager.Instance.Data.exercises.Remove(toDeleteBtn.Data);
+            GameDataManager.Instance.SaveToJson();
         }
 
         private void OnTriggerEnter2D(Collider2D other)

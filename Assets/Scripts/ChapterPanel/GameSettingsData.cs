@@ -1,10 +1,12 @@
-﻿using ChapterPanel;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "DataGame", menuName = "DataGameManager", order = 1)]
-public class GameSettingsData : ScriptableObject
+namespace ChapterPanel
 {
-    public JsonData dataGameSettintgs;
+    [CreateAssetMenu(fileName = "DataGame", menuName = "DataGameManager", order = 1)]
+    public class GameSettingsData : ScriptableObject
+    {
+        public JsonData dataGameSettings;
+    }
 }
 
 

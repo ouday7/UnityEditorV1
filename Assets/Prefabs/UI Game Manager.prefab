@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 310740084193428909}
   - component: {fileID: 310740083006724293}
   - component: {fileID: 310740083006724298}
-  - component: {fileID: 310740083006724302}
   - component: {fileID: 310740083006724297}
   m_Layer: 5
   m_Name: Content
@@ -346,24 +345,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &310740083006724302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310740083006724296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c68a7138a550f4f9ee735c43745821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignment: 1
-  padding: {x: 0, y: 10}
-  spacing: {x: 0, y: 17}
-  layout: 0
-  includeDisabledChildren: 0
-  newLineTag: LayoutNewLine
 --- !u!114 &310740083006724297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1001,6 @@ GameObject:
   - component: {fileID: 310740083554517100}
   - component: {fileID: 310740083554517101}
   - component: {fileID: 310740083554517905}
-  - component: {fileID: 310740083554517904}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1102,24 +1082,6 @@ MonoBehaviour:
   extraSpacing: 0
   spacing: 0
   allParent: []
---- !u!114 &310740083554517904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310740083554517907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c68a7138a550f4f9ee735c43745821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignment: 1
-  padding: {x: 0, y: 10}
-  spacing: {x: 0, y: 20}
-  layout: 0
-  includeDisabledChildren: 0
-  newLineTag: LayoutNewLine
 --- !u!1 &310740083572203479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1293,6 @@ GameObject:
   - component: {fileID: 310740084870058940}
   - component: {fileID: 310740083631174785}
   - component: {fileID: 310740083631174790}
-  - component: {fileID: 310740083631174794}
   - component: {fileID: 310740083631174789}
   m_Layer: 5
   m_Name: Content
@@ -1397,24 +1358,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &310740083631174794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310740083631174788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c68a7138a550f4f9ee735c43745821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignment: 1
-  padding: {x: 0, y: 10}
-  spacing: {x: 0, y: 17}
-  layout: 0
-  includeDisabledChildren: 0
-  newLineTag: LayoutNewLine
 --- !u!114 &310740083631174789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1790,7 +1733,7 @@ GameObject:
   - component: {fileID: 310740084063759868}
   - component: {fileID: 310740084063759869}
   m_Layer: 5
-  m_Name: UX
+  m_Name: UI Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1907,9 +1850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8915c39f1a154defb7416bf139f6787e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsHolder: {fileID: 310740083006724302}
-  subjectsHolder: {fileID: 310740083631174794}
-  chaptersHolder: {fileID: 310740083554517904}
+  levelsHolder: {fileID: 0}
+  subjectsHolder: {fileID: 0}
+  chaptersHolder: {fileID: 0}
+  _selectedLevel: {fileID: 0}
   _selectedChapter: {fileID: 0}
 --- !u!1 &310740084154337772
 GameObject:

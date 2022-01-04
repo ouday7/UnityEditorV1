@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Components.GridLayout;
+using ChapterPanel;
+using Envast.Components.GridLayout;
 using UnityEngine;
 
 namespace EditorMenu
@@ -13,14 +14,13 @@ namespace EditorMenu
     
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
-        private LevelBtn _selectedLevel;
+        public LevelBtn _selectedLevel;
         private SubjectsBtn _selectedSubject;
         public ChaptersBtn _selectedChapter;
         public SubjectData SelectedSubject => _selectedSubject.Data;
 
         private void OnDestroy()
         {
-          
             SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton -= OnSelectChapterButton;
         }
@@ -32,7 +32,7 @@ namespace EditorMenu
             else
             {
                 instance = this;
-                DontDestroyOnLoad(this.gameObject);
+                //DontDestroyOnLoad(this.gameObject);
             }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton += OnSelectChapterButton;
@@ -116,13 +116,14 @@ namespace EditorMenu
             if (nbChild> 6)
             {
                 chaptersHolder.RectTransform.sizeDelta = new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
-                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 100));
+                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 120));
             }
             chaptersHolder.UpdateLayout();
         }
     
         private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
         {
+            Debug.Log("chap test");
             if (_selectedChapter != null)
             {
                 _selectedChapter.Unselect();
