@@ -16,7 +16,7 @@ namespace ChapterPanel
         private TemplateCategory _category;
         public TemplateCategory Category => _category;
 
-        private Button button
+        private Button Button
         {
             get
             {
@@ -27,25 +27,23 @@ namespace ChapterPanel
         public void Initialize(TemplateCategory category)
         {
             this._category = category;
-
             this.icon.sprite = this._category.icon;
             this.title.text = this._category.name;
-            button.onClick.AddListener(OnButtonClicked);
+            Button.onClick.AddListener(OnButtonClicked);
             Unselect();
         }
         private void OnButtonClicked()
         {
             onClick?.Invoke(this, this._category);
         }
-
         public void Select()
         {
-            button.interactable = false;
+            Button.interactable = false;
         }
 
         public void Unselect()
         {
-            button.interactable = true;
+            Button.interactable = true;
         }
 
     

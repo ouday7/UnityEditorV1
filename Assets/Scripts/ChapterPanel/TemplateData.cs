@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,7 @@ public enum FieldTypes
 }
 
 [CreateAssetMenu(fileName = "TemplateData", menuName = "ScriptableObjects/TemplateDataInformation", order = 1)]
-public class TemplateDataInformation : ScriptableObject
+public class TemplateData : ScriptableObject
 {
     public int id;
     public TemplatesNames templateName;
@@ -49,5 +50,13 @@ public class TemplateDataInformation : ScriptableObject
     public int minFields;
     public List<FieldTypes> templateFields;
 
-    
+
+    public FieldTypes GetQuizFieldType(int i)
+    {
+        if (templateFields.IsNullOrEmpty())
+            throw new Exception(
+                $"Quiz Fields is Empty ({templateName})");
+        if (i >= templateFields.Count) return templateFields[templateFields.Count - 1];
+        return templateFields[i];
+    }
 }

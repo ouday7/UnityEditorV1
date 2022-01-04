@@ -75,19 +75,4 @@ namespace ChapterPanel
         public int exerciseId;
         public List<QuestionData> questions;
     }
-
-    [Serializable]
-    public class TemplateData
-    {
-        public int templateId;
-        public string templateName;
-    }
-
-    [Serializable]
-    public class Categorydata
-    {
-        public int categoryId;
-        public string categoryName;
-        public List<TemplateData> template;
-    }
 }

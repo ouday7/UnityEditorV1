@@ -20,40 +20,36 @@ public class QuestionFields : MonoBehaviour
     {
         QuestionBtn.OnClickQuestion += QuestionClick;
         //  saveBtn.onClick.AddListener(SaveData);
+        GameDataManager.Instance.SaveToJson();
     }
-
     private void QuestionClick(QuestionBtn qstBtn)
     {
         //  if(qstBtn.Data.mainQst=="")  
 
         // saveBtn.onClick.AddListener(SaveData);
     }
-
     public void SaveData()
     {
         GameDataManager.Instance.SaveToJson();
     }
-
     private void OnUpdateFields(QuestionBtn btn)
     {
         mainQuestionText.text = btn.data.mainQst;
         subQuestionText.text = btn.data.subQst;
         helpQuestionText.text = btn.data.helpQst;
     }
-
     private void AddDataField()
     {
-        foreach (var exBtn in MenuController.Instance.currentExList)
-        {
-            if (MenuController.Instance.currentExbtn.data.exerciseId !=
-                exBtn.data.exerciseId)
-            {
-                data.exercises.Add(MenuController.Instance.currentExbtn.data);
-            }
-        }
+        // foreach (var exBtn in MenuController.Instance.currentExList)
+        // {
+        //     if (MenuController.Instance.currentExbtn.data.exerciseId !=
+        //         exBtn.data.exerciseId)
+        //     {
+        //         data.exercises.Add(MenuController.Instance.currentExbtn.data);
+        //     }
+        // }
     }
-
-
+    
     public void Clear()
     {
         mainQuestionText.text = "";

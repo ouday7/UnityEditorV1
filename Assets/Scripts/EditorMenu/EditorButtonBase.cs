@@ -6,6 +6,7 @@ using UPersian.Components;
 
 public abstract class EditorButtonBase : PoolableObject
 {
+    
     protected event Action OnSelectAction;
     protected static event Action OnUpdateIndex;
     

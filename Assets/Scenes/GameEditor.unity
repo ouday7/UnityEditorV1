@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59202299b15cd994f9eafd832bca3d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameSettingsData: {fileID: 11400000, guid: af9c8dc8f1435a74f93545c2f8f9d418, type: 2}
+  gameSettingsData: {fileID: 11400000, guid: af9c8dc8f1435a74f93545c2f8f9d418, type: 2}
   fileName: JsonFile.txt
   jsonData:
     levels: []

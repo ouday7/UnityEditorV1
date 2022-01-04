@@ -1,31 +1,32 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-[System.Serializable]
-public struct TemplateCatalog
-{
-    public TemplatesNames type;
-    public GameObject prefab;
-}
 
 public class TemplatesHandler : MonoBehaviour
 {
     public static TemplatesHandler Instance;
-    public List<TemplateDataInformation> templatesData;
-    public List<TemplateCategory> categoriesData;
-    public List<TemplateCatalog> templatesCatalog;
     
-
-    public void Awake()
+    public List<TemplateData> templatesData;
+    public List<TemplateCategory> categoriesData;
+    private Dictionary<TemplateCategory, List<TemplateData>> _mapByCategory;
+    private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (Instance != null) return;
+        Instance = this;
+    }
+    public TemplateData GetTemplateData(int id)
+    {
+        return templatesData.FirstOrDefault(t => t.templateName == (TemplatesNames) id);
+        
+    }
+    public TemplateData GetTemplateData(TemplatesNames tName)
+    {
+        return templatesData.FirstOrDefault(t => t.templateName == tName);
+    }
+
+    public TemplateCategory GetCategory(TemplatesCategories category)
+    {
+        return this.categoriesData.FirstOrDefault(c => c.category == category);
     }
 }
 
