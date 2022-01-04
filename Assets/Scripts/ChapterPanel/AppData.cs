@@ -12,7 +12,7 @@ namespace ChapterPanel
         public string name;
         public int order;
         public List<int> subjectsId;
-        public Dictionary<int, SubjectData> subjects;
+        public Dictionary<int, SubjectData> Subjects;
     }
 
     [Serializable]
@@ -66,17 +66,6 @@ namespace ChapterPanel
         public List<QuizFieldData> quizFields;
         public int templateId;
         public string situationData;
-
-        public QuestionData()
-        {
-            questionId = 0;
-            mainQst = "";
-            subQst = "";
-            helpQst = "";
-            quizFields = new List<QuizFieldData>();
-            templateId = 0;
-            situationData = "";
-        }
     }
 
     [Serializable]
@@ -85,20 +74,5 @@ namespace ChapterPanel
         public int chapterId;
         public int exerciseId;
         public List<QuestionData> questions;
-    }
-
-    [Serializable]
-    public class TemplateData
-    {
-        public int templateId;
-        public string templateName;
-    }
-
-    [Serializable]
-    public class CategoryData
-    {
-        public int categoryId;
-        public string categoryName;
-        public List<TemplateData> template;
     }
 }

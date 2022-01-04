@@ -5,15 +5,15 @@ using UnityEngine.UI;
 public class TemplateBtn : MonoBehaviour
 {
     public static event Action<TemplateBtn> onSelect;
-    public static event Action<TemplateBtn, TemplateDataInformation> onSubmit;
+    public static event Action<TemplateBtn, TemplateData> onSubmit;
 
     private bool _submitted;
     [SerializeField] public Image icon;
     [SerializeField] public Text title;
     [SerializeField] private Button selectBtn;
     
-    private TemplateDataInformation _data;
-    public TemplateDataInformation Data => _data;
+    private TemplateData _data;
+    public TemplateData Data => _data;
     private Button _btn;
 
     private Button button
@@ -27,7 +27,7 @@ public class TemplateBtn : MonoBehaviour
 
 
     
-    public void Initialize(TemplateDataInformation data)
+    public void Initialize(TemplateData data)
     {
         this._data = data;
         this.icon.sprite = _data.icon;
