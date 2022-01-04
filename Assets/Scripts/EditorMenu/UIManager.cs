@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        foreach (var sub in level.subjects)
+        foreach (var sub in level.Subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -252,16 +252,16 @@ public class UIManager : MonoBehaviour
             {
                 if (_levelSubjects.Contains(subject.id)) continue;
                 _levelSubjects.Add(subject.id);
-                _selectedLevelButton.Data.subjects.Add(subject.id, subject);
+                _selectedLevelButton.Data.Subjects.Add(subject.id, subject);
                 continue;
             }
 
             if (_selectedSubjects.Contains(subject.id)) continue;
             if (!_levelSubjects.Contains(subject.id)) continue;
 
-            if (_selectedLevelButton.Data.subjects.ContainsKey(subject.id))
+            if (_selectedLevelButton.Data.Subjects.ContainsKey(subject.id))
             {
-                _selectedLevelButton.Data.subjects.Remove(subject.id);
+                _selectedLevelButton.Data.Subjects.Remove(subject.id);
                 _levelSubjects.Remove(subject.id);
             }
         }
@@ -296,13 +296,13 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        if (!levelToUpdate.subjects.ContainsKey(_selectedSubjectId))
+        if (!levelToUpdate.Subjects.ContainsKey(_selectedSubjectId))
         {
             Debug.Log("//. Game Break no Subject found");
             return;
         }
 
-        var subjectToUpdate = levelToUpdate.subjects[_selectedSubjectId];
+        var subjectToUpdate = levelToUpdate.Subjects[_selectedSubjectId];
         subjectToUpdate.chapters.Add(_selectChaptersButton.Data);
         PoolSystem.instance.DeSpawn(_selectChaptersButton.Transform);
         _selectChaptersButton = null;

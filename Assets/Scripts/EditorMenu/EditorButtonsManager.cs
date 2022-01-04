@@ -72,7 +72,7 @@ namespace EditorMenu
         {
             ResetSubjectsHolder();
             var isFirst = true;
-            foreach (var subjectPair in inLevelDataData.subjects)
+            foreach (var subjectPair in inLevelDataData.Subjects)
             {
                 var subject = subjectPair.Value;
                 var subjectBtn = PoolSystem.instance.Spawn<SubjectsBtn>(ObjectToPoolType.Subject);

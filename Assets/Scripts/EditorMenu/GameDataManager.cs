@@ -68,6 +68,6 @@ public class GameDataManager : MonoBehaviour
     private void JsontoScriptableObject()
     {
         var x = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
-        gameSettingsData.dataGameSettintgs = JsonUtility.FromJson<JsonData>(x);
+        gameSettingsData.dataGameSettings = JsonUtility.FromJson<JsonData>(x);
     }
 }
