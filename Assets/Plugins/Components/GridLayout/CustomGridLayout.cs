@@ -4,7 +4,7 @@ using Envast.Components.GridLayout.Helpers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Components.GridLayout
+namespace Envast.Components.GridLayout
 {
     public class CustomGridLayout : MonoBehaviour
     {
@@ -36,7 +36,7 @@ namespace Components.GridLayout
         [SerializeField] private string newLineTag = "LayoutNewLine";
         public string NewLineTag => newLineTag;
     
-        private void ReleaseReferences()
+        protected void ReleaseReferences()
         {
             _rt = null;
             _linesWidthList?.Clear();
@@ -62,7 +62,7 @@ namespace Components.GridLayout
             }
         }
     
-        // [Button("Update Layout", ButtonSizes.Medium)]
+        [Button("Update Layout", ButtonSizes.Medium)]
         public void UpdateLayout()
         {
             if (RectTransform.childCount == 0) return;

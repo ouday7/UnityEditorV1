@@ -34,9 +34,9 @@ public class QuestionFields : MonoBehaviour
     }
     private void OnUpdateFields(QuestionBtn btn)
     {
-        mainQuestionText.text = btn.data.mainQst;
-        subQuestionText.text = btn.data.subQst;
-        helpQuestionText.text = btn.data.helpQst;
+        mainQuestionText.text = btn.Data.mainQst;
+        subQuestionText.text = btn.Data.subQst;
+        helpQuestionText.text = btn.Data.helpQst;
     }
     private void AddDataField()
     {

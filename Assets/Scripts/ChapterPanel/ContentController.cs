@@ -1,5 +1,6 @@
-﻿using Components.GridLayout;
+﻿
 using EditorMenu;
+using Envast.Components.GridLayout;
 using Envast.Layouts;
 using UnityEngine;
 
@@ -7,15 +8,9 @@ namespace ChapterPanel
 {
     public class ContentController : MonoBehaviour
     {
-        public static ContentController instance;
-        [SerializeField] private CustomGridLayout content;
-        [SerializeField] private CustomSizeFitter contentSize;
-
-        private int exHeight = 110;
         private void Start()
         {
-            instance = this;
-            foreach (var ex in GameDataManager.instance.Data.exercises )
+            foreach (var ex in GameDataManager.Instance.Data.exercises )
             {
                 if(ex.chapterId!=EditorButtonsManager.instance._selectedChapter.Data.id) continue;
                 var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);

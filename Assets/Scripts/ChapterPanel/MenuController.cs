@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Components.GridLayout;
 using EditorMenu;
 using Envast.Layouts;
 using UnityEngine;
@@ -19,11 +18,8 @@ namespace ChapterPanel
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
         [SerializeField] public GameObject mainContent;
-        [SerializeField] private InputField mainQuestion;
-        [SerializeField] private InputField subQuestion;
         // [SerializeField] private int templateId;
         //[SerializeField] private int situationData;
-        [SerializeField] private Button saveBtn;
         
         [NonSerialized]public  List<ExerciseBtn> currentExList;
         [NonSerialized]public  List<QuestionBtn> currentQstList;
@@ -31,6 +27,7 @@ namespace ChapterPanel
         private ExerciseData Data;
         private QuestionData QstData;
         private bool _isInitialised;
+        private bool _editing;
         public GameObject ExerciseHolder => exerciseHolder;
 
         private void Awake()
@@ -51,63 +48,47 @@ namespace ChapterPanel
         {
             currentExList = new List<ExerciseBtn>();
             currentQstList=new List<QuestionBtn>();
-            QuestionBtn.OnClickQuestion += ClickQuestion;
+            
             addExBtn.onClick.AddListener(AddExercise);
             mainContent.gameObject.SetActive(false);
             chapterName.text = PlayerPrefs.GetString("chapterName");
             levelName.text=PlayerPrefs.GetString("levelName");
             subjName.text = PlayerPrefs.GetString("subjectName");
         }
-
-        private void ClickQuestion(QuestionBtn qstBtn)
-        {
-            mainQuestion.text = "";
-            subQuestion.text="";
-            
-            if (qstBtn.Data.mainQst.Length > 0)
-            {
-                mainQuestion.text = qstBtn.Data.mainQst;
-                subQuestion.text = qstBtn.Data.subQst;
-                
-            }
-            saveBtn.onClick.AddListener(() =>
-            {
-                qstBtn.Data.mainQst = mainQuestion.text;
-                qstBtn.Data.subQst = subQuestion.text;
-                GameDataManager.instance.SaveToJson();
-            });
-            
-        }
+        
         private void AddExercise()
         {
+            // Spawn and prepare exercise data
             Data = new ExerciseData();
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.Initialize();
             newExBtn.transform.SetParent(exerciseHolder.transform);
             newExBtn.transform.localScale = Vector3.one;
-            
             Data.chapterId = PlayerPrefs.GetInt("chapterId");
             Data.questions = new List<QuestionData>();
             newExBtn.BindData(Data);
             currentExList.Add(newExBtn);
-            GameDataManager.instance.Data.exercises.Add(Data);
-            GameDataManager.instance.SaveToJson();
+            GameDataManager.Instance.Data.exercises.Add(Data);
+            GameDataManager.Instance.SaveToJson();
             UpdateExercisesHolderSize(1);
         }
         public void AddNewQst(ExerciseBtn inExerciseBtn)
         {
+            // Spawn and prepare question data
             QstData = new QuestionData();
             var newQuestionButton = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
             newQuestionButton.UpdateName();
-            inExerciseBtn.AddQuestionChild(newQuestionButton);
-            newQuestionButton.Initialize();
+            inExerciseBtn.AddQuestionChild(newQuestionButton); // add qst & update qsts holder size
             newQuestionButton.BindData(QstData);
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
+            newQuestionButton.Initialize();
+            
+            // update sizes & graphics
+            UpdateExercisesHolderSize(1);
             inExerciseBtn.MaximiseExerciseSize(inExerciseBtn.QstHolder);
             inExerciseBtn.transform.Find("Panel").gameObject.SetActive(true);
-            GameDataManager.instance.SaveToJson();
-            UpdateExercisesHolderSize(1);
+            GameDataManager.Instance.SaveToJson();
         }
 
         private RectTransform RectTransform

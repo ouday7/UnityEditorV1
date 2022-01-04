@@ -1,4 +1,5 @@
 using System;
+using ChapterPanel;
 using EditorMenu;
 
 public class LevelBtn : EditorButtonBase
@@ -7,6 +8,7 @@ public class LevelBtn : EditorButtonBase
     public event Action<LevelBtn> OnSelectLevelButton;
     
     private LevelData _data;
+    private bool _isInitialized;
     public LevelData Data => _data;
     private void OnDestroy()
     {
@@ -15,7 +17,6 @@ public class LevelBtn : EditorButtonBase
     
     public override void Initialize()
     {
-       
         if(_isInitialized) return;
         base.Initialize();
         editBtn.onClick.AddListener(() => UIManager.instance.LevelEdit(this));
@@ -48,6 +49,6 @@ public class LevelBtn : EditorButtonBase
         var newOrder = _data.order;
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
-        GameDataManager.instance.SaveToJson();
+        GameDataManager.Instance.SaveToJson();
     }
 }

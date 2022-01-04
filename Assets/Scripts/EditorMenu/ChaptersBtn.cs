@@ -15,7 +15,10 @@ namespace EditorMenu
 
         public ChapterData Data => _data;
 
-        private void OnDestroy() => OnSelectChaptersButton = null;
+        private void OnDestroy()
+        {
+            OnSelectChaptersButton = null;
+        }
 
         public override void Initialize()
         {
@@ -56,7 +59,10 @@ namespace EditorMenu
             _data.order = Transform.GetSiblingIndex() + 1;
         }
 
-        private void OnSelectChapterButton() => OnSelectChaptersButton?.Invoke(this);
+        private void OnSelectChapterButton()
+        {
+            OnSelectChaptersButton?.Invoke(this);
+        } 
 
         public SubjectData GetSelectedSubjectData() => _parent.SelectedSubject;
     }

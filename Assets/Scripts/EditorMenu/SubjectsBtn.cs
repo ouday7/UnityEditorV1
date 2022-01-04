@@ -1,46 +1,50 @@
 using System;
-using EditorMenu;
+using ChapterPanel;
 
-public class SubjectsBtn : EditorButtonBase
+namespace EditorMenu
 {
-    public static event Action<SubjectsBtn> OnSelectSubjectButton;
-    
-    private SubjectData _data;
-    public SubjectData Data => _data;
-    
-    public override void Initialize()
+    public class SubjectsBtn : EditorButtonBase
     {
-        if(_isInitialized) return;
-        base.Initialize();
-        editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
-        OnSelectAction += SubjectButtonSelected;
-    }
+        public static event Action<SubjectsBtn> OnSelectSubjectButton;
+    
+        private SubjectData _data;
+        private bool _isInitialized;
+        public SubjectData Data => _data;
+    
+        public override void Initialize()
+        {
+            if(_isInitialized) return;
+            base.Initialize();
+            editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
+            OnSelectAction += SubjectButtonSelected;
+        }
 
-    public void BindData(SubjectData subjectData)
-    {
-        _data = subjectData;
-        text.text = _data.name;
-        transform.SetSiblingIndex(subjectData.order-1);
-    }
-    
-    public void SubjectButtonSelected()
-    {
-        OnSelectSubjectButton?.Invoke(this);
-    }
-    
-    public void UpdateData(string newName, string newOrderText)
-    {
-        if (newName.Length == 0)
+        public void BindData(SubjectData subjectData)
         {
-            newName = _data.name;
+            _data = subjectData;
+            text.text = _data.name;
+            transform.SetSiblingIndex(subjectData.order-1);
         }
-        if (newOrderText.Length == 0)
+    
+        public void SubjectButtonSelected()
         {
-            newOrderText = _data.order.ToString();
+            OnSelectSubjectButton?.Invoke(this);
         }
-        _data.name = newName;
-        if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
-        BindData(_data);
-        GameDataManager.instance.SaveToJson();
+    
+        public void UpdateData(string newName, string newOrderText)
+        {
+            if (newName.Length == 0)
+            {
+                newName = _data.name;
+            }
+            if (newOrderText.Length == 0)
+            {
+                newOrderText = _data.order.ToString();
+            }
+            _data.name = newName;
+            if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
+            BindData(_data);
+            GameDataManager.Instance.SaveToJson();
+        }
     }
 }
