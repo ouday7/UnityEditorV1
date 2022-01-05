@@ -939,7 +939,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7906372955290952308}
   - component: {fileID: 3271855003667076650}
-  - component: {fileID: 2103814132}
   - component: {fileID: 5234044363710436868}
   - component: {fileID: 1184300390211135671}
   m_Layer: 5
@@ -1048,18 +1047,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &2103814132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103814128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5769bea7483e87241b732d8090c7bdb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2723907327345038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,7 +1078,14 @@ MonoBehaviour:
   templateHolder: {fileID: 4190712773064939214}
   openPanel: {fileID: 8550811584012365862}
   panelPopUp: {fileID: 6185188693881149054}
-  addQuizFiled: {fileID: 5236948164100173615}
+  mainQuestionText: {fileID: 399441385}
+  subQuestionText: {fileID: 399441384}
+  helpQuestionText: {fileID: 399441383}
+  time: {fileID: 816428152212598735}
+  points: {fileID: 5108715847622137900}
+  saveBtn: {fileID: 0}
+  templateBtn: {fileID: 0}
+  templateCategory: {fileID: 0}
 --- !u!114 &27876030497610416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,14 +1547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec0612938847c24fbb767250426f673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainQuestionText: {fileID: 399441385}
-  subQuestionText: {fileID: 399441384}
-  helpQuestionText: {fileID: 399441383}
-  time: {fileID: 816428152212598735}
-  points: {fileID: 5108715847622137900}
-  saveBtn: {fileID: 0}
-  templateBtn: {fileID: 0}
-  templateCategory: {fileID: 0}
   data:
     levels: []
     subjects: []
@@ -1944,6 +1930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5769bea7483e87241b732d8090c7bdb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exerciseHolder: {fileID: 2103814128}
 --- !u!224 &1270423889603652987
 RectTransform:
   m_ObjectHideFlags: 0

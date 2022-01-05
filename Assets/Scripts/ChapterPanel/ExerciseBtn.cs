@@ -28,7 +28,7 @@ namespace ChapterPanel
         private int _startIndex;
         private int _endIndex;
         private bool _isInitialized;
-        private static int _exerciseNbr=1;
+        public static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
         private Vector2 startPos;
         private ExerciseData _data;

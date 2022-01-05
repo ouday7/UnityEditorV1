@@ -1,4 +1,5 @@
 ﻿
+using System;
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,11 @@ namespace ChapterPanel
         public QuestionData Data=>_data;
         private bool _isInitialized=false;
         private const string _qstName = "  سؤال  ";
+
+        private void OnDestroy()
+        {
+            OnClickQuestion = null;
+        }
 
         public  void UpdateName()
         {

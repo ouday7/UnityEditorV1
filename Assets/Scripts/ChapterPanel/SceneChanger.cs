@@ -16,6 +16,7 @@ namespace ChapterPanel
         public void OpenMainScene()
         {
             SceneManager.LoadScene(mainScene);
+            ExerciseBtn._exerciseNbr = 1;
         }
     }
 }

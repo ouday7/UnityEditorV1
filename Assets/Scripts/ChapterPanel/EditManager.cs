@@ -1,6 +1,8 @@
-﻿using ChapterPanel;
+﻿using System;
+using ChapterPanel;
 using Envast.Layouts;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -18,11 +20,15 @@ public class EditManager : MonoBehaviour
     [SerializeField] private RectTransform templateHolder;
     [SerializeField] private Button openPanel;
     [SerializeField] private GameObject panelPopUp;
-    [SerializeField] private InputField mainQuestion;
-    [SerializeField] private InputField subQuestion;
-    [SerializeField] private InputField helpQuestion;
-
-
+    [SerializeField] public InputField mainQuestionText;
+    [SerializeField] public InputField subQuestionText;
+    [SerializeField] public InputField helpQuestionText;
+    [SerializeField] private InputField time;
+    [SerializeField] private InputField points;
+    [SerializeField] private Button saveBtn;
+    [SerializeField] public TemplateBtn templateBtn;
+    [SerializeField] private TemplateCategory templateCategory;
+    
     public void Start()
     {
         openPanel.onClick.AddListener(OpenPanel);
@@ -30,11 +36,37 @@ public class EditManager : MonoBehaviour
     }
     private void ClickQuestion(QuestionBtn qstBtn)
     {
-        mainQuestion.text = qstBtn.Data.mainQst;
-        subQuestion.text = qstBtn.Data.subQst;
-        helpQuestion.text = qstBtn.Data.subQst;
+        mainQuestionText.text=qstBtn.Data.mainQst;
+        subQuestionText.text = qstBtn.Data.subQst;
+        helpQuestionText.text = qstBtn.Data.helpQst;
+        
+        mainQuestionText.onEndEdit.RemoveAllListeners();
+        subQuestionText.onEndEdit.RemoveAllListeners();
+        helpQuestionText.onEndEdit.RemoveAllListeners();
+        
+        mainQuestionText.onEndEdit.AddListener(delegate {EditMainQuestion(mainQuestionText.text,qstBtn); });
+        subQuestionText.onEndEdit.AddListener(delegate {EditSubQuestion(subQuestionText.text,qstBtn); });
+        helpQuestionText.onEndEdit.AddListener(delegate{EditHelpQuestion(helpQuestionText.text,qstBtn); });
     }
-   
+
+    private void EditMainQuestion(string arg0,QuestionBtn qstBtn)
+    {
+        qstBtn.Data.mainQst = arg0;
+        GameDataManager.Instance.SaveToJson();
+    }
+    private void EditSubQuestion(string arg0,QuestionBtn qstBtn)
+    {
+        qstBtn.Data.subQst = arg0;
+        GameDataManager.Instance.SaveToJson();
+    }
+    private void EditHelpQuestion(string arg0,QuestionBtn qstBtn)
+    {
+        qstBtn.Data.helpQst = arg0;
+        GameDataManager.Instance.SaveToJson();
+    }
+    
+    
+
     public void OnQuestionSelected(QuestionData inQuestion)
     {
         currentQuestion = inQuestion;

@@ -21,8 +21,6 @@ public class QuizFieldsHandler : MonoBehaviour
         {
             if(_map.ContainsKey(quizFieldMap.name)) continue;
             _map.Add(quizFieldMap.name, quizFieldMap.prefab);
-            
-            Debug.Log(quizFieldMap.prefab+"test"+quizFieldMap.name);
         }
     }
     public static QuizFieldBase GetQuizField(FieldTypes inName)
