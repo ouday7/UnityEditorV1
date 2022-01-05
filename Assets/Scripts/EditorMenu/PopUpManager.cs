@@ -93,7 +93,7 @@ public class PopUpManager : MonoBehaviour
             PoolSystem.instance.DeSpawn(child);
         }
 
-        foreach (var subject in GameDataManager.Instance.Data.subjects)
+        foreach (var subject in GameDataManager.instance.Data.subjects)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -137,7 +137,7 @@ public class PopUpManager : MonoBehaviour
 
         _currentSubjectsToggle?.Clear();
 
-        var level = GameDataManager.Instance.Data.levels.FirstOrDefault(lev => lev.id == _selectedLevelBtn.Id);
+        var level = GameDataManager.instance.Data.levels.FirstOrDefault(lev => lev.id == _selectedLevelBtn.Id);
 
         if (level == null)
         {
@@ -203,7 +203,7 @@ public class PopUpManager : MonoBehaviour
             PoolSystem.instance.DeSpawn(child);
         }
 
-        foreach (var lvl in GameDataManager.Instance.Data.levels)
+        foreach (var lvl in GameDataManager.instance.Data.levels)
         {
             var newBtn = PoolSystem.instance.Spawn<ToggleButton>(ObjectToPoolType.Toggle);
             newBtn.Initialize();
@@ -248,7 +248,7 @@ public class PopUpManager : MonoBehaviour
     {
         _selectedLevelButton.UpdateData(inputFieldNameText, inputFieldOrderText);
 
-        foreach (var subject in GameDataManager.Instance.Data.subjects)
+        foreach (var subject in GameDataManager.instance.Data.subjects)
         {
             if (_selectedSubjects.Contains(subject.id))
             {
@@ -267,7 +267,7 @@ public class PopUpManager : MonoBehaviour
                 _levelSubjects.Remove(subject.id);
             }
         }
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
         
     }
 
@@ -281,7 +281,7 @@ public class PopUpManager : MonoBehaviour
         _selectChaptersButton.UpdateName(inputFieldNameText);
         _selectChaptersButton.UpdateOrder(inputFieldOrderText);
         UpdateChapterRoot();
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
 
     private void UpdateChapterRoot()
@@ -293,7 +293,7 @@ public class PopUpManager : MonoBehaviour
         _selectChaptersButton.Data.subjectId = _selectedSubjectId;
 
         _selectChaptersButton.GetSelectedSubjectData().chapters.Remove(_selectChaptersButton.Data);
-        var levelToUpdate = GameDataManager.Instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
+        var levelToUpdate = GameDataManager.instance.Data.levels.FirstOrDefault(lvl => lvl.id == _selectedLevelId);
         if (levelToUpdate == null)
         {
             Debug.Log("//. Level Is Null");

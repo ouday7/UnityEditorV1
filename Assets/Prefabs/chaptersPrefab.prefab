@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4544337683012450121}
   - component: {fileID: 3374933604779408174}
   - component: {fileID: 5122175430824026750}
-  - component: {fileID: 2976379260328142320}
   m_Layer: 5
   m_Name: ConfigureBtn
   m_TagString: Untagged
@@ -120,7 +119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2976379260328142320}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: OpenConfigScene
         m_Mode: 1
@@ -132,20 +131,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2976379260328142320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606597925948107539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90831c51ddf1034895e88e6bb581cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configScene: ChapterConfig
-  mainScene: GameEditor
 --- !u!1 &968776924009317115
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,4 +484,5 @@ MonoBehaviour:
   editBtn: {fileID: 4836439067259369641}
   selectedColor: {r: 1, g: 0.89411765, b: 0.09411765, a: 1}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  isInitialized: 0
   configBtn: {fileID: 5122175430824026750}

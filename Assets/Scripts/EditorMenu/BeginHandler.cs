@@ -14,6 +14,7 @@ namespace EditorMenu
             pool.Initialize();
             gm.Initialize();
             popUp.Initialize();
+            gm.GenerateData();
             editorButtons.Initialize();
             editorButtons.StartEditor(gm.Data);
         }

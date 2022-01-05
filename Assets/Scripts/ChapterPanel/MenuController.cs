@@ -35,9 +35,9 @@ namespace ChapterPanel
             if (instance != null) return;
             instance = this;
             
-            Begin();
+            Initialize();
         }
-        private void Begin()
+        private void Initialize()
         {
             currentExList = new List<ExerciseBtn>();
             currentQstList=new List<QuestionBtn>();
@@ -61,8 +61,8 @@ namespace ChapterPanel
             Data.questions = new List<QuestionData>();
             newExBtn.BindData(Data);
             currentExList.Add(newExBtn);
-            GameDataManager.Instance.Data.exercises.Add(Data);
-            GameDataManager.Instance.SaveToJson();
+            GameDataManager.instance.Data.exercises.Add(Data);
+            GameDataManager.instance.SaveToJson();
             UpdateExercisesHolderSize(1);
         }
         public void AddNewQst(ExerciseBtn inExerciseBtn)
@@ -70,18 +70,17 @@ namespace ChapterPanel
             // Spawn and prepare question data
             QstData = new QuestionData();
             var newQuestionButton = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
-            newQuestionButton.UpdateName();
             inExerciseBtn.AddQuestionChild(newQuestionButton); // add qst & update qsts holder size
+            newQuestionButton.UpdateName();
+            newQuestionButton.Initialize(inExerciseBtn);
             newQuestionButton.BindData(QstData);
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
-            newQuestionButton.Initialize();
             
             // update sizes & graphics
             UpdateExercisesHolderSize(1);
-            inExerciseBtn.MaximiseExerciseSize(inExerciseBtn.QstHolder);
-            inExerciseBtn.transform.Find("Panel").gameObject.SetActive(true);
-            GameDataManager.Instance.SaveToJson();
+            inExerciseBtn.ExpandQuestions();
+            GameDataManager.instance.SaveToJson();
         }
 
         private RectTransform RectTransform

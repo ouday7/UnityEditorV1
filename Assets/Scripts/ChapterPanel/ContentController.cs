@@ -1,7 +1,5 @@
-﻿
+﻿using System.Linq;
 using EditorMenu;
-using Envast.Components.GridLayout;
-using Envast.Layouts;
 using UnityEngine;
 
 namespace ChapterPanel
@@ -11,9 +9,12 @@ namespace ChapterPanel
         [SerializeField] private GameObject exerciseHolder;
         private void Start()
         {
-            foreach (var ex in GameDataManager.Instance.Data.exercises )
+            var selectChapterId = GameDataManager.instance.GetSelectedChapter().id;
+            var exercises = GameDataManager.instance.Data.exercises
+                .Where(ex => ex.chapterId == selectChapterId).ToList();
+            
+            foreach (var ex in exercises)
             {
-                if(ex.chapterId!=EditorButtonsManager.instance._selectedChapter.Data.id) continue;
                 var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
                 newExBtn.Initialize();
                 newExBtn.BindData(ex);
@@ -25,11 +26,11 @@ namespace ChapterPanel
                 foreach (var qst in ex.questions)
                 {
                     var newqstBtn = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
-                    newqstBtn.Initialize();
-                    newqstBtn.UpdateName();
+                    newqstBtn.Initialize(newExBtn);
                     newqstBtn.BindData(qst);
                     newExBtn.AddQuestionChild(newqstBtn);
                     newqstBtn.transform.localScale = Vector3.one;
+                    newqstBtn.UpdateName();
                 }
             }
         }

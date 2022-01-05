@@ -17,7 +17,6 @@ namespace ChapterPanel
         [SerializeField] private GameObject categoryPrefab;
         [SerializeField] private GameObject templatePrefab;
 
-
         private SelectTemplateButton _selectTemplateButton;
         private List<TemplateCategoryBtn> _allCategories;
         private List<TemplateBtn> _allTemplates;
@@ -25,6 +24,13 @@ namespace ChapterPanel
         public TemplateBtn selectedTemplate;
         private TemplateBtn _submittedTemplate;
         private TemplatesHandler _templatesHandler;
+
+        private void OnDestroy()
+        {
+            TemplateCategoryBtn.onClick -= OnClickCategory;
+            TemplateBtn.onSelect -= OnSelectTemplate;
+            TemplateBtn.onSubmit -= OnTemplateSubmitted;
+        }
 
         public void Start()
         {

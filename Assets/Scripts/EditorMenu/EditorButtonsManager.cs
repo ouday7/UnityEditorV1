@@ -38,10 +38,17 @@ namespace EditorMenu
             }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton += OnSelectChapterButton;
+            ChaptersBtn.OnSubmitButton += OnSubmitChapter;
 
             _subjectsList = new List<Transform>();
             _chapList = new List<Transform>();
             startSize.y = chaptersHolder.RectTransform.sizeDelta.y;
+        }
+
+        private void OnSubmitChapter(ChaptersBtn inChapterButton)
+        {
+            GameDataManager.instance.SetSelectedChapter(inChapterButton.Data);
+            SceneHandler.instance.LoadScene(SceneNames.ChapterConfig);
         }
 
         public void StartEditor(JsonData inData)

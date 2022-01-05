@@ -1,5 +1,4 @@
-﻿using System;
-using ChapterPanel;
+﻿using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,43 +8,27 @@ public class ToggleTextQuizField : QuizFieldBase
     [SerializeField] private InputField inputFiled;
     [SerializeField] private Button buttonRemove;
 
-
-    public void Start()
+    public override void Initialize()
     {
         buttonRemove.onClick.AddListener(Remove);
-        myToggle.onValueChanged.AddListener(delegate { ToggleValue(myToggle); });
-        inputFiled.onEndEdit.AddListener(delegate { InputValue(inputFiled); });
-    }
-
-    public override void Initialize()
-    {   
-        buttonRemove.onClick.AddListener(Remove);
-        myToggle.onValueChanged.AddListener(delegate { ToggleValue(myToggle); });
-        inputFiled.onEndEdit.AddListener(delegate { InputValue(inputFiled); });
-
+        myToggle.onValueChanged.AddListener(ToggleValue);
+        inputFiled.onEndEdit.AddListener(InputValue);
     }
 
     public override void BindData(QuizFieldData inData)
     {
-        inData.textOne = inputFiled.text;
-        inData.toggleOne = myToggle.isOn;
-        Debug.Log(inData.textOne);
-        Debug.Log(inData.toggleOne);
-        
+        _data = inData;
+        _data.textA = inputFiled.text;
+        _data.toggleA = myToggle.isOn;
+        Debug.Log(_data.textA);
+        Debug.Log(_data.toggleA);
     }
-
 
     private void Remove()
     {
         Destroy(gameObject);
     }
-    private bool ToggleValue(Toggle tog)
-    {
-
-        return (tog.isOn);
-    }
-    private string InputValue(InputField inputField)
-    {
-        return (inputField.text);
-    }
+    
+    private void ToggleValue(bool newValue) => _data.toggleA = newValue;
+    private void InputValue(string newValue) => _data.textA = newValue;
 }

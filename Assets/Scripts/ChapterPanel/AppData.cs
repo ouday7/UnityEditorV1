@@ -32,6 +32,7 @@ namespace ChapterPanel
         public int order;
         public int subjectId;
         public int levelId;
+        //todo MAP exercises
     }
 
     [Serializable]
@@ -48,11 +49,11 @@ namespace ChapterPanel
     {
         public int id;
         public string type;
-        public string textOne;
+        public string textA;
         public string textTwo;
         public Sprite imageOne;
         public Sprite imageTwo;
-        public bool toggleOne;
+        public bool toggleA;
         public bool toggleTwo;
     }
 

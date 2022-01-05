@@ -11,13 +11,13 @@ public class QuestionFields : MonoBehaviour
     public void Start()
     { ;
         //  saveBtn.onClick.AddListener(SaveData);
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
        
     }
    
     public void SaveData()
     {
-        GameDataManager.Instance.SaveToJson();
+        GameDataManager.instance.SaveToJson();
     }
     
 }

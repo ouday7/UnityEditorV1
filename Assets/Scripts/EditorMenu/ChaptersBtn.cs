@@ -8,6 +8,7 @@ namespace EditorMenu
     public class ChaptersBtn : EditorButtonBase
     {
         public static event Action<ChaptersBtn> OnSelectChaptersButton;
+        public static event Action<ChaptersBtn> OnSubmitButton; 
 
         private ChapterData _data;
         private EditorButtonsManager _parent;
@@ -19,7 +20,7 @@ namespace EditorMenu
         {
             if (isInitialized) return;
             base.Initialize();
-
+            configBtn.onClick.AddListener(() => OnSubmitButton?.Invoke(this));
             editBtn.onClick.AddListener(() => PopUpManager.instance.ChapterEdit(this));
             OnSelectAction += OnSelectChapterButton;
             configBtn.gameObject.SetActive(false);

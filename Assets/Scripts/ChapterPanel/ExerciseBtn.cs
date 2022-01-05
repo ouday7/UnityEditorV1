@@ -1,8 +1,5 @@
-﻿using System;
-using EditorMenu;
+﻿using EditorMenu;
 using Envast.Components.GridLayout;
-using Envast.Layouts;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +34,7 @@ namespace ChapterPanel
         private int holderWeight = 400;
         public ExerciseData Data => _data;
         public CustomGridLayout QstHolder => qstHolder;
+        
         public  void Initialize()
         {
             if(_isInitialized) return;
@@ -69,7 +67,7 @@ namespace ChapterPanel
                 MenuController.instance.UpdateExercisesHolderSize(-nbChild);
                 return;
             }
-            MaximiseHolderSize(nbChild);
+            MaximiseHolderSize();
             MenuController.instance.UpdateExercisesHolderSize(nbChild);
             QstHolder.UpdateLayout();
             qstHolder.gameObject.SetActive(true);
@@ -113,11 +111,11 @@ namespace ChapterPanel
             PoolSystem.instance.DeSpawn(transform);
             _exerciseNbr--;
             MenuController.instance.UpdateExercisesHolderSize(-1);
-            MaximiseHolderSize(-1);
-            MaximiseExerciseSize(qstHolder);
+            MaximiseHolderSize();
+            MaximiseExerciseSize();
             MenuController.instance.currentExList.Remove(toDeleteBtn);
-            GameDataManager.Instance.Data.exercises.Remove(toDeleteBtn.Data);
-            GameDataManager.Instance.SaveToJson();
+            GameDataManager.instance.Data.exercises.Remove(toDeleteBtn.Data);
+            GameDataManager.instance.SaveToJson();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -136,7 +134,7 @@ namespace ChapterPanel
                 _changePos = true;
                 _targetBtn = other.GetComponent<ExerciseBtn>();
             }
-    }
+        }
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Remove") )
@@ -153,9 +151,10 @@ namespace ChapterPanel
         public void AddQuestionChild(QuestionBtn newQuestionButton)
         {
             newQuestionButton.transform.SetParent(qstHolder.RectTransform);
-            MaximiseHolderSize(qstHolder.RectTransform.childCount);
+            MaximiseHolderSize();
             qstHolder.UpdateLayout();
         }
+
         private RectTransform RectTransform
         {
             get
@@ -164,16 +163,35 @@ namespace ChapterPanel
                 return _rt;
             }
         }
-        public void MaximiseHolderSize(int nbChild)
+        public void MaximiseHolderSize()
         {
-            var newSize = new Vector2(holderWeight,  (nbChild * qstHeight));
+            var nbChild = qstHolder.RectTransform.childCount;
+            var newSize = new Vector2(holderWeight,  nbChild * qstHeight);
             qstHolder.RectTransform.sizeDelta = newSize;
         }
-        public void MaximiseExerciseSize(CustomGridLayout qslHolder)
+        public void MaximiseExerciseSize()
         {
-            var newHeight = qslHolder.RectTransform.sizeDelta.y +
+            var newHeight = qstHolder.RectTransform.sizeDelta.y +
                             header.sizeDelta.y;
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
+        }
+
+        public void ExpandQuestions()
+        {
+            MaximiseExerciseSize();
+            qstHolder.gameObject.SetActive(true);
+        }
+
+        public void DeleteQuestion(QuestionBtn questionBtn)
+        {
+            PoolSystem.instance.DeSpawn(questionBtn.Transform);
+            MenuController.instance.currentQstList.Remove(questionBtn);
+            Data.questions.Remove(questionBtn.Data);
+            GameDataManager.instance.SaveToJson();
+            
+            MenuController.instance.UpdateExercisesHolderSize(-1);
+            MaximiseHolderSize();
+            MaximiseExerciseSize();
         }
     }
 }

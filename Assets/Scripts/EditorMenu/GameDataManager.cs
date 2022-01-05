@@ -6,27 +6,28 @@ using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
-    public static GameDataManager Instance;
-    public GameSettingsData gameSettingsData;
-
+    public static GameDataManager instance;
+    
     [SerializeField] private string fileName = "JsonFile.txt";
+    
+    [SerializeField] private GameSettingsData data;
+    public JsonData Data => data.gameData;
 
-    [SerializeField] private JsonData jsonData;
-    public JsonData Data => jsonData;
+    private void Awake()
+    {
+        Initialize();
+    }
 
     public void Initialize()
     {
-        if (Instance != null) return;
-        Instance = this;
-        Begin();
+        if (instance != null) return;
+        instance = this;
     }
-
-    private void Begin()
+    
+    public void GenerateData()
     {
-        JsontoScriptableObject();
-        var data = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
-        jsonData = JsonUtility.FromJson<JsonData>(data);
-
+        var dataString = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
+        data.gameData = JsonUtility.FromJson<JsonData>(dataString);
 
         LinkData();
 
@@ -65,9 +66,6 @@ public class GameDataManager : MonoBehaviour
         File.WriteAllText($"{Application.streamingAssetsPath}/JsonFile.txt", jsonString);
     }
 
-    private void JsontoScriptableObject()
-    {
-        var x = File.ReadAllText($"{Application.streamingAssetsPath}/{fileName}");
-        gameSettingsData.dataGameSettings = JsonUtility.FromJson<JsonData>(x);
-    }
+    public void SetSelectedChapter(ChapterData inChapterData) => data.selectedChapter = inChapterData;
+    public ChapterData GetSelectedChapter() => data.selectedChapter;
 }

@@ -5,7 +5,8 @@ namespace ChapterPanel
     [CreateAssetMenu(fileName = "DataGame", menuName = "DataGameManager", order = 1)]
     public class GameSettingsData : ScriptableObject
     {
-        public JsonData dataGameSettings;
+        public JsonData gameData;
+        public ChapterData selectedChapter;
     }
 }
 
