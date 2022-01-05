@@ -20,7 +20,7 @@ namespace ChapterPanel
 
         public  void UpdateName()
         {
-            this.btnName.text = _qstName + transform.GetSiblingIndex();
+            btnName.text = _qstName + transform.GetSiblingIndex();
         }
         
         public void Initialize()

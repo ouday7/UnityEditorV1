@@ -32,15 +32,8 @@ namespace ChapterPanel
 
         private void Awake()
         {
-            if (instance != null && instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
+            if (instance != null) return;
+            instance = this;
             
             Begin();
         }
