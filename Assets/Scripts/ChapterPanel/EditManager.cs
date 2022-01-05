@@ -1,5 +1,6 @@
 ﻿using System;
 using ChapterPanel;
+using Envast.Components.GridLayout.Helpers;
 using Envast.Layouts;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,10 +10,7 @@ using UnityEngine.UI;
 public class EditManager : MonoBehaviour
 {
     [SerializeField] private Text minFieldsTxt;
-    [SerializeField] private QuestionFields questionFields;
     [SerializeField] private SelectTemplateDialog selectTemplateDialog;
-    [SerializeField] private CustomSizeFitter holder;
-    [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private TemplateCategory currentTemplateCategory;
     [SerializeField] public SelectTemplateButton selectTemplateBtn;
     [SerializeField] public TemplateData currentTemplate;
@@ -23,22 +21,53 @@ public class EditManager : MonoBehaviour
     [SerializeField] public InputField mainQuestionText;
     [SerializeField] public InputField subQuestionText;
     [SerializeField] public InputField helpQuestionText;
-    [SerializeField] private InputField time;
-    [SerializeField] private InputField points;
-    [SerializeField] private Button saveBtn;
     [SerializeField] public TemplateBtn templateBtn;
     [SerializeField] private TemplateCategory templateCategory;
+    [SerializeField] private Button addQuizFiled;
+    [SerializeField] private int tempTemplatId;
     
     public void Start()
     {
         openPanel.onClick.AddListener(OpenPanel);
         QuestionBtn.OnClickQuestion += ClickQuestion;
+        selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
+        addQuizFiled.onClick.AddListener(QuizFieldsMaxGenerate);
+        
     }
+
+    private void OpenPanel()
+    {
+        panelPopUp.SetActive(true);
+    }
+
     private void ClickQuestion(QuestionBtn qstBtn)
     {
+       
         mainQuestionText.text=qstBtn.Data.mainQst;
         subQuestionText.text = qstBtn.Data.subQst;
         helpQuestionText.text = qstBtn.Data.helpQst;
+        
+      /*  OnTemplateSelected(qstBtn.Data.templateId);
+        for (var i = 0; i < TemplatesHandler.Instance.templatesData.Count; i++)
+        {
+            if (qstBtn.Data.templateId != TemplatesHandler.Instance.templatesData[i].id) continue;
+            currentTemplate = TemplatesHandler.Instance.templatesData[i];
+            selectTemplateBtn.templateNameTxt.text = currentTemplate.templateFields.ToString();
+            selectTemplateBtn.templateIcon.sprite = currentTemplate.icon;
+            minFieldsTxt.text = "Min Fiddles : "+ currentTemplate.minFields;
+
+            for (var j = 0; i < currentTemplate.minFields; j++)
+            {
+                Debug.Log(currentTemplate.GetQuizFieldType(j));
+                var data = new QuizFieldData();
+                var quizFieldType = currentTemplate.GetQuizFieldType(j);
+                var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+                quizField.Initialize();
+                quizField.BindData(data);
+                Instantiate(quizField, templateHolder);
+                tempTemplatId = j;
+            }
+        }*/
         
         mainQuestionText.onEndEdit.RemoveAllListeners();
         subQuestionText.onEndEdit.RemoveAllListeners();
@@ -64,71 +93,53 @@ public class EditManager : MonoBehaviour
         qstBtn.Data.helpQst = arg0;
         GameDataManager.Instance.SaveToJson();
     }
-    
-    
-
-    public void OnQuestionSelected(QuestionData inQuestion)
-    {
-        currentQuestion = inQuestion;
-    }
+  
     private void OnTemplateSelected(TemplateData inTemplate)
     {
         currentTemplate = inTemplate;
         currentQuestion.templateId = currentTemplate.id;
         selectTemplateBtn.templateIcon.sprite = currentTemplate.icon;
         selectTemplateBtn.templateNameTxt.text = currentTemplate.templateName.ToString();
-        minFieldsTxt.text = currentTemplate.minFields.ToString();
+        minFieldsTxt.text = "Min Fiddles : "+currentTemplate.minFields;
         GenerateTemplateFields();
     }
+
     private void GenerateTemplateFields()
     {
+        RemoveDataTemplate();
+        addQuizFiled.gameObject.SetActive(true);
         for (var i = 0; i < currentTemplate.minFields; i++)
         {
+            Debug.Log(currentTemplate.GetQuizFieldType(i));
             var data = new QuizFieldData();
             var quizFieldType = currentTemplate.GetQuizFieldType(i);
             var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
             quizField.Initialize();
             quizField.BindData(data);
             currentQuestion.quizFields.Add(data);
+            Instantiate(quizField, templateHolder);
+            tempTemplatId = i;
         }
     }
-    private void SpawnData()
-    {
-        /*
-         RemoveDataTemplate();
-        for (var i = 0; i < TemplatesHandler.Instance.templatesCatalog.Count; i++)
-        {
-            if (_selectedTemplate.Data.templateName ==
-                TemplatesHandler.Instance.templatesCatalog[i].type)
-            {
-                Debug.Log(TemplatesHandler.Instance.templatesCatalog[i].prefab);
-                for (var j = 0; j < _selectedTemplate.Data.minFields; j++)
-                {
-                    Instantiate(TemplatesHandler.Instance.templatesCatalog[i].prefab, templateHolder);
-                }
-            }
-        }
-        */
-        // ClosePanelPopUp();
-    }
-    private void AddQuizFiled()
-    {
-        // /*todo: Move to EditManager
-        // if (_selectedTemplate.Data.maxFields > templateHolder.GetChildren().Count)
-        // {
-        //     Instantiate(TemplatesHandler.Instance.templatesCatalog[_selectedTemplate.Data.id].prefab,
-        //         templateHolder);
-        //     
-        // }
-    }
+
     private void RemoveDataTemplate()
     {
         foreach (Transform child in templateHolder) {
             Destroy(child.gameObject);
         }
     }
-    private void OpenPanel()
+
+    private void QuizFieldsMaxGenerate()
     {
-        panelPopUp.SetActive(true);
+        if (templateHolder.GetChildren().Count >= currentTemplate.maxFields) return;
+        Debug.Log(currentTemplate.GetQuizFieldType(tempTemplatId));
+        var data = new QuizFieldData();
+        var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
+        var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+        quizField.Initialize();
+        quizField.BindData(data);
+        currentQuestion.quizFields.Add(data);
+        Instantiate(quizField, templateHolder);
     }
+
 }

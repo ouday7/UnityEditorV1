@@ -1063,7 +1063,6 @@ MonoBehaviour:
   questionFields: {fileID: 637828763390086956}
   selectTemplateDialog: {fileID: 6418975908533705797}
   holder: {fileID: 0}
-  scrollRect: {fileID: 0}
   currentTemplateCategory: {fileID: 0}
   selectTemplateBtn: {fileID: 6439374629571581410}
   currentTemplate: {fileID: 0}
@@ -1083,9 +1082,10 @@ MonoBehaviour:
   helpQuestionText: {fileID: 399441383}
   time: {fileID: 816428152212598735}
   points: {fileID: 5108715847622137900}
-  saveBtn: {fileID: 0}
   templateBtn: {fileID: 0}
   templateCategory: {fileID: 0}
+  addQuizFiled: {fileID: 5236948164100173615}
+  tempTemplatId: 0
 --- !u!114 &27876030497610416
 MonoBehaviour:
   m_ObjectHideFlags: 0
