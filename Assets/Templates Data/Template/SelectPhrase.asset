@@ -17,5 +17,5 @@ MonoBehaviour:
   category: 4
   icon: {fileID: 21300018, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
   maxFields: 5
-  minFields: 2
-  templateFields: 0000000001000000
+  minFields: 3
+  templateFields: 06000000

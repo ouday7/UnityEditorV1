@@ -15,7 +15,6 @@ public class TemplateBtn : MonoBehaviour
     private TemplateData _data;
     public TemplateData Data => _data;
     private Button _btn;
-
     private Button button
     {
         get
@@ -24,8 +23,6 @@ public class TemplateBtn : MonoBehaviour
             return _btn;
         }
     }
-
-
     
     public void Initialize(TemplateData data)
     {
@@ -37,24 +34,19 @@ public class TemplateBtn : MonoBehaviour
         selectBtn.onClick.AddListener(OnSubmitTemplate);
         button.onClick.AddListener(OnSelectTemplate);
     }
-
-
     private void OnSelectTemplate()
     {
         onSelect?.Invoke(this);
     }
-
     private void OnSubmitTemplate()
     {
         selectBtn.interactable = false;
         onSubmit?.Invoke(this,this._data);
     }
-
     public void Select()
     {
         selectBtn.gameObject.SetActive(true);
     }
-
     public void Unselect()
     {
         if(_submitted) return;
@@ -62,7 +54,6 @@ public class TemplateBtn : MonoBehaviour
         selectBtn.interactable = true;
         selectBtn.gameObject.SetActive(false);
     }
-
     public void SetVisibility(bool status)
     {
         this.gameObject.SetActive(status);
