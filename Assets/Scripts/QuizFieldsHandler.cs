@@ -12,7 +12,6 @@ public class QuizFieldsHandler : MonoBehaviour
     public static QuizFieldsHandler Instance;
     [SerializeField] private List<QuizFieldMap> quizFieldsList;
     private Dictionary<FieldTypes, QuizFieldBase> _map;
-
     private void Awake()
     {
         if(Instance != null) return;
@@ -22,9 +21,10 @@ public class QuizFieldsHandler : MonoBehaviour
         {
             if(_map.ContainsKey(quizFieldMap.name)) continue;
             _map.Add(quizFieldMap.name, quizFieldMap.prefab);
+            
+            Debug.Log(quizFieldMap.prefab+"test"+quizFieldMap.name);
         }
     }
-
     public static QuizFieldBase GetQuizField(FieldTypes inName)
     {
         if (!Instance._map.ContainsKey(inName)) return null;

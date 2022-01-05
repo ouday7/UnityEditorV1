@@ -2874,9 +2874,6 @@ MonoBehaviour:
   templateHolder: {fileID: 0}
   openPanel: {fileID: 4984357499421143202}
   panelPopUp: {fileID: 7374467577346217722}
-  mainQuestion: {fileID: 0}
-  subQuestion: {fileID: 0}
-  helpQuestion: {fileID: 0}
 --- !u!1 &3519147690160393377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,8 +3223,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6789316317578552048}
   - component: {fileID: 2226640386619479726}
-  - component: {fileID: 8872765223754241664}
   - component: {fileID: 3711365664124086128}
+  - component: {fileID: 8872765223754241664}
+  - component: {fileID: 2589026103900448819}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -3280,6 +3278,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3711365664124086128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711365664124086132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5769bea7483e87241b732d8090c7bdb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8872765223754241664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,7 +3304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &3711365664124086128
+--- !u!114 &2589026103900448819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

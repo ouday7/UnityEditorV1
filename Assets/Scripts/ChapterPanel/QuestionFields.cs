@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class QuestionFields : MonoBehaviour
 {
-    [SerializeField] private InputField mainQuestionText;
-    [SerializeField] private InputField subQuestionText;
-    [SerializeField] private InputField helpQuestionText;
+    [SerializeField] public InputField mainQuestionText;
+    [SerializeField] public InputField subQuestionText;
+    [SerializeField] public InputField helpQuestionText;
     [SerializeField] private InputField time;
     [SerializeField] private InputField points;
     [SerializeField] private Button saveBtn;
-    [SerializeField] private TemplateBtn templateBtn;
+    [SerializeField] public TemplateBtn templateBtn;
     [SerializeField] private TemplateCategory templateCategory;
 
     private EditManager _editManager;

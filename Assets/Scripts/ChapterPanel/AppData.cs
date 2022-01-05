@@ -52,8 +52,8 @@ namespace ChapterPanel
         public string textTwo;
         public Sprite imageOne;
         public Sprite imageTwo;
-        public Button toggleOne;
-        public Button toggleTwo;
+        public bool toggleOne;
+        public bool toggleTwo;
     }
 
     [Serializable]
