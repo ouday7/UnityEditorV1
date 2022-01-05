@@ -49,8 +49,7 @@
             "name": "سنة سادسة",
             "order": 6,
             "subjectsId": [
-                1,
-                2
+                1
             ]
         }
     ],
@@ -114,14 +113,14 @@
         {
             "id": 7,
             "name": "Wx",
-            "order": 0,
+            "order": 1,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 8,
             "name": "القوة",
-            "order": 0,
+            "order": 1,
             "subjectId": 1,
             "levelId": 1
         },
@@ -135,7 +134,7 @@
         {
             "id": 10,
             "name": "المادة",
-            "order": 0,
+            "order": 2,
             "subjectId": 1,
             "levelId": 1
         },
@@ -282,35 +281,35 @@
         {
             "id": 31,
             "name": "وظائفُ الجلدِ ووقايَتُهُ",
-            "order": 0,
+            "order": 3,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 32,
             "name": " التّنَقُّلِ\r\n",
-            "order": 0,
+            "order": 2,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 33,
             "name": "التغذية",
-            "order": 0,
+            "order": 4,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 34,
             "name": "التَّكاثُرُ و النُّموِّ",
-            "order": 0,
+            "order": 5,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 35,
             "name": "التنفس",
-            "order": 0,
+            "order": 6,
             "subjectId": 1,
             "levelId": 4
         },
@@ -338,14 +337,14 @@
         {
             "id": 39,
             "name": "النّاقِلُ الحَراريُّ وَ العازِلُ الحَراريُّ",
-            "order": 0,
+            "order": 7,
             "subjectId": 1,
             "levelId": 4
         },
         {
             "id": 40,
             "name": " تأثير الطاقة الحرارية",
-            "order": 0,
+            "order": 8,
             "subjectId": 1,
             "levelId": 4
         },
@@ -590,33 +589,6 @@
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [],
-                    "templateId": 0,
-                    "situationData": "init"
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [],
-                    "templateId": 0,
-                    "situationData": "init"
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [],
-                    "templateId": 0,
-                    "situationData": "init"
                 }
             ]
         },
@@ -637,6 +609,33 @@
                     "quizFields": [],
                     "templateId": 0,
                     "situationData": "init"
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
                 }
             ]
         },

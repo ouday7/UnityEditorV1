@@ -238,7 +238,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 501.3921, y: 117.9194}
+  m_SizeDelta: {x: 455, y: 117.9194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5245915111082606958
 CanvasRenderer:
@@ -352,3 +352,4 @@ MonoBehaviour:
   editBtn: {fileID: 4836439067259369641}
   selectedColor: {r: 1, g: 0.89411765, b: 0.09411765, a: 1}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  isInitialized: 0

@@ -6,7 +6,6 @@ using UPersian.Components;
 
 public abstract class EditorButtonBase : PoolableObject
 {
-    
     protected event Action OnSelectAction;
     protected static event Action OnUpdateIndex;
     
@@ -19,11 +18,11 @@ public abstract class EditorButtonBase : PoolableObject
     [SerializeField] private Color unselectedColor;
 
     public bool isInitialized;
-    [SerializeField] private bool _isOpen;
-    
+
     private void OnDestroy()
     {
         OnSelectAction = null;
+        OnUpdateIndex = null;
     }
 
     public virtual void Initialize()
@@ -43,7 +42,6 @@ public abstract class EditorButtonBase : PoolableObject
     }
     public void Select()
     {
-        _isOpen = true;
         background.color = selectedColor;
         editBtn.gameObject.SetActive(true);
     
@@ -51,7 +49,6 @@ public abstract class EditorButtonBase : PoolableObject
     }
     public void Unselect()
     {
-        _isOpen = false;
         background.color = unselectedColor;
         editBtn.gameObject.SetActive(false);
         btn.interactable = true;

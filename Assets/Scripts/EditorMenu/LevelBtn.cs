@@ -19,7 +19,7 @@ public class LevelBtn : EditorButtonBase
     {
         if(_isInitialized) return;
         base.Initialize();
-        editBtn.onClick.AddListener(() => UIManager.instance.LevelEdit(this));
+        editBtn.onClick.AddListener(() => PopUpManager.instance.LevelEdit(this));
         OnSelectAction += LevelButtonSelected;
     }
 

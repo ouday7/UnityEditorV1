@@ -8,6 +8,7 @@ namespace ChapterPanel
 {
     public class ContentController : MonoBehaviour
     {
+        [SerializeField] private GameObject exerciseHolder;
         private void Start()
         {
             foreach (var ex in GameDataManager.Instance.Data.exercises )
@@ -16,7 +17,7 @@ namespace ChapterPanel
                 var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
                 newExBtn.Initialize();
                 newExBtn.BindData(ex);
-                newExBtn.transform.SetParent(MenuController.instance.ExerciseHolder.transform);
+                newExBtn.transform.SetParent(exerciseHolder.transform);
                 newExBtn.transform.localScale = Vector3.one;
                 
                 if(ex.questions.Count==0)continue;

@@ -7,9 +7,9 @@ using UnityEngine.UI;
 using UPersian.Components;
 
 
-public class UIManager : MonoBehaviour
+public class PopUpManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static PopUpManager instance;
 
     private enum EditedData
     {
@@ -228,6 +228,7 @@ public class UIManager : MonoBehaviour
 
             case EditedData.Level:
                 UpdateLevel(inputFiledName.text, inputFieldOrder.text);
+                EditorButtonsManager.instance.ShowSubjects(_selectedLevelButton.Data);
                 break;
 
             case EditedData.Subject:
@@ -240,6 +241,7 @@ public class UIManager : MonoBehaviour
         }
 
         ClosePanel();
+        
     }
 
     private void UpdateLevel(string inputFieldNameText, string inputFieldOrderText)
@@ -265,6 +267,8 @@ public class UIManager : MonoBehaviour
                 _levelSubjects.Remove(subject.id);
             }
         }
+        GameDataManager.Instance.SaveToJson();
+        
     }
 
     private void UpdateSubject(string inputFieldNameText, string inputFieldOrderText)
@@ -298,7 +302,7 @@ public class UIManager : MonoBehaviour
 
         if (!levelToUpdate.Subjects.ContainsKey(_selectedSubjectId))
         {
-            Debug.Log("//. Game Break no Subject found");
+            Debug.Log("//. No Subject found");
             return;
         }
 

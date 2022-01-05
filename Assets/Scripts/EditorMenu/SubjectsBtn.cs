@@ -15,7 +15,7 @@ namespace EditorMenu
         {
             if(_isInitialized) return;
             base.Initialize();
-            editBtn.onClick.AddListener(() => UIManager.instance.SubjectEdit(this));
+            editBtn.onClick.AddListener(() => PopUpManager.instance.SubjectEdit(this));
             OnSelectAction += SubjectButtonSelected;
         }
 

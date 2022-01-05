@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ChapterPanel;
 using Envast.Components.GridLayout;
 using UnityEngine;
@@ -14,9 +15,11 @@ namespace EditorMenu
     
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
-        public LevelBtn _selectedLevel;
+        [NonSerialized] public LevelBtn _selectedLevel;
         private SubjectsBtn _selectedSubject;
-        public ChaptersBtn _selectedChapter;
+        [NonSerialized]public ChaptersBtn _selectedChapter;
+        private RectTransform _rt;
+        private Vector2 startSize;
         public SubjectData SelectedSubject => _selectedSubject.Data;
 
         private void OnDestroy()
@@ -32,13 +35,13 @@ namespace EditorMenu
             else
             {
                 instance = this;
-                //DontDestroyOnLoad(this.gameObject);
             }
             SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
             ChaptersBtn.OnSelectChaptersButton += OnSelectChapterButton;
 
             _subjectsList = new List<Transform>();
             _chapList = new List<Transform>();
+            startSize.y = chaptersHolder.RectTransform.sizeDelta.y;
         }
 
         public void StartEditor(JsonData inData)
@@ -68,7 +71,7 @@ namespace EditorMenu
             ShowSubjects(_selectedLevel.Data);
         }
 
-        private void ShowSubjects(LevelData inLevelDataData)
+        public void ShowSubjects(LevelData inLevelDataData)
         {
             ResetSubjectsHolder();
             var isFirst = true;
@@ -95,6 +98,11 @@ namespace EditorMenu
             if (_selectedSubject != null) _selectedSubject.Unselect();
             _selectedSubject = inNewSubjectButton;
             _selectedSubject.Select();
+            
+            chaptersHolder.RectTransform.sizeDelta =
+                new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
+                    startSize.y);
+            
             ShowChapter(_selectedSubject.Data);
         }
 
@@ -108,6 +116,7 @@ namespace EditorMenu
                 newBtn.Initialize();
                 newBtn.BindData(chapter, this);
                 newBtn.Unselect();
+                newBtn.configBtn.gameObject.SetActive(false);
                 newBtn.Transform.SetParent(chaptersHolder.RectTransform);
                 newBtn.Transform.localScale = Vector3.one;
                 _chapList.Add(newBtn.Transform);
@@ -116,14 +125,13 @@ namespace EditorMenu
             if (nbChild> 6)
             {
                 chaptersHolder.RectTransform.sizeDelta = new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
-                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 120));
+                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 105));
             }
             chaptersHolder.UpdateLayout();
         }
     
         private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
         {
-            Debug.Log("chap test");
             if (_selectedChapter != null)
             {
                 _selectedChapter.Unselect();
@@ -151,6 +159,14 @@ namespace EditorMenu
             if (_chapList == null || _chapList.Count == 0) return;
             foreach (var child in _chapList) PoolSystem.instance.DeSpawn(child);
             _chapList.Clear();
+        }
+        private RectTransform RectTransform
+        {
+            get
+            {
+                if (_rt == null) _rt = GetComponent<RectTransform>();
+                return _rt;
+            }
         }
     }
 }

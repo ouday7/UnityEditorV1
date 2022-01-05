@@ -14,19 +14,15 @@ namespace EditorMenu
         [SerializeField] public Button configBtn;
 
         public ChapterData Data => _data;
-
-        private void OnDestroy()
-        {
-            OnSelectChaptersButton = null;
-        }
-
+        
         public override void Initialize()
         {
             if (isInitialized) return;
             base.Initialize();
 
-            editBtn.onClick.AddListener(() => UIManager.instance.ChapterEdit(this));
+            editBtn.onClick.AddListener(() => PopUpManager.instance.ChapterEdit(this));
             OnSelectAction += OnSelectChapterButton;
+            configBtn.gameObject.SetActive(false);
         }
 
         public void BindData(ChapterData chapterData, EditorButtonsManager parent)

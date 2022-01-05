@@ -18,26 +18,29 @@ public class EditManager : MonoBehaviour
     [SerializeField] private RectTransform templateHolder;
     [SerializeField] private Button openPanel;
     [SerializeField] private GameObject panelPopUp;
+    [SerializeField] private InputField mainQuestion;
+    [SerializeField] private InputField subQuestion;
+    [SerializeField] private InputField helpQuestion;
 
 
     public void Start()
     {
         openPanel.onClick.AddListener(OpenPanel);
-        
-        
-     //   selectTemplateDialog.selectTemplateButton += OnTemplateSelected(this.curr);
+        QuestionBtn.OnClickQuestion += ClickQuestion;
     }
-    
+    private void ClickQuestion(QuestionBtn qstBtn)
+    {
+        mainQuestion.text = qstBtn.Data.mainQst;
+        subQuestion.text = qstBtn.Data.subQst;
+        helpQuestion.text = qstBtn.Data.subQst;
+    }
+   
     public void OnQuestionSelected(QuestionData inQuestion)
     {
         currentQuestion = inQuestion;
-        //update fields properly (question, template, sub question)
-        
-        
     }
     private void OnTemplateSelected(TemplateData inTemplate)
     {
-        //update template button
         currentTemplate = inTemplate;
         currentQuestion.templateId = currentTemplate.id;
         selectTemplateBtn.templateIcon.sprite = currentTemplate.icon;
