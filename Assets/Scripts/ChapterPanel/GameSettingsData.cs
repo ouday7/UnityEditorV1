@@ -6,7 +6,10 @@ namespace ChapterPanel
     public class GameSettingsData : ScriptableObject
     {
         public JsonData gameData;
+        public LevelData selectedLevel;
+        public SubjectData selectedSubject;
         public ChapterData selectedChapter;
+        
     }
 }
 

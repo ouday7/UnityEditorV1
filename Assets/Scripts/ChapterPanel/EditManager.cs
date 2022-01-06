@@ -39,6 +39,7 @@ namespace ChapterPanel
         private void ClickQuestion(QuestionBtn qstBtn)
         {
             currentQuestion = qstBtn.Data;
+            
             mainQuestionText.onEndEdit.RemoveAllListeners();
             subQuestionText.onEndEdit.RemoveAllListeners();
             helpQuestionText.onEndEdit.RemoveAllListeners();

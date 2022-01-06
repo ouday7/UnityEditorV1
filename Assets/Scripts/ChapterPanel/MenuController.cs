@@ -42,9 +42,9 @@ namespace ChapterPanel
             
             addExBtn.onClick.AddListener(AddExercise);
             mainContent.gameObject.SetActive(false);
-            chapterName.text = PlayerPrefs.GetString("chapterName");
-            levelName.text=PlayerPrefs.GetString("levelName");
-            subjName.text = PlayerPrefs.GetString("subjectName");
+            chapterName.text = GameDataManager.instance.GetSelectedChapter().name;
+            levelName.text = GameDataManager.instance.GetSelectedLevel().name;
+            subjName.text = GameDataManager.instance.GetSelectedSubject().name;
         }
         
         private void AddExercise()
@@ -53,7 +53,7 @@ namespace ChapterPanel
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.transform.SetParent(exerciseHolder.transform);
             newExBtn.Initialize();
-            Data.chapterId = PlayerPrefs.GetInt("chapterId");
+            Data.chapterId = GameDataManager.instance.GetSelectedChapter().id;
             Data.questions = new List<QuestionData>();
             newExBtn.BindData(Data);
             currentExList.Add(newExBtn);
@@ -74,13 +74,11 @@ namespace ChapterPanel
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
             
-            // update sizes & graphics
             UpdateExercisesHolderSize(1);
             inExerciseBtn.ExpandQuestions();
             GameDataManager.instance.SaveToJson();
             
             UpdateExercisesHolder();
-            
         }
 
         private RectTransform RectTransform
@@ -93,7 +91,7 @@ namespace ChapterPanel
         }
         public void UpdateExercisesHolderSize(int nb)
         {
-            var exHolderSize=exerciseHolder.GetComponent<RectTransform>().sizeDelta;
+            var exHolderSize=exerciseHolder.RectTransform.sizeDelta;
             exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*100));
         }
 

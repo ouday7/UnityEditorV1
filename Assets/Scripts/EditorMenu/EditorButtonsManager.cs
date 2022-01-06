@@ -16,7 +16,7 @@ namespace EditorMenu
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
         [NonSerialized] public LevelBtn _selectedLevel;
-        private SubjectsBtn _selectedSubject;
+        [NonSerialized] public SubjectsBtn _selectedSubject;
         [NonSerialized]public ChaptersBtn _selectedChapter;
         private RectTransform _rt;
         private Vector2 startSize;
@@ -76,6 +76,7 @@ namespace EditorMenu
             _selectedLevel = inNewSelectedLevelButton;
             _selectedLevel.Select();
             ShowSubjects(_selectedLevel.Data);
+            GameDataManager.instance.SetSelectedLevel(inNewSelectedLevelButton.Data);
         }
 
         public void ShowSubjects(LevelData inLevelDataData)
@@ -109,7 +110,7 @@ namespace EditorMenu
             chaptersHolder.RectTransform.sizeDelta =
                 new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
                     startSize.y);
-            
+            GameDataManager.instance.SetSelectedSubject(inNewSubjectButton.Data);
             ShowChapter(_selectedSubject.Data);
         }
 
@@ -147,11 +148,6 @@ namespace EditorMenu
             _selectedChapter = inNewSelectedChapterButton;
             _selectedChapter.Select();
             _selectedChapter.configBtn.gameObject.SetActive(true);
-            
-            PlayerPrefs.SetString("chapterName",_selectedChapter.Data.name);
-            PlayerPrefs.SetInt("chapterId",_selectedChapter.Data.id);
-            PlayerPrefs.SetString("levelName",_selectedLevel.Data.name);
-            PlayerPrefs.SetString("subjectName",_selectedSubject.Data.name);
         }
 
         private void ResetSubjectsHolder()

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ChapterPanel;
+using EditorMenu;
 using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
@@ -67,5 +68,10 @@ public class GameDataManager : MonoBehaviour
     }
 
     public void SetSelectedChapter(ChapterData inChapterData) => data.selectedChapter = inChapterData;
+    public void SetSelectedLevel(LevelData inLevelData) => data.selectedLevel = inLevelData;
+    public void SetSelectedSubject(SubjectData inSubjectData) => data.selectedSubject = inSubjectData;
     public ChapterData GetSelectedChapter() => data.selectedChapter;
+    public LevelData GetSelectedLevel() => data.selectedLevel;
+    
+    public SubjectData GetSelectedSubject() => data.selectedSubject;
 }
