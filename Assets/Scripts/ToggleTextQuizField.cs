@@ -18,17 +18,16 @@ public class ToggleTextQuizField : QuizFieldBase
     public override void BindData(QuizFieldData inData)
     {
         _data = inData;
-        _data.textA = inputFiled.text;
-        _data.toggleA = myToggle.isOn;
-        Debug.Log(_data.textA);
-        Debug.Log(_data.toggleA);
+        inputFiled.text = _data.textA;
+        myToggle.isOn = _data.toggleA;
+        
     }
 
     private void Remove()
     {
         Destroy(gameObject);
     }
-    
+
     private void ToggleValue(bool newValue) => _data.toggleA = newValue;
     private void InputValue(string newValue) => _data.textA = newValue;
 }
