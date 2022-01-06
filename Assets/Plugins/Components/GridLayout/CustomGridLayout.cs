@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Envast.Components.GridLayout.Helpers;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Envast.Components.GridLayout
-{
+    //REFACTOR: CustomGridLayout Y Positions
+    //Experimental Y positioning fix for elements with != Height (CalculatePosRTL && CalculatePosLTR)
     public class CustomGridLayout : MonoBehaviour
     {
         public Alignment alignment;
@@ -34,9 +33,10 @@ namespace Envast.Components.GridLayout
         private List<float> _linesWidthList = new List<float>();
         
         [SerializeField] private string newLineTag = "LayoutNewLine";
+        [SerializeField] private bool isVertical;
         public string NewLineTag => newLineTag;
     
-        protected void ReleaseReferences()
+        private void ReleaseReferences()
         {
             _rt = null;
             _linesWidthList?.Clear();
@@ -62,7 +62,8 @@ namespace Envast.Components.GridLayout
             }
         }
     
-        [Button("Update Layout", ButtonSizes.Medium)]
+        // [Button("Update Layout", ButtonSizes.Medium)]
+        [ContextMenu("UpdateLayout")]
         public void UpdateLayout()
         {
             if (RectTransform.childCount == 0) return;
@@ -106,7 +107,8 @@ namespace Envast.Components.GridLayout
             RestoreOriginalAnchor();
         }
 
-        [Button("Shuffle", ButtonSizes.Medium)]
+        // [Button("Shuffle", ButtonSizes.Medium)]
+        [ContextMenu("ShuffleLayout")]
         public void ShuffleLayout()
         {
             if (RectTransform.childCount == 0) return;
@@ -461,7 +463,7 @@ namespace Envast.Components.GridLayout
                 Vector2 newPos;
                 child.SetAnchorsByType(anchor);
             
-                if ((_currentLineWidth + (spacing.x + child.rect.width)) > _parentWidth || _isNewLine)
+                if (_currentLineWidth + (spacing.x + child.rect.width) > _parentWidth || _isNewLine)
                 {
                     _isNewLine = false;
                     _currentLineWidth = padding.x + child.rect.width;
@@ -506,7 +508,7 @@ namespace Envast.Components.GridLayout
                     Vector2 newPos;
                     child.SetAnchorsByType(anchor);
                 
-                    if (_currentLineWidth + (spacing.x + child.rect.width) > _parentWidth || _isNewLine)
+                    if (_currentLineWidth + (spacing.x + child.rect.width) > _parentWidth || _isNewLine)//new line condition
                     {
                         _isNewLine = false;
                         _currentLineWidth = padding.x + child.rect.width;
@@ -516,7 +518,7 @@ namespace Envast.Components.GridLayout
                     }
                     else
                     {
-                        _currentLineWidth = _currentLineWidth + (child.rect.width + spacing.x);
+                        _currentLineWidth += child.rect.width + spacing.x;
                         newPos = CalculatePosRTL(false, last, child);
                     }
 
@@ -662,11 +664,13 @@ namespace Envast.Components.GridLayout
             float xPos = 0;
             float yPos = 0;
             var childRect = child.rect;
-
+            var lastRect = last.rect;
+            var lastAnchoredPos = last.anchoredPosition;
+            
             if (!newLine)
             {
-                yPos = last.anchoredPosition.y;
-                xPos = last.anchoredPosition.x + (last.sizeDelta.x / 2 + spacing.x + child.sizeDelta.x / 2);
+                yPos = lastAnchoredPos.y;
+                xPos = lastAnchoredPos.x + (last.sizeDelta.x / 2 + spacing.x + child.sizeDelta.x / 2);
                 return new Vector2(xPos, yPos);
             }
 
@@ -675,19 +679,22 @@ namespace Envast.Components.GridLayout
                 case Alignment.UpperLeft:
                 case Alignment.MiddleLeft:
                 case Alignment.LowerLeft:
-                    yPos = last.anchoredPosition.y - (childRect.height + spacing.y);
+                    yPos = lastAnchoredPos.y - (childRect.height + spacing.y);
                     xPos = padding.x + childRect.width / 2;
                     break;
                 case Alignment.UpperCenter:
                 case Alignment.MiddleCenter:
                 case Alignment.LowerCenter:
-                    yPos = last.anchoredPosition.y - (childRect.height + spacing.y);
+                    yPos = isVertical
+                        ? lastAnchoredPos.y - (((lastRect.height / 2) + spacing.y) + (childRect.height / 2))
+                        : lastAnchoredPos.y - (childRect.height + spacing.y);
+                    // Debug.Log($"//. {lastAnchoredPos.y}-({lastRect.height}+{spacing.y}) YPos = {yPos}");
                     xPos = padding.x + childRect.width / 2 + (_parentWidth - _linesWidthList[lineIndex]) / 2;
                     break;
                 case Alignment.UpperRight:
                 case Alignment.MiddleRight:
                 case Alignment.LowerRight:
-                    yPos = last.anchoredPosition.y - (childRect.height + spacing.y);
+                    yPos = lastAnchoredPos.y - (childRect.height + spacing.y);
                     xPos =  childRect.width / 2 - _linesWidthList[lineIndex];
                     break;
             }
@@ -701,6 +708,7 @@ namespace Envast.Components.GridLayout
             float yPos = 0;
             var childRect = child.rect;
             var lastAnchoredPos = last.anchoredPosition;
+            var lastRect = last.rect;
 
             if (!newLine)
             {
@@ -719,7 +727,10 @@ namespace Envast.Components.GridLayout
                     break;
                 case Alignment.UpperCenter:
                 case Alignment.MiddleCenter:
-                    yPos = lastAnchoredPos.y - (childRect.height + spacing.y);
+                    yPos = isVertical
+                        ? lastAnchoredPos.y - (((lastRect.height / 2) + spacing.y) + (childRect.height / 2))
+                        : lastAnchoredPos.y - (childRect.height + spacing.y);
+                    // Debug.Log($"//. {lastAnchoredPos.y}-({lastRect.height}/2 + {spacing.y} + {childRect.height}/2) YPos = {yPos}");
                     xPos = padding.x - childRect.width / 2 - (_parentWidth - _linesWidthList[lineIndex]) / 2;
                     break;
                 case Alignment.UpperRight:
@@ -788,6 +799,3 @@ namespace Envast.Components.GridLayout
         public float CalculateScrollHeight(int nbElementsOrRows, float elemHeight) => nbElementsOrRows * elemHeight + spacing.y * (nbElementsOrRows - 1) + padding.y * 2;
 
     }
-}
-
-//}

@@ -10,14 +10,14 @@ namespace ChapterPanel
     {
         public static event Action<QuestionBtn> OnClickQuestion; 
         
-        [SerializeField] private Text btnName;
+        [SerializeField] public Text btnName;
         [SerializeField] private Button deleteQstBtn;
 
         private QuestionData _data;
         public QuestionData Data=>_data;
         private bool _isInitialized=false;
         private ExerciseBtn _parentExercise;
-        private const string _qstName = "سؤال";
+        public static string _qstName = " سؤال ";
 
         private void OnDestroy()
         {
@@ -47,15 +47,6 @@ namespace ChapterPanel
         {
             _data = quesData;
             return;
-            Data.mainQst = quesData.mainQst;
-            Data.subQst = quesData.subQst;
-            Data.quizFields = quesData.quizFields;
-            Data.templateId = quesData.templateId;
-            Data.situationData = quesData.situationData;
-        }
-        private void DeleteQst(ExerciseBtn inExerciseBtn)
-        {
-
         }
     }
 }

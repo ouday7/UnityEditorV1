@@ -17,15 +17,13 @@ namespace ChapterPanel
         private Color _startColor;
         private Color _endColor;
         
-        private bool _isDragging=false;
+        private bool _isDragging;
         private bool _removable;
         private bool _changePos;
         private RectTransform _rt;
         private float _startSize;
-        private int _startIndex;
         private int _endIndex;
         private bool _isInitialized;
-        public static int _exerciseNbr=1;
         private const string _exName = "  تمرين  ";
         private Vector2 startPos;
         private ExerciseData _data;
@@ -38,8 +36,7 @@ namespace ChapterPanel
         public  void Initialize()
         {
             if(_isInitialized) return;
-            this.titleTxt.text = _exName + _exerciseNbr;
-            _exerciseNbr++;
+            this.titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
             _isInitialized = true;
             dragBtn.Initialize(this);
             
@@ -67,20 +64,21 @@ namespace ChapterPanel
                 MenuController.instance.UpdateExercisesHolderSize(-nbChild);
                 return;
             }
+
+            if (nbChild == 0) return;
+            MenuController.instance.UpdateExercisesHolder();
             MaximiseHolderSize();
             MenuController.instance.UpdateExercisesHolderSize(nbChild);
             QstHolder.UpdateLayout();
             qstHolder.gameObject.SetActive(true);
-            
             var newHeight = qstHolder.RectTransform.sizeDelta.y +
                             header.sizeDelta.y;
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
-            
+
         }
         
         public void OnStartDrag()
         {
-            _startIndex = transform.GetSiblingIndex();
             startPos = transform.position;
         }
         public void OnDrag(Vector3 pos)
@@ -109,14 +107,35 @@ namespace ChapterPanel
         {
             var toDeleteBtn = transform.GetComponent<ExerciseBtn>();
             PoolSystem.instance.DeSpawn(transform);
-            _exerciseNbr--;
             MenuController.instance.UpdateExercisesHolderSize(-1);
             MaximiseHolderSize();
             MaximiseExerciseSize();
             MenuController.instance.currentExList.Remove(toDeleteBtn);
             GameDataManager.instance.Data.exercises.Remove(toDeleteBtn.Data);
             GameDataManager.instance.SaveToJson();
+            RenameExercises();
+            MenuController.instance.UpdateExercisesHolder();
         }
+
+        private void RenameExercises()
+        {
+            var exercicseNumber = 1;
+            foreach (Transform ex in MenuController.instance.ExerciseHolder.transform)
+            {
+                ex.GetComponent<ExerciseBtn>().titleTxt.text = _exName+exercicseNumber;
+                exercicseNumber++;
+            }
+        }
+
+        private void RenameQuestions()
+        {
+            var qstNumber = 1;
+            foreach (Transform qst in qstHolder.transform)
+            {
+                qst.GetComponent<QuestionBtn>().btnName.text = QuestionBtn._qstName+qstNumber;
+                qstNumber++;
+            }
+        } 
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -168,6 +187,7 @@ namespace ChapterPanel
             var nbChild = qstHolder.RectTransform.childCount;
             var newSize = new Vector2(holderWeight,  nbChild * qstHeight);
             qstHolder.RectTransform.sizeDelta = newSize;
+            qstHolder.UpdateLayout();
         }
         public void MaximiseExerciseSize()
         {
@@ -188,10 +208,11 @@ namespace ChapterPanel
             MenuController.instance.currentQstList.Remove(questionBtn);
             Data.questions.Remove(questionBtn.Data);
             GameDataManager.instance.SaveToJson();
-            
+            RenameQuestions();
             MenuController.instance.UpdateExercisesHolderSize(-1);
             MaximiseHolderSize();
             MaximiseExerciseSize();
+            MenuController.instance.UpdateExercisesHolder();
         }
     }
 }
