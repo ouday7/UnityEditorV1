@@ -92,7 +92,7 @@ namespace ChapterPanel
         public void UpdateExercisesHolderSize(int nb)
         {
             var exHolderSize=exerciseHolder.RectTransform.sizeDelta;
-            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*100));
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*80));
         }
 
         public void UpdateExercisesHolder()
