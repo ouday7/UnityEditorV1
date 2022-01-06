@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addExBtn: {fileID: 2103814130}
-  exerciseHolder: {fileID: 2103814128}
+  exerciseHolder: {fileID: 2103814133}
   chapterName: {fileID: 2103814131}
   levelName: {fileID: 1205908687}
   subjName: {fileID: 360168566}
@@ -984,8 +984,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7906372955290952308}
   - component: {fileID: 1184300390211135671}
-  - component: {fileID: 2103814132}
   - component: {fileID: 2103814133}
+  - component: {fileID: 2103814132}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1101,23 +1101,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2103814128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: fa38851086ff33d469ec0df50020b773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 5
-    m_Bottom: 680
-  m_ChildAlignment: 1
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  subscribeToEditorMenuEvent: 0
+  autoUpdate: 0
+  extraSpacing: 0
+  spacing: 0
+  allParent: []
 --- !u!114 &2103814133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,11 +1118,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2103814128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Script: {fileID: 11500000, guid: e0c68a7138a550f4f9ee735c43745821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
+  alignment: 1
+  padding: {x: 0, y: 10}
+  spacing: {x: 0, y: 15}
+  layout: 0
+  includeDisabledChildren: 0
+  newLineTag: LayoutNewLine
+  isVertical: 1
 --- !u!114 &2723907327345038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6565,8 +6561,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: -0.000061035156}
-  m_SizeDelta: {x: -405.20337, y: 0}
+  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7984517921330560217
 MonoBehaviour:
@@ -6826,7 +6822,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2304511887640872331}
   m_HandleRect: {fileID: 2261927511197447977}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

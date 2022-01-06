@@ -1,4 +1,5 @@
 ﻿using System;
+using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;

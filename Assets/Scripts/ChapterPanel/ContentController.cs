@@ -39,6 +39,7 @@ namespace ChapterPanel
             }
 
             MenuController.instance.UpdateExercisesHolder();
+            MenuController.instance.UpdateExercisesHolderSize(exerciseHolder.transform.childCount);
         }
 
         private void OnExitSubmitChapter()

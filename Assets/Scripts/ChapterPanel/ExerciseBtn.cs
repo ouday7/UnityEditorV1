@@ -23,7 +23,6 @@ namespace ChapterPanel
         private RectTransform _rt;
         private float _startSize;
         private int _endIndex;
-        private bool _isInitialized;
         private const string _exName = "  تمرين  ";
         private Vector2 startPos;
         private ExerciseData _data;
@@ -35,9 +34,7 @@ namespace ChapterPanel
         
         public  void Initialize()
         {
-            if(_isInitialized) return;
-            this.titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
-            _isInitialized = true;
+            titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
             dragBtn.Initialize(this);
             
             addQstBtn.onClick.AddListener(() =>
@@ -62,11 +59,12 @@ namespace ChapterPanel
                 RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
                     _startSize);
                 MenuController.instance.UpdateExercisesHolderSize(-nbChild);
+                MenuController.instance.UpdateExercisesHolder();
                 return;
             }
 
             if (nbChild == 0) return;
-            MenuController.instance.UpdateExercisesHolder();
+            
             MaximiseHolderSize();
             MenuController.instance.UpdateExercisesHolderSize(nbChild);
             QstHolder.UpdateLayout();
@@ -74,7 +72,7 @@ namespace ChapterPanel
             var newHeight = qstHolder.RectTransform.sizeDelta.y +
                             header.sizeDelta.y;
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
-
+            MenuController.instance.UpdateExercisesHolder();
         }
         
         public void OnStartDrag()
@@ -100,6 +98,7 @@ namespace ChapterPanel
                 transform.position = x;
             }
             else transform.position = startPos;
+            
             _isDragging = false;
         }
         

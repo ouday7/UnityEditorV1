@@ -11,7 +11,7 @@ namespace ChapterPanel
         public static MenuController instance; 
         
         [SerializeField] private Button addExBtn;
-        [SerializeField] private GameObject exerciseHolder;
+        [SerializeField] private CustomGridLayout exerciseHolder;
         [SerializeField] private Text chapterName;
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
@@ -26,7 +26,7 @@ namespace ChapterPanel
         private QuestionData QstData;
         private bool _isInitialised;
         private bool _editing;
-        public GameObject ExerciseHolder => exerciseHolder;
+        public CustomGridLayout ExerciseHolder => exerciseHolder;
 
         private void Awake()
         {
@@ -53,7 +53,6 @@ namespace ChapterPanel
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.transform.SetParent(exerciseHolder.transform);
             newExBtn.Initialize();
-            newExBtn.transform.localScale = Vector3.one;
             Data.chapterId = PlayerPrefs.GetInt("chapterId");
             Data.questions = new List<QuestionData>();
             newExBtn.BindData(Data);
@@ -61,6 +60,7 @@ namespace ChapterPanel
             GameDataManager.instance.Data.exercises.Add(Data);
             GameDataManager.instance.SaveToJson();
             UpdateExercisesHolderSize(1);
+            
             UpdateExercisesHolder();
         }
         public void AddNewQst(ExerciseBtn inExerciseBtn)
@@ -78,7 +78,9 @@ namespace ChapterPanel
             UpdateExercisesHolderSize(1);
             inExerciseBtn.ExpandQuestions();
             GameDataManager.instance.SaveToJson();
+            
             UpdateExercisesHolder();
+            
         }
 
         private RectTransform RectTransform
@@ -92,13 +94,12 @@ namespace ChapterPanel
         public void UpdateExercisesHolderSize(int nb)
         {
             var exHolderSize=exerciseHolder.GetComponent<RectTransform>().sizeDelta;
-            exerciseHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*100));
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*100));
         }
 
         public void UpdateExercisesHolder()
         {
-            exerciseHolder.transform.position = new Vector2(exerciseHolder.transform.position.x,
-                -142);
+            exerciseHolder.UpdateLayout();
         }
     }
 }

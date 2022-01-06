@@ -797,6 +797,10 @@ PrefabInstance:
       propertyPath: padding.y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7967649002776330116, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: isVertical
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7967649002820233976, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: m_Name
       value: UI Game Manager
@@ -989,6 +993,10 @@ PrefabInstance:
       propertyPath: padding.y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7967649003222131820, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: isVertical
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7967649003222131821, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000018319539
@@ -1044,6 +1052,10 @@ PrefabInstance:
     - target: {fileID: 7967649003453689896, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: padding.y
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649003453689896, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: isVertical
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7967649003453689897, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: m_AnchoredPosition.y
