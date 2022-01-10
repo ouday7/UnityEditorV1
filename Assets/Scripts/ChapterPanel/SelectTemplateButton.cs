@@ -26,17 +26,7 @@ using UPersian.Components;
       private void Initialize(EditManager parent)
       {
           this._parent = parent;
-          var btn = GetComponent<Button>();
-          btn.onClick.AddListener(OnClick);
-          //templateNameTxt.text = "test";
-
       }
-      private void OnClick()
-      {
-          
-      }
-      
-      
       public void SetTemplate(TemplateData data)
       {
           Debug.Log("category : "+data.category);
