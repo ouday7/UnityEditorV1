@@ -99,8 +99,9 @@ namespace ChapterPanel
         }
         private void GenerateTemplateFields()
         {
-            RemoveDataTemplate();
             addQuizFiled.gameObject.SetActive(true);
+            RemoveDataTemplate();
+
             if (currentQuestion.quizFields == null)
             {
                 currentQuestion.quizFields = new List<QuizFieldData>();
@@ -110,7 +111,7 @@ namespace ChapterPanel
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
                     var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
                     quizField.transform.SetParent(templateHolder);
-                    quizField.transform.localScale=Vector3.one;
+                   // quizField.transform.localScale=Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
                     currentQuestion.quizFields.Add(data);
@@ -124,8 +125,9 @@ namespace ChapterPanel
                 {
                     var data = currentQuestion.quizFields[i];
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
-                    var quizFieldPrefab = QuizFieldsHandler.GetQuizField(quizFieldType);
-                    var quizField = Instantiate(quizFieldPrefab, templateHolder);
+                    var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+                    quizField.transform.SetParent(templateHolder);
+                   // quizField.transform.localScale=Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
                     GameDataManager.instance.SaveToJson();
@@ -138,6 +140,8 @@ namespace ChapterPanel
             foreach (Transform child in templateHolder)
             {
                 Destroy(child.gameObject);
+                Debug.Log("destroy");
+                
             }
         }
         private void QuizFieldsMaxGenerate()
@@ -146,12 +150,15 @@ namespace ChapterPanel
             if (x >= currentTemplate.maxFields) return;
             Debug.Log(currentTemplate.GetQuizFieldType(tempTemplatId));
             var data = currentQuestion.quizFields[tempTemplatId];
+
             var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
             var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+            quizField.transform.SetParent(templateHolder);
+         //   quizField.transform.localScale=Vector3.one;
+           // Instantiate(quizField, templateHolder);
             quizField.Initialize();
             quizField.BindData(data);
             currentQuestion.quizFields.Add(data);
-            Instantiate(quizField, templateHolder);
             GameDataManager.instance.SaveToJson();
             tempTemplatId++;
         }
