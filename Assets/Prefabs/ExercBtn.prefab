@@ -174,6 +174,7 @@ MonoBehaviour:
   layout: 0
   includeDisabledChildren: 0
   newLineTag: LayoutNewLine
+  isVertical: 0
 --- !u!114 &2766226328675340059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,7 +903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5949998270423598308
@@ -931,7 +932,6 @@ MonoBehaviour:
   titleTxt: {fileID: 2083848603370279421}
   dragBtn: {fileID: 1406996165807013669}
   qstHolder: {fileID: 1216796492917187395}
-  qstHolderSize: {fileID: 2766226328675340059}
   header: {fileID: 8976313836361783569}
 --- !u!114 &1378972922250091823
 MonoBehaviour:
@@ -953,11 +953,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    m_HighlightedColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    m_PressedColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    m_SelectedColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    m_DisabledColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1010,7 +1010,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -5.8199463}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1021,7 +1021,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 400, y: 100}
+  m_Size: {x: 400, y: 42.92505}
   m_EdgeRadius: 0
 --- !u!1 &6976254266150807065
 GameObject:

@@ -11,7 +11,7 @@ namespace ChapterPanel
         public static MenuController instance; 
         
         [SerializeField] private Button addExBtn;
-        [SerializeField] private GameObject exerciseHolder;
+        [SerializeField] private CustomGridLayout exerciseHolder;
         [SerializeField] private Text chapterName;
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
@@ -26,9 +26,9 @@ namespace ChapterPanel
         private QuestionData QstData;
         private bool _isInitialised;
         private bool _editing;
-        public GameObject ExerciseHolder => exerciseHolder;
+        public CustomGridLayout ExerciseHolder => exerciseHolder;
 
-        private void Awake()
+        public void Begin()
         {
             if (instance != null) return;
             instance = this;
@@ -42,9 +42,9 @@ namespace ChapterPanel
             
             addExBtn.onClick.AddListener(AddExercise);
             mainContent.gameObject.SetActive(false);
-            chapterName.text = PlayerPrefs.GetString("chapterName");
-            levelName.text=PlayerPrefs.GetString("levelName");
-            subjName.text = PlayerPrefs.GetString("subjectName");
+            chapterName.text = GameDataManager.instance.GetSelectedChapter().name;
+            levelName.text = GameDataManager.instance.GetSelectedLevel().name;
+            subjName.text = GameDataManager.instance.GetSelectedSubject().name;
         }
         
         private void AddExercise()
@@ -53,14 +53,14 @@ namespace ChapterPanel
             var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
             newExBtn.transform.SetParent(exerciseHolder.transform);
             newExBtn.Initialize();
-            newExBtn.transform.localScale = Vector3.one;
-            Data.chapterId = PlayerPrefs.GetInt("chapterId");
+            Data.chapterId = GameDataManager.instance.GetSelectedChapter().id;
             Data.questions = new List<QuestionData>();
             newExBtn.BindData(Data);
             currentExList.Add(newExBtn);
             GameDataManager.instance.Data.exercises.Add(Data);
             GameDataManager.instance.SaveToJson();
             UpdateExercisesHolderSize(1);
+            
             UpdateExercisesHolder();
         }
         public void AddNewQst(ExerciseBtn inExerciseBtn)
@@ -74,10 +74,10 @@ namespace ChapterPanel
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
             
-            // update sizes & graphics
             UpdateExercisesHolderSize(1);
             inExerciseBtn.ExpandQuestions();
             GameDataManager.instance.SaveToJson();
+            
             UpdateExercisesHolder();
         }
 
@@ -91,14 +91,13 @@ namespace ChapterPanel
         }
         public void UpdateExercisesHolderSize(int nb)
         {
-            var exHolderSize=exerciseHolder.GetComponent<RectTransform>().sizeDelta;
-            exerciseHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*100));
+            var exHolderSize=exerciseHolder.RectTransform.sizeDelta;
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*80));
         }
 
         public void UpdateExercisesHolder()
         {
-            exerciseHolder.transform.position = new Vector2(exerciseHolder.transform.position.x,
-                -142);
+            exerciseHolder.UpdateLayout();
         }
     }
 }

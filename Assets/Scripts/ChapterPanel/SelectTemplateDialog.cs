@@ -7,6 +7,7 @@ namespace ChapterPanel
 {
     public class SelectTemplateDialog : MonoBehaviour
     {
+        public static SelectTemplateDialog instance;
         public event Action<TemplateData> OnSubmitTemplate;
         public TemplateData submittedData;
         public Button closeBtn;
@@ -32,8 +33,11 @@ namespace ChapterPanel
             TemplateBtn.onSubmit -= OnTemplateSubmitted;
         }
 
-        public void Start()
+        public void Begin()
         {
+            if(instance!=null) return;
+            instance = this;
+            
             this.selectedTemplate = null;
             this._submittedTemplate = null;
             this._selectedCategory = null;

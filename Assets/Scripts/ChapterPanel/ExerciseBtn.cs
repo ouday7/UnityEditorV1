@@ -23,23 +23,22 @@ namespace ChapterPanel
         private RectTransform _rt;
         private float _startSize;
         private int _endIndex;
-        private bool _isInitialized;
         private const string _exName = "  تمرين  ";
         private Vector2 startPos;
         private ExerciseData _data;
         private bool updateSize;
         private int qstHeight = 85;
         private int holderWeight = 400;
+        private bool _isInitialised;
         public ExerciseData Data => _data;
         public CustomGridLayout QstHolder => qstHolder;
         
         public  void Initialize()
         {
-            if(_isInitialized) return;
-            this.titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
-            _isInitialized = true;
-            dragBtn.Initialize(this);
+            if (_isInitialised) return;
             
+            dragBtn.Initialize(this);
+            _isInitialised = true;
             addQstBtn.onClick.AddListener(() =>
             {
                 MenuController.instance.AddNewQst(this);
@@ -49,6 +48,7 @@ namespace ChapterPanel
         }
         public void BindData(ExerciseData newExerciseData)
         {
+            titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
             _data = newExerciseData;
             Data.chapterId = newExerciseData.chapterId;
             Data.questions = newExerciseData.questions;
@@ -62,11 +62,12 @@ namespace ChapterPanel
                 RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
                     _startSize);
                 MenuController.instance.UpdateExercisesHolderSize(-nbChild);
+                MenuController.instance.UpdateExercisesHolder();
                 return;
             }
 
             if (nbChild == 0) return;
-            MenuController.instance.UpdateExercisesHolder();
+            
             MaximiseHolderSize();
             MenuController.instance.UpdateExercisesHolderSize(nbChild);
             QstHolder.UpdateLayout();
@@ -74,7 +75,7 @@ namespace ChapterPanel
             var newHeight = qstHolder.RectTransform.sizeDelta.y +
                             header.sizeDelta.y;
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
-
+            MenuController.instance.UpdateExercisesHolder();
         }
         
         public void OnStartDrag()
@@ -95,12 +96,14 @@ namespace ChapterPanel
             }
             else if (_changePos)
             {
-                var x = _targetBtn.transform.position;
-                _targetBtn.transform.position = startPos;
-                transform.position = x;
+                var x = _targetBtn.transform.GetSiblingIndex();
+                _targetBtn.transform.SetSiblingIndex(transform.transform.GetSiblingIndex());
+                transform.transform.SetSiblingIndex(x);
             }
             else transform.position = startPos;
+            
             _isDragging = false;
+            MenuController.instance.ExerciseHolder.UpdateLayout();
         }
         
         private void Remove()
