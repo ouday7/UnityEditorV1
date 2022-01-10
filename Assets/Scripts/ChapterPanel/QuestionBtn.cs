@@ -1,5 +1,6 @@
 ﻿
 using System;
+using DG.Tweening;
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ namespace ChapterPanel
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 MenuController.instance.mainContent.gameObject.SetActive(true);
+                MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -25), 0.35f);
                 OnClickQuestion?.Invoke(this);
             });
             _isInitialized = true;

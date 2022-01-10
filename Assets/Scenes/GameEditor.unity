@@ -596,6 +596,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8915c39f1a154defb7416bf139f6787e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1947412647 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+  m_PrefabInstance: {fileID: 7967649002380857340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7967649002380857340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -705,7 +710,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7967649002436670321, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1877
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967649002436670322, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7967649002597837574, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -947,6 +980,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7967649003112177749, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
+      propertyPath: popUpPanel
+      value: 
+      objectReference: {fileID: 1947412647}
     - target: {fileID: 7967649003222131820, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: padding.x
       value: 0
