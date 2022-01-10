@@ -58,6 +58,7 @@ namespace ChapterPanel
             mainQuestionText.text = qstBtn.Data.mainQst;
             subQuestionText.text = qstBtn.Data.subQst;
             helpQuestionText.text = qstBtn.Data.helpQst;
+            
             if (qstBtn.Data.templateId == 0)
             {
                 selectTemplateBtn.templateIcon.sprite = null;

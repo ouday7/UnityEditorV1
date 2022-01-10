@@ -22,7 +22,6 @@ namespace ChapterPanel
         
         [NonSerialized]public  List<ExerciseBtn> currentExList;
         [NonSerialized]public  List<QuestionBtn> currentQstList;
-        private RectTransform _rt;
         private ExerciseData Data;
         private QuestionData QstData;
         private bool _isInitialised;
@@ -82,15 +81,7 @@ namespace ChapterPanel
             
             UpdateExercisesHolder();
         }
-
-        private RectTransform RectTransform
-        {
-            get
-            {
-                if (_rt == null) _rt = GetComponent<RectTransform>();
-                return _rt;
-            }
-        }
+        
         public void UpdateExercisesHolderSize(int nb)
         {
             var exHolderSize=exerciseHolder.RectTransform.sizeDelta;

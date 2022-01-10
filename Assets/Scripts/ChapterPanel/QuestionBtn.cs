@@ -38,6 +38,7 @@ namespace ChapterPanel
                 _parentExercise.DeleteQuestion(this));
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
+                MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, 1300), 0.01f);
                 MenuController.instance.mainContent.gameObject.SetActive(true);
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -25), 0.35f);
                 OnClickQuestion?.Invoke(this);

@@ -681,6 +681,48 @@
                             },
                             "toggleA": false,
                             "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
                         }
                     ],
                     "templateId": 1,
@@ -748,9 +790,46 @@
                             },
                             "toggleA": false,
                             "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
                         }
                     ],
                     "templateId": 2,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
                     "situationData": ""
                 }
             ]
@@ -759,6 +838,15 @@
             "chapterId": 2,
             "exerciseId": 0,
             "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
                 {
                     "questionId": 0,
                     "mainQst": "",
