@@ -740,7 +740,7 @@
                     "subQst": "",
                     "helpQst": "",
                     "quizFields": [],
-                    "templateId": 0,
+                    "templateId": 1,
                     "situationData": ""
                 },
                 {
@@ -868,6 +868,34 @@
                     "subQst": "",
                     "helpQst": "",
                     "quizFields": [
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "id": 0,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
                         {
                             "id": 0,
                             "type": "",
@@ -1143,6 +1171,15 @@
                         }
                     ],
                     "templateId": 1,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
                     "situationData": ""
                 }
             ]
