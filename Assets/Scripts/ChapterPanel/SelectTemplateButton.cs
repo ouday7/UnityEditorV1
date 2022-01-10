@@ -7,14 +7,17 @@ using UPersian.Components;
 
     public class SelectTemplateButton : MonoBehaviour
     {
+        public static SelectTemplateButton instance;
         [SerializeField] public Image templateIcon;
-      [SerializeField] public RtlText templateNameTxt;
-      private EditManager _parent;
-      private TemplateData _data;
+        [SerializeField] public RtlText templateNameTxt;
+        private EditManager _parent;
+        private TemplateData _data;
 
 
-      public void Start()
+      public void Begin()
       {
+          if(instance!=null) return;
+          instance = this;
         Initialize(EditManager);
       }
 

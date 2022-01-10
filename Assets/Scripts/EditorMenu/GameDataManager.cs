@@ -14,7 +14,7 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private GameSettingsData data;
     public JsonData Data => data.gameData;
 
-    private void Awake()
+    public void Begin()
     {
         Initialize();
     }

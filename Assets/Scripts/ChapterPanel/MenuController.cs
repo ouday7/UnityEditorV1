@@ -28,7 +28,7 @@ namespace ChapterPanel
         private bool _editing;
         public CustomGridLayout ExerciseHolder => exerciseHolder;
 
-        private void Awake()
+        public void Begin()
         {
             if (instance != null) return;
             instance = this;
