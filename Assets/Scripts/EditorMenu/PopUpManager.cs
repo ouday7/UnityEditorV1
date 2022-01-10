@@ -5,6 +5,7 @@ using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
+using DG.Tweening;
 
 
 public class PopUpManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class PopUpManager : MonoBehaviour
     }
 
     //game objects
-    [SerializeField] private GameObject popUpPanel;
+    [SerializeField] private RectTransform popUpPanel;
     [SerializeField] private InputField inputFiledName;
     [SerializeField] private InputField inputFieldOrder;
     [SerializeField] private GameObject dataInput;
@@ -70,6 +71,7 @@ public class PopUpManager : MonoBehaviour
 
     private void ClosePanel()
     {
+        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
         popUpPanel.gameObject.SetActive(false);
         ResetPopup();
     }
@@ -79,6 +81,7 @@ public class PopUpManager : MonoBehaviour
         _selectedLevelButton = levelBtn;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
+        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(true);
@@ -173,6 +176,7 @@ public class PopUpManager : MonoBehaviour
         _selectSubjectsButton = subjectsBtn;
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
+        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
@@ -185,6 +189,7 @@ public class PopUpManager : MonoBehaviour
         _selectChaptersButton = chapter;
         _editing = EditedData.Chapter;
         popUpPanel.gameObject.SetActive(true);
+        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(true);
         subjectSection.gameObject.SetActive(true);
@@ -221,6 +226,7 @@ public class PopUpManager : MonoBehaviour
 
     private void Submit()
     {
+        
         switch (_editing)
         {
             case EditedData.None:
@@ -239,7 +245,7 @@ public class PopUpManager : MonoBehaviour
                 UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
-
+        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
         ClosePanel();
         
     }

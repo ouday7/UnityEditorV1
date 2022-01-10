@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ namespace ChapterPanel
         [SerializeField] private Text chapterName;
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
-        [SerializeField] public GameObject mainContent;
+        [SerializeField] public RectTransform mainContent;
         // [SerializeField] private int templateId;
         //[SerializeField] private int situationData;
         
@@ -42,6 +43,7 @@ namespace ChapterPanel
             
             addExBtn.onClick.AddListener(AddExercise);
             mainContent.gameObject.SetActive(false);
+            mainContent.DOAnchorPos(new Vector2(0.5f, 1250), 0.35f);
             chapterName.text = GameDataManager.instance.GetSelectedChapter().name;
             levelName.text = GameDataManager.instance.GetSelectedLevel().name;
             subjName.text = GameDataManager.instance.GetSelectedSubject().name;

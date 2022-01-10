@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +13,7 @@ namespace ChapterPanel
         public event Action<TemplateData> OnSubmitTemplate;
         public TemplateData submittedData;
         public Button closeBtn;
-        public GameObject templateCategoryPopUp;
+        public RectTransform templateCategoryPopUp;
 
         [SerializeField] private RectTransform categoriesHolder;
         [SerializeField] private RectTransform templatesHolder;
@@ -107,7 +109,8 @@ namespace ChapterPanel
 
         private void ClosePanelPopUp()
         {
-            templateCategoryPopUp.SetActive(false);
+            templateCategoryPopUp.DOAnchorPos(new Vector2(0, 0), 0.35f);
+            templateCategoryPopUp.gameObject.SetActive(false);
         }
     }
 }

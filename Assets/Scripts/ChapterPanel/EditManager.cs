@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Envast.Components.GridLayout.Helpers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +20,7 @@ namespace ChapterPanel
         [SerializeField] private QuestionData currentQuestion;
         [SerializeField] private RectTransform templateHolder;
         [SerializeField] private Button openPanel;
-        [SerializeField] private GameObject panelPopUp;
+        [SerializeField] private RectTransform panelPopUp;
         [SerializeField] private InputField mainQuestionText;
         [SerializeField] private InputField subQuestionText;
         [SerializeField] private InputField helpQuestionText;
@@ -39,7 +41,8 @@ namespace ChapterPanel
         }
         private void OpenPanel()
         {
-            panelPopUp.SetActive(true);
+            panelPopUp.DOAnchorPos(new Vector2(0, 0), 0.35f);
+            panelPopUp.GameObject().SetActive(true);
         }
         private void ClickQuestion(QuestionBtn qstBtn)
         {
