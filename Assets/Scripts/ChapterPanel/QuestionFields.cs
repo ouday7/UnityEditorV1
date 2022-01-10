@@ -8,13 +8,11 @@ public class QuestionFields : MonoBehaviour
     private EditManager _editManager;
     public JsonData data;
 
-    public void Start()
-    { ;
-        //  saveBtn.onClick.AddListener(SaveData);
+    public void Begin()
+    {
         GameDataManager.instance.SaveToJson();
        
     }
-   
     public void SaveData()
     {
         GameDataManager.instance.SaveToJson();

@@ -8,10 +8,14 @@ namespace ChapterPanel
 {
     public class ContentController : MonoBehaviour
     {
+        public static ContentController instance;
         [SerializeField] private GameObject exerciseHolder;
         [SerializeField] private Button exitConfigBtn;
-        private void Start()
+        public void Begin()
         {
+            if(instance!=null) return;
+             instance = this;
+            
             exitConfigBtn.onClick.AddListener(OnExitSubmitChapter);
             var selectChapterId = GameDataManager.instance.GetSelectedChapter().id;
             var exercises = GameDataManager.instance.Data.exercises

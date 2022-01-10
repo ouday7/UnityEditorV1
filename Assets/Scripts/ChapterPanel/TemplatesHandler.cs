@@ -9,7 +9,7 @@ public class TemplatesHandler : MonoBehaviour
     public List<TemplateData> templatesData;
     public List<TemplateCategory> categoriesData;
     private Dictionary<TemplateCategory, List<TemplateData>> _mapByCategory;
-    private void Awake()
+    public void Begin()
     {
         if (Instance != null) return;
         Instance = this;

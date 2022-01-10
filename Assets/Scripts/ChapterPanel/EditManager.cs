@@ -8,6 +8,8 @@ namespace ChapterPanel
 {
     public class EditManager : MonoBehaviour
     {
+        public static EditManager instance; 
+        
         [SerializeField] private Text minFieldsTxt;
         [SerializeField] private SelectTemplateDialog selectTemplateDialog;
         [SerializeField] private TemplateCategory currentTemplateCategory;
@@ -25,8 +27,11 @@ namespace ChapterPanel
         [SerializeField] private Button addQuizFiled;
         [SerializeField] private int tempTemplatId;
 
-        public void Start()
+        public void Begin()
         {
+            if (instance != null) return;
+                instance = this;
+                
             openPanel.onClick.AddListener(OpenPanel);
             QuestionBtn.OnClickQuestion += ClickQuestion;
             selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
@@ -99,8 +104,9 @@ namespace ChapterPanel
                 {
                     var data = new QuizFieldData();
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
-                    var quizFieldPrefab = QuizFieldsHandler.GetQuizField(quizFieldType);
-                    var quizField = Instantiate(quizFieldPrefab, templateHolder);
+                    var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+                    quizField.transform.SetParent(templateHolder);
+                    quizField.transform.localScale=Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
                     currentQuestion.quizFields.Add(data);
