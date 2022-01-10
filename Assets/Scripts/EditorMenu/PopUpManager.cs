@@ -71,7 +71,7 @@ public class PopUpManager : MonoBehaviour
 
     private void ClosePanel()
     {
-        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(-2500,0),0.35f);
         popUpPanel.gameObject.SetActive(false);
         ResetPopup();
     }
@@ -226,7 +226,6 @@ public class PopUpManager : MonoBehaviour
 
     private void Submit()
     {
-        
         switch (_editing)
         {
             case EditedData.None:
@@ -245,7 +244,7 @@ public class PopUpManager : MonoBehaviour
                 UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
-        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(-2500,0),0.35f);
         ClosePanel();
         
     }
