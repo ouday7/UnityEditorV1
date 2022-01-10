@@ -20,11 +20,11 @@ public class ToggleTextQuizField : QuizFieldBase
         _data = inData;
         inputFiled.text = _data.textA;
         myToggle.isOn = _data.toggleA;
-        
     }
 
     private void Remove()
     {
+        //todo: Remove data from question
         Destroy(gameObject);
     }
 

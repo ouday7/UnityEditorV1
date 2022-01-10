@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace ChapterPanel
@@ -22,6 +21,7 @@ namespace ChapterPanel
 
         public void LoadScene(SceneNames sceneName)
         {
+            //todo: implement LoadSceneAsync
             SceneManager.LoadScene((int) sceneName);
         }
     }

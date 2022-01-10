@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using EditorMenu;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChapterPanel
 {
-    public class ContentController : MonoBehaviour
+    public class ExercisesHolder : EntryPointSystemBase
     {
-        public static ContentController instance;
+        public static ExercisesHolder instance;
+
         [SerializeField] private GameObject exerciseHolder;
         [SerializeField] private Button exitConfigBtn;
-        public void Begin()
+        public override void Begin()
         {
             if(instance!=null) return;
              instance = this;

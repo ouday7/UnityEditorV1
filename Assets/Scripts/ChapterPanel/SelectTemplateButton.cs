@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UPersian.Components;
 
 
-    public class SelectTemplateButton : MonoBehaviour
+    public class SelectTemplateButton : EntryPointSystemBase
     {
         public static SelectTemplateButton instance;
         [SerializeField] public Image templateIcon;
@@ -14,7 +14,7 @@ using UPersian.Components;
         private TemplateData _data;
 
 
-      public void Begin()
+      public override void Begin()
       {
           if(instance!=null) return;
           instance = this;

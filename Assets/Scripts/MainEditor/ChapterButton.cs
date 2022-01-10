@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 namespace EditorMenu
 {
-    public class ChaptersBtn : EditorButtonBase
+    public class ChapterButton : EditorButtonBase
     {
-        public static event Action<ChaptersBtn> OnSelectChaptersButton;
-        public static event Action<ChaptersBtn> OnSubmitButton; 
+        public static event Action<ChapterButton> OnSelectChaptersButton;
+        public static event Action<ChapterButton> OnSubmitButton;
 
         private ChapterData _data;
         private EditorButtonsManager _parent;
