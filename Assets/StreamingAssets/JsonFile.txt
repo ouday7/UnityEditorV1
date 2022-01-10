@@ -2213,6 +2213,49 @@
                     "situationData": ""
                 }
             ]
+        },
+        {
+            "chapterId": 22,
+            "exerciseId": 0,
+            "questions": []
+        },
+        {
+            "chapterId": 22,
+            "exerciseId": 0,
+            "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                }
+            ]
+        },
+        {
+            "chapterId": 22,
+            "exerciseId": 0,
+            "questions": []
         }
     ]
 }

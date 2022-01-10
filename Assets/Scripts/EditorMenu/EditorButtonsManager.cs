@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChapterPanel;
-using Envast.Components.GridLayout;
 using UnityEngine;
 
 namespace EditorMenu

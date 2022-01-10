@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subscribeToEditorMenuEvent: 0
-  autoUpdate: 0
+  autoUpdate: 1
   extraSpacing: 0
   spacing: 0
   allParent: []
