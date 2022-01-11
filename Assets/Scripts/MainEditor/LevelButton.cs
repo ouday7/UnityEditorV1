@@ -2,10 +2,10 @@ using System;
 using ChapterPanel;
 using EditorMenu;
 
-public class LevelBtn : EditorButtonBase
+public class LevelButton : EditorButtonBase
 {
    
-    public event Action<LevelBtn> OnSelectLevelButton;
+    public event Action<LevelButton> OnSelectLevelButton;
     
     private LevelData _data;
     private bool _isInitialized;

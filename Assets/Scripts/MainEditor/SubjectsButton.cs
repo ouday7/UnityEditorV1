@@ -3,9 +3,9 @@ using ChapterPanel;
 
 namespace EditorMenu
 {
-    public class SubjectsBtn : EditorButtonBase
+    public class SubjectsButton : EditorButtonBase
     {
-        public static event Action<SubjectsBtn> OnSelectSubjectButton;
+        public static event Action<SubjectsButton> OnSelectSubjectButton;
     
         private SubjectData _data;
         private bool _isInitialized;

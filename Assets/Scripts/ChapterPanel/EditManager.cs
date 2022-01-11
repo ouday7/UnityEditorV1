@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace ChapterPanel
 {
-    public class EditManager : MonoBehaviour
+    public class EditManager : EntryPointSystemBase
     {
         public static EditManager instance; 
         
@@ -29,7 +29,7 @@ namespace ChapterPanel
         [SerializeField] private Button addQuizFiled;
         [SerializeField] private int tempTemplatId;
 
-        public void Begin()
+        public override void Begin()
         {
             if (instance != null) return;
                 instance = this;
@@ -38,7 +38,12 @@ namespace ChapterPanel
             QuestionBtn.OnClickQuestion += ClickQuestion;
             selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
             addQuizFiled.onClick.AddListener(QuizFieldsMaxGenerate);
+
+            mainQuestionText.onEndEdit.AddListener(UpdateMainQuestion);
+            subQuestionText.onEndEdit.AddListener(UpdateSubQuestion);
+            helpQuestionText.onEndEdit.AddListener(UpdateHelpQuestion);
         }
+
         private void OpenPanel()
         {
             panelPopUp.DOAnchorPos(new Vector2(0, 0), 0.35f);
@@ -48,13 +53,6 @@ namespace ChapterPanel
         {
             currentQuestion = qstBtn.Data;
             
-            mainQuestionText.onEndEdit.RemoveAllListeners();
-            subQuestionText.onEndEdit.RemoveAllListeners();
-            helpQuestionText.onEndEdit.RemoveAllListeners();
-
-            mainQuestionText.onEndEdit.AddListener(delegate { EditMainQuestion(mainQuestionText.text, qstBtn); });
-            subQuestionText.onEndEdit.AddListener(delegate { EditSubQuestion(subQuestionText.text, qstBtn); });
-            helpQuestionText.onEndEdit.AddListener(delegate { EditHelpQuestion(helpQuestionText.text, qstBtn); });
             mainQuestionText.text = qstBtn.Data.mainQst;
             subQuestionText.text = qstBtn.Data.subQst;
             helpQuestionText.text = qstBtn.Data.helpQst;
@@ -73,19 +71,19 @@ namespace ChapterPanel
                 TemplatesHandler.Instance.templatesData.FirstOrDefault(template => template.id == qstBtn.Data.templateId);
             OnTemplateSelected(templateData);
         }
-        private void EditMainQuestion(string arg0, QuestionBtn qstBtn)
+        private void UpdateMainQuestion(string inNewValue)
         {
-            qstBtn.Data.mainQst = arg0;
+            currentQuestion.mainQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
-        private void EditSubQuestion(string arg0, QuestionBtn qstBtn)
+        private void UpdateSubQuestion(string inNewValue)
         {
-            qstBtn.Data.subQst = arg0;
+            currentQuestion.subQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
-        private void EditHelpQuestion(string arg0, QuestionBtn qstBtn)
+        private void UpdateHelpQuestion(string inNewValue)
         {
-            qstBtn.Data.helpQst = arg0;
+            currentQuestion.helpQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
         private void OnTemplateSelected(TemplateData inTemplate)
@@ -115,12 +113,12 @@ namespace ChapterPanel
                     quizField.Initialize();
                     quizField.BindData(data);
                     currentQuestion.quizFields.Add(data);
-                    GameDataManager.instance.SaveToJson();
                     tempTemplatId = i;
                 }
             }
             else
             {
+                Debug.Log($"//. This Question Has {currentQuestion.quizFields.Count} Fields");
                 for (var i = 0; i <currentQuestion.quizFields.Count ; i++)
                 {
                     var data = currentQuestion.quizFields[i];
@@ -130,15 +128,18 @@ namespace ChapterPanel
                    // quizField.transform.localScale=Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
-                    GameDataManager.instance.SaveToJson();
                     tempTemplatId = i;
-                }   
+                }
             }
+            GameDataManager.instance.SaveToJson();
+
         }
         private void RemoveDataTemplate()
         {
+            //todo clear data
             foreach (Transform child in templateHolder)
             {
+                Debug.Log("//. Destroy QF_GameObject");
                 Destroy(child.gameObject);
                 Debug.Log("destroy");
                 

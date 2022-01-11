@@ -14,17 +14,17 @@ namespace EditorMenu
     
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
-        [NonSerialized] public LevelBtn _selectedLevel;
-        [NonSerialized] public SubjectsBtn _selectedSubject;
-        [NonSerialized]public ChaptersBtn _selectedChapter;
+        [NonSerialized] public LevelButton _selectedLevel;
+        [NonSerialized] public SubjectsButton _selectedSubject;
+        [NonSerialized]public ChapterButton _selectedChapter;
         private RectTransform _rt;
         private Vector2 startSize;
         public SubjectData SelectedSubject => _selectedSubject.Data;
 
         private void OnDestroy()
         {
-            SubjectsBtn.OnSelectSubjectButton -= OnSelectSubjectButton;
-            ChaptersBtn.OnSelectChaptersButton -= OnSelectChapterButton;
+            SubjectsButton.OnSelectSubjectButton -= OnSelectSubjectButton;
+            ChapterButton.OnSelectChaptersButton -= OnSelectChapterButton;
         }
 
         public void Initialize()
@@ -35,16 +35,16 @@ namespace EditorMenu
             {
                 instance = this;
             }
-            SubjectsBtn.OnSelectSubjectButton += OnSelectSubjectButton;
-            ChaptersBtn.OnSelectChaptersButton += OnSelectChapterButton;
-            ChaptersBtn.OnSubmitButton += OnSubmitChapter;
+            SubjectsButton.OnSelectSubjectButton += OnSelectSubjectButton;
+            ChapterButton.OnSelectChaptersButton += OnSelectChapterButton;
+            ChapterButton.OnSubmitButton += OnSubmitChapter;
 
             _subjectsList = new List<Transform>();
             _chapList = new List<Transform>();
             startSize.y = chaptersHolder.RectTransform.sizeDelta.y;
         }
 
-        private void OnSubmitChapter(ChaptersBtn inChapterButton)
+        private void OnSubmitChapter(ChapterButton inChapterButton)
         {
             GameDataManager.instance.SetSelectedChapter(inChapterButton.Data);
             SceneHandler.instance.LoadScene(SceneNames.ChapterConfig);
@@ -54,7 +54,7 @@ namespace EditorMenu
         {
             for (var i = 0; i < inData.levels.Count; i++)
             {
-                var newLevelBtn = PoolSystem.instance.Spawn<LevelBtn>(ObjectToPoolType.Level);
+                var newLevelBtn = PoolSystem.instance.Spawn<LevelButton>(ObjectToPoolType.Level);
                 if (newLevelBtn == null) Debug.Log("Level Button is Null");
                 newLevelBtn.OnSelectLevelButton += OnSelectLevelButton;
                 newLevelBtn.Initialize();
@@ -69,7 +69,7 @@ namespace EditorMenu
             levelsHolder.UpdateLayout();
         }
 
-        private void OnSelectLevelButton(LevelBtn inNewSelectedLevelButton)
+        private void OnSelectLevelButton(LevelButton inNewSelectedLevelButton)
         {
             if (_selectedLevel != null) _selectedLevel.Unselect();
             _selectedLevel = inNewSelectedLevelButton;
@@ -85,7 +85,7 @@ namespace EditorMenu
             foreach (var subjectPair in inLevelDataData.Subjects)
             {
                 var subject = subjectPair.Value;
-                var subjectBtn = PoolSystem.instance.Spawn<SubjectsBtn>(ObjectToPoolType.Subject);
+                var subjectBtn = PoolSystem.instance.Spawn<SubjectsButton>(ObjectToPoolType.Subject);
                 subjectBtn.Initialize();
                 subjectBtn.BindData(subject);
                 subjectBtn.Unselect();
@@ -100,7 +100,7 @@ namespace EditorMenu
             subjectsHolder.UpdateLayout();
         }
 
-        private void OnSelectSubjectButton(SubjectsBtn inNewSubjectButton)
+        private void OnSelectSubjectButton(SubjectsButton inNewSubjectButton)
         {
             if (_selectedSubject != null) _selectedSubject.Unselect();
             _selectedSubject = inNewSubjectButton;
@@ -119,7 +119,7 @@ namespace EditorMenu
 
             foreach (var chapter in inSubjectData.chapters)
             {
-                var newBtn = PoolSystem.instance.Spawn<ChaptersBtn>(ObjectToPoolType.Chapter);
+                var newBtn = PoolSystem.instance.Spawn<ChapterButton>(ObjectToPoolType.Chapter);
                 newBtn.Initialize();
                 newBtn.BindData(chapter, this);
                 newBtn.Unselect();
@@ -137,7 +137,7 @@ namespace EditorMenu
             chaptersHolder.UpdateLayout();
         }
     
-        private void OnSelectChapterButton(ChaptersBtn inNewSelectedChapterButton)
+        private void OnSelectChapterButton(ChapterButton inNewSelectedChapterButton)
         {
             if (_selectedChapter != null)
             {

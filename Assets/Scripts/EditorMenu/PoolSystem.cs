@@ -9,7 +9,7 @@ namespace EditorMenu
     {
         Level, Subject, Chapter, Toggle,Exercise,Question
     }
-    public class PoolSystem : MonoBehaviour
+    public class PoolSystem : EntryPointSystemBase
     {
         [Serializable] private struct PoolObject
         {
@@ -21,16 +21,18 @@ namespace EditorMenu
         [SerializeField] private List<PoolableObject> currentPoolObjects;
     
         public static PoolSystem instance;
+        
+        public override void Begin()
+        {
+            if (instance != null) return;
+            instance = this;
+            InitPool();
+        }
 
         public void Initialize()
         {
-            if (instance != null && instance != this)
-                Destroy(this.gameObject);
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
+            if (instance != null) return;
+            instance = this;
             InitPool();
         }
     
@@ -46,7 +48,7 @@ namespace EditorMenu
                 }
             }
         }
-        public T Spawn<T>(ObjectToPoolType type) where T:Component
+        public T Spawn<T>(ObjectToPoolType type) where T : PoolableObject
         {
             var poolItem = currentPoolObjects.FirstOrDefault(t => t.Type == type);
             if (poolItem != null)
@@ -54,6 +56,7 @@ namespace EditorMenu
                 var obj = poolItem.GetComponent<T>();
                 currentPoolObjects.Remove(poolItem);
                 obj.gameObject.SetActive(true);
+                obj.Spawn();
                 return obj;
             }
             GenerateElement(type);
@@ -61,6 +64,7 @@ namespace EditorMenu
         }
         public void DeSpawn(Transform objectToDeSpawn)
         {
+            objectToDeSpawn.GetComponent<PoolableObject>().DeSpawn();
             objectToDeSpawn.SetParent(transform);
             objectToDeSpawn.gameObject.SetActive(false);
             currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());

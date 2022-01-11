@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace ChapterPanel
 {
-    public class MenuController : MonoBehaviour
+    public class MenuController : EntryPointSystemBase
     {
         public static MenuController instance; 
         
@@ -28,7 +28,7 @@ namespace ChapterPanel
         private bool _editing;
         public CustomGridLayout ExerciseHolder => exerciseHolder;
 
-        public void Begin()
+        public override void Begin()
         {
             if (instance != null) return;
             instance = this;
@@ -84,8 +84,8 @@ namespace ChapterPanel
         
         public void UpdateExercisesHolderSize(int nb)
         {
-            var exHolderSize=exerciseHolder.RectTransform.sizeDelta;
-            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + (nb*80));
+            var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + nb*80);
         }
 
         public void UpdateExercisesHolder()

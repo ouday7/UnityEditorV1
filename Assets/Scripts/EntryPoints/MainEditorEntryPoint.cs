@@ -2,7 +2,7 @@
 
 namespace EditorMenu
 {
-    public class BeginHandler : MonoBehaviour
+    public class MainEditorEntryPoint : MonoBehaviour
     {
         [SerializeField]private PoolSystem pool;
         [SerializeField]private GameDataManager gm;

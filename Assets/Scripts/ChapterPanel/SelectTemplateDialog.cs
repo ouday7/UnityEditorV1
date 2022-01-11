@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace ChapterPanel
 {
-    public class SelectTemplateDialog : MonoBehaviour
+    public class SelectTemplateDialog : EntryPointSystemBase
     {
         public static SelectTemplateDialog instance;
         public event Action<TemplateData> OnSubmitTemplate;
@@ -35,7 +35,7 @@ namespace ChapterPanel
             TemplateBtn.onSubmit -= OnTemplateSubmitted;
         }
 
-        public void Begin()
+        public override void Begin()
         {
             if(instance!=null) return;
             instance = this;

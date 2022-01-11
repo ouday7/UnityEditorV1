@@ -5,7 +5,7 @@ using ChapterPanel;
 using EditorMenu;
 using UnityEngine;
 
-public class GameDataManager : MonoBehaviour
+public class GameDataManager : EntryPointSystemBase
 {
     public static GameDataManager instance;
     
@@ -14,7 +14,7 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private GameSettingsData data;
     public JsonData Data => data.gameData;
 
-    public void Begin()
+    public override void Begin()
     {
         Initialize();
     }

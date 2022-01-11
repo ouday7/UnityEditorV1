@@ -7,13 +7,14 @@ public struct QuizFieldMap
     public QuizFieldBase prefab;
 }
 
-public class QuizFieldsHandler : MonoBehaviour
+public class QuizFieldsHandler : EntryPointSystemBase
 {
     public static QuizFieldsHandler Instance;
+    
     [SerializeField] private List<QuizFieldMap> quizFieldsList;
     private Dictionary<FieldTypes, QuizFieldBase> _map;
     
-    public void Begin()
+    public override void Begin()
     {
         if(Instance != null) return;
         Instance = this;

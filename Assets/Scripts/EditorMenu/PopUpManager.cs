@@ -35,11 +35,12 @@ public class PopUpManager : MonoBehaviour
     //holders
     [SerializeField] private Transform holderSubject;
     [SerializeField] private Transform holderLevel;
-
+    [SerializeField] private float duration;
+    [SerializeField] private Ease ease;
     private EditedData _editing;
-    private LevelBtn _selectedLevelButton;
-    private SubjectsBtn _selectSubjectsButton;
-    private ChaptersBtn _selectChaptersButton;
+    private LevelButton _selectedLevelButton;
+    private SubjectsButton _selectSubjectsButton;
+    private ChapterButton _selectChaptersButton;
     private List<SubjectData> _availableSubjects;
     private List<LevelData> _availableLevels;
     private Button _currentButton;
@@ -71,14 +72,16 @@ public class PopUpManager : MonoBehaviour
 
     private void ClosePanel()
     {
-        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
-        popUpPanel.gameObject.SetActive(false);
-        ResetPopup();
+        popUpPanel.DOAnchorPos(new Vector2(-2000, 0), duration).SetEase(ease).OnComplete(() =>
+        {
+            popUpPanel.gameObject.SetActive(false); 
+            ResetPopup();
+        });
     }
 
-    public void LevelEdit(LevelBtn levelBtn) //remove spawn and deSpawn of level everytime
+    public void LevelEdit(LevelButton levelButton) //remove spawn and deSpawn of level everytime
     {
-        _selectedLevelButton = levelBtn;
+        _selectedLevelButton = levelButton;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
         popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
@@ -86,7 +89,7 @@ public class PopUpManager : MonoBehaviour
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(true);
         subjectSection.transform.position = levelSection.transform.position;
-        _namePlaceHolder.text = levelBtn.Data.name;
+        _namePlaceHolder.text = levelButton.Data.name;
 
         _levelSubjects = _selectedLevelButton.Data.subjectsId;
         _selectedSubjects = new List<int>(_levelSubjects);
@@ -170,10 +173,10 @@ public class PopUpManager : MonoBehaviour
         _oldSubjectBtn = newSubjectButton;
     }
 
-    public void SubjectEdit(SubjectsBtn subjectsBtn)
+    public void SubjectEdit(SubjectsButton subjectsButton)
     {
         subjectSection.transform.position = _subjectsHolderPosition;
-        _selectSubjectsButton = subjectsBtn;
+        _selectSubjectsButton = subjectsButton;
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
         popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
@@ -181,10 +184,10 @@ public class PopUpManager : MonoBehaviour
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
 
-        _namePlaceHolder.text = subjectsBtn.Data.name;
+        _namePlaceHolder.text = subjectsButton.Data.name;
     }
 
-    public void ChapterEdit(ChaptersBtn chapter)
+    public void ChapterEdit(ChapterButton chapter)
     {
         _selectChaptersButton = chapter;
         _editing = EditedData.Chapter;
@@ -226,7 +229,6 @@ public class PopUpManager : MonoBehaviour
 
     private void Submit()
     {
-        
         switch (_editing)
         {
             case EditedData.None:
@@ -245,7 +247,7 @@ public class PopUpManager : MonoBehaviour
                 UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
-        popUpPanel.DOAnchorPos(new Vector2(-1877f,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(-2500,0),0.35f);
         ClosePanel();
         
     }
