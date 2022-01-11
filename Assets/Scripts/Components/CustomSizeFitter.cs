@@ -17,7 +17,7 @@ namespace Envast.Layouts
         private RectTransform _rt;
         private float _startSize;
     
-        private RectTransform RectTransform
+        public RectTransform RectTransform
         {
             get
             {

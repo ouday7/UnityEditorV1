@@ -66,8 +66,11 @@ using UnityEngine;
         [ContextMenu("UpdateLayout")]
         public void UpdateLayout()
         {
-            if (RectTransform.childCount == 0) return;
-
+            
+            if (RectTransform.childCount == 0)
+            {
+                return;
+            }
             _currentLineWidth = 0f;
             _totalLinesHeight = 0f;
             _linesWidthList.Clear();

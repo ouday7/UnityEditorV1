@@ -24,8 +24,8 @@ public class ToggleTextQuizField : QuizFieldBase
 
     private void Remove()
     {
-        //todo: Remove data from question
         Destroy(gameObject);
+        EditManager.instance.MaximiseMainContentHolder(EditManager.instance.quizFieldsHolder.transform.childCount-1);
     }
 
     private void ToggleValue(bool newValue) => _data.toggleA = newValue;

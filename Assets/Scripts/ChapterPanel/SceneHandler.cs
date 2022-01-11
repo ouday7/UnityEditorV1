@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ChapterPanel
 {
@@ -12,6 +15,8 @@ namespace ChapterPanel
     public class SceneHandler : MonoBehaviour
     {
         public static SceneHandler instance;
+        [SerializeField] private GameObject loadingScreen;
+        [SerializeField] private Slider slider;
 
         private void Awake()
         {
@@ -21,8 +26,19 @@ namespace ChapterPanel
 
         public void LoadScene(SceneNames sceneName)
         {
-            //todo: implement LoadSceneAsync
-            SceneManager.LoadScene((int) sceneName);
+            StartCoroutine(LoadAsync(sceneName));
+        }
+
+        IEnumerator LoadAsync(SceneNames sceneName)
+        {
+            var operation=SceneManager.LoadSceneAsync((int) sceneName);
+            loadingScreen.SetActive(true);
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / 0.9f);
+                slider.value = progress;
+                yield return null;
+            }
         }
     }
 }
