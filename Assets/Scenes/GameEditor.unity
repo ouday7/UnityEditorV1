@@ -501,10 +501,10 @@ MonoBehaviour:
     amount: 2
   - type: 2
     objectReference: {fileID: 7572448648591995012, guid: c51f7aa931de4dc419c74395efc4e6f3, type: 3}
-    amount: 10
+    amount: 12
   - type: 3
     objectReference: {fileID: 7018296770654228063, guid: 64748d64d69714c4a88f07bb6171b38c, type: 3}
-    amount: 6
+    amount: 10
   currentPoolObjects: []
 --- !u!4 &1295490903
 Transform:
@@ -1004,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7967649003112177749, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: ease
-      value: 10
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7967649003222131820, guid: 3ef8d7ac8aaa1fc49a0205412eacfbb0, type: 3}
       propertyPath: padding.x

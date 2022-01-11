@@ -79,12 +79,12 @@ public class PopUpManager : MonoBehaviour
         });
     }
 
-    public void LevelEdit(LevelButton levelButton) //remove spawn and deSpawn of level everytime
+    public void LevelEdit(LevelButton levelButton) 
     {
         _selectedLevelButton = levelButton;
         _editing = EditedData.Level;
         popUpPanel.gameObject.SetActive(true);
-        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(0, 0), duration).SetEase(ease);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(true);
@@ -179,7 +179,7 @@ public class PopUpManager : MonoBehaviour
         _selectSubjectsButton = subjectsButton;
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
-        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(0, 0), duration).SetEase(ease);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
@@ -192,7 +192,7 @@ public class PopUpManager : MonoBehaviour
         _selectChaptersButton = chapter;
         _editing = EditedData.Chapter;
         popUpPanel.gameObject.SetActive(true);
-        popUpPanel.DOAnchorPos(new Vector2(0,0),0.35f);
+        popUpPanel.DOAnchorPos(new Vector2(0, 0), duration).SetEase(ease);
         dataInput.gameObject.SetActive(true);
         levelSection.gameObject.SetActive(true);
         subjectSection.gameObject.SetActive(true);
@@ -247,9 +247,7 @@ public class PopUpManager : MonoBehaviour
                 UpdateChapter(inputFiledName.text, inputFieldOrder.text);
                 break;
         }
-        popUpPanel.DOAnchorPos(new Vector2(-2500,0),0.35f);
         ClosePanel();
-        
     }
 
     private void UpdateLevel(string inputFieldNameText, string inputFieldOrderText)

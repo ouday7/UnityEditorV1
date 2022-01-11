@@ -46,7 +46,6 @@ namespace ChapterPanel
 
         private void OpenPanel()
         {
-            panelPopUp.DOAnchorPos(new Vector2(0, 0), 0.35f);
             panelPopUp.GameObject().SetActive(true);
         }
         private void ClickQuestion(QuestionBtn qstBtn)

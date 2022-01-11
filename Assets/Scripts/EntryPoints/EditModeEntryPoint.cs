@@ -7,9 +7,9 @@ public class EditModeEntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        for (var i = 0; i < systems.Count; i++)
+        foreach (var s in systems)
         {
-            systems[i].Begin();
+            s.Begin();
         }
     }
 }

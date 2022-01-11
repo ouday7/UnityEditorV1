@@ -68,13 +68,5 @@ public class ToggleButton : PoolableObject
 
     public void RemoveEventListeners() => OnClickToggle = null;
 
-    public override void Spawn()
-    {
-        Debug.Log($"//. Spawn {gameObject.name}");
-    }
-
-    public override void DeSpawn()
-    {
-        Debug.Log($"//. DeSpawn {gameObject.name}");
-    }
+    
 }
