@@ -28,7 +28,9 @@ namespace ChapterPanel
         [SerializeField] private TemplateCategory templateCategory;
         [SerializeField] private Button addQuizFiled;
         [SerializeField] private int tempTemplatId;
-
+        
+        
+      
         public override void Begin()
         {
             if (instance != null) return;
@@ -63,7 +65,7 @@ namespace ChapterPanel
                 selectTemplateBtn.templateNameTxt.text = "None";
                 minFieldsTxt.text = "Min Fiddles : " ;
                 addQuizFiled.gameObject.SetActive(false);
-                RemoveDataTemplate();
+                RemoveTemplateFromHierarchy();
                 return;
             }
 
@@ -88,7 +90,7 @@ namespace ChapterPanel
         }
         private void OnTemplateSelected(TemplateData inTemplate)
         {
-            currentTemplate = inTemplate;
+            currentTemplate = inTemplate; 
             currentQuestion.templateId = currentTemplate.id;
             selectTemplateBtn.templateIcon.sprite = currentTemplate.icon;
             selectTemplateBtn.templateNameTxt.text = currentTemplate.templateName.ToString();
@@ -97,8 +99,9 @@ namespace ChapterPanel
         }
         private void GenerateTemplateFields()
         {
+            // RemoveDataFromJson();
             addQuizFiled.gameObject.SetActive(true);
-            RemoveDataTemplate();
+           // RemoveTemplateFromHierarchy();
 
             if (currentQuestion.quizFields == null)
             {
@@ -118,9 +121,14 @@ namespace ChapterPanel
             }
             else
             {
+              //  RemoveDataFromJson();
+              RemoveDataFromJson();
                 Debug.Log($"//. This Question Has {currentQuestion.quizFields.Count} Fields");
                 for (var i = 0; i <currentQuestion.quizFields.Count ; i++)
                 {
+                   // var templatedata = currentQuestion.templateId;
+                    
+                    
                     var data = currentQuestion.quizFields[i];
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
                     var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
@@ -134,16 +142,33 @@ namespace ChapterPanel
             GameDataManager.instance.SaveToJson();
 
         }
-        private void RemoveDataTemplate()
+        private void RemoveTemplateFromHierarchy()
         {
             //todo clear data
-            foreach (Transform child in templateHolder)
+                foreach (Transform child in templateHolder)
+                {
+                    Debug.Log("//. Destroy QF_GameObject");
+                    Destroy(child.gameObject);
+                
+                }
+
+        }
+
+        private void RemoveDataFromJson()
+        {
+
+            if (currentQuestion.quizFields[0].id == selectTemplateDialog.selectedTemplate.Data.id )
             {
-                Debug.Log("//. Destroy QF_GameObject");
-                Destroy(child.gameObject);
-                Debug.Log("destroy");
+                Debug.Log(currentQuestion.templateId +"template id ,current question ");
                 
             }
+            // for (int i = 0; i < currentQuestion.quizFields.Count; i++)
+            // {
+            //     var data = currentQuestion.quizFields[i];
+            //     currentQuestion.quizFields.Remove(data);
+            // }   
+          
+            
         }
         private void QuizFieldsMaxGenerate()
         {
