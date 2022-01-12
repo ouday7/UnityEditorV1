@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ChapterPanel;
 using UnityEngine;
+using DG.Tweening;
 
 namespace EditorMenu
 {
@@ -11,19 +12,20 @@ namespace EditorMenu
         [SerializeField] private CustomGridLayout levelsHolder;
         [SerializeField] private CustomGridLayout subjectsHolder;
         [SerializeField] private CustomGridLayout chaptersHolder;
-    
+        [SerializeField] private Ease ease;
         private List<Transform> _subjectsList;
         private List<Transform> _chapList;
         [NonSerialized] public LevelButton _selectedLevel;
-        [NonSerialized] public SubjectsButton _selectedSubject;
+        [NonSerialized] public SubjectButton selectedSubject;
         [NonSerialized]public ChapterButton _selectedChapter;
         private RectTransform _rt;
         private Vector2 startSize;
-        public SubjectData SelectedSubject => _selectedSubject.Data;
+        private static float _delay=0.28f;
+        public SubjectData SelectedSubject => selectedSubject.Data;
 
         private void OnDestroy()
         {
-            SubjectsButton.OnSelectSubjectButton -= OnSelectSubjectButton;
+            SubjectButton.OnSelectSubjectButton -= OnSelectSubjectButton;
             ChapterButton.OnSelectChaptersButton -= OnSelectChapterButton;
         }
 
@@ -35,7 +37,7 @@ namespace EditorMenu
             {
                 instance = this;
             }
-            SubjectsButton.OnSelectSubjectButton += OnSelectSubjectButton;
+            SubjectButton.OnSelectSubjectButton += OnSelectSubjectButton;
             ChapterButton.OnSelectChaptersButton += OnSelectChapterButton;
             ChapterButton.OnSubmitButton += OnSubmitChapter;
 
@@ -61,7 +63,7 @@ namespace EditorMenu
                 newLevelBtn.BindData(inData.levels[i]);
                 newLevelBtn.Unselect();
                 newLevelBtn.Transform.SetParent(levelsHolder.RectTransform);
-                newLevelBtn.Transform.localScale = Vector3.one;
+                newLevelBtn.transform.localScale=Vector3.one;
                 if (i != 0) continue;
                 newLevelBtn.Select();
                 newLevelBtn.LevelButtonSelected();
@@ -71,11 +73,21 @@ namespace EditorMenu
 
         private void OnSelectLevelButton(LevelButton inNewSelectedLevelButton)
         {
-            if (_selectedLevel != null) _selectedLevel.Unselect();
+            if (_selectedLevel != null)
+            {
+                _selectedLevel.ResetTextColor();
+                _selectedLevel.Unselect();
+            }
             _selectedLevel = inNewSelectedLevelButton;
+            
             _selectedLevel.Select();
-            ShowSubjects(_selectedLevel.Data);
-            GameDataManager.instance.SetSelectedLevel(inNewSelectedLevelButton.Data);
+            _selectedLevel.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
+            {
+                _selectedLevel.transform.DOScale(1, _delay);
+                _selectedLevel.SetTextColor();
+                ShowSubjects(_selectedLevel.Data);
+                GameDataManager.instance.SetSelectedLevel(inNewSelectedLevelButton.Data);
+            });
         }
 
         public void ShowSubjects(LevelData inLevelDataData)
@@ -85,7 +97,7 @@ namespace EditorMenu
             foreach (var subjectPair in inLevelDataData.Subjects)
             {
                 var subject = subjectPair.Value;
-                var subjectBtn = PoolSystem.instance.Spawn<SubjectsButton>(ObjectToPoolType.Subject);
+                var subjectBtn = PoolSystem.instance.Spawn<SubjectButton>(ObjectToPoolType.Subject);
                 subjectBtn.Initialize();
                 subjectBtn.BindData(subject);
                 subjectBtn.Unselect();
@@ -100,17 +112,26 @@ namespace EditorMenu
             subjectsHolder.UpdateLayout();
         }
 
-        private void OnSelectSubjectButton(SubjectsButton inNewSubjectButton)
+        private void OnSelectSubjectButton(SubjectButton inNewSubjectButton)
         {
-            if (_selectedSubject != null) _selectedSubject.Unselect();
-            _selectedSubject = inNewSubjectButton;
-            _selectedSubject.Select();
-            
-            chaptersHolder.RectTransform.sizeDelta =
-                new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
-                    startSize.y);
-            GameDataManager.instance.SetSelectedSubject(inNewSubjectButton.Data);
-            ShowChapter(_selectedSubject.Data);
+            if (selectedSubject != null)
+            {
+                selectedSubject.ResetTextColor();
+                selectedSubject.Unselect();
+            }
+            selectedSubject = inNewSubjectButton;
+            selectedSubject.Select();
+
+            selectedSubject.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
+            {
+                selectedSubject.transform.DOScale(1, _delay);
+                selectedSubject.SetTextColor();
+                chaptersHolder.RectTransform.sizeDelta =
+                    new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
+                        startSize.y);
+                GameDataManager.instance.SetSelectedSubject(inNewSubjectButton.Data);
+                ShowChapter(selectedSubject.Data);
+            });
         }
 
         private void ShowChapter(SubjectData inSubjectData)
@@ -123,6 +144,7 @@ namespace EditorMenu
                 newBtn.Initialize();
                 newBtn.BindData(chapter, this);
                 newBtn.Unselect();
+                newBtn.ResetTextColor();
                 newBtn.configBtn.gameObject.SetActive(false);
                 newBtn.Transform.SetParent(chaptersHolder.RectTransform);
                 newBtn.Transform.localScale = Vector3.one;
@@ -142,11 +164,17 @@ namespace EditorMenu
             if (_selectedChapter != null)
             {
                 _selectedChapter.Unselect();
+                _selectedChapter.ResetTextColor();
                 _selectedChapter.configBtn.gameObject.SetActive(false);
             }
             _selectedChapter = inNewSelectedChapterButton;
             _selectedChapter.Select();
             _selectedChapter.configBtn.gameObject.SetActive(true);
+            _selectedChapter.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
+            {
+                _selectedChapter.transform.DOScale(1, _delay);
+                _selectedChapter.SetTextColor();
+            });
         }
 
         private void ResetSubjectsHolder()

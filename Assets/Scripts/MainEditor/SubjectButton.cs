@@ -1,11 +1,12 @@
 using System;
 using ChapterPanel;
+using UnityEngine;
 
 namespace EditorMenu
 {
-    public class SubjectsButton : EditorButtonBase
+    public class SubjectButton : EditorButtonBase
     {
-        public static event Action<SubjectsButton> OnSelectSubjectButton;
+        public static event Action<SubjectButton> OnSelectSubjectButton;
     
         private SubjectData _data;
         private bool _isInitialized;
@@ -45,6 +46,14 @@ namespace EditorMenu
             if (int.TryParse(newOrderText, out var newOrder)) _data.order = newOrder;
             BindData(_data);
             GameDataManager.instance.SaveToJson();
+        }
+        public void SetTextColor()
+        {
+            text.color=Color.white;
+        }
+        public void ResetTextColor()
+        {
+            text.color=Color.black;
         }
     }
 }

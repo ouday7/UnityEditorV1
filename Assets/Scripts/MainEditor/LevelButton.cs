@@ -1,6 +1,7 @@
 using System;
 using ChapterPanel;
 using EditorMenu;
+using UnityEngine;
 
 public class LevelButton : EditorButtonBase
 {
@@ -50,5 +51,14 @@ public class LevelButton : EditorButtonBase
         if (int.TryParse(newOrderText, out newOrder)) _data.order = newOrder;
         BindData(_data);
         GameDataManager.instance.SaveToJson();
+    }
+
+    public void SetTextColor()
+    {
+        text.color=Color.white;
+    }
+    public void ResetTextColor()
+    {
+        text.color=Color.black;
     }
 }

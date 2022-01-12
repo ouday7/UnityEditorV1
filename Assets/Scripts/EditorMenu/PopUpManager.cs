@@ -39,7 +39,7 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private Ease ease;
     private EditedData _editing;
     private LevelButton _selectedLevelButton;
-    private SubjectsButton _selectSubjectsButton;
+    private SubjectButton selectSubjectButton;
     private ChapterButton _selectChaptersButton;
     private List<SubjectData> _availableSubjects;
     private List<LevelData> _availableLevels;
@@ -173,10 +173,10 @@ public class PopUpManager : MonoBehaviour
         _oldSubjectBtn = newSubjectButton;
     }
 
-    public void SubjectEdit(SubjectsButton subjectsButton)
+    public void SubjectEdit(SubjectButton subjectButton)
     {
         subjectSection.transform.position = _subjectsHolderPosition;
-        _selectSubjectsButton = subjectsButton;
+        selectSubjectButton = subjectButton;
         _editing = EditedData.Subject;
         popUpPanel.gameObject.SetActive(true);
         popUpPanel.DOAnchorPos(new Vector2(0, 0), duration).SetEase(ease);
@@ -184,7 +184,7 @@ public class PopUpManager : MonoBehaviour
         levelSection.gameObject.SetActive(false);
         subjectSection.gameObject.SetActive(false);
 
-        _namePlaceHolder.text = subjectsButton.Data.name;
+        _namePlaceHolder.text = subjectButton.Data.name;
     }
 
     public void ChapterEdit(ChapterButton chapter)
@@ -279,7 +279,7 @@ public class PopUpManager : MonoBehaviour
 
     private void UpdateSubject(string inputFieldNameText, string inputFieldOrderText)
     {
-        _selectSubjectsButton.UpdateData(inputFieldNameText, inputFieldOrderText);
+        selectSubjectButton.UpdateData(inputFieldNameText, inputFieldOrderText);
     }
 
     private void UpdateChapter(string inputFieldNameText, string inputFieldOrderText)

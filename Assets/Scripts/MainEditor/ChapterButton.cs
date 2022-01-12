@@ -62,5 +62,14 @@ namespace EditorMenu
         } 
 
         public SubjectData GetSelectedSubjectData() => _parent.SelectedSubject;
+        
+        public void SetTextColor()
+        {
+            text.color=Color.white;
+        }
+        public void ResetTextColor()
+        {
+            text.color=Color.black;
+        }
     }
 }
