@@ -47,6 +47,7 @@ namespace ChapterPanel
     [Serializable]
     public class QuizFieldData
     {
+        public int templateID;
         public int id;
         public string type;
         public string textA;

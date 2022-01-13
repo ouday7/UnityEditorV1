@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Envast.Layouts;
+using DG.Tweening;
+using Envast.Components.GridLayout.Helpers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,15 +10,14 @@ namespace ChapterPanel
 {
     public class EditManager : EntryPointSystemBase
     {
-        public static EditManager instance; 
-        
+        public static EditManager Instance;
         [SerializeField] private Text minFieldsTxt;
         [SerializeField] private SelectTemplateDialog selectTemplateDialog;
         [SerializeField] private TemplateCategory currentTemplateCategory;
         [SerializeField] public SelectTemplateButton selectTemplateBtn;
         [SerializeField] public TemplateData currentTemplate;
-        [SerializeField] private QuestionData currentQuestionData;
-        [SerializeField] private CustomGridLayout quizfieldsHolder;
+        [SerializeField] private QuestionData currentQuestion;
+        [SerializeField] private RectTransform templateHolder;
         [SerializeField] private Button openPanel;
         [SerializeField] private RectTransform panelPopUp;
         [SerializeField] private InputField mainQuestionText;
@@ -25,180 +25,161 @@ namespace ChapterPanel
         [SerializeField] private InputField helpQuestionText;
         [SerializeField] private TemplateBtn templateBtn;
         [SerializeField] private TemplateCategory templateCategory;
-        [SerializeField] private Button addQuizField;
+        [SerializeField] private Button addQuizFiled;
         [SerializeField] private int tempTemplatId;
-        [SerializeField] private CustomSizeFitter maincontentHolder;
-        private QuestionBtn currentQuestion;
-        private Vector2 defaultholderSize;
-        private int HeightToAdd=200;
+        private TemplateData x;
+        public RectTransform TemplateHolder => templateHolder;
 
-        public QuestionData currentquestionData => currentQuestionData;
-        public CustomGridLayout quizFieldsHolder => quizfieldsHolder;      
         public override void Begin()
         {
-            if (instance != null) return;
-                instance = this;
-                
+            if (Instance != null) return;
+            Instance = this;
+
             openPanel.onClick.AddListener(OpenPanel);
             QuestionBtn.OnClickQuestion += ClickQuestion;
             selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
-            addQuizField.onClick.AddListener(QuizFieldsMaxGenerate);
-
+            addQuizFiled.onClick.AddListener(QuizFieldsMaxGenerate);
             mainQuestionText.onEndEdit.AddListener(UpdateMainQuestion);
             subQuestionText.onEndEdit.AddListener(UpdateSubQuestion);
             helpQuestionText.onEndEdit.AddListener(UpdateHelpQuestion);
-            defaultholderSize = new Vector2(1484, 920);
         }
 
         private void OpenPanel()
         {
+            panelPopUp.DOAnchorPos(new Vector2(0, 0), 0.35f);
             panelPopUp.GameObject().SetActive(true);
         }
+
         private void ClickQuestion(QuestionBtn qstBtn)
         {
-            currentQuestionData = qstBtn.Data;
-            currentQuestion = qstBtn;
+            currentQuestion = qstBtn.Data;
+
             mainQuestionText.text = qstBtn.Data.mainQst;
             subQuestionText.text = qstBtn.Data.subQst;
             helpQuestionText.text = qstBtn.Data.helpQst;
-            maincontentHolder.RectTransform.sizeDelta = defaultholderSize;
-            RemoveTemplateFromHierarchy();
+
             if (qstBtn.Data.templateId == 0)
             {
                 selectTemplateBtn.templateIcon.sprite = null;
                 selectTemplateBtn.templateNameTxt.text = "None";
-                minFieldsTxt.text = "Min Fiddles : " ;
-                addQuizField.gameObject.SetActive(false);
+                minFieldsTxt.text = "Min Fiddles : ";
+                addQuizFiled.gameObject.SetActive(false);
+                RemoveTemplateFromHierarchy();
                 return;
             }
 
             var templateData =
-                TemplatesHandler.Instance.templatesData.FirstOrDefault(template => template.id == qstBtn.Data.templateId);
+                TemplatesHandler.Instance.templatesData.FirstOrDefault(
+                    template => template.id == qstBtn.Data.templateId);
             OnTemplateSelected(templateData);
         }
+
         private void UpdateMainQuestion(string inNewValue)
         {
-            currentQuestionData.mainQst = inNewValue;
+            currentQuestion.mainQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
+
         private void UpdateSubQuestion(string inNewValue)
         {
-            currentQuestionData.subQst = inNewValue;
+            currentQuestion.subQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
+
         private void UpdateHelpQuestion(string inNewValue)
         {
-            currentQuestionData.helpQst = inNewValue;
+            currentQuestion.helpQst = inNewValue;
             GameDataManager.instance.SaveToJson();
         }
         private void OnTemplateSelected(TemplateData inTemplate)
         {
-            currentTemplate = inTemplate; 
-            currentQuestionData.templateId = currentTemplate.id;
+            currentTemplate = inTemplate;
+            currentQuestion.templateId = currentTemplate.id;
             selectTemplateBtn.templateIcon.sprite = currentTemplate.icon;
             selectTemplateBtn.templateNameTxt.text = currentTemplate.templateName.ToString();
             minFieldsTxt.text = "Min Fields : " + currentTemplate.minFields;
             GenerateTemplateFields();
+            GameDataManager.instance.SaveToJson();
+
         }
         private void GenerateTemplateFields()
         {
+            addQuizFiled.gameObject.SetActive(true);
             RemoveTemplateFromHierarchy();
-            // RemoveDataFromJson();
-            addQuizField.gameObject.SetActive(true);
-           // RemoveTemplateFromHierarchy();
-           
-            if (currentQuestionData.quizFields.Count == 0)
+            if (currentQuestion.quizFields == null)
             {
-                currentQuestionData.quizFields = new List<QuizFieldData>();
-                
+                currentQuestion.quizFields = new List<QuizFieldData>();
                 for (var i = 0; i < currentTemplate.minFields; i++)
                 {
                     var data = new QuizFieldData();
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
                     var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-                    quizField.transform.SetParent(quizfieldsHolder.RectTransform);
-                    quizField.transform.localScale=Vector3.one;
+                    quizField.transform.SetParent(templateHolder);
+                    quizField.transform.localScale = Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
-                    currentQuestionData.quizFields.Add(data);
+                    currentQuestion.quizFields.Add(data);
                     tempTemplatId = i;
-                    quizfieldsHolder.UpdateLayout();
                 }
-                MaximiseMainContentHolder(currentQuestionData.quizFields.Count);
             }
+            // else if (((selectTemplateDialog.submittedData.id != currentQuestion.templateId)))
+            // {
+            //     Test();
+            // }
             else
             {
-              //  RemoveDataFromJson();
-              //RemoveDataFromJson();
-                Debug.Log($"//. This Question Has {currentQuestionData.quizFields.Count} Fields");
-                for (var i = 0; i <currentQuestionData.quizFields.Count ; i++)
+                Debug.Log($"//. This Question Has {currentQuestion.quizFields.Count} Fields");
+                for (var i = 0; i < currentQuestion.quizFields.Count; i++)
                 {
-                   // var templatedata = currentQuestion.templateId;
-                   var data = currentQuestionData.quizFields[i];
+                    var data = currentQuestion.quizFields[i];
                     var quizFieldType = currentTemplate.GetQuizFieldType(i);
                     var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-                    quizField.transform.SetParent(quizfieldsHolder.RectTransform);
-                    // quizField.transform.localScale=Vector3.one;
+                    quizField.transform.SetParent(templateHolder);
+                    quizField.transform.localScale = Vector3.one;
                     quizField.Initialize();
                     quizField.BindData(data);
                     tempTemplatId = i;
-                    quizfieldsHolder.UpdateLayout();
                 }
-                MaximiseMainContentHolder(currentQuestionData.quizFields.Count);
             }
-            GameDataManager.instance.SaveToJson();
-
-        }
-        public void MaximiseMainContentHolder(int child)
-        {
-            if(child==0)
-            {
-                maincontentHolder.RectTransform.sizeDelta=defaultholderSize;
-                quizfieldsHolder.UpdateLayout();
-                return;
-            }
-            maincontentHolder.RectTransform.sizeDelta = new Vector2(defaultholderSize.x, defaultholderSize.y +(child* HeightToAdd));
-            maincontentHolder.transform.position = new Vector2(maincontentHolder.transform.position.x, 800);
-            quizfieldsHolder.UpdateLayout();
         }
         private void RemoveTemplateFromHierarchy()
         {
-            foreach (Transform child in quizfieldsHolder.RectTransform)
-                {
-                    Destroy(child.gameObject);
-                }
-        }
-        private void RemoveDataFromJson()
-        {
-
-            if (currentQuestionData.quizFields[0].id == selectTemplateDialog.selectedTemplate.Data.id )
+            foreach (Transform child in templateHolder)
             {
-                Debug.Log(currentQuestionData.templateId +"template id ,current question ");
-                
+                Destroy(child.gameObject);
             }
-            // for (int i = 0; i < currentQuestion.quizFields.Count; i++)
-            // {
-            //     var data = currentQuestion.quizFields[i];
-            //     currentQuestion.quizFields.Remove(data);
-            // }   
-          
-            
         }
         private void QuizFieldsMaxGenerate()
         {
-            var x = quizfieldsHolder.RectTransform.childCount;
+            var x = templateHolder.GetChildren().Count;
             if (x >= currentTemplate.maxFields) return;
             Debug.Log(currentTemplate.GetQuizFieldType(tempTemplatId));
-            var data = currentQuestionData.quizFields[tempTemplatId];
+            var data = currentQuestion.quizFields[tempTemplatId];
             var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
             var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-            quizField.transform.SetParent(quizfieldsHolder.RectTransform);
-            MaximiseMainContentHolder(quizfieldsHolder.RectTransform.childCount);
+            quizField.transform.SetParent(templateHolder);
+            //   quizField.transform.localScale=Vector3.one;
+            // Instantiate(quizField, templateHolder);
             quizField.Initialize();
             quizField.BindData(data);
-            currentQuestionData.quizFields.Add(data);
+            currentQuestion.quizFields.Add(data);
             GameDataManager.instance.SaveToJson();
             tempTemplatId++;
+        }
+        private void Test()
+        {
+            currentQuestion.quizFields.Clear();
+            for (var i = 0; i < currentTemplate.minFields; i++)
+            {
+                var data = new QuizFieldData();
+                var quizFieldType = currentTemplate.GetQuizFieldType(i);
+                var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
+                quizField.transform.SetParent(templateHolder);
+                quizField.transform.localScale = Vector3.one;
+                quizField.Initialize();
+                quizField.BindData(data);
+                currentQuestion.quizFields.Add(data);
+            }
         }
     }
 }

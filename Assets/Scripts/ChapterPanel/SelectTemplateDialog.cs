@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,7 @@ namespace ChapterPanel
         public static SelectTemplateDialog instance;
         public event Action<TemplateData> OnSubmitTemplate;
         public TemplateData submittedData;
+        public TemplateData x;
         public Button closeBtn;
         public RectTransform templateCategoryPopUp;
 
@@ -25,9 +25,11 @@ namespace ChapterPanel
         private List<TemplateBtn> _allTemplates;
         private TemplateCategoryBtn _selectedCategory;
         public TemplateBtn selectedTemplate;
-        private TemplateBtn _submittedTemplate;
+        public TemplateBtn _submittedTemplate;
         private TemplatesHandler _templatesHandler;
 
+
+        public int z;
         private void OnDestroy()
         {
             TemplateCategoryBtn.onClick -= OnClickCategory;
@@ -57,6 +59,7 @@ namespace ChapterPanel
         {
             _submittedTemplate = btn;
             submittedData = data;
+            x = data;
             Debug.Log("<color=red> template name selected :</color>" + data.templateName);
             if (submittedData == null)
             {
@@ -64,6 +67,7 @@ namespace ChapterPanel
                 return;
             }
 
+      
             ClosePanelPopUp();
             OnSubmitTemplate?.Invoke(data);
         }
