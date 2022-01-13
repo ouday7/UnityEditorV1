@@ -40,7 +40,7 @@ namespace Envast.Layouts
         public void UpdateSize()
         {
            
-            Debug.Log("Clicked !");
+//            Debug.Log("Clicked !");
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, _startSize);
             var totalWidth = 0f;
             if (RectTransform.childCount > 0)

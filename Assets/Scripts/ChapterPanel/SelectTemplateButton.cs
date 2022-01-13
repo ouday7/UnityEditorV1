@@ -10,6 +10,7 @@ using UPersian.Components;
         public static SelectTemplateButton instance;
         [SerializeField] public Image templateIcon;
         [SerializeField] public RtlText templateNameTxt;
+        public int tempid;
         private EditManager _parent;
         private TemplateData _data;
 

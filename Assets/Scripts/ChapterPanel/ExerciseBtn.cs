@@ -2,7 +2,6 @@
 using Envast.Components.GridLayout;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ChapterPanel
 {
     public class ExerciseBtn : PoolableObject

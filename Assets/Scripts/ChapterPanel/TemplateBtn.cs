@@ -11,6 +11,7 @@ public class TemplateBtn : MonoBehaviour
     [SerializeField] public Image icon;
     [SerializeField] public Text title;
     [SerializeField] private Button selectBtn;
+    public int templateId;
     
     private TemplateData _data;
     public TemplateData Data => _data;
@@ -30,6 +31,7 @@ public class TemplateBtn : MonoBehaviour
         this.icon.sprite = _data.icon;
         this.title.text = _data.name;
         _submitted = false;
+        templateId = _data.id;
         Unselect();
         selectBtn.onClick.AddListener(OnSubmitTemplate);
         button.onClick.AddListener(OnSelectTemplate);
