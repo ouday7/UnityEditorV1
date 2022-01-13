@@ -69,6 +69,7 @@ namespace ChapterPanel
                 minFieldsTxt.text = "Min Fiddles : ";
                 addQuizField.gameObject.SetActive(false);
                 RemoveTemplateFromHierarchy();
+                MaximiseMainContentHolder(templateHolder.RectTransform.childCount);
                 return;
             }
 
