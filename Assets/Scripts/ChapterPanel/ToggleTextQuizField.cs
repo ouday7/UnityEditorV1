@@ -33,7 +33,9 @@ public class ToggleTextQuizField : QuizFieldBase
         // }
         
             Destroy(gameObject);
-        
+            EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.mainHolder.RectTransform
+                .childCount);
+
     }
 
     private void ToggleValue(bool newValue) => _data.toggleA = newValue;
