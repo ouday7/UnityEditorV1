@@ -25,7 +25,7 @@ namespace ChapterPanel
         [SerializeField] private InputField helpQuestionText;
         [SerializeField] private TemplateBtn templateBtn;
         [SerializeField] private TemplateCategory templateCategory;
-        [SerializeField] private Button addQuizFiled;
+        [SerializeField] private Button addQuizField;
         [SerializeField] private int tempTemplatId;
         private TemplateData x;
 
@@ -40,7 +40,7 @@ namespace ChapterPanel
             openPanel.onClick.AddListener(OpenPanel);
             QuestionBtn.OnClickQuestion += ClickQuestion;
             selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
-            addQuizFiled.onClick.AddListener(QuizFieldsMaxGenerate);
+            addQuizField.onClick.AddListener(QuizFieldsMaxGenerate);
             mainQuestionText.onEndEdit.AddListener(UpdateMainQuestion);
             subQuestionText.onEndEdit.AddListener(UpdateSubQuestion);
             helpQuestionText.onEndEdit.AddListener(UpdateHelpQuestion);
@@ -65,7 +65,7 @@ namespace ChapterPanel
                 selectTemplateBtn.templateIcon.sprite = null;
                 selectTemplateBtn.templateNameTxt.text = "None";
                 minFieldsTxt.text = "Min Fiddles : ";
-                addQuizFiled.gameObject.SetActive(false);
+                addQuizField.gameObject.SetActive(false);
                 RemoveTemplateFromHierarchy();
                 return;
             }
@@ -106,7 +106,7 @@ namespace ChapterPanel
         }
         private void GenerateTemplateFields()
         {
-            addQuizFiled.gameObject.SetActive(true);
+            addQuizField.gameObject.SetActive(true);
             RemoveTemplateFromHierarchy();
             if (currentQuestion.quizFields == null)
             {

@@ -956,6 +956,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1707261411842503276, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
+      propertyPath: templateHolder
+      value: 
+      objectReference: {fileID: 1709331925778265059}
     - target: {fileID: 1709331923682907149, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1114,10 +1118,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925640985377, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
+--- !u!224 &1709331925778265059 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1709331924135599826, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
+  m_PrefabInstance: {fileID: 1709331925778265058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5528238663196853858 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6557517663115064704, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
