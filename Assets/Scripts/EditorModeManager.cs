@@ -29,7 +29,7 @@ public class EditorModeManager : MonoBehaviour
         
         private void ClickDesignMode()
         {
-            OnDesignClick?.Invoke(EditManager.instance.currentquestionData);
+            OnDesignClick?.Invoke(EditManager.Instance.currentQuestionData);
         }
 
         private void OnClickDesignMode(QuestionData questionData)
@@ -40,8 +40,7 @@ public class EditorModeManager : MonoBehaviour
             editmodeButton.interactable = true;
             editmodeButton.GetComponent<Image>().color = unselectedColor;
         }
-
-
+        
         private void OnClickEditMode()
         {
             designmodePanel.gameObject.SetActive(false);

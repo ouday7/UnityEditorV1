@@ -28,6 +28,8 @@ namespace ChapterPanel
         [SerializeField] private Button addQuizFiled;
         [SerializeField] private int tempTemplatId;
         private TemplateData x;
+
+        public QuestionData currentQuestionData => currentQuestion;
         public RectTransform TemplateHolder => templateHolder;
 
         public override void Begin()
