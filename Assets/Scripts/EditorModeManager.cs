@@ -1,8 +1,14 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using ChapterPanel;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class EditorModeManager : MonoBehaviour
-    {
+{
+        public static event Action<QuestionData> OnDesignClick;
+    
+
         [BoxGroup("Unselected Mode")][LabelText("Color")] [SerializeField] private Color unselectedColor;
         [BoxGroup("Selected Mode")][LabelText("Color")] [SerializeField] private Color selectedColor;
         
@@ -15,9 +21,26 @@ public class EditorModeManager : MonoBehaviour
 
         private void Awake()
         {
-            designmodeButton.onClick.AddListener(OnClickDesignMode);
+            designmodeButton.onClick.AddListener(ClickDesignMode);
             editmodeButton.onClick.AddListener(OnClickEditMode);
+
+            OnDesignClick += OnClickDesignMode;
         }
+        
+        private void ClickDesignMode()
+        {
+            OnDesignClick?.Invoke(EditManager.instance.currentquestionData);
+        }
+
+        private void OnClickDesignMode(QuestionData questionData)
+        {
+            designmodePanel.gameObject.SetActive(true);
+            designmodeButton.interactable = false;
+            designmodeButton.GetComponent<Image>().color = selectedColor;
+            editmodeButton.interactable = true;
+            editmodeButton.GetComponent<Image>().color = unselectedColor;
+        }
+
 
         private void OnClickEditMode()
         {
@@ -30,15 +53,5 @@ public class EditorModeManager : MonoBehaviour
             designmodeButton.GetComponent<Image>().color = unselectedColor;
         }
 
-        private void OnClickDesignMode()
-        {
-            designmodePanel.gameObject.SetActive(true);
-            
-            designmodeButton.interactable = false;
-            designmodeButton.GetComponent<Image>().color = selectedColor;
-
-            editmodeButton.interactable = true;
-            editmodeButton.GetComponent<Image>().color = unselectedColor;
-        }
-        
+      
     }

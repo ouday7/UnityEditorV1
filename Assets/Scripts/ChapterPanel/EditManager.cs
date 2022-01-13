@@ -32,6 +32,7 @@ namespace ChapterPanel
         private Vector2 defaultholderSize;
         private int HeightToAdd=200;
 
+        public QuestionData currentquestionData => currentQuestionData;
         public CustomGridLayout quizFieldsHolder => quizfieldsHolder;      
         public override void Begin()
         {
