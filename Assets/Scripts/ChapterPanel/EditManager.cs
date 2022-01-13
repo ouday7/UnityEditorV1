@@ -5,7 +5,6 @@ using Envast.Components.GridLayout.Helpers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ChapterPanel
 {
     public class EditManager : EntryPointSystemBase
