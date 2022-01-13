@@ -1479,6 +1479,15 @@
                     ],
                     "templateId": 1,
                     "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
                 }
             ]
         },

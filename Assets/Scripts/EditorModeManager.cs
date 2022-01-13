@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class EditorModeManager : MonoBehaviour
 {
         public static event Action<QuestionData> OnDesignClick;
-    
-
+        
         [BoxGroup("Unselected Mode")][LabelText("Color")] [SerializeField] private Color unselectedColor;
         [BoxGroup("Selected Mode")][LabelText("Color")] [SerializeField] private Color selectedColor;
         
@@ -31,6 +30,7 @@ public class EditorModeManager : MonoBehaviour
         {
             OnDesignClick?.Invoke(EditManager.Instance.currentQuestionData);
         }
+        
 
         private void OnClickDesignMode(QuestionData questionData)
         {
@@ -39,6 +39,8 @@ public class EditorModeManager : MonoBehaviour
             designmodeButton.GetComponent<Image>().color = selectedColor;
             editmodeButton.interactable = true;
             editmodeButton.GetComponent<Image>().color = unselectedColor;
+            
+            
         }
         
         private void OnClickEditMode()
