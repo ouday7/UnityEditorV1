@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public enum TemplatesNames
 {
-    SortingPhrases,
-    SelectPhrases,
     TrueOrFalse,
+    SelectPhrases,
+    SortingPhrase,
     SelectPictures,
     SortingPictures,
     ConnectImageToImage,

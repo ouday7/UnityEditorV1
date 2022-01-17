@@ -21,7 +21,7 @@ public class TrueFalseTemplate : TemplateBase
     {
     }
 
-    public override void Initialize(QuestionData questionData, Action onAlert)
+    public override void Initialize(QuestionData questionData)
     {
         if (questionData.quizFields[0].textA == null)
         {
