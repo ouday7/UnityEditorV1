@@ -1,19 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using ChapterPanel;
+﻿using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
-using UPersian.Components;
 
-public abstract class TemplateBase : MonoBehaviour
+namespace Templates
 {
-     public Text mainQuestionTxt;
-     public Text subQuestionTxt;
-     public Button resultBtn;
+    public abstract class TemplateBase : MonoBehaviour
+    {
+        public Text mainQuestionTxt;//todo QUESTION IS SEPARATE FROM TEMPLATE
+        public Text subQuestionTxt;
+        public Button resultBtn;
+
+        private Transform _t;
+        public Transform Transform
+        {
+            get
+            {
+                if (_t == null) _t = transform;
+                return _t;
+            }
+        }
     
-    public abstract void Initialize(QuestionData question);
-    public abstract void SetData();
-    public abstract bool GetResult();
-    public abstract void ResetTemplate();
-    public abstract void OnDestroy();
+        public abstract void Initialize();
+        public abstract void BindData(QuestionData inQuestionData);
+        public abstract bool GetResult();
+        public abstract void ResetTemplate();
+        public abstract void OnDestroy();
+    }
 }

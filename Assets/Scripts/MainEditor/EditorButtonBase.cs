@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,11 @@ public abstract class EditorButtonBase : PoolableObject
     
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color unselectedColor;
-
+    [SerializeField] private Color labelSelectedColor;
+    [SerializeField] private Color labelUnselectedColor;
+    
+    [SerializeField] private float duration = .2f;
+    [SerializeField] private Ease ease = Ease.Linear;
     public bool isInitialized;
 
     private void OnDestroy()
@@ -37,22 +42,31 @@ public abstract class EditorButtonBase : PoolableObject
 
     private void OnClickMainButton()
     {
-        Select();
+        AnimateButton();
         OnSelectAction?.Invoke();
     }
     public void Select()
     {
         background.color = selectedColor;
+        text.color = labelSelectedColor;
         editBtn.gameObject.SetActive(true);
-    
         btn.interactable = false;
     }
     public void Unselect()
     {
         background.color = unselectedColor;
+        text.color = labelUnselectedColor;
         editBtn.gameObject.SetActive(false);
         btn.interactable = true;
     }
 
     protected void InvokeUpdateChaptersOrder() => OnUpdateIndex?.Invoke();
+
+    private void AnimateButton()
+    {
+        Transform.DOScale(0.9f, duration).SetEase(ease).OnComplete( () =>
+        {
+            Transform.DOScale(1f, duration).SetEase(ease);
+        });
+    }
 }

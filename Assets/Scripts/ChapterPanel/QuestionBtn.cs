@@ -20,11 +20,6 @@ namespace ChapterPanel
         private ExerciseBtn _parentExercise;
         public static string _qstName = " سؤال ";
 
-        private void OnDestroy()
-        {
-            OnClickQuestion = null;
-        }
-
         public  void UpdateName()
         {
             btnName.text = $"{_qstName} {transform.GetSiblingIndex() + 1}";

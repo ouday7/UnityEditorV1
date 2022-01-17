@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 public struct QuizFieldMap
@@ -27,7 +28,8 @@ public class QuizFieldsHandler : EntryPointSystemBase
     }
     public static QuizFieldBase GetQuizField(FieldTypes inName)
     {
-        if (!Instance._map.ContainsKey(inName)) return null;
+        if (!Instance._map.ContainsKey(inName))
+            throw new Exception($"No QuizField with name {inName}");
         return Instantiate(Instance._map[inName]);
     }
 }

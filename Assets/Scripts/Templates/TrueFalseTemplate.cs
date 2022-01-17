@@ -1,10 +1,9 @@
-﻿
-using ChapterPanel;
+﻿using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
 using UPersian.Components;
 using DG.Tweening;
-using Unity.VisualScripting;
+using Templates;
 
 public class TrueFalseTemplate : TemplateBase
 {
@@ -12,17 +11,13 @@ public class TrueFalseTemplate : TemplateBase
     [SerializeField] private Image imageTxt;
     [SerializeField] private Button btnA;
     [SerializeField] private Button btnB;
-    private QuestionData questionData;
+    private QuestionData _questionData;
     private bool _result, _a, _b;
 
-
-    public override void SetData()
+    public override void BindData(QuestionData inQuestionData)
     {
-    }
-
-    public override void Initialize(QuestionData questionData)
-    {
-        if (questionData.quizFields[0].textA == null)
+        _questionData = inQuestionData;
+        if (_questionData.quizFields[0].textA == null)
         {
             questionTxt.text = "";
         }
@@ -33,22 +28,22 @@ public class TrueFalseTemplate : TemplateBase
         }
 
         _result = false;
-        imageTxt.sprite = questionData.quizFields[0].imageOne;
-        questionTxt.text = questionData.quizFields[0].textA;
-        
-        btnA.GetComponentInChildren<RtlText>().text = questionData.quizFields[1].textA;
-        btnB.GetComponentInChildren<RtlText>().text = questionData.quizFields[2].textA;
+        imageTxt.sprite = _questionData.quizFields[0].imageOne;
+        questionTxt.text = _questionData.quizFields[0].textA;
+    }
 
-    
+    public override void Initialize()
+    {
+        btnA.GetComponentInChildren<RtlText>().text = _questionData.quizFields[1].textA;
+        btnB.GetComponentInChildren<RtlText>().text = _questionData.quizFields[2].textA;
+
         btnA.onClick.AddListener(OnClickButtonA);
         btnB.onClick.AddListener(OnClickButtonB);
-
     }
 
     private void OnClickButtonA()
     {
-     
-        _a = questionData.quizFields[1].toggleA;
+        _a = _questionData.quizFields[1].toggleA;
         _result = _a;
         btnA.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
@@ -61,7 +56,7 @@ public class TrueFalseTemplate : TemplateBase
 
     private void OnClickButtonB()
     {
-        _b = questionData.quizFields[2].toggleA;
+        _b = _questionData.quizFields[2].toggleA;
         _result = _b;
         btnB.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
@@ -75,7 +70,6 @@ public class TrueFalseTemplate : TemplateBase
 
     public override void ResetTemplate()
     {
-
         questionTxt.text = "";
         _a = false;
         _b = false;
@@ -84,11 +78,6 @@ public class TrueFalseTemplate : TemplateBase
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
         btnB.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
-
-
-        // btnA.transform.DOScale(new Vector3(0.75f, 0.5f, 1f),duration:5f)
-        //     .SetEase(Ease.InOutSine)
-        //     .SetLoops(-1, LoopType.Yoyo);
     }
 
 
@@ -100,6 +89,5 @@ public class TrueFalseTemplate : TemplateBase
     public override void OnDestroy()
     {
         ResetTemplate();
-
     }
 }

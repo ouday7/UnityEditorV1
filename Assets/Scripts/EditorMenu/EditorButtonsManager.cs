@@ -73,21 +73,12 @@ namespace EditorMenu
 
         private void OnSelectLevelButton(LevelButton inNewSelectedLevelButton)
         {
-            if (_selectedLevel != null)
-            {
-                _selectedLevel.ResetTextColor();
-                _selectedLevel.Unselect();
-            }
+            if (_selectedLevel != null) _selectedLevel.Unselect();
             _selectedLevel = inNewSelectedLevelButton;
             
             _selectedLevel.Select();
-            _selectedLevel.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
-            {
-                _selectedLevel.transform.DOScale(1, _delay);
-                _selectedLevel.SetTextColor();
-                ShowSubjects(_selectedLevel.Data);
-                GameDataManager.instance.SetSelectedLevel(inNewSelectedLevelButton.Data);
-            });
+            GameDataManager.instance.SetSelectedLevel(inNewSelectedLevelButton.Data);
+            ShowSubjects(_selectedLevel.Data);
         }
 
         public void ShowSubjects(LevelData inLevelDataData)
@@ -121,17 +112,11 @@ namespace EditorMenu
             }
             selectedSubject = inNewSubjectButton;
             selectedSubject.Select();
-
-            selectedSubject.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
-            {
-                selectedSubject.transform.DOScale(1, _delay);
-                selectedSubject.SetTextColor();
-                chaptersHolder.RectTransform.sizeDelta =
-                    new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
-                        startSize.y);
-                GameDataManager.instance.SetSelectedSubject(inNewSubjectButton.Data);
-                ShowChapter(selectedSubject.Data);
-            });
+            chaptersHolder.RectTransform.sizeDelta =
+                new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
+                    startSize.y);
+            GameDataManager.instance.SetSelectedSubject(inNewSubjectButton.Data);
+            ShowChapter(selectedSubject.Data);
         }
 
         private void ShowChapter(SubjectData inSubjectData)
@@ -153,8 +138,10 @@ namespace EditorMenu
             var nbChild = chaptersHolder.RectTransform.childCount;
             if (nbChild> 6)
             {
-                chaptersHolder.RectTransform.sizeDelta = new Vector2(chaptersHolder.RectTransform.sizeDelta.x,
-                    chaptersHolder.RectTransform.sizeDelta.y +((nbChild-6)* 105));
+                var sizeDelta = chaptersHolder.RectTransform.sizeDelta;
+                sizeDelta = new Vector2(sizeDelta.x,
+                    sizeDelta.y +(nbChild-6)* 105);
+                chaptersHolder.RectTransform.sizeDelta = sizeDelta;
             }
             chaptersHolder.UpdateLayout();
         }
@@ -170,11 +157,6 @@ namespace EditorMenu
             _selectedChapter = inNewSelectedChapterButton;
             _selectedChapter.Select();
             _selectedChapter.configBtn.gameObject.SetActive(true);
-            _selectedChapter.transform.DOScale(0.7f, _delay).SetEase(ease).OnComplete(() =>
-            {
-                _selectedChapter.transform.DOScale(1, _delay);
-                _selectedChapter.SetTextColor();
-            });
         }
 
         private void ResetSubjectsHolder()

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using ChapterPanel;
 using Sirenix.OdinInspector;
+using Templates;
 using UnityEngine;
 using UnityEngine.UI;
-using UPersian.Components;
 
 public class EditorModeManager : MonoBehaviour
 {
@@ -26,8 +25,13 @@ public class EditorModeManager : MonoBehaviour
 
     private Button _btn;
     private Image _bg;
-    private QuestionData currentQstData;
+    private QuestionData _currentQuestion;
+    private TemplateBase _currentTemplate;
 
+    private void OnDestroy()
+    {
+        QuestionBtn.OnClickQuestion -= InitiateDesignMode;
+    }
 
     private void Awake()
     {
@@ -35,16 +39,19 @@ public class EditorModeManager : MonoBehaviour
         editmodeButton.onClick.AddListener(OnClickEditMode);
         HidewarningPanelBtn.onClick.AddListener(() => warningPanel.SetActive(false));
         OnDesignClick += OnClickDesignMode;
-        QuestionBtn.OnClickQuestion += PrepareDesignMode;
-        OnGetTemplateComplete += ShowTemplateGamePlay;
+        QuestionBtn.OnClickQuestion += InitiateDesignMode;
+        OnGetTemplateComplete += StartTemplate;
     }
 
-    private void ShowTemplateGamePlay(TemplateBase obj, QuestionData currentQuestion)
+    private void StartTemplate(TemplateBase template, QuestionData currentQuestion)
     {
-        obj.Initialize(currentQuestion);
+        if(_currentTemplate != null) Destroy(_currentTemplate.gameObject);
+        _currentTemplate = template;
+        _currentTemplate.Initialize();
+        _currentTemplate.BindData(currentQuestion);
     }
 
-    private void PrepareDesignMode(QuestionBtn questionButton)
+    private void InitiateDesignMode(QuestionBtn questionButton)
     {
         if (questionButton.Data.quizFields == null)
         {
@@ -55,26 +62,26 @@ public class EditorModeManager : MonoBehaviour
             return;
         }
 
-        var currentQstData = questionButton.Data;
-        var templateId = currentQstData.templateId;
-        GetTemplate(templateId, currentQstData);
+        _currentQuestion = questionButton.Data;
+        // var currentQstData = questionButton.Data;
+        // var templateId = currentQstData.templateId;
+        // GetTemplate(templateId, currentQstData);
     }
 
-    private void GetTemplate(int templateId, QuestionData currentQuestionData)
+    private void GenerateTemplate(int templateId, QuestionData currentQuestionData)
     {
         var type = (TemplatesNames) templateId;
         Debug.Log(type.ToString());
-        var prefab = TemplatesHandler.Instance.templatesCatalog.FirstOrDefault(obj => obj.type == type).prefab;
-        Debug.Log(prefab.name+"prefaab name");
-        if (prefab == null)
+        var newTemplate = TemplatesHandler.GetTemplateById(templateId);
+        if (newTemplate == null)
         {
-            Debug.Log("Prefab is null !");
+            Debug.Log("Prefab is null!");
             return;
         }
-
-        var template = Instantiate(prefab, gameplayPanel.transform).gameObject.GetComponent<TemplateBase>();
-        template.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
-        OnGetTemplateComplete?.Invoke(template, currentQuestionData);
+        Debug.Log(newTemplate.name + "prefab name");
+        newTemplate.Transform.SetParent(gameplayPanel.transform);
+        newTemplate.Transform.localScale = Vector3.one;
+        OnGetTemplateComplete?.Invoke(newTemplate, currentQuestionData);
     }
 
     private void ClickDesignMode()
@@ -91,12 +98,12 @@ public class EditorModeManager : MonoBehaviour
         }
 
         var templateId = questionData.templateId;
-        GetTemplate(templateId, questionData);
+        GenerateTemplate(templateId, questionData);
         designmodePanel.gameObject.SetActive(true);
         designmodeButton.interactable = false;
-        designmodeButton.GetComponent<Image>().color = selectedColor;
+        designmodeButton.image.color = selectedColor;
         editmodeButton.interactable = true;
-        editmodeButton.GetComponent<Image>().color = unselectedColor;
+        editmodeButton.image.color = unselectedColor;
     }
 
     private void OnClickEditMode()
@@ -104,9 +111,9 @@ public class EditorModeManager : MonoBehaviour
         designmodePanel.gameObject.SetActive(false);
 
         editmodeButton.interactable = false;
-        editmodeButton.GetComponent<Image>().color = selectedColor;
+        editmodeButton.image.color = selectedColor;
 
         designmodeButton.interactable = true;
-        designmodeButton.GetComponent<Image>().color = unselectedColor;
+        designmodeButton.image.color = unselectedColor;
     }
 }

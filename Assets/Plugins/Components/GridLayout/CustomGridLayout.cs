@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Envast.Components.GridLayout.Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
     //REFACTOR: CustomGridLayout Y Positions
@@ -62,8 +63,8 @@ using UnityEngine;
             }
         }
     
-        // [Button("Update Layout", ButtonSizes.Medium)]
-        [ContextMenu("UpdateLayout")]
+        [Button("Update Layout", ButtonSizes.Medium)]
+        // [ContextMenu("UpdateLayout")]
         public void UpdateLayout()
         {
             
