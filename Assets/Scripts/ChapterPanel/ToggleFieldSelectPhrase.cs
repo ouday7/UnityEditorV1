@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleTextQuizField : QuizFieldBase
+public class ToggleFieldSelectPhrase : QuizFieldBase
 {
     [SerializeField] private Toggle myToggle;
     [SerializeField] private InputField inputFiled;
@@ -27,15 +27,9 @@ public class ToggleTextQuizField : QuizFieldBase
 
     private void Remove()
     {
-        // if (EditManager.Instance.TemplateHolder.childCount==EditManager.Instance.currentTemplate.minFields)
-        // {
-        //     buttonRemove.interactable = false;
-        // }
-        
-            Destroy(gameObject);
-            EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.TemplateHolder.RectTransform
+        Destroy(gameObject);
+        EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.TemplateHolder.RectTransform
                 .childCount-1);
-
     }
 
     private void ToggleValue(bool newValue) => _data.toggleA = newValue;

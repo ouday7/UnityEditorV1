@@ -35,7 +35,7 @@ using UnityEngine;
         [SerializeField] private string newLineTag = "LayoutNewLine";
         [SerializeField] private bool isVertical;
         public string NewLineTag => newLineTag;
-    
+        
         private void ReleaseReferences()
         {
             _rt = null;

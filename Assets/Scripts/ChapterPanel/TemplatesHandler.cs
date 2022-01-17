@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TemplatesHandler : EntryPointSystemBase
 {
+
     public static TemplatesHandler Instance;
     
     [System.Serializable]
@@ -13,10 +14,10 @@ public class TemplatesHandler : EntryPointSystemBase
         public GameObject prefab;
     }
     
-    
     public List<TemplateData> templatesData;
     public List<TemplateCategory> categoriesData;
-    [SerializeField]  private List<TemplateCatalog> templatesCatalog;
+    
+    [SerializeField] public List<TemplateCatalog> templatesCatalog;
     
     private Dictionary<TemplateCategory, List<TemplateData>> _mapByCategory;
     
