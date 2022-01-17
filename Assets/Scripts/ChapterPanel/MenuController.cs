@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using EditorMenu;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace ChapterPanel
 {
     public class MenuController : EntryPointSystemBase
     {
-        public static MenuController instance; 
+        //todo separate Add Question => change size from Remove Question and Generate Questions 
+        public static MenuController instance; //todo: remove instance
         
         [SerializeField] private Button addExBtn;
         [SerializeField] private CustomGridLayout exerciseHolder;
@@ -62,7 +64,7 @@ namespace ChapterPanel
             GameDataManager.instance.SaveToJson();
             UpdateExercisesHolderSize(1);
             
-            UpdateExercisesHolder();
+            UpdateLayout();
         }
         public void AddNewQst(ExerciseBtn inExerciseBtn)
         {
@@ -79,18 +81,49 @@ namespace ChapterPanel
             inExerciseBtn.ExpandQuestions();
             GameDataManager.instance.SaveToJson();
             
-            UpdateExercisesHolder();
+            UpdateLayout();
         }
         
-        public void UpdateExercisesHolderSize(int nb)
+        public void UpdateExercisesHolderSize(int nb) //todo: clean code
         {
-            var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
-            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y + nb*80);
+            UpdateHolderSize();
+            return;
+            if (nb >= 0)
+                UpdateHolderSize();
+            else
+                DecreaseHolderSize(Math.Abs(nb));
         }
 
-        public void UpdateExercisesHolder()
+        private void UpdateHolderSize()
         {
-            exerciseHolder.UpdateLayout();
+            var nb = exerciseHolder.transform.childCount;
+            var totalElementsHeight = currentExList.Sum(exerciseBtn => exerciseBtn.GetHeight());
+            var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
+            var newHeight = totalElementsHeight + (nb - 1) * exerciseHolder.spacing.y + exerciseHolder.padding.y * 2;
+            // Debug.Log($"//. {newHeight} = {totalElementsHeight} + {(nb - 1) * exerciseHolder.spacing.y} + {exerciseHolder.padding.y * 2}");
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, newHeight);
+            DelayedUpdateLayout();
+        }
+
+        private void DecreaseHolderSize(int nb)
+        {
+            // Debug.Log("//. Decrease Size");
+            var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y - nb * 80);
+            UpdateLayout();
+        }
+
+        public void UpdateLayout() => exerciseHolder.UpdateLayout();
+
+        private void DelayedUpdateLayout()
+        {
+            Invoke(nameof(UpdateLayout), .01f);
+        }
+
+        public void RemoveQuestion(QuestionBtn questionBtn)
+        {
+            currentQstList.Remove(questionBtn);
+            PoolSystem.instance.DeSpawn(questionBtn.Transform);
         }
     }
 }

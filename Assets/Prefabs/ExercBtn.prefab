@@ -930,7 +930,7 @@ MonoBehaviour:
   showQstsBtn: {fileID: 8903797514634085189}
   addQstBtn: {fileID: 2774032223149492134}
   titleTxt: {fileID: 2083848603370279421}
-  dragBtn: {fileID: 1406996165807013669}
+  dragComponent: {fileID: 1406996165807013669}
   qstHolder: {fileID: 1216796492917187395}
   header: {fileID: 8976313836361783569}
 --- !u!114 &1378972922250091823

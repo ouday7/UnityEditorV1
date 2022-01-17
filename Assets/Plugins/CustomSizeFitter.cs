@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-//using Envast.MenuEditor;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Envast.Layouts
+namespace Plugins
 {
     [RequireComponent(typeof(RectTransform))]
     public class CustomSizeFitter : MonoBehaviour

@@ -89,7 +89,7 @@ namespace ChapterPanel
 
         private void Generate()
         {
-            foreach (var categoryData in TemplatesHandler.Instance.categoriesData)
+            foreach (var categoryData in TemplatesHandler.Instance.Categories)
             {
                 var category = Instantiate(categoryPrefab, categoriesHolder).gameObject
                     .GetComponent<TemplateCategoryBtn>();
@@ -97,7 +97,7 @@ namespace ChapterPanel
                 category.Initialize(categoryData);
             }
 
-            foreach (var templateData in TemplatesHandler.Instance.templatesData)
+            foreach (var templateData in TemplatesHandler.Instance.Templates)
             {
                 var template = Instantiate(templatePrefab, templatesHolder).gameObject.GetComponent<TemplateBtn>();
                 this._allTemplates.Add(template);

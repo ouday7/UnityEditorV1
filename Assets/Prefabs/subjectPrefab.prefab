@@ -352,4 +352,8 @@ MonoBehaviour:
   editBtn: {fileID: 4836439067259369641}
   selectedColor: {r: 1, g: 0.89411765, b: 0.09411765, a: 1}
   unselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  labelSelectedColor: {r: 1, g: 1, b: 1, a: 1}
+  labelUnselectedColor: {r: 0, g: 0, b: 0, a: 1}
+  duration: 0.2
+  ease: 1
   isInitialized: 0

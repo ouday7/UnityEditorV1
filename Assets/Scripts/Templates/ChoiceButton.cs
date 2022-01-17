@@ -14,13 +14,14 @@ namespace Templates
 
         public void OnClickChoiceButton()
         {
+            //todo: outter scope
             if (lastChoise != null)
             {
                 lastChoise.Unselect();
                 Select();
             }
-                Select();
-                lastChoise = this;
+            Select();
+            lastChoise = this;
         }
         private void Unselect()
         {

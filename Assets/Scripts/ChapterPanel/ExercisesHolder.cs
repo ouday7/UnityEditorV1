@@ -7,43 +7,42 @@ namespace ChapterPanel
 {
     public class ExercisesHolder : EntryPointSystemBase
     {
-        public static ExercisesHolder instance;
+        public static ExercisesHolder instance;//todo: remove singletons with parents
 
         [SerializeField] private GameObject exerciseHolder;
         [SerializeField] private Button exitConfigBtn;
         public override void Begin()
         {
-            if(instance!=null) return;
-             instance = this;
-            
+            if (instance != null) return;
+            instance = this;
+
             exitConfigBtn.onClick.AddListener(OnExitSubmitChapter);
             var selectChapterId = GameDataManager.instance.GetSelectedChapter().id;
             var exercises = GameDataManager.instance.Data.exercises
                 .Where(ex => ex.chapterId == selectChapterId).ToList();
-            
+
             foreach (var ex in exercises)
             {
                 var newExBtn = PoolSystem.instance.Spawn<ExerciseBtn>(ObjectToPoolType.Exercise);
-                newExBtn.transform.SetParent(exerciseHolder.transform);
+                newExBtn.Transform.SetParent(exerciseHolder.transform);
+                newExBtn.Transform.localScale = Vector3.one;
                 newExBtn.Initialize();
                 newExBtn.BindData(ex);
-                newExBtn.transform.localScale = Vector3.one;
-                
-                if(ex.questions.Count==0)continue;
-                
+
+                if (ex.questions.Count == 0) continue;
+
                 foreach (var qst in ex.questions)
                 {
-                    var newqstBtn = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
-                    newqstBtn.Initialize(newExBtn);
-                    newqstBtn.BindData(qst);
-                    newExBtn.AddQuestionChild(newqstBtn);
-                    newqstBtn.transform.localScale = Vector3.one;
-                    newqstBtn.UpdateName();
+                    var newQstBtn = PoolSystem.instance.Spawn<QuestionBtn>(ObjectToPoolType.Question);
+                    newQstBtn.Initialize(newExBtn);
+                    newQstBtn.BindData(qst);
+                    newExBtn.AddQuestionChild(newQstBtn, false);
+                    newQstBtn.UpdateName();
                 }
             }
 
-            MenuController.instance.UpdateExercisesHolder();
             MenuController.instance.UpdateExercisesHolderSize(exerciseHolder.transform.childCount);
+            MenuController.instance.UpdateLayout();
         }
 
         private void OnExitSubmitChapter()

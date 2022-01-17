@@ -1,6 +1,6 @@
 ﻿using EditorMenu;
-using Envast.Components.GridLayout;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace ChapterPanel
 {
@@ -9,114 +9,106 @@ namespace ChapterPanel
         [SerializeField] private Button showQstsBtn;
         [SerializeField] private Button addQstBtn;
         [SerializeField] private Text titleTxt;
-        [SerializeField] private DraggBtn dragBtn;
+        [SerializeField] private DragComponent dragComponent;
         [SerializeField] private CustomGridLayout qstHolder;
         [SerializeField] private RectTransform header;
+        
         private ExerciseBtn _targetBtn;
         private Color _startColor;
         private Color _endColor;
-        
         private bool _isDragging;
         private bool _removable;
         private bool _changePos;
         private RectTransform _rt;
         private float _startSize;
         private int _endIndex;
-        private const string _exName = "  تمرين  ";
-        private Vector2 startPos;
+        private const string ExName = "  تمرين  ";
+        private Vector2 _startPos;
         private ExerciseData _data;
-        private bool updateSize;
+        private bool _updateSize;
         private int qstHeight = 85;
         private int holderWeight = 400;
         private bool _isInitialised;
-        public ExerciseData Data => _data;
-        public CustomGridLayout QstHolder => qstHolder;
         
-        public  void Initialize()
+        public ExerciseData Data => _data;
+        private CustomGridLayout QstHolder => qstHolder;
+
+        private RectTransform RectTransform
+        {
+            get
+            {
+                if (_rt == null) _rt = GetComponent<RectTransform>();
+                return _rt;
+            }
+        }
+        
+        public void Initialize()
         {
             if (_isInitialised) return;
-            
-            dragBtn.Initialize(this);
+            InitializeDrag();
             _isInitialised = true;
-            addQstBtn.onClick.AddListener(() =>
-            {
-                MenuController.instance.AddNewQst(this);
-            });
-            showQstsBtn.onClick.AddListener(ShowQuestions);
+            addQstBtn.onClick.AddListener(AddQuestion);
+            showQstsBtn.onClick.AddListener(DisplayQuestions);
             _startSize = RectTransform.sizeDelta.y;
         }
+
+        private void AddQuestion() => MenuController.instance.AddNewQst(this);
+
+        private void InitializeDrag()
+        {
+            dragComponent.OnBeginDragCallback += OnStartDrag;
+            dragComponent.OnDragCallback += OnDrag;
+            dragComponent.OnEndDragCallback += OnEndDrag;
+        }
+
         public void BindData(ExerciseData newExerciseData)
         {
-            titleTxt.text = _exName + (transform.GetSiblingIndex()+1);
+            titleTxt.text = ExName + (transform.GetSiblingIndex()+1);
             _data = newExerciseData;
             Data.chapterId = newExerciseData.chapterId;
             Data.questions = newExerciseData.questions;
         }
-        private void ShowQuestions()
+        private void DisplayQuestions()
         {
             var nbChild = qstHolder.transform.childCount;
             if (qstHolder.gameObject.activeInHierarchy)
             {
-                qstHolder.gameObject.SetActive(false);
-                RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
-                    _startSize);
-                MenuController.instance.UpdateExercisesHolderSize(-nbChild);
-                MenuController.instance.UpdateExercisesHolder();
+                Hide(nbChild);
                 return;
             }
 
+            Show(nbChild);
+        }
+
+        public void Show(int nbChild)
+        {
             if (nbChild == 0) return;
-            
-            MaximiseHolderSize();
+
+            UpdateQuestionHolderSize();
             MenuController.instance.UpdateExercisesHolderSize(nbChild);
-            QstHolder.UpdateLayout();
             qstHolder.gameObject.SetActive(true);
-            var newHeight = qstHolder.RectTransform.sizeDelta.y +
-                            header.sizeDelta.y;
-            RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
-            MenuController.instance.UpdateExercisesHolder();
         }
-        
-        public void OnStartDrag()
+
+        public void Hide(int nbChild)
         {
-            startPos = transform.position;
+            qstHolder.gameObject.SetActive(false);
+            RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
+                _startSize);
+            MenuController.instance.UpdateExercisesHolderSize(-nbChild);
         }
-        public void OnDrag(Vector3 pos)
-        {
-            _isDragging=true;
-            var transform1 = transform;
-            transform1.position = new Vector2(transform1.position.x, pos.y);
-        }
-        public void OnEndDrag()
-        {
-            if (_removable)
-            {
-                Remove();
-            }
-            else if (_changePos)
-            {
-                var x = _targetBtn.transform.GetSiblingIndex();
-                _targetBtn.transform.SetSiblingIndex(transform.transform.GetSiblingIndex());
-                transform.transform.SetSiblingIndex(x);
-            }
-            else transform.position = startPos;
-            
-            _isDragging = false;
-            MenuController.instance.ExerciseHolder.UpdateLayout();
-        }
-        
+
         private void Remove()
         {
-            var toDeleteBtn = transform.GetComponent<ExerciseBtn>();
-            PoolSystem.instance.DeSpawn(transform);
+            var toDeleteBtn = Transform.GetComponent<ExerciseBtn>();
+            PoolSystem.instance.DeSpawn(Transform);
             MenuController.instance.UpdateExercisesHolderSize(-1);
-            MaximiseHolderSize();
-            MaximiseExerciseSize();
+            UpdateQuestionHolderSize();
+            UpdateExerciseSize();
             MenuController.instance.currentExList.Remove(toDeleteBtn);
             GameDataManager.instance.Data.exercises.Remove(toDeleteBtn.Data);
             GameDataManager.instance.SaveToJson();
             RenameExercises();
-            MenuController.instance.UpdateExercisesHolder();
+            MenuController.instance.UpdateLayout();
         }
 
         private void RenameExercises()
@@ -124,7 +116,7 @@ namespace ChapterPanel
             var exercicseNumber = 1;
             foreach (Transform ex in MenuController.instance.ExerciseHolder.transform)
             {
-                ex.GetComponent<ExerciseBtn>().titleTxt.text = _exName+exercicseNumber;
+                ex.GetComponent<ExerciseBtn>().titleTxt.text = ExName+exercicseNumber;
                 exercicseNumber++;
             }
         }
@@ -137,8 +129,85 @@ namespace ChapterPanel
                 qst.GetComponent<QuestionBtn>().btnName.text = QuestionBtn._qstName+qstNumber;
                 qstNumber++;
             }
-        } 
+        }
 
+        public void AddQuestionChild(QuestionBtn newQuestionButton, bool updateSize = true)
+        {
+            newQuestionButton.Transform.SetParent(qstHolder.RectTransform);
+            newQuestionButton.Transform.localScale = Vector3.one;
+            if(!updateSize) return;
+            UpdateQuestionHolderSize();
+            qstHolder.UpdateLayout();
+        }
+
+        private void UpdateQuestionHolderSize()
+        {
+            var nbChild = qstHolder.RectTransform.childCount;
+            var newSize = new Vector2(holderWeight,  nbChild * qstHeight);
+            qstHolder.RectTransform.sizeDelta = newSize;
+            qstHolder.UpdateLayout();
+            UpdateExerciseSize();
+        }
+
+        private void UpdateExerciseSize()
+        {
+            var newHeight = qstHolder.RectTransform.sizeDelta.y +
+                            header.sizeDelta.y;
+            RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
+        }
+
+        public void ExpandQuestions()
+        {
+            UpdateExerciseSize();
+            qstHolder.gameObject.SetActive(true);
+        }
+
+        public void DeleteQuestion(QuestionBtn questionBtn)
+        {
+            Data.questions.Remove(questionBtn.Data);
+            MenuController.instance.RemoveQuestion(questionBtn);
+            RenameQuestions();
+            MenuController.instance.UpdateExercisesHolderSize(-1);
+            UpdateQuestionHolderSize();
+            UpdateExerciseSize();
+            MenuController.instance.UpdateLayout();
+            GameDataManager.instance.SaveToJson();
+        }
+        
+        //drag logic
+
+        private void OnStartDrag(PointerEventData eventData)
+        {
+            _startPos = transform.position;
+        }
+
+        private void OnDrag(PointerEventData eventData)
+        {
+            _isDragging=true;
+            var transform1 = transform;
+            transform1.position = new Vector2(transform1.position.x, eventData.position.y);
+        }
+
+        private void OnEndDrag(PointerEventData eventData)
+        {
+            if (_removable)
+            {
+                Remove();
+            }
+            else if (_changePos)
+            {
+                var x = _targetBtn.transform.GetSiblingIndex();
+                _targetBtn.transform.SetSiblingIndex(transform.transform.GetSiblingIndex());
+                transform.transform.SetSiblingIndex(x);
+            }
+            else transform.position = _startPos;
+            
+            _isDragging = false;
+            MenuController.instance.ExerciseHolder.UpdateLayout();
+        }
+        
+        //collision logic
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Remove") && _isDragging)
@@ -160,8 +229,8 @@ namespace ChapterPanel
         {
             if (other.gameObject.CompareTag("Remove") )
             {
-               header.GetComponent<Image>().color=Color.white;
-               _removable = false;
+                header.GetComponent<Image>().color=Color.white;
+                _removable = false;
             }
 
             if (!other.gameObject.CompareTag("GroupQuestionMenuBtn")) return;
@@ -169,52 +238,6 @@ namespace ChapterPanel
             _changePos = false;
         }
 
-        public void AddQuestionChild(QuestionBtn newQuestionButton)
-        {
-            newQuestionButton.transform.SetParent(qstHolder.RectTransform);
-            MaximiseHolderSize();
-            qstHolder.UpdateLayout();
-        }
-
-        private RectTransform RectTransform
-        {
-            get
-            {
-                if (_rt == null) _rt = GetComponent<RectTransform>();
-                return _rt;
-            }
-        }
-        public void MaximiseHolderSize()
-        {
-            var nbChild = qstHolder.RectTransform.childCount;
-            var newSize = new Vector2(holderWeight,  nbChild * qstHeight);
-            qstHolder.RectTransform.sizeDelta = newSize;
-            qstHolder.UpdateLayout();
-        }
-        public void MaximiseExerciseSize()
-        {
-            var newHeight = qstHolder.RectTransform.sizeDelta.y +
-                            header.sizeDelta.y;
-            RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, newHeight);
-        }
-
-        public void ExpandQuestions()
-        {
-            MaximiseExerciseSize();
-            qstHolder.gameObject.SetActive(true);
-        }
-
-        public void DeleteQuestion(QuestionBtn questionBtn)
-        {
-            PoolSystem.instance.DeSpawn(questionBtn.Transform);
-            MenuController.instance.currentQstList.Remove(questionBtn);
-            Data.questions.Remove(questionBtn.Data);
-            GameDataManager.instance.SaveToJson();
-            RenameQuestions();
-            MenuController.instance.UpdateExercisesHolderSize(-1);
-            MaximiseHolderSize();
-            MaximiseExerciseSize();
-            MenuController.instance.UpdateExercisesHolder();
-        }
+        public float GetHeight() => RectTransform.sizeDelta.y;
     }
 }
