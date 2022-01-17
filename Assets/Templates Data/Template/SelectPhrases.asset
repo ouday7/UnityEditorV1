@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb8c25dceebc70345856a544a8681f3f, type: 3}
-  m_Name: SelectPhrase
+  m_Name: SelectPhrases
   m_EditorClassIdentifier: 
   id: 2
-  templateName: 3
+  templateName: 1
   category: 4
-  icon: {fileID: 21300018, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
-  maxFields: 5
+  icon: {fileID: 21300032, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
+  maxFields: 6
   minFields: 3
   templateFields: 06000000

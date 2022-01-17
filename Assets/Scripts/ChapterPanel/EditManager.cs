@@ -46,7 +46,7 @@ namespace ChapterPanel
             mainQuestionText.onEndEdit.AddListener(UpdateMainQuestion);
             subQuestionText.onEndEdit.AddListener(UpdateSubQuestion);
             helpQuestionText.onEndEdit.AddListener(UpdateHelpQuestion);
-             defaultSize = new Vector2(1484,920f);
+             defaultSize = new Vector2(1484,925);
         }
 
         private void OpenPanel()
@@ -69,7 +69,7 @@ namespace ChapterPanel
                 minFieldsTxt.text = "Min Fiddles : ";
                 addQuizField.gameObject.SetActive(false);
                 RemoveTemplateFromHierarchy();
-                MaximiseMainContentHolder(templateHolder.RectTransform.childCount);
+                MaximiseMainContentHolder(currentQuestion.quizFields.Count);
                 return;
             }
 
@@ -77,6 +77,7 @@ namespace ChapterPanel
                 TemplatesHandler.Instance.templatesData.FirstOrDefault(
                     template => template.id == qstBtn.Data.templateId);
             OnTemplateSelected(templateData);
+            
         }
 
         public void MaximiseMainContentHolder(int nbChild)
@@ -87,7 +88,7 @@ namespace ChapterPanel
                 templateHolder.UpdateLayout();
                 return;
             }
-            mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x , defaultSize.y+(nbChild * 180));
+            mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x , defaultSize.y+((nbChild) * 180));
             templateHolder.UpdateLayout();
         }
 
@@ -137,6 +138,7 @@ namespace ChapterPanel
                     quizField.BindData(data);
                     currentQuestion.quizFields.Add(data);
                     tempTemplatId = i;
+                    templateHolder.UpdateLayout();
                 }
             }
             // else if (((selectTemplateDialog.submittedData.id != currentQuestion.templateId)))
@@ -156,9 +158,11 @@ namespace ChapterPanel
                     quizField.Initialize();
                     quizField.BindData(data);
                     tempTemplatId = i;
+                    templateHolder.UpdateLayout();
                 }
             }
-            MaximiseMainContentHolder(templateHolder.RectTransform.childCount); 
+            MaximiseMainContentHolder(currentQuestion.quizFields.Count); 
+            templateHolder.UpdateLayout();
         }
         private void RemoveTemplateFromHierarchy()
         {
@@ -166,10 +170,11 @@ namespace ChapterPanel
             {
                 Destroy(child.gameObject);
             }
+            MaximiseMainContentHolder(templateHolder.RectTransform.childCount);
         }
         private void QuizFieldsMaxGenerate()
         {
-            var x = templateHolder.RectTransform.GetChildren().Count;
+            var x = templateHolder.RectTransform.childCount;
             if (x >= currentTemplate.maxFields) return;
             Debug.Log(currentTemplate.GetQuizFieldType(tempTemplatId));
             var data = currentQuestion.quizFields[tempTemplatId];
@@ -184,6 +189,7 @@ namespace ChapterPanel
             GameDataManager.instance.SaveToJson();
             tempTemplatId++;
             MaximiseMainContentHolder(templateHolder.RectTransform.childCount);
+            templateHolder.UpdateLayout();
         }
         private void Test()
         {
