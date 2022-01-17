@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using UPersian.Components;
 
 namespace Templates
 {
@@ -18,17 +17,16 @@ namespace Templates
             if (lastChoise != null)
             {
                 lastChoise.Unselect();
-                this.Select();
-                lastChoise = this;
+                Select();
             }
-        
-            this.Select();
-            lastChoise = this;
+                Select();
+                lastChoise = this;
         }
         private void Unselect()
         {
             transform.GetComponent<Image>().DOColor(unselectedColor,0.1f);
             transform.DOScale(1, 0.1f);
+            transform.GetComponent<Button>().interactable = true;
         }
         private void Select()
         {
@@ -36,8 +34,8 @@ namespace Templates
             {
                 transform.DOScale(1.2f, 0.25f);
                 transform.GetComponent<Image>().DOColor(selectedColor,0.1f);
+                transform.GetComponent<Button>().interactable = false;
             });
-        
         }
     }
 }

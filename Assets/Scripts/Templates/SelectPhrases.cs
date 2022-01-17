@@ -22,11 +22,8 @@ namespace Templates
             foreach (var t in question.quizFields)
             {
                 var newBtn = Instantiate(_choiceButton, _buttonsList.RectTransform);
-                var txt = t.textA;
-                newBtn.GetComponentInChildren<Text>().text = txt;
-                
-                txt = t.textTwo;
-                
+                newBtn.GetComponentInChildren<Text>().text = t.textA;
+               
                 if (newBtn.GetComponentInChildren<Text>().text == t.toggleA.ToString())
                 {
                     _correctChoice = newBtn;

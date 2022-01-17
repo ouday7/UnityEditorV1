@@ -43,10 +43,10 @@ public class EditorModeManager : MonoBehaviour
         {
             if (questionButton.Data.quizFields == null)
             {
-                foreach (Transform obj in gameplayPanel.transform)
+                /*foreach (Transform obj in gameplayPanel.transform)
                 {
                     Destroy(obj);                  
-                }
+                }*/
                 return;
             }
            var currentQstData=questionButton.Data;
@@ -61,7 +61,7 @@ public class EditorModeManager : MonoBehaviour
             var prefab = TemplatesHandler.Instance.templatesCatalog.FirstOrDefault(obj => obj.type==type).prefab;
             if (prefab == null)
             {
-                //Debug.Log("Prefab is null !");
+                Debug.Log("Prefab is null !");
                 return;
             }
             var template = Instantiate(prefab, gameplayPanel.transform).gameObject.GetComponent<TemplateBase>();
@@ -81,6 +81,8 @@ public class EditorModeManager : MonoBehaviour
                 warningPanel.SetActive(true);
                 return;
             }
+            var templateId = questionData.templateId;
+            GetTemplate(templateId,questionData);
             designmodePanel.gameObject.SetActive(true);
             designmodeButton.interactable = false;
             designmodeButton.GetComponent<Image>().color = selectedColor;

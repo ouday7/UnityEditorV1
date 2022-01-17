@@ -354,7 +354,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6531e2a4c29ea9541b30a4aa44f15201, type: 2}
   - {fileID: 11400000, guid: 946af88835259e849b7dd94e71d56536, type: 2}
   templatesCatalog:
-  - type: 2
+  - type: 1
     prefab: {fileID: 3846846862371286279, guid: 2134cc268e76d1a45981e9ab452768d3, type: 3}
 --- !u!4 &450717873
 Transform:
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quizFieldsList:
-  - name: 6
+  - name: 1
     prefab: {fileID: 5429761376805596237, guid: c007d969dfa7e9148b934ba061632f09, type: 3}
   - name: 0
     prefab: {fileID: 7852179051471456959, guid: 1cf3f03fa39641b499701ae314602f79, type: 3}
@@ -1146,7 +1146,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please Check the Data
+  m_Text: 'You can''t enter playMode. Check your data
+
+'
 --- !u!222 &2072684124
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1579,7 +1581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925640985377, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10.245119
+      value: 0.5675659
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925640985377, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1619,7 +1621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7437377711494966299, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00003910296
+      value: 0.00003910251
       objectReference: {fileID: 0}
     - target: {fileID: 7496414078737943156, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_IsActive

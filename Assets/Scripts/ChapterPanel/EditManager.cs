@@ -69,15 +69,16 @@ namespace ChapterPanel
                 minFieldsTxt.text = "Min Fiddles : ";
                 addQuizField.gameObject.SetActive(false);
                 RemoveTemplateFromHierarchy();
-                MaximiseMainContentHolder(currentQuestion.quizFields.Count);
-                return;
+                MaximiseMainContentHolder(0);
+                
+                    return;
             }
 
             var templateData =
                 TemplatesHandler.Instance.templatesData.FirstOrDefault(
                     template => template.id == qstBtn.Data.templateId);
             OnTemplateSelected(templateData);
-            
+            templateHolder.UpdateLayout();
         }
 
         public void MaximiseMainContentHolder(int nbChild)
@@ -117,6 +118,7 @@ namespace ChapterPanel
             selectTemplateBtn.templateNameTxt.text = currentTemplate.templateName.ToString();
             minFieldsTxt.text = "Min Fields : " + currentTemplate.minFields;
             GenerateTemplateFields();
+            templateHolder.UpdateLayout();
             GameDataManager.instance.SaveToJson();
 
         }
@@ -171,6 +173,7 @@ namespace ChapterPanel
                 Destroy(child.gameObject);
             }
             MaximiseMainContentHolder(templateHolder.RectTransform.childCount);
+            templateHolder.UpdateLayout();
         }
         private void QuizFieldsMaxGenerate()
         {
