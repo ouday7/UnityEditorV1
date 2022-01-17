@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 6284934204382685557}
   - component: {fileID: 6284934204382685546}
   - component: {fileID: 6284934204382685547}
-  - component: {fileID: 9119919866175474733}
   m_Layer: 5
   m_Name: btnB
   m_TagString: Untagged
@@ -210,26 +209,6 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 6284934204382685557}
   m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &9119919866175474733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6284934204382685545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cfe647664048047a2b52c22f0423de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnLabel: {fileID: 6284934205887205807}
-  internalUpdateShape: 1
-  OnSelect:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnselect:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6284934204573594960
@@ -425,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6284934205128297615}
-  - component: {fileID: 1448074652650037514}
+  - component: {fileID: 7861982508473891693}
   m_Layer: 5
   m_Name: TrueOrFalseTemplate
   m_TagString: Untagged
@@ -453,7 +432,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1448074652650037514
+--- !u!114 &7861982508473891693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,6 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4193768f446be314f9363b2271707d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainQuestionTxt: {fileID: 0}
+  subQuestionTxt: {fileID: 0}
+  resultBtn: {fileID: 0}
   questionData:
     questionId: 0
     mainQst: 
@@ -475,8 +457,8 @@ MonoBehaviour:
     situationData: 
   questionTxt: {fileID: 6284934205180120273}
   imageTxt: {fileID: 6284934204262919646}
-  btnA: {fileID: 0}
-  btnB: {fileID: 0}
+  btnA: {fileID: 6284934205618750011}
+  btnB: {fileID: 6284934204382685547}
   contentHolder: {fileID: 6284934205351067165}
   btnHolder: {fileID: 6284934205732865055}
 --- !u!1 &6284934205180120276
@@ -741,7 +723,6 @@ GameObject:
   - component: {fileID: 6284934205618750009}
   - component: {fileID: 6284934205618750014}
   - component: {fileID: 6284934205618750011}
-  - component: {fileID: 4528142993065154510}
   m_Layer: 5
   m_Name: btnA
   m_TagString: Untagged
@@ -863,26 +844,6 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 6284934205618750009}
   m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4528142993065154510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6284934205618750012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cfe647664048047a2b52c22f0423de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnLabel: {fileID: 6284934204753672345}
-  internalUpdateShape: 1
-  OnSelect:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnselect:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6284934205732865053
