@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +28,7 @@ public class TrueFalseTemplate : TemplateBase
             questionTxt.text = "";
         }
 
-        if (imageTxt.sprite == null ) 
+        if (imageTxt.sprite == null)
         {
             Debug.Log("sprite null");
         }
@@ -40,7 +40,7 @@ public class TrueFalseTemplate : TemplateBase
         btnB.name = questionData.quizFields[2].textA;
         btnA.onClick.AddListener(OnClickButtonA);
         btnB.onClick.AddListener(OnClickButtonB);
-        
+
     }
 
     private void OnClickButtonA()
@@ -50,11 +50,11 @@ public class TrueFalseTemplate : TemplateBase
         _result = _a;
         btnA.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
-        
-        btnB.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+
+        btnB.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
         btnA.interactable = false;
-        btnB.interactable =true;
+        btnB.interactable = true;
     }
 
     private void OnClickButtonB()
@@ -64,8 +64,8 @@ public class TrueFalseTemplate : TemplateBase
         _result = _b;
         btnB.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
-        
-        btnA.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+
+        btnA.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
         btnA.interactable = true;
         btnB.interactable = false;
@@ -79,17 +79,17 @@ public class TrueFalseTemplate : TemplateBase
         _a = false;
         _b = false;
         _result = false;
-        btnA.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+        btnA.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
-        btnB.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+        btnB.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
-        
-            
+
+
         // btnA.transform.DOScale(new Vector3(0.75f, 0.5f, 1f),duration:5f)
         //     .SetEase(Ease.InOutSine)
         //     .SetLoops(-1, LoopType.Yoyo);
     }
-    
+
 
     public override bool GetResult()
     {
@@ -99,6 +99,6 @@ public class TrueFalseTemplate : TemplateBase
     public override void OnDestroy()
     {
         ResetTemplate();
-        
+
     }
 }
