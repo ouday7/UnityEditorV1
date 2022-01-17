@@ -30,9 +30,12 @@ using UPersian.Components;
       }
       public void SetTemplate(TemplateData data)
       {
-          Debug.Log("category : "+data.category);
           this._data = data;
           templateIcon.sprite = data.icon;
           templateNameTxt.text = data.name;
+
+          // Debug.Log("category : "+data.category);
+          // Debug.Log(templateNameTxt.text+"templateNameTxt.text");
+          // Debug.Log(templateIcon.sprite +"data.icon");
       }
     }
