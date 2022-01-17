@@ -16,6 +16,7 @@ namespace Templates
     
         public override void Initialize(QuestionData question)
         {
+            ResetTemplate();
             mainQuestionTxt.text = question.mainQst;
             subQuestionTxt.text = question.subQst;
         
@@ -45,7 +46,13 @@ namespace Templates
 
         public override void ResetTemplate()
         {
-           
+            mainQuestionTxt.text = "";
+            subQuestionTxt.text = "";
+
+            foreach (Object choice in _buttonsList.transform)
+            {
+                Destroy(choice);
+            }
         }
 
         public override void OnDestroy()

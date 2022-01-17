@@ -356,7 +356,7 @@ MonoBehaviour:
   templatesCatalog:
   - type: 1
     prefab: {fileID: 3846846862371286279, guid: 2134cc268e76d1a45981e9ab452768d3, type: 3}
-  - type: 2
+  - type: 0
     prefab: {fileID: 6284934205128297612, guid: 02cc7c51fcf762d4db7f4d573cc8607e, type: 3}
 --- !u!4 &450717873
 Transform:
@@ -886,7 +886,7 @@ MonoBehaviour:
   - name: 4
     prefab: {fileID: 6145269787478288624, guid: fe628fb4158c13a4aa9c70695f268206, type: 3}
   - name: 6
-    prefab: {fileID: 5429761376805596237, guid: c007d969dfa7e9148b934ba061632f09, type: 3}
+    prefab: {fileID: 7223298751068071182, guid: 8d13bcd06b3228341b3dd8f5ba54a456, type: 3}
 --- !u!4 &1515404980
 Transform:
   m_ObjectHideFlags: 0
@@ -1373,6 +1373,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000015735626
       objectReference: {fileID: 0}
+    - target: {fileID: 167434097519183682, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 496.98712
+      objectReference: {fileID: 0}
     - target: {fileID: 493677392245980560, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_Name
       value: ModeButtonsPanel
@@ -1583,7 +1587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925640985377, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.5675659
+      value: 0.5675968
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925640985377, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_SizeDelta.y

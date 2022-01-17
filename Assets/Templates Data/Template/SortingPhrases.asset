@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SortingPhrases
   m_EditorClassIdentifier: 
   id: 3
-  templateName: 0
+  templateName: 2
   category: 0
   icon: {fileID: 21300016, guid: 23de6ab01a704514eb4df3906dd60a63, type: 3}
   maxFields: 8

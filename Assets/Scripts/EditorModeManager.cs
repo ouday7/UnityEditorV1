@@ -41,14 +41,9 @@ public class EditorModeManager : MonoBehaviour
         }
         private void PrepareDesignMode(QuestionBtn questionButton)
         {
-            if (questionButton.Data.quizFields == null)
-            {
-                /*foreach (Transform obj in gameplayPanel.transform)
-                {
-                    Destroy(obj);                  
-                }*/
+            if (questionButton.Data.quizFields==null)
                 return;
-            }
+            
            var currentQstData=questionButton.Data;
            var templateId = currentQstData.templateId;
            GetTemplate(templateId,currentQstData);
