@@ -17,7 +17,7 @@
                             "templateID": 0,
                             "id": 0,
                             "type": "",
-                            "textA": "xwc",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -25,14 +25,14 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
                             "templateID": 0,
                             "id": 0,
                             "type": "",
-                            "textA": "wxc",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -40,14 +40,14 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
                             "templateID": 0,
                             "id": 0,
                             "type": "",
-                            "textA": "wxcwxcqsdqsd",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -59,15 +59,6 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 2,
-                    "situationData": ""
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [],
                     "templateId": 0,
                     "situationData": ""
                 }

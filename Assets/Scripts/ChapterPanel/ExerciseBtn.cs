@@ -176,7 +176,7 @@ namespace ChapterPanel
         
         //drag logic
 
-        private void OnStartDrag(PointerEventData eventData)
+        public void OnStartDrag(PointerEventData eventData)
         {
             _startPos = transform.position;
         }

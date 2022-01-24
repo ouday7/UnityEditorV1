@@ -83,12 +83,10 @@ public class EditorModeManager : MonoBehaviour
         newTemplate.Transform.localScale = Vector3.one;
         OnGetTemplateComplete?.Invoke(newTemplate, currentQuestionData);
     }
-
     private void ClickDesignMode()
     {
         OnDesignClick?.Invoke(EditManager.Instance.currentQuestionData);
     }
-
     private void OnClickDesignMode(QuestionData questionData)
     {
         if (questionData.quizFields.Count == 0)
@@ -105,7 +103,6 @@ public class EditorModeManager : MonoBehaviour
         editmodeButton.interactable = true;
         editmodeButton.image.color = unselectedColor;
     }
-
     private void OnClickEditMode()
     {
         designmodePanel.gameObject.SetActive(false);

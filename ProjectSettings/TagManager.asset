@@ -7,6 +7,11 @@ TagManager:
   - Remove
   - GroupQuestionMenuBtn
   - LayoutNewLine
+  - question
+  - answer
+  - Block
+  - Slot
+  - Holder
   layers:
   - Default
   - TransparentFX
