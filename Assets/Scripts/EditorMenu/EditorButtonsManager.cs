@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ChapterPanel;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace EditorMenu
 {
@@ -37,6 +38,7 @@ namespace EditorMenu
             {
                 instance = this;
             }
+            
             SubjectButton.OnSelectSubjectButton += OnSelectSubjectButton;
             ChapterButton.OnSelectChaptersButton += OnSelectChapterButton;
             ChapterButton.OnSubmitButton += OnSubmitChapter;

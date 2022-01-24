@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class DragComponent : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public event Action<PointerEventData> OnDragCallback;
-    public event Action<PointerEventData> OnBeginDragCallback;
-    public event Action<PointerEventData> OnEndDragCallback; 
+    public  event Action<PointerEventData> OnDragCallback;
+    public  event Action<PointerEventData> OnBeginDragCallback;
+    public  event Action<PointerEventData> OnEndDragCallback; 
 
     public void OnBeginDrag(PointerEventData eventData)
     {

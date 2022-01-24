@@ -6,10 +6,6 @@ namespace Templates
 {
     public abstract class TemplateBase : MonoBehaviour
     {
-        public Text mainQuestionTxt;//todo QUESTION IS SEPARATE FROM TEMPLATE
-        public Text subQuestionTxt;
-        public Button resultBtn;
-
         private Transform _t;
         public Transform Transform
         {

@@ -62,7 +62,7 @@ namespace ChapterPanel
             currentExList.Add(newExBtn);
             GameDataManager.instance.Data.exercises.Add(Data);
             GameDataManager.instance.SaveToJson();
-            UpdateExercisesHolderSize(1);
+            UpdateExercisesHolderSize();
             
             UpdateLayout();
         }
@@ -77,21 +77,16 @@ namespace ChapterPanel
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
             
-            UpdateExercisesHolderSize(1);
+            UpdateExercisesHolderSize();
             inExerciseBtn.ExpandQuestions();
             GameDataManager.instance.SaveToJson();
             
             UpdateLayout();
         }
         
-        public void UpdateExercisesHolderSize(int nb) //todo: clean code
+        public void UpdateExercisesHolderSize()
         {
             UpdateHolderSize();
-            return;
-            if (nb >= 0)
-                UpdateHolderSize();
-            else
-                DecreaseHolderSize(Math.Abs(nb));
         }
 
         private void UpdateHolderSize()
@@ -100,19 +95,9 @@ namespace ChapterPanel
             var totalElementsHeight = currentExList.Sum(exerciseBtn => exerciseBtn.GetHeight());
             var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
             var newHeight = totalElementsHeight + (nb - 1) * exerciseHolder.spacing.y + exerciseHolder.padding.y * 2;
-            // Debug.Log($"//. {newHeight} = {totalElementsHeight} + {(nb - 1) * exerciseHolder.spacing.y} + {exerciseHolder.padding.y * 2}");
             exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, newHeight);
             DelayedUpdateLayout();
         }
-
-        private void DecreaseHolderSize(int nb)
-        {
-            // Debug.Log("//. Decrease Size");
-            var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
-            exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, exHolderSize.y - nb * 80);
-            UpdateLayout();
-        }
-
         public void UpdateLayout() => exerciseHolder.UpdateLayout();
 
         private void DelayedUpdateLayout()

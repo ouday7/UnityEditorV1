@@ -41,7 +41,7 @@ namespace ChapterPanel
                 }
             }
 
-            MenuController.instance.UpdateExercisesHolderSize(exerciseHolder.transform.childCount);
+            MenuController.instance.UpdateExercisesHolderSize();
             MenuController.instance.UpdateLayout();
         }
 

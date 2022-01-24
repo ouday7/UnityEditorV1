@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleFieldSelectPhrase : QuizFieldBase
+public class InputFieldSelectPhrase : QuizFieldBase
 {
     [SerializeField] private Toggle myToggle;
     [SerializeField] private InputField inputFiled;
@@ -28,7 +28,7 @@ public class ToggleFieldSelectPhrase : QuizFieldBase
     private void Remove()
     {
         Destroy(gameObject);
-        EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.TemplateHolder.RectTransform
+        EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.QuizFieldsHolder.RectTransform
                 .childCount-1);
     }
 

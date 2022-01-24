@@ -37,7 +37,8 @@ public enum FieldTypes
     ImageText,
     ImageImage,
     ToggleText,
-    ImageToggle
+    ImageToggle,
+    NumberText
 }
 
 [CreateAssetMenu(fileName = "TemplateData", menuName = "ScriptableObjects/TemplateDataInformation", order = 1)]

@@ -9,7 +9,7 @@ namespace ChapterPanel
         [SerializeField] private Button showQstsBtn;
         [SerializeField] private Button addQstBtn;
         [SerializeField] private Text titleTxt;
-        [SerializeField] private DragComponent dragComponent;
+        [SerializeField] private  DragComponent dragComponent;
         [SerializeField] private CustomGridLayout qstHolder;
         [SerializeField] private RectTransform header;
         
@@ -73,35 +73,35 @@ namespace ChapterPanel
             var nbChild = qstHolder.transform.childCount;
             if (qstHolder.gameObject.activeInHierarchy)
             {
-                Hide(nbChild);
+                Hide();
                 return;
             }
 
             Show(nbChild);
         }
 
-        public void Show(int nbChild)
+        private void Show(int nbChild)
         {
             if (nbChild == 0) return;
 
             UpdateQuestionHolderSize();
-            MenuController.instance.UpdateExercisesHolderSize(nbChild);
+            MenuController.instance.UpdateExercisesHolderSize();
             qstHolder.gameObject.SetActive(true);
         }
 
-        public void Hide(int nbChild)
+        private void Hide( )
         {
             qstHolder.gameObject.SetActive(false);
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
                 _startSize);
-            MenuController.instance.UpdateExercisesHolderSize(-nbChild);
+            MenuController.instance.UpdateExercisesHolderSize();
         }
 
         private void Remove()
         {
             var toDeleteBtn = Transform.GetComponent<ExerciseBtn>();
             PoolSystem.instance.DeSpawn(Transform);
-            MenuController.instance.UpdateExercisesHolderSize(-1);
+            MenuController.instance.UpdateExercisesHolderSize();
             UpdateQuestionHolderSize();
             UpdateExerciseSize();
             MenuController.instance.currentExList.Remove(toDeleteBtn);
@@ -167,7 +167,7 @@ namespace ChapterPanel
             Data.questions.Remove(questionBtn.Data);
             MenuController.instance.RemoveQuestion(questionBtn);
             RenameQuestions();
-            MenuController.instance.UpdateExercisesHolderSize(-1);
+            MenuController.instance.UpdateExercisesHolderSize();
             UpdateQuestionHolderSize();
             UpdateExerciseSize();
             MenuController.instance.UpdateLayout();
