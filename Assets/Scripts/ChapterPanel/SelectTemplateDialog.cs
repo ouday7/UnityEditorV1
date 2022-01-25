@@ -8,7 +8,6 @@ namespace ChapterPanel
 {
     public class SelectTemplateDialog : EntryPointSystemBase
     {
-        public static SelectTemplateDialog instance;
         public event Action<TemplateData> OnSubmitTemplate;
         public TemplateData submittedData;
         public TemplateData x;
@@ -22,10 +21,10 @@ namespace ChapterPanel
 
         private SelectTemplateButton _selectTemplateButton;
         private List<TemplateCategoryBtn> _allCategories;
-        private List<TemplateBtn> _allTemplates;
+        private List<TemplateButton> _allTemplates;
         private TemplateCategoryBtn _selectedCategory;
-        public TemplateBtn selectedTemplate;
-        public TemplateBtn _submittedTemplate;
+        public TemplateButton selectedTemplate;
+        public TemplateButton _submittedTemplate;
         private TemplatesHandler _templatesHandler;
 
 
@@ -33,49 +32,45 @@ namespace ChapterPanel
         private void OnDestroy()
         {
             TemplateCategoryBtn.onClick -= OnClickCategory;
-            TemplateBtn.onSelect -= OnSelectTemplate;
-            TemplateBtn.onSubmit -= OnTemplateSubmitted;
+            TemplateButton.onSelect -= OnSelectTemplate;
+            TemplateButton.onSubmit -= OnTemplateSubmitted;
         }
 
         public override void Begin()
         {
-            if(instance!=null) return;
-            instance = this;
-            
-            this.selectedTemplate = null;
-            this._submittedTemplate = null;
-            this._selectedCategory = null;
-            this._allCategories = new List<TemplateCategoryBtn>();
-            this._allTemplates = new List<TemplateBtn>();
+            selectedTemplate = null;
+            _submittedTemplate = null;
+            _selectedCategory = null;
+            _allCategories = new List<TemplateCategoryBtn>();
+            _allTemplates = new List<TemplateButton>();
             TemplateCategoryBtn.onClick += OnClickCategory;
-            TemplateBtn.onSelect += OnSelectTemplate;
-            TemplateBtn.onSubmit += OnTemplateSubmitted;
+            TemplateButton.onSelect += OnSelectTemplate;
+            TemplateButton.onSubmit += OnTemplateSubmitted;
             Generate();
             ClosePanelPopUp();
             closeBtn.onClick.AddListener(ClosePanelPopUp);
         }
 
-        private void OnTemplateSubmitted(TemplateBtn btn, TemplateData data)
+        private void OnTemplateSubmitted(TemplateButton button, TemplateData data)
         {
-            _submittedTemplate = btn;
+            _submittedTemplate = button;
             submittedData = data;
             x = data;
             Debug.Log("<color=red> template name selected :</color>" + data.templateName);
             if (submittedData == null)
             {
-                Debug.Log("NULL !");
+                Debug.Log("<color=black> template is NULL !");
                 return;
             }
-
-      
+            
             ClosePanelPopUp();
             OnSubmitTemplate?.Invoke(data);
         }
 
-        private void OnSelectTemplate(TemplateBtn btn)
+        private void OnSelectTemplate(TemplateButton button)
         {
             if (selectedTemplate != null) selectedTemplate.Unselect();
-            selectedTemplate = btn;
+            selectedTemplate = button;
             selectedTemplate.Select();
         }
 
@@ -99,7 +94,7 @@ namespace ChapterPanel
 
             foreach (var templateData in TemplatesHandler.Instance.Templates)
             {
-                var template = Instantiate(templatePrefab, templatesHolder).gameObject.GetComponent<TemplateBtn>();
+                var template = Instantiate(templatePrefab, templatesHolder).gameObject.GetComponent<TemplateButton>();
                 this._allTemplates.Add(template);
                 template.Initialize(templateData);
                 template.SetVisibility(false);

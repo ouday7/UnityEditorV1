@@ -22,14 +22,11 @@ public class InputFieldSelectPhrase : QuizFieldBase
         _data = inData;
         inputFiled.text = _data.textA;
         myToggle.isOn = _data.toggleA;
-     
     }
-
     private void Remove()
     {
         Destroy(gameObject);
-        EditManager.Instance.MaximiseMainContentHolder(EditManager.Instance.QuizFieldsHolder.RectTransform
-                .childCount-1);
+        EditManager.Instance.MaximiseMainContentHolder();
     }
 
     private void ToggleValue(bool newValue) => _data.toggleA = newValue;

@@ -7,15 +7,10 @@ namespace ChapterPanel
 {
     public class ExercisesHolder : EntryPointSystemBase
     {
-        public static ExercisesHolder instance;//todo: remove singletons with parents
-
         [SerializeField] private GameObject exerciseHolder;
         [SerializeField] private Button exitConfigBtn;
         public override void Begin()
         {
-            if (instance != null) return;
-            instance = this;
-
             exitConfigBtn.onClick.AddListener(OnExitSubmitChapter);
             var selectChapterId = GameDataManager.instance.GetSelectedChapter().id;
             var exercises = GameDataManager.instance.Data.exercises

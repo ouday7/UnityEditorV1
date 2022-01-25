@@ -10,8 +10,7 @@ namespace ChapterPanel
 {
     public class MenuController : EntryPointSystemBase
     {
-        //todo separate Add Question => change size from Remove Question and Generate Questions 
-        public static MenuController instance; //todo: remove instance
+        public static MenuController instance; 
         
         [SerializeField] private Button addExBtn;
         [SerializeField] private CustomGridLayout exerciseHolder;
@@ -19,9 +18,7 @@ namespace ChapterPanel
         [SerializeField] private Text levelName;
         [SerializeField] private Text subjName;
         [SerializeField] public RectTransform mainContent;
-        // [SerializeField] private int templateId;
-        //[SerializeField] private int situationData;
-        
+
         [NonSerialized]public  List<ExerciseBtn> currentExList;
         [NonSerialized]public  List<QuestionBtn> currentQstList;
         private ExerciseData Data;
@@ -98,13 +95,12 @@ namespace ChapterPanel
             exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, newHeight);
             DelayedUpdateLayout();
         }
-        public void UpdateLayout() => exerciseHolder.UpdateLayout();
-
         private void DelayedUpdateLayout()
         {
             Invoke(nameof(UpdateLayout), .01f);
         }
-
+        public void UpdateLayout() => exerciseHolder.UpdateLayout();
+        
         public void RemoveQuestion(QuestionBtn questionBtn)
         {
             currentQstList.Remove(questionBtn);

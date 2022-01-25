@@ -27,7 +27,7 @@ namespace QuizFields
             EditManager.Instance.currentQuestionData.quizFields.Remove(data);
             Destroy(gameObject);
             EditManager.Instance.MaximiseMainContentHolder
-                (EditManager.Instance.QuizFieldsHolder.RectTransform.childCount-1);
+                ();
         }
 
         private void InputValue(string newValue) => _data.textA = newValue;

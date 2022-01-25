@@ -10,12 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1496148835026119402}
   - component: {fileID: 4825065585541078141}
-  - component: {fileID: 8402994206385878494}
   - component: {fileID: 8931897459252925188}
   - component: {fileID: 1037179993090336944}
-  - component: {fileID: -6489369979769640275}
-  - component: {fileID: 5713514654172944688}
-  - component: {fileID: 6548501606317012193}
+  - component: {fileID: 6940176997276300999}
   m_Layer: 5
   m_Name: DraggableButton
   m_TagString: Untagged
@@ -52,30 +49,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878924340373206162}
   m_CullTransparentMesh: 0
---- !u!114 &8402994206385878494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878924340373206162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f814a545cddf9448dbb720c999d613, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sortText: {fileID: 1179259653459568277}
-  buttonLabel: {fileID: 4955769608708812874}
-  Data:
-    templateID: 0
-    id: 0
-    type: 
-    textA: 
-    textTwo: 
-    imageOne: {fileID: 0}
-    imageTwo: {fileID: 0}
-    toggleA: 0
-    toggleTwo: 0
 --- !u!114 &8931897459252925188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,54 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!50 &-6489369979769640275
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878924340373206162}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &5713514654172944688
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878924340373206162}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.19055176, y: 1.3867798}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 831.8308, y: 113.29138}
-  m_EdgeRadius: 0
---- !u!114 &6548501606317012193
+--- !u!114 &6940176997276300999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,9 +131,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1878924340373206162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17812f9142ef7fb49b0f7dd8574edd40, type: 3}
+  m_Script: {fileID: 11500000, guid: 2af996acc4e0d1640b703b1f6150e8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTransform: {fileID: 1496148835026119402}
+  labelText: {fileID: 4955769608708812874}
+  labelIndex: {fileID: 1179259653459568277}
+  _distance: 50
 --- !u!1 &4988013698935388651
 GameObject:
   m_ObjectHideFlags: 0

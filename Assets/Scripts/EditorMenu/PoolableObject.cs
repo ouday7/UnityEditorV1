@@ -17,15 +17,5 @@ namespace EditorMenu
                 return _t;
             }
         }
-        //todo: for debugging -> remove later
-        public virtual void Spawn()
-        {
-            
-        }
-
-        public virtual void DeSpawn()
-        {
-            
-        }
     }
 }

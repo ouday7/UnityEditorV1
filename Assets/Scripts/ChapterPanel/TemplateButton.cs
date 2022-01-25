@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TemplateBtn : MonoBehaviour
+public class TemplateButton : MonoBehaviour
 {
-    public static event Action<TemplateBtn> onSelect;
-    public static event Action<TemplateBtn, TemplateData> onSubmit;
+    public static event Action<TemplateButton> onSelect;
+    public static event Action<TemplateButton, TemplateData> onSubmit;
 
     private bool _submitted;
     [SerializeField] public Image icon;

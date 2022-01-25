@@ -21,7 +21,7 @@ namespace EditorMenu
         [NonSerialized]public ChapterButton _selectedChapter;
         private RectTransform _rt;
         private Vector2 startSize;
-        private static float _delay=0.28f;
+        private static float _delay=0.38f;
         public SubjectData SelectedSubject => selectedSubject.Data;
 
         private void OnDestroy()
@@ -137,17 +137,22 @@ namespace EditorMenu
                 newBtn.Transform.localScale = Vector3.one;
                 _chapList.Add(newBtn.Transform);
             }
+            ResizeChaptersHolder();
+        }
+
+        private void ResizeChaptersHolder()
+        {
             var nbChild = chaptersHolder.RectTransform.childCount;
-            if (nbChild> 6)
+            if (nbChild > 6)
             {
                 var sizeDelta = chaptersHolder.RectTransform.sizeDelta;
                 sizeDelta = new Vector2(sizeDelta.x,
-                    sizeDelta.y +(nbChild-6)* 105);
+                    sizeDelta.y + (nbChild - 6) * 105);
                 chaptersHolder.RectTransform.sizeDelta = sizeDelta;
             }
             chaptersHolder.UpdateLayout();
         }
-    
+
         private void OnSelectChapterButton(ChapterButton inNewSelectedChapterButton)
         {
             if (_selectedChapter != null)

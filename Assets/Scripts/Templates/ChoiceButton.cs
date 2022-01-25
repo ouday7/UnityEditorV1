@@ -36,16 +36,17 @@ namespace Templates
 
         public void Initialize(QuizFieldData inQuizFields)
         {
-            buttonLabel.text = inQuizFields.textA;
-            _correctChoice = inQuizFields.toggleA;
-            Debug.Log(_correctChoice);
+            data = inQuizFields;
+            data.textA = inQuizFields.textA;
+            data.toggleA = inQuizFields.toggleA;
+            
         }
 
         public void BindData(QuizFieldData inQuizFields)
         {
-            data = inQuizFields;
-            data.textA = inQuizFields.textA;
-            data.toggleA = inQuizFields.toggleA;
+            buttonLabel.text = inQuizFields.textA;
+            _correctChoice = inQuizFields.toggleA;
+            Debug.Log(_correctChoice);
         }
     }
 }

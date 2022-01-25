@@ -11,6 +11,7 @@ namespace EditorMenu
     }
     public class PoolSystem : EntryPointSystemBase
     {
+        public static PoolSystem instance;
         [Serializable] private struct PoolObject
         {
             public ObjectToPoolType type;
@@ -19,8 +20,6 @@ namespace EditorMenu
         }
         [SerializeField] private List<PoolObject> poolObjects;
         [SerializeField] private List<PoolableObject> currentPoolObjects;
-    
-        public static PoolSystem instance;
         
         public override void Begin()
         {
@@ -56,21 +55,19 @@ namespace EditorMenu
                 var obj = poolItem.GetComponent<T>();
                 currentPoolObjects.Remove(poolItem);
                 obj.gameObject.SetActive(true);
-                obj.Spawn();
                 return obj;
             }
-            GenerateElement(type);
+            GenerateExtraElement(type);
             return Spawn<T>(type);
         }
         public void DeSpawn(Transform objectToDeSpawn)
         {
-            objectToDeSpawn.GetComponent<PoolableObject>().DeSpawn();
             objectToDeSpawn.SetParent(transform);
             objectToDeSpawn.gameObject.SetActive(false);
             currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
         }
     
-        private void GenerateElement(ObjectToPoolType type) //create an element if the pool is empty
+        private void GenerateExtraElement(ObjectToPoolType type) //create an extra element if the pool is empty
         {
             var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
             var item = Instantiate(poolItem.objectReference, transform);

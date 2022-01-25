@@ -29,7 +29,7 @@ namespace ChapterPanel
             StartCoroutine(LoadAsync(sceneName));
         }
 
-        IEnumerator LoadAsync(SceneNames sceneName)
+        private IEnumerator LoadAsync(SceneNames sceneName)
         {
             var operation=SceneManager.LoadSceneAsync((int) sceneName);
             loadingScreen.SetActive(true);

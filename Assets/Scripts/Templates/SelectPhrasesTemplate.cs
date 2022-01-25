@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using ChapterPanel;
+using EditorMenu;
+using ModeManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +23,7 @@ namespace Templates
 
         public override void BindData(QuestionData inQuestionData)
         {
+            Debug.Log(inQuestionData.quizFields.Count-1);
             foreach (var quizFieldData in inQuestionData.quizFields)
             {
                 if (_fieldNumber == 0)

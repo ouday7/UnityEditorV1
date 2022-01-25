@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Envast.Layouts;
+using ModeManager;
 using Sirenix.Utilities;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ChapterPanel
@@ -24,7 +26,7 @@ namespace ChapterPanel
         [SerializeField] private InputField mainQuestionText;
         [SerializeField] private InputField subQuestionText;
         [SerializeField] private InputField helpQuestionText;
-        [SerializeField] private TemplateBtn templateBtn;
+        [FormerlySerializedAs("templateBtn")] [SerializeField] private TemplateButton templateButton;
         [SerializeField] private TemplateCategory templateCategory;
         [SerializeField] private Button addQuizField;
         [SerializeField] private int tempTemplatId;
@@ -70,7 +72,7 @@ namespace ChapterPanel
                 addQuizField.gameObject.SetActive(false);
                 var childCount = quizFieldsHolder.RectTransform.childCount;
                 RemoveTemplateFromHierarchy(childCount);
-                MaximiseMainContentHolder(childCount);
+                Invoke(nameof(MaximiseMainContentHolder),.01f);
                 return;
             }
 
@@ -78,25 +80,22 @@ namespace ChapterPanel
             OnTemplateSelected(templateData);
         }
 
-        public void MaximiseMainContentHolder(int nbChild)
+        public void MaximiseMainContentHolder()
         {
+            var nbChild = quizFieldsHolder.RectTransform.childCount;
             if (nbChild == 0)
             {
                 mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
-                coroutine = WaitForSecondsToUpdateLayout(0.05f);
-                StartCoroutine(coroutine);
+                Invoke(nameof(UpdateHodlerSize),.01f);
                 return;
             }
 
             mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 220);
-            coroutine = WaitForSecondsToUpdateLayout(0.1f);
-            StartCoroutine(coroutine);
+            Invoke(nameof(UpdateHodlerSize),.01f);
         }
-        private IEnumerator WaitForSecondsToUpdateLayout(float time)
-        {
-            yield return new WaitForSeconds(time);
-            quizFieldsHolder.UpdateLayout();
-        }
+
+        private void UpdateHodlerSize()=> quizFieldsHolder.UpdateLayout();
+        
 
         private void UpdateMainQuestion(string inNewValue)
         {
@@ -152,7 +151,7 @@ namespace ChapterPanel
             else
                 GenerateQuestionFields();
 
-            MaximiseMainContentHolder(quizFieldsHolder.RectTransform.childCount);
+            Invoke(nameof(MaximiseMainContentHolder),.01f);
             GameDataManager.instance.SaveToJson();
         }
 
@@ -207,7 +206,7 @@ namespace ChapterPanel
                 quizField.BindData(data);
                 currentQuestion.quizFields.Add(data);
                 tempTemplatId = i;
-                MaximiseMainContentHolder(quizFieldsHolder.RectTransform.childCount);
+                MaximiseMainContentHolder();
             }
         }
 
@@ -225,7 +224,10 @@ namespace ChapterPanel
         {
             var x = quizFieldsHolder.RectTransform.childCount;
             if (x >= currentTemplate.maxFields) return;
-            var data = currentQuestion.quizFields[tempTemplatId];
+            var data = new QuizFieldData
+            {
+                id = x + 1
+            };
             var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
             var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
             quizField.transform.SetParent(quizFieldsHolder.RectTransform);
@@ -234,7 +236,7 @@ namespace ChapterPanel
             currentQuestion.quizFields.Add(data);
             GameDataManager.instance.SaveToJson();
             tempTemplatId++;
-            MaximiseMainContentHolder(quizFieldsHolder.RectTransform.childCount);
+            MaximiseMainContentHolder();
         }
     }
 }
