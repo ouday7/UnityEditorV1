@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using ChapterPanel;
+﻿using ChapterPanel;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TextTextQuizField : QuizFieldBase
 {
-    [SerializeField]  private InputField text1;
-    [SerializeField]   private InputField text2;
+    [SerializeField] private InputField text1;
+    [SerializeField] private InputField text2;
     [SerializeField] private Button buttonRemove;
 
     public override void Initialize()
@@ -31,5 +29,5 @@ public class TextTextQuizField : QuizFieldBase
 
 
     private void InputValue1(string newValue) => _data.textA = newValue;
-    private void InputValue2(string newValue) => _data.textA = newValue;
+    private void InputValue2(string newValue) => _data.textTwo = newValue;
 }
