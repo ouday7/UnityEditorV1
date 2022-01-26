@@ -66,7 +66,7 @@ namespace MainEditor
 
         private void AnimateButton()
         {
-            Transform.DOScale(0.9f, duration).SetEase(ease).OnComplete( () =>
+            Transform.DOScale(0.8f, duration).SetEase(ease).OnComplete( () =>
             {
                 Transform.DOScale(1f, duration).SetEase(ease);
             });

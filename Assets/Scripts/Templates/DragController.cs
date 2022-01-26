@@ -68,19 +68,32 @@ namespace Templates
         private void UpdatePositions(Transform otherTransform)
         {
             var targetPosition = otherTransform.position;
-            var target = otherTransform;
             var position = currentTransform.position;
             var otherTransformOldPosition = targetPosition;
             
             targetPosition = new Vector2(targetPosition.x, _currentPosition.y);
-            var label = target.transform.GetSiblingIndex();
-            target.GetComponent<DragController>().labelIndex.text = label.ToString();
             otherTransform.position = targetPosition;
-            
-            SetCurrentTransform(otherTransform, position, otherTransformOldPosition);
+
+            SetTargetSortNumber(otherTransform, targetPosition);
+
+            UpdateCurrentTransform(otherTransform, position, otherTransformOldPosition);
         }
 
-        private void SetCurrentTransform(Transform otherTransform, Vector3 position, Vector3 otherTransformOldPosition)
+        private void SetTargetSortNumber(Transform otherTransform, Vector3 targetPosition)
+        {
+            var specLabel = otherTransform.transform.GetSiblingIndex() + 2;
+            var label = otherTransform.transform.GetSiblingIndex();
+            if ((currentTransform.position.y > targetPosition.y))
+            {
+                otherTransform.GetComponent<DragController>().labelIndex.text = specLabel.ToString();
+            }
+            else
+            {
+                otherTransform.GetComponent<DragController>().labelIndex.text = label.ToString();
+            }
+        }
+
+        private void UpdateCurrentTransform(Transform otherTransform, Vector3 position, Vector3 otherTransformOldPosition)
         {
             position = new Vector2(position.x, otherTransformOldPosition.y);
             currentTransform.position = position;

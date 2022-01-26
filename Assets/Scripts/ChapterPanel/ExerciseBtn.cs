@@ -89,7 +89,7 @@ namespace ChapterPanel
             qstHolder.gameObject.SetActive(true);
         }
 
-        private void Hide( )
+        private void Hide()
         {
             qstHolder.gameObject.SetActive(false);
             RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x,
@@ -100,6 +100,13 @@ namespace ChapterPanel
         private void Remove()
         {
             var toDeleteBtn = Transform.GetComponent<ExerciseBtn>();
+            var nbQuestions = qstHolder.transform.childCount;
+            Debug.Log(" nb Qts = "+nbQuestions);
+            while (nbQuestions > 0)
+            {
+                Destroy(qstHolder.transform.GetChild(0).gameObject);
+                nbQuestions--;
+            }
             PoolSystem.instance.DeSpawn(Transform);
             MenuController.instance.UpdateExercisesHolderSize();
             UpdateQuestionHolderSize();
@@ -179,6 +186,7 @@ namespace ChapterPanel
         private void OnStartDrag(PointerEventData eventData)
         {
             _startPos = transform.position;
+            Hide();
         }
 
         private void OnDrag(PointerEventData eventData)
@@ -217,10 +225,9 @@ namespace ChapterPanel
             }
 
             else if (other.gameObject.CompareTag("GroupQuestionMenuBtn"))
-
             {
-                this.header.GetComponent<Image>().color = Color.yellow;
-                other.transform.Find("Header").GetComponent<Image>().color = Color.white;
+                header.GetComponent<Image>().color = Color.yellow;
+                other.transform.GetComponent<ExerciseBtn>().header.GetComponent<Image>().color = Color.white;
                 _changePos = true;
                 _targetBtn = other.GetComponent<ExerciseBtn>();
             }

@@ -34,7 +34,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 730, y: 755}
+  m_SizeDelta: {x: 730, y: 730}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &5723714276290529918
 MonoBehaviour:
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alignment: 1
-  padding: {x: 0, y: 0}
-  spacing: {x: 0, y: 20}
+  padding: {x: 0, y: 5}
+  spacing: {x: 0, y: 30}
   layout: 0
   includeDisabledChildren: 0
   newLineTag: LayoutNewLine

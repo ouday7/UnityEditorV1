@@ -67,7 +67,8 @@ namespace EditorMenu
             currentPoolObjects.Add(objectToDeSpawn.GetComponent<PoolableObject>());
         }
     
-        private void GenerateExtraElement(ObjectToPoolType type) //create an extra element if the pool is empty
+        //create an extra element if the pool is empty
+        private void GenerateExtraElement(ObjectToPoolType type) 
         {
             var poolItem = poolObjects.FirstOrDefault(poolObject => poolObject.type == type);
             var item = Instantiate(poolItem.objectReference, transform);

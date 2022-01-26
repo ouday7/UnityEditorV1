@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bed17962dd34baf4fb0eb2869681fffc, type: 3}
-    m_FontSize: 65
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -129,8 +129,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.2, y: -194.4}
-  m_SizeDelta: {x: 620, y: 128}
+  m_AnchoredPosition: {x: -8.5, y: -179.7}
+  m_SizeDelta: {x: 800, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2357521420119971380
 MonoBehaviour:
@@ -144,10 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0692505c5fbc2c47a07006ccd7a4862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unselectedColor: {r: 0.5283019, g: 0.51534355, b: 0.51534355, a: 1}
+  unselectedColor: {r: 0.26666668, g: 0.7254902, b: 0.99215686, a: 1}
   selectedColor: {r: 0.1764706, g: 0.7921569, b: 0.05490196, a: 1}
   buttonLabel: {fileID: 1586375461964665676}
-  _correctChoice: 0
   data:
     templateID: 0
     id: 0
@@ -179,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5137255, b: 0.5137255, a: 1}
+  m_Color: {r: 0.26666668, g: 0.7254902, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

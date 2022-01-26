@@ -9,26 +9,24 @@ namespace Templates
 {
     public class SelectPhrasesTemplate : TemplateBase
     {
-        [SerializeField] private List<ChoiceButton> choices;
         [SerializeField] private ChoiceButton _choiceButton;
         [SerializeField] private CustomGridLayout _buttonsList;
         private ChoiceButton _currentChoice;
-        private ChoiceButton _correctChoice;
-        private int _fieldNumber=0;
+        private bool _isFirstToggle;
+        private bool _result;
     
         public override void Initialize()
         {
-            EditorModeManager.Instance.resultBtn.onClick.AddListener(ReturnResult);
+            EditorModeManager.Instance.resultBtn.onClick.AddListener(()=>GetResult());
         }
 
         public override void BindData(QuestionData inQuestionData)
         {
-            Debug.Log(inQuestionData.quizFields.Count-1);
             foreach (var quizFieldData in inQuestionData.quizFields)
             {
-                if (_fieldNumber == 0)
+                if (!_isFirstToggle)
                 {
-                    _fieldNumber++;
+                    _isFirstToggle = true;
                     continue;
                 }
                 var newBtn = Instantiate(_choiceButton, _buttonsList.RectTransform);
@@ -54,25 +52,24 @@ namespace Templates
                 _currentChoice = newBtn;
             });
         }
-
-        private void ReturnResult()
-        {
-            if (_currentChoice == null)
-            {
-                EditorModeManager.Instance.losePanel.SetActive(true);
-                return;
-            }
-            if (_currentChoice.data.toggleA)
-            {
-                EditorModeManager.Instance.winPanel.SetActive(true);
-                return;
-            }
-            EditorModeManager.Instance.losePanel.SetActive(true);
-        }
         
         public override bool GetResult()
         {
-            return true;
+            if (_currentChoice == null)
+            {
+                _result = false;
+                EditorModeManager.Instance.losePanel.SetActive(true);
+                return _result;
+            }
+            if (_currentChoice.data.toggleA)
+            {
+                _result = true;
+                EditorModeManager.Instance.winPanel.SetActive(true);
+                return _result;
+            }
+            _result = false;
+            EditorModeManager.Instance.losePanel.SetActive(true);
+            return _result;
         }
         
         public override void ResetTemplate()

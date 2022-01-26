@@ -90,7 +90,7 @@ namespace ChapterPanel
                 return;
             }
 
-            mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 220);
+            mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 210);
             Invoke(nameof(UpdateHodlerSize),.01f);
         }
 
@@ -222,11 +222,11 @@ namespace ChapterPanel
 
         private void AddQuizFields()
         {
-            var x = quizFieldsHolder.RectTransform.childCount;
-            if (x >= currentTemplate.maxFields) return;
+            var nbQuizFields = quizFieldsHolder.RectTransform.childCount;
+            if (nbQuizFields >= currentTemplate.maxFields) return;
             var data = new QuizFieldData
             {
-                id = x + 1
+                id = nbQuizFields + 1
             };
             var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
             var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
