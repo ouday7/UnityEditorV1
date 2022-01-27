@@ -40,7 +40,7 @@ namespace ChapterPanel
         {
             if (Instance != null) return;
             Instance = this;
-
+            
             openPanel.onClick.AddListener(OpenPanel);
             QuestionBtn.OnClickQuestion += ClickQuestion;
             selectTemplateDialog.OnSubmitTemplate += OnTemplateSelected;
@@ -49,6 +49,11 @@ namespace ChapterPanel
             subQuestionText.onEndEdit.AddListener(UpdateSubQuestion);
             helpQuestionText.onEndEdit.AddListener(UpdateHelpQuestion);
             defaultSize = new Vector2(1484, 920f);
+        }
+
+        private void OnDestroy()
+        {
+            QuestionBtn.OnClickQuestion -= ClickQuestion;
         }
 
         private void OpenPanel()
@@ -60,19 +65,20 @@ namespace ChapterPanel
         {
             currentQuestion = qstBtn.Data;
 
-            mainQuestionText.text = qstBtn.Data.mainQst;
-            subQuestionText.text = qstBtn.Data.subQst;
-            helpQuestionText.text = qstBtn.Data.helpQst;
+            mainQuestionText.text = currentQuestion.mainQst;
+            subQuestionText.text = currentQuestion.subQst;
+            helpQuestionText.text = currentQuestion.helpQst;
 
             if (qstBtn.Data.templateId == 0)
             {
+                currentQuestion = qstBtn.Data;
                 selectTemplateBtn.templateIcon.sprite = null;
                 selectTemplateBtn.templateNameTxt.text = "None";
                 minFieldsTxt.text = "Min Fiddles : ";
                 addQuizField.gameObject.SetActive(false);
                 var childCount = quizFieldsHolder.RectTransform.childCount;
                 RemoveTemplateFromHierarchy(childCount);
-                Invoke(nameof(MaximiseMainContentHolder),.01f);
+                Invoke(nameof(ReturnMainContentToDefaultSize),.01f);
                 return;
             }
 
@@ -80,9 +86,26 @@ namespace ChapterPanel
             OnTemplateSelected(templateData);
         }
 
+        private void ReturnMainContentToDefaultSize()
+        {
+            mainHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
+        }
+
         public void MaximiseMainContentHolder()
         {
-            var nbChild = quizFieldsHolder.RectTransform.childCount;
+            var nbChild = quizFieldsHolder.transform.childCount;
+            if (nbChild == 0)
+            {
+                mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
+                Invoke(nameof(UpdateHodlerSize),.01f);
+                return;
+            }
+
+            mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 210);
+            Invoke(nameof(UpdateHodlerSize),.01f);
+        }
+        public void MaximiseMainContentHolders(int nbChild)
+        {
             if (nbChild == 0)
             {
                 mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
@@ -237,6 +260,15 @@ namespace ChapterPanel
             GameDataManager.instance.SaveToJson();
             tempTemplatId++;
             MaximiseMainContentHolder();
+            UpdateMainContentPosition();
+        }
+
+        private void UpdateMainContentPosition()
+        {
+            var position = mainHolder.RectTransform.position;
+            position = new Vector2(position.x,
+                position.y + 150);
+            mainHolder.RectTransform.position = position;
         }
     }
 }

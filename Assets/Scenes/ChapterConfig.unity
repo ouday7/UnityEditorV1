@@ -225,10 +225,10 @@ MonoBehaviour:
   poolObjects:
   - type: 4
     objectReference: {fileID: 1875916904166460901, guid: 6553d6b1b7fc3a54f8ca38cfab839709, type: 3}
-    amount: 5
+    amount: 8
   - type: 5
     objectReference: {fileID: 2642254180913290276, guid: b452176c718213c41a1cda3c391e6925, type: 3}
-    amount: 5
+    amount: 8
   currentPoolObjects: []
 --- !u!114 &360168566 stripped
 MonoBehaviour:
@@ -1382,7 +1382,7 @@ PrefabInstance:
     - target: {fileID: 1709331925074966408, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6b6a1d22911ffae46a2b0a64e2208307, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1709331925074966408, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_Type
       value: 0

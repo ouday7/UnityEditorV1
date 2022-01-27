@@ -39,6 +39,8 @@ namespace ModeManager
         private void OnDestroy()
         {
             QuestionBtn.OnClickQuestion -= InitiateDesignMode;
+            OnDesignClick -= OnClickDesignMode;
+            OnGetTemplateComplete -= StartTemplate;
         }
 
         public override  void Begin()

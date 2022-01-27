@@ -34,9 +34,11 @@ namespace QuizFields
 
         private void Remove(QuizFieldData obj)
         {
+            if (EditManager.Instance.currentTemplate.minFields >=
+                EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
             Destroy(gameObject);
             EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
-            EditManager.Instance.MaximiseMainContentHolder();
+            EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
         }
 
         private void ToggleValue(bool newValue)

@@ -43,6 +43,9 @@ public class ToggleTextQuizField : QuizFieldBase
 
     private void Remove(QuizFieldData obj)
     {
+        if (EditManager.Instance.currentTemplate.minFields >=
+         EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
+    
         Destroy(gameObject);
         EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
         EditManager.Instance.MaximiseMainContentHolder();
