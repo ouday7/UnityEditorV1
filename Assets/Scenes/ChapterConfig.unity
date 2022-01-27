@@ -380,6 +380,8 @@ MonoBehaviour:
     prefab: {fileID: 8192369370897164279, guid: 2134cc268e76d1a45981e9ab452768d3, type: 3}
   - type: 2
     prefab: {fileID: 965878666689454859, guid: edce847ae63f4354e932fa26c2a874ba, type: 3}
+  - type: 0
+    prefab: {fileID: 7861982508473891693, guid: 02cc7c51fcf762d4db7f4d573cc8607e, type: 3}
 --- !u!4 &450717873
 Transform:
   m_ObjectHideFlags: 0
@@ -585,7 +587,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 7
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -780,6 +782,8 @@ MonoBehaviour:
     prefab: {fileID: 1568336133924579553, guid: 53144737174410a42aec4c59e164e050, type: 3}
   - name: 0
     prefab: {fileID: 833741766351976010, guid: 1cf3f03fa39641b499701ae314602f79, type: 3}
+  - name: 9
+    prefab: {fileID: 8853925944810294045, guid: 65b43c72bc17fab4884f7c6f13de7b15, type: 3}
 --- !u!4 &1515404980
 Transform:
   m_ObjectHideFlags: 0
@@ -1932,19 +1936,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8808273607954855285, guid: d7eef76013bbc484aaa6b7a480bd0529, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.016113281
       objectReference: {fileID: 0}
     - target: {fileID: 8808273607954855285, guid: d7eef76013bbc484aaa6b7a480bd0529, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.022827148
       objectReference: {fileID: 0}
     - target: {fileID: 8808273607954855285, guid: d7eef76013bbc484aaa6b7a480bd0529, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -0.032226562
       objectReference: {fileID: 0}
     - target: {fileID: 8808273607954855285, guid: d7eef76013bbc484aaa6b7a480bd0529, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 0.045654297
       objectReference: {fileID: 0}
     - target: {fileID: 8808273607954855285, guid: d7eef76013bbc484aaa6b7a480bd0529, type: 3}
       propertyPath: m_AnchorMin.x

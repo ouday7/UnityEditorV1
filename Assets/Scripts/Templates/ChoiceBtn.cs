@@ -72,14 +72,17 @@ public class ChoiceBtn : MonoBehaviour
     public void Select()
     {
         Image.enabled = true;
-        RectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        RectTransform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
+        RectTransform.DOScale(0.75f, 0.15f).OnComplete(() =>
+        {
+            RectTransform.DOScale(1.1f, 0.15f);
+        });
+        
     }
 
     public void UnSelect()
     {
         Image.enabled = false;
-        RectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        RectTransform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutBack);
+        RectTransform.DOScale(1, 0.05f);
+
     }
 }

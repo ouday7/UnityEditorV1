@@ -15,24 +15,36 @@ namespace Templates
         [BoxGroup("Selected ")][LabelText("Color")] [SerializeField] private Color selectedColor;
         
         public RtlText buttonLabel;
-
+        public bool IsSelected;
+        
         private bool _correctChoice;
         private List<bool> correctChoices;
         public QuizFieldData data;
+        private Button _btn;
+        
+
+        private Button Button
+        {
+            get
+            {
+                if (_btn == null) _btn = GetComponent<Button>();
+                return _btn;
+            }
+        }
         public void Select()
         {
+            IsSelected = true;
             transform.DOScale(0.7f, 0.15f).OnComplete(()=>
             {
                 transform.DOScale(1.2f, 0.20f);
                 transform.GetComponent<Image>().DOColor(selectedColor,0.05f);
-                transform.GetComponent<Button>().interactable = false;
             });
         }
         public void Unselect()
         {
+            IsSelected = false;
+            transform.DOScale(1, 0.2f);
             transform.GetComponent<Image>().DOColor(unselectedColor,0.15f);
-            transform.DOScale(1, 0.1f);
-            transform.GetComponent<Button>().interactable = true;
         }
 
         public void Initialize(QuizFieldData inQuizFields)

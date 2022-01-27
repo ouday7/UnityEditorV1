@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ChapterPanel;
-using EditorMenu;
 using ModeManager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,24 +11,21 @@ namespace Templates
     {
         [SerializeField] private ChoiceButton _choiceButton;
         [SerializeField] private CustomGridLayout _buttonsList;
-        private ChoiceButton _currentChoice;
-        private bool _isFirstToggle;
+        private List<ChoiceButton> _currentChoices;
         private bool _result;
+        private  Button _btn;
     
+       
         public override void Initialize()
         {
             EditorModeManager.Instance.resultBtn.onClick.AddListener(()=>GetResult());
+            _currentChoices = new List<ChoiceButton>();
         }
 
         public override void BindData(QuestionData inQuestionData)
         {
             foreach (var quizFieldData in inQuestionData.quizFields)
             {
-                if (!_isFirstToggle)
-                {
-                    _isFirstToggle = true;
-                    continue;
-                }
                 var newBtn = Instantiate(_choiceButton, _buttonsList.RectTransform);
                 newBtn.Initialize(quizFieldData);
                 newBtn.BindData(quizFieldData);
@@ -36,48 +33,47 @@ namespace Templates
             }
             _buttonsList.UpdateLayout();
         }
-        
+
         private void OnClickChoiceButton(ChoiceButton newBtn)
         {
-            newBtn.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                if (_currentChoice != null)
+            newBtn.GetComponent<Button>()
+                .onClick.AddListener(() =>
                 {
-                    _currentChoice.Unselect();
-                    newBtn.Select();
-                    _currentChoice = newBtn;
-                    return;
-                }
-                newBtn.Select();
-                _currentChoice = newBtn;
-            });
+                    if (!newBtn.IsSelected)
+                    {
+                        newBtn.Select();
+                        _currentChoices.Add(newBtn);
+                        return;
+                    }
+
+                    newBtn.Unselect();
+                    _currentChoices.Remove(newBtn);
+                });
         }
         
         public override bool GetResult()
         {
-            if (_currentChoice == null)
+            if (_currentChoices.Any(choice => !choice.data.toggleA))
             {
-                _result = false;
                 EditorModeManager.Instance.losePanel.SetActive(true);
-                return _result;
+                return false;
             }
-            if (_currentChoice.data.toggleA)
-            {
-                _result = true;
-                EditorModeManager.Instance.winPanel.SetActive(true);
-                return _result;
-            }
-            _result = false;
-            EditorModeManager.Instance.losePanel.SetActive(true);
-            return _result;
+            EditorModeManager.Instance.winPanel.SetActive(true);
+            return true;
         }
-        
         public override void ResetTemplate()
         {
+            var nbChild = _buttonsList.RectTransform.childCount;
+            while (nbChild>0)
+            {
+                Destroy(_buttonsList.transform.GetChild(0).gameObject);
+                nbChild--;
+            }
+            _currentChoices.Clear();
         }
-        
         public override void OnDestroy()
         {
+            ResetTemplate();
         }
     }
 }

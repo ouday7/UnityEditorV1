@@ -29,7 +29,7 @@ namespace ChapterPanel
         private int qstHeight = 85;
         private int holderWeight = 400;
         private bool _isInitialised;
-        
+
         public ExerciseData Data => _data;
         private CustomGridLayout QstHolder => qstHolder;
 
@@ -49,6 +49,7 @@ namespace ChapterPanel
             _isInitialised = true;
             addQstBtn.onClick.AddListener(AddQuestion);
             showQstsBtn.onClick.AddListener(DisplayQuestions);
+            RectTransform.sizeDelta =new Vector2(400,100) ;
             _startSize = RectTransform.sizeDelta.y;
         }
 
@@ -101,7 +102,6 @@ namespace ChapterPanel
         {
             var toDeleteBtn = Transform.GetComponent<ExerciseBtn>();
             var nbQuestions = qstHolder.transform.childCount;
-            Debug.Log(" nb Qts = "+nbQuestions);
             while (nbQuestions > 0)
             {
                 Destroy(qstHolder.transform.GetChild(0).gameObject);
