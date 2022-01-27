@@ -82,19 +82,21 @@ namespace ChapterPanel
 
         public void MaximiseMainContentHolder()
         {
-            var nbChild = currentQuestionData.quizFields.Count;
+            var nbChild = quizFieldsHolder.RectTransform.childCount;
             if (nbChild == 0)
             {
                 mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
                 Invoke(nameof(UpdateHodlerSize),.01f);
                 return;
             }
+
             mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 210);
             Invoke(nameof(UpdateHodlerSize),.01f);
         }
 
         private void UpdateHodlerSize()=> quizFieldsHolder.UpdateLayout();
         
+
         private void UpdateMainQuestion(string inNewValue)
         {
             currentQuestion.mainQst = inNewValue;
@@ -221,9 +223,7 @@ namespace ChapterPanel
         private void AddQuizFields()
         {
             var nbQuizFields = quizFieldsHolder.RectTransform.childCount;
-            if (nbQuizFields >= currentTemplate.maxFields)
-                return;
-            
+            if (nbQuizFields >= currentTemplate.maxFields) return;
             var data = new QuizFieldData
             {
                 id = nbQuizFields + 1

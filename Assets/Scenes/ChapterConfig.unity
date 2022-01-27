@@ -225,10 +225,10 @@ MonoBehaviour:
   poolObjects:
   - type: 4
     objectReference: {fileID: 1875916904166460901, guid: 6553d6b1b7fc3a54f8ca38cfab839709, type: 3}
-    amount: 10
+    amount: 5
   - type: 5
     objectReference: {fileID: 2642254180913290276, guid: b452176c718213c41a1cda3c391e6925, type: 3}
-    amount: 10
+    amount: 5
   currentPoolObjects: []
 --- !u!114 &360168566 stripped
 MonoBehaviour:
