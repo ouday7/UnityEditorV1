@@ -1846,7 +1846,7 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
@@ -1861,7 +1861,7 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {

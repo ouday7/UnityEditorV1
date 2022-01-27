@@ -1,4 +1,6 @@
-﻿using ChapterPanel;
+﻿using System.Linq;
+using ChapterPanel;
+using EditorMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +36,10 @@ namespace QuizFields
 
         private void Remove(QuizFieldData obj)
         {
+            if (EditManager.Instance.currentQuestionData.quizFields.Count <=
+                EditManager.Instance.currentTemplate.minFields)
+                return;
+            
             Destroy(gameObject);
             EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
             EditManager.Instance.MaximiseMainContentHolder();
