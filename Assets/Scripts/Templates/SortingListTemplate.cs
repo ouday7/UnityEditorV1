@@ -55,12 +55,18 @@ namespace Templates
 
         public override void ResetTemplate()
         {
+            var nbChild = _optionsList.RectTransform.childCount;
+            while (nbChild>0)
+            {
+                Destroy(_optionsList.transform.GetChild(0).gameObject);
+                nbChild--;
+            }
             
         }
 
         public override void OnDestroy()
         {
-            
+            ResetTemplate();
         }
     }
 }
