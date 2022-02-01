@@ -32,6 +32,7 @@ namespace ChapterPanel
         [SerializeField] private int tempTemplatId;
         private Vector2 defaultSize;
         private IEnumerator coroutine;
+        private static int nbr = 1;
         public QuestionData currentQuestionData => currentQuestion;
         public CustomGridLayout QuizFieldsHolder => quizFieldsHolder;
         public CustomSizeFitter mainHolder => mainContentHolder;
@@ -69,7 +70,7 @@ namespace ChapterPanel
             subQuestionText.text = currentQuestion.subQst;
             helpQuestionText.text = currentQuestion.helpQst;
 
-            if (qstBtn.Data.templateId == 0)
+            if (currentQuestion.templateId== 0)
             {
                 currentQuestion = qstBtn.Data;
                 selectTemplateBtn.templateIcon.sprite = null;
@@ -81,7 +82,7 @@ namespace ChapterPanel
                 Invoke(nameof(ReturnMainContentToDefaultSize),.01f);
                 return;
             }
-
+            
             var templateData = TemplatesHandler.GetTemplateDataById(qstBtn.Data.templateId);
             OnTemplateSelected(templateData);
         }
@@ -106,6 +107,7 @@ namespace ChapterPanel
         }
         public void MaximiseMainContentHolders(int nbChild)
         {
+            Debug.Log($"nb child = {nbChild}");
             if (nbChild == 0)
             {
                 mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);
@@ -116,7 +118,6 @@ namespace ChapterPanel
             mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y + nbChild * 210);
             Invoke(nameof(UpdateHodlerSize),.01f);
         }
-
         private void UpdateHodlerSize()=> quizFieldsHolder.UpdateLayout();
         
 
@@ -180,57 +181,55 @@ namespace ChapterPanel
 
         private void GenerateQuestionFields()
         {
+            nbr = 1;
             for (var i = 0; i < currentQuestion.quizFields.Count; i++)
             {
-                var data = currentQuestion.quizFields[i];
                 var quizFieldType = currentTemplate.GetQuizFieldType(i);
-                var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-                quizField.transform.SetParent(quizFieldsHolder.RectTransform);
-                quizField.transform.localScale = Vector3.one;
-                quizField.Initialize();
-                data.id = i + 1;
-                quizField.BindData(data);
-                tempTemplatId = i;
-                GameDataManager.instance.SaveToJson();
+                QuizFieldsHandler.Instance.GetQuizField(quizFieldType,GetFields);
             }
+        }
+        private void GetFields(QuizFieldBase quizField)
+        {
+            var data = currentQuestion.quizFields[nbr-1];
+            quizField.transform.SetParent(quizFieldsHolder.RectTransform);
+            quizField.transform.localScale = Vector3.one;
+            quizField.Initialize();
+            data.id = nbr;
+            quizField.BindData(data);
+            tempTemplatId = nbr;
+            nbr++;
+            MaximiseMainContentHolder();
+            UpdateMainContentPosition();
+            UpdateHodlerSize();
+            GameDataManager.instance.SaveToJson();
         }
 
         private void GenerateDefaultFields()
         {
+            nbr = 1;
             Debug.Log("//. Generate Default Fields");
             currentQuestion.quizFields = new List<QuizFieldData>();
             for (var i = 0; i < currentTemplate.minFields; i++)
             {
-                var data = new QuizFieldData();
                 var quizFieldType = currentTemplate.GetQuizFieldType(i);
-                var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-                quizField.transform.SetParent(quizFieldsHolder.RectTransform); 
-                quizField.transform.localScale = Vector3.one;
-                data.id = i+1;
-                quizField.Initialize();
-                quizField.BindData(data);
-                currentQuestion.quizFields.Add(data);
-                tempTemplatId = i;
+                QuizFieldsHandler.Instance.GetQuizField(quizFieldType,OnGetQuizfields);
             }
         }
-
-        private void Test()
+        private void OnGetQuizfields(QuizFieldBase quizField)
         {
-            currentQuestion.quizFields.Clear();
-            RemoveTemplateFromHierarchy(quizFieldsHolder.RectTransform.childCount);
-            for (var i = 0; i < currentTemplate.minFields; i++)
-            {
-                var data = new QuizFieldData();
-                var quizFieldType = currentTemplate.GetQuizFieldType(i);
-                var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
-                quizField.transform.SetParent(quizFieldsHolder.RectTransform);
-                quizField.transform.localScale = Vector3.one;
-                quizField.Initialize();
-                quizField.BindData(data);
-                currentQuestion.quizFields.Add(data);
-                tempTemplatId = i;
-                MaximiseMainContentHolder();
-            }
+            var data = new QuizFieldData();
+            quizField.transform.SetParent(quizFieldsHolder.RectTransform); 
+            quizField.transform.localScale = Vector3.one;
+            data.id = nbr;
+            quizField.Initialize();
+            quizField.BindData(data);
+            currentQuestion.quizFields.Add(data);
+            tempTemplatId = nbr;
+            nbr++;
+            MaximiseMainContentHolder();
+            UpdateMainContentPosition();
+            UpdateHodlerSize();
+            GameDataManager.instance.SaveToJson();
         }
 
         private void RemoveTemplateFromHierarchy(int nbChild)
@@ -247,12 +246,18 @@ namespace ChapterPanel
         {
             var nbQuizFields = quizFieldsHolder.RectTransform.childCount;
             if (nbQuizFields >= currentTemplate.maxFields) return;
+
+            var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
+            QuizFieldsHandler.Instance.GetQuizField(quizFieldType, OnGetQuizField);
+            quizFieldsHolder.UpdateLayout();
+        }
+
+        private void OnGetQuizField(QuizFieldBase quizField)
+        {
             var data = new QuizFieldData
             {
-                id = nbQuizFields + 1
+                id = quizFieldsHolder.RectTransform.childCount + 1
             };
-            var quizFieldType = currentTemplate.GetQuizFieldType(tempTemplatId);
-            var quizField = QuizFieldsHandler.GetQuizField(quizFieldType);
             quizField.transform.SetParent(quizFieldsHolder.RectTransform);
             quizField.Initialize();
             quizField.BindData(data);

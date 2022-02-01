@@ -24,10 +24,11 @@ namespace QuizFields
         }
         private void Remove(QuizFieldData data)
         {
+            if (EditManager.Instance.currentTemplate.minFields >=
+                EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
             EditManager.Instance.currentQuestionData.quizFields.Remove(data);
             Destroy(gameObject);
-            EditManager.Instance.MaximiseMainContentHolder
-                ();
+            EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
         }
 
         private void InputValue(string newValue) => _data.textA = newValue;

@@ -222,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30981bbc45ba6364b9f703346a4042c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manyChoicesToggle: {fileID: 1568336133924579553, guid: 53144737174410a42aec4c59e164e050, type: 3}
   myToggle: {fileID: 318714604766156911}
   inputFiled: {fileID: 9181603942708240992}
   buttonRemove: {fileID: 3906566076043360901}

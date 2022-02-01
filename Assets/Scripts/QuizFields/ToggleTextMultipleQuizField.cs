@@ -6,7 +6,6 @@ namespace QuizFields
 {
     public class ToggleTextMultipleQuizField : QuizFieldBase
     {
-        //[SerializeField] private ToggleField manyChoicesToggle;
         [SerializeField] private Toggle myToggle;
         [SerializeField] private InputField inputFiled;
         [SerializeField] private Button buttonRemove;
@@ -32,12 +31,12 @@ namespace QuizFields
             myToggle.isOn = _data.toggleA;
         }
 
-        private void Remove(QuizFieldData obj)
+        private void Remove(QuizFieldData data)
         {
             if (EditManager.Instance.currentTemplate.minFields >=
                 EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
+            EditManager.Instance.currentQuestionData.quizFields.Remove(data);
             Destroy(gameObject);
-            EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
             EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
         }
 
