@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: bac1557eaed099e4f951724c22ffc731
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2390121814052647994
+    second: final correction UI_updated-29_0
+  - first:
+      213: -949584548284465819
+    second: final correction UI_updated-29_1
+  - first:
+      213: -7853255390891072111
+    second: final correction UI_updated-29_2
+  - first:
+      213: -4402513394444778199
+    second: final correction UI_updated-29_3
+  - first:
+      213: -6476152268924977463
+    second: final correction UI_updated-29_4
+  - first:
+      213: -435462755963725889
+    second: final correction UI_updated-29_5
+  - first:
+      213: -1221525691819735233
+    second: final correction UI_updated-29_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +62,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -73,9 +94,168 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: final correction UI_updated-29_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 718
+        width: 439
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a343580602b6b2120800000000000000
+      internalID: 2390121814052647994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_1
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 730
+        width: 241
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56dfd4b62e562d2f0800000000000000
+      internalID: -949584548284465819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_2
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 376
+        width: 132
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 195248f84d1a30390800000000000000
+      internalID: -7853255390891072111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 377
+        width: 138
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 925483da46127e2c0800000000000000
+      internalID: -4402513394444778199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_4
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 69
+        width: 241
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cef263d2d51026a0800000000000000
+      internalID: -6476152268924977463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_5
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 66
+        width: 134
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb79edd3eece4f9f0800000000000000
+      internalID: -435462755963725889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: final correction UI_updated-29_6
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 67
+        width: 138
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f37421fead44c0fe0800000000000000
+      internalID: -1221525691819735233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
