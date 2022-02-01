@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Envast.Layouts;
 using ModeManager;
 using Sirenix.Utilities;
+using Templates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -83,9 +84,12 @@ namespace ChapterPanel
             }
 
             var templateData = TemplatesHandler.GetTemplateDataById(qstBtn.Data.templateId);
-            OnTemplateSelected(templateData);
-        }
+            OnTemplateSelected(templateData);        }
 
+        private void GetTemplate(TemplateData tmp)
+        {
+            OnTemplateSelected(tmp);
+        }
         private void ReturnMainContentToDefaultSize()
         {
             mainHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);

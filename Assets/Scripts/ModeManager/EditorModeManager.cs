@@ -69,7 +69,7 @@ namespace ModeManager
         }
 
         private void InitiateDesignMode(QuestionBtn questionButton)
-        {
+        { 
             if (questionButton.Data.quizFields.IsNullOrEmpty())
             {
                 EditManager.Instance.MaximiseMainContentHolder();
@@ -80,15 +80,20 @@ namespace ModeManager
 
         private void GenerateTemplate(int templateId, QuestionData currentQuestionData)
         {
-            var newTemplate = TemplatesHandler.GetTemplateById(templateId);
-            if (newTemplate == null)
+             TemplatesHandler.Instance.GetTemplateById(templateId,OnComplete);
+            
+        }
+
+        private void OnComplete(TemplateBase obj)
+        {
+            if (obj == null)
             {
                 Debug.Log("Prefab is null!");
                 return;
             }
-            newTemplate.transform.SetParent(designModePanel.transform);
-            newTemplate.Transform.localScale = Vector3.one;
-            OnGetTemplateComplete?.Invoke(newTemplate, currentQuestionData);
+            obj.transform.SetParent(designModePanel.transform);
+            obj.Transform.localScale = Vector3.one;
+            OnGetTemplateComplete?.Invoke(obj, currentQuestionData);
         }
 
         private void ClickDesignMode()

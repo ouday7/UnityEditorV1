@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f2af32fb0dc71419158c93f86aa08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choices: []
   _choiceButton: {fileID: 2357521420119971380, guid: 7fcc278bbdadea446948f50b674de4c3, type: 3}
   _buttonsList: {fileID: 5723714276290529918}
 --- !u!222 &3846846862371286394
