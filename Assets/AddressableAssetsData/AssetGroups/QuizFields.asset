@@ -21,38 +21,38 @@ MonoBehaviour:
     m_Address: TextQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 7022761623735018150, guid: 1cf3f03fa39641b499701ae314602f79, type: 3}
-    m_TargetAsset: {fileID: 7022761623735018150, guid: 1cf3f03fa39641b499701ae314602f79, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 3a699577f3b492c4caf14d892bb11da8
     m_Address: TextTextQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 5872097149943749217, guid: 3a699577f3b492c4caf14d892bb11da8, type: 3}
-    m_TargetAsset: {fileID: 5872097149943749217, guid: 3a699577f3b492c4caf14d892bb11da8, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 53144737174410a42aec4c59e164e050
     m_Address: Toggle
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 6257580834056500962, guid: 53144737174410a42aec4c59e164e050, type: 3}
-    m_TargetAsset: {fileID: 6257580834056500962, guid: 53144737174410a42aec4c59e164e050, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 65b43c72bc17fab4884f7c6f13de7b15
     m_Address: ToggleTextMQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2705175541875763513, guid: 65b43c72bc17fab4884f7c6f13de7b15, type: 3}
-    m_TargetAsset: {fileID: 2705175541875763513, guid: 65b43c72bc17fab4884f7c6f13de7b15, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: c007d969dfa7e9148b934ba061632f09
     m_Address: ToggleTextQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 318714604980244919, guid: c007d969dfa7e9148b934ba061632f09, type: 3}
-    m_TargetAsset: {fileID: 318714604980244919, guid: c007d969dfa7e9148b934ba061632f09, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: fe628fb4158c13a4aa9c70695f268206
     m_Address: ImageTextQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 344159176547170323, guid: fe628fb4158c13a4aa9c70695f268206, type: 3}
-    m_TargetAsset: {fileID: 344159176547170323, guid: fe628fb4158c13a4aa9c70695f268206, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ee5ce07e72a42ed43b2f322e0c7d5de7, type: 2}
   m_SchemaSet:

@@ -67,7 +67,6 @@ public class TemplatesHandler : EntryPointSystemBase
         if (!Instance._mapById.ContainsKey(Id)) throw Exception($"No Template With id == {Id}");
         var name = Instance._mapById[Id].templateName;
         if (!Instance._mapByName.ContainsKey(name)) throw Exception($"No Template With Name == {name}");
-        // return Instantiate(Instance._mapByName[name]);
         Addressables.InstantiateAsync(Instance._mapByName[name]).Completed += (operation) =>
         {
             OnComplete?.Invoke(operation.Result.GetComponent<TemplateBase>());
