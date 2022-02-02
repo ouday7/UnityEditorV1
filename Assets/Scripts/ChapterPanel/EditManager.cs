@@ -180,7 +180,6 @@ namespace ChapterPanel
                 GenerateQuestionFields();
 
             Invoke(nameof(MaximiseMainContentHolder),.01f);
-            GameDataManager.instance.SaveToJson();
         }
 
         private void GenerateQuestionFields()

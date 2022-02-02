@@ -1729,6 +1729,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2963326415709235342, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
+      propertyPath: m_Name
+      value: LosePopUp
+      objectReference: {fileID: 0}
     - target: {fileID: 3553665635534748870, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 241.8
