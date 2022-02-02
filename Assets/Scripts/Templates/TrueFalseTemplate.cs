@@ -25,11 +25,9 @@ namespace Templates
         private void ReturnResult()
         {
             if (_result)
-            {
-                EditorModeManager.Instance.winPanel.SetActive(true);
+            { 
                 return;
             }
-            EditorModeManager.Instance.losePanel.SetActive(true);
         }
 
         public override void BindData(QuestionData inQuestionData)

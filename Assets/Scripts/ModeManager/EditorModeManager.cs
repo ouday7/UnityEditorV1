@@ -29,12 +29,13 @@ namespace ModeManager
         [SerializeField] private RtlText mainQuestion;
         [SerializeField] private RtlText subQuestion;
         [SerializeField] public Button resultBtn;
-        [SerializeField] public GameObject winPanel;
-        [SerializeField] public GameObject losePanel;
+        [SerializeField] public GameObject quizoWon;
+        [SerializeField] public GameObject quizoLost;
         private Button _btn;
         private Image _bg;
         public static QuestionData currentQuestionData;
         private TemplateBase _currentTemplate;
+        
 
         private void OnDestroy()
         {
@@ -120,7 +121,8 @@ namespace ModeManager
         private void OnClickEditMode()
         {
             designModePanel.gameObject.SetActive(false);
-
+            quizoLost.SetActive(false);
+            quizoWon.SetActive(false);
             editModeButton.interactable = false;
             editModeButton.image.color = selectedColor;
 
