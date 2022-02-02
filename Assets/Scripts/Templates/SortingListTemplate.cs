@@ -11,6 +11,7 @@ namespace Templates
     {
         [SerializeField] private DragController _draggableButton;
         [SerializeField] private CustomGridLayout _optionsList;
+        private bool result;
         public override void Initialize()
         {
             EditorModeManager.Instance.resultBtn.onClick.AddListener(ReturnResult);
@@ -41,16 +42,20 @@ namespace Templates
                     continue;
                 }
                 {
-                    EditorModeManager.Instance.losePanel.SetActive(true);
+                    QuizLost.lastTemplate = gameObject;
+                    this.gameObject.SetActive(false);
+                    EditorModeManager.Instance.quizoLost.SetActive(true);
                     return;
                 }
             }
-            EditorModeManager.Instance.winPanel.SetActive(true);
+            QuizoWon.lastTemplate = gameObject;
+            this.gameObject.SetActive(false);
+            EditorModeManager.Instance.quizoWon.gameObject.SetActive(true);
         }
         
         public override bool GetResult()
         {
-            return true;
+            return result;
         }
 
         public override void ResetTemplate()

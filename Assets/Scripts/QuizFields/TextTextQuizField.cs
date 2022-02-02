@@ -12,7 +12,7 @@ public class TextTextQuizField : QuizFieldBase
     {
         text1.onEndEdit.AddListener(InputValue1);
         text2.onEndEdit.AddListener(InputValue2);
-        buttonRemove.onClick.AddListener(Remove);
+        buttonRemove.onClick.AddListener(()=>Remove(_data));
     }
 
     public override void BindData(QuizFieldData inData)
@@ -22,9 +22,13 @@ public class TextTextQuizField : QuizFieldBase
         text2.text = _data.textTwo;
     }
 
-    private void Remove()
+    private void Remove(QuizFieldData data)
     {
+        if (EditManager.Instance.currentTemplate.minFields >=
+            EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
+        EditManager.Instance.currentQuestionData.quizFields.Remove(data);
         Destroy(gameObject);
+        EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
     }
 
 

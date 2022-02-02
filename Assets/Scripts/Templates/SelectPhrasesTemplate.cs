@@ -55,10 +55,15 @@ namespace Templates
         {
             if (_currentChoices.Any(choice => !choice.data.toggleA))
             {
-                EditorModeManager.Instance.losePanel.SetActive(true);
+                QuizLost.lastTemplate = gameObject;
+                this.gameObject.SetActive(false);
+                EditorModeManager.Instance.quizoLost.SetActive(true);
                 return false;
             }
-            EditorModeManager.Instance.winPanel.SetActive(true);
+
+            QuizoWon.lastTemplate = gameObject;
+            this.gameObject.SetActive(false);
+            EditorModeManager.Instance.quizoWon.gameObject.SetActive(true);
             return true;
         }
         public override void ResetTemplate()

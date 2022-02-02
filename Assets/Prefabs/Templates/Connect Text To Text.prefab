@@ -111,9 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a57423b33f2d04aafb2fa87f64e1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainQuestionTxt: {fileID: 0}
-  subQuestionTxt: {fileID: 0}
-  resultBtn: {fileID: 0}
   dragObject: {fileID: 2629879378239850400, guid: a697681ccb536414a979435761ff4cbe, type: 3}
   question: {fileID: 2629540551151138680, guid: c42ec3ff93691ac4c8c837bbcec39d0d, type: 3}
   questionHolder: {fileID: 6284934205732865053}
