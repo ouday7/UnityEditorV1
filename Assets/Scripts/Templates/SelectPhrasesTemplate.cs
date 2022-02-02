@@ -18,7 +18,6 @@ namespace Templates
        
         public override void Initialize()
         {
-            EditorModeManager.Instance.resultBtn.onClick.AddListener(()=>GetResult());
             _currentChoices = new List<ChoiceButton>();
         }
 
@@ -53,18 +52,7 @@ namespace Templates
         
         public override bool GetResult()
         {
-            if (_currentChoices.Any(choice => !choice.data.toggleA))
-            {
-                QuizLost.lastTemplate = gameObject;
-                this.gameObject.SetActive(false);
-                EditorModeManager.Instance.quizoLost.SetActive(true);
-                return false;
-            }
-
-            QuizoWon.lastTemplate = gameObject;
-            this.gameObject.SetActive(false);
-            EditorModeManager.Instance.quizoWon.gameObject.SetActive(true);
-            return true;
+            return _currentChoices.All(choice => choice.data.toggleA);
         }
         public override void ResetTemplate()
         {

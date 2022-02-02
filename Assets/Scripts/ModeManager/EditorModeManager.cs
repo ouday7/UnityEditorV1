@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Templates;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UPersian.Components;
 
@@ -28,7 +29,7 @@ namespace ModeManager
         [SerializeField] private Button hideWarningPanelBtn;
         [SerializeField] private RtlText mainQuestion;
         [SerializeField] private RtlText subQuestion;
-        [SerializeField] public Button resultBtn;
+        [SerializeField] private Button resultBtn;
         [SerializeField] public GameObject quizoWon;
         [SerializeField] public GameObject quizoLost;
         private Button _btn;
@@ -48,7 +49,8 @@ namespace ModeManager
         {
             if(Instance!=null) return;
             Instance=this;
-        
+            
+            resultBtn.onClick.AddListener(Result);
             designModeButton.onClick.AddListener(ClickDesignMode);
             editModeButton.onClick.AddListener(OnClickEditMode);
             hideWarningPanelBtn.onClick.AddListener(() => warningPanel.SetActive(false));
@@ -56,7 +58,22 @@ namespace ModeManager
             QuestionBtn.OnClickQuestion += InitiateDesignMode;
             OnGetTemplateComplete += StartTemplate;
         }
-    
+
+        private void Result()
+        {
+            if (!_currentTemplate.GetResult())
+            {
+                QuizLost.lastTemplate = _currentTemplate.gameObject;
+                _currentTemplate.gameObject.SetActive(false);
+                quizoLost.SetActive(true);
+                return;
+            }
+            
+            QuizoWon.lastTemplate = _currentTemplate.gameObject;
+            _currentTemplate.gameObject.SetActive(false);
+            quizoWon.gameObject.SetActive(true);
+        }
+
         private void StartTemplate(TemplateBase template, QuestionData currentQuestion)
         {
             if(_currentTemplate != null) Destroy(_currentTemplate.gameObject);

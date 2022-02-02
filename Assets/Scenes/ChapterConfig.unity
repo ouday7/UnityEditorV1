@@ -743,6 +743,7 @@ MonoBehaviour:
   editModeButton: {fileID: 1489064517}
   warningPanel: {fileID: 651578548}
   hideWarningPanelBtn: {fileID: 902239937}
+  resultButton: {fileID: 431084043}
   mainQuestion: {fileID: 121814509}
   subQuestion: {fileID: 968312854}
   resultBtn: {fileID: 431084043}
@@ -1341,11 +1342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924135599826, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2
+      value: -28.395
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924135599826, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1001
+      value: 974.60535
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924135599826, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1354,6 +1355,10 @@ PrefabInstance:
     - target: {fileID: 1709331924135599827, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: padding.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709331924135599827, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
+      propertyPath: alignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924195000386, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_ShowMaskGraphic
@@ -1437,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924916450953, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -210.00024
+      value: -210
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925074966408, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_Sprite

@@ -12,15 +12,6 @@ public class QuizoWon : MonoBehaviour
 
     private void Start()
     {
-        /*leftStar.transform.DORotate(new Vector3(0, 0, 300), 0.8f).OnComplete(()=>
-        {
-            rightStar.transform.DORotate(new Vector3(0, 0, 300), 0.8f).OnComplete(() =>
-            {
-                middletStar.transform.DORotate(new Vector3(0, 0, 300), 0.8f);
-            });
-
-        });*/
-        
         ClosePopUp.onClick.AddListener(()=>
         {
             this.gameObject.SetActive(false);

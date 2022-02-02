@@ -111,7 +111,6 @@ namespace ChapterPanel
         }
         public void MaximiseMainContentHolders(int nbChild)
         {
-            Debug.Log($"nb child = {nbChild}");
             if (nbChild == 0)
             {
                 mainContentHolder.RectTransform.sizeDelta = new Vector2(defaultSize.x, defaultSize.y);

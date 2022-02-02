@@ -31,7 +31,10 @@ namespace QuizFields
             EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
         }
 
-        private void InputValue(string newValue) => _data.textA = newValue;
-
+        private void InputValue(string newValue)
+        {
+            _data.textA = newValue;
+            GameDataManager.instance.SaveToJson();
+        }
     }
 }

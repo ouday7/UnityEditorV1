@@ -17,7 +17,6 @@ namespace Templates
 
         public override void Initialize()
         {
-            EditorModeManager.Instance.resultBtn.onClick.AddListener(ReturnResult);
             btnA.OnClicked += OnClickButtonA;
             btnB.OnClicked += OnClickButtonB;
         }

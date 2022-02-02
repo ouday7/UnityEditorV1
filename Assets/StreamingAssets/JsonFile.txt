@@ -555,7 +555,7 @@
             "questions": [
                 {
                     "questionId": 0,
-                    "mainQst": "",
+                    "mainQst": "Select the right phrases",
                     "subQst": "",
                     "helpQst": "",
                     "quizFields": [
@@ -563,7 +563,7 @@
                             "templateID": 0,
                             "id": 1,
                             "type": "",
-                            "textA": "",
+                            "textA": "a",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -578,7 +578,7 @@
                             "templateID": 0,
                             "id": 2,
                             "type": "",
-                            "textA": "",
+                            "textA": "bv",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -586,7 +586,7 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": false,
+                            "toggleA": true,
                             "toggleTwo": false
                         },
                         {

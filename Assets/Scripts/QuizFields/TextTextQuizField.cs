@@ -32,6 +32,16 @@ public class TextTextQuizField : QuizFieldBase
     }
 
 
-    private void InputValue1(string newValue) => _data.textA = newValue;
-    private void InputValue2(string newValue) => _data.textTwo = newValue;
+    private void InputValue1(string newValue)
+    {
+        _data.textA = newValue;
+        GameDataManager.instance.SaveToJson();
+    }
+
+    private void InputValue2(string newValue)
+    {
+        _data.textTwo = newValue;
+        GameDataManager.instance.SaveToJson();
+    }
+    
 }

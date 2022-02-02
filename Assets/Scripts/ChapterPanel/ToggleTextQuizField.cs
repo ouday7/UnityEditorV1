@@ -54,10 +54,12 @@ public class ToggleTextQuizField : QuizFieldBase
     private void ToggleValue(bool newValue)
     {
         _data.toggleA = newValue;
+        GameDataManager.instance.SaveToJson();
     }
     private void InputValue(string newValue)
     {
         _data.textA = newValue;
+        GameDataManager.instance.SaveToJson();
     } 
     
 }

@@ -29,6 +29,14 @@ public class ImageTextQuizField : QuizFieldBase
         Destroy(gameObject);
     }
 
-    private void InputValue1(string newValue) => _data.textA = newValue;
-    private void SetImage(Image newImage) => _data.imageOne = newImage.sprite;
+    private void InputValue1(string newValue)
+    {
+        _data.textA = newValue;
+        GameDataManager.instance.SaveToJson();
+    } 
+    private void SetImage(Image newImage)
+    {
+        _data.imageOne = newImage.sprite;
+        GameDataManager.instance.SaveToJson();
+    }
 }

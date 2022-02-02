@@ -14,7 +14,6 @@ namespace Templates
         private bool result;
         public override void Initialize()
         {
-            EditorModeManager.Instance.resultBtn.onClick.AddListener(ReturnResult);
         }
         public override void BindData(QuestionData inQuestionData)
         {
@@ -31,31 +30,17 @@ namespace Templates
         {
             _optionsList.UpdateLayout();
         }
-        private void ReturnResult()
-        {
-            var correctSort=1;
-            foreach (Transform btn in _optionsList.RectTransform)
-            {
-                if (btn.GetComponent<DragController>().data.id == correctSort)
-                {
-                    correctSort++;
-                    continue;
-                }
-                {
-                    QuizLost.lastTemplate = gameObject;
-                    this.gameObject.SetActive(false);
-                    EditorModeManager.Instance.quizoLost.SetActive(true);
-                    return;
-                }
-            }
-            QuizoWon.lastTemplate = gameObject;
-            this.gameObject.SetActive(false);
-            EditorModeManager.Instance.quizoWon.gameObject.SetActive(true);
-        }
-        
+
         public override bool GetResult()
         {
-            return result;
+            var correctSort = 1;
+            foreach (Transform btn in _optionsList.RectTransform)
+            {
+                if (btn.GetComponent<DragController>().data.id != correctSort) return false;
+                correctSort++;
+            }
+
+            return true;
         }
 
         public override void ResetTemplate()
