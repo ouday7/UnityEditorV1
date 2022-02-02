@@ -1437,7 +1437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709331924916450953, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -210
+      value: -210.00024
       objectReference: {fileID: 0}
     - target: {fileID: 1709331925074966408, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_Sprite
@@ -1747,7 +1747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4901950872426757027, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5663086115681587799, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_Enabled
@@ -1799,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8677789292784808223, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_Text
-      value: questionhjnamlkeilae
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8677789292784808223, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -1827,11 +1827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8677789293429129977, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8677789293568427236, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_Text
-      value: "\thkaeblakebaenlbneaea"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8677789293568427236, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_FontData.m_Alignment
