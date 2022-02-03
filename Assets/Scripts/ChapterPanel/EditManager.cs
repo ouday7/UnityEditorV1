@@ -4,7 +4,6 @@ using Envast.Layouts;
 using ModeManager;
 using Sirenix.Utilities;
 using Templates;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -60,7 +59,8 @@ namespace ChapterPanel
 
         private void OpenPanel()
         {
-            panelPopUp.GameObject().SetActive(true);
+            panelPopUp.gameObject.SetActive(true);
+            
         }
 
         private void ClickQuestion(QuestionBtn qstBtn)
