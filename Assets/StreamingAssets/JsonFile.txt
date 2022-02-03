@@ -489,350 +489,6 @@
     ],
     "exercises": [
         {
-            "chapterId": 2,
-            "exerciseId": 0,
-            "questions": [
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 1,
-                    "situationData": ""
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 3,
-                    "situationData": ""
-                }
-            ]
-        },
-        {
-            "chapterId": 2,
-            "exerciseId": 0,
-            "questions": [
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 1,
-                    "situationData": ""
-                }
-            ]
-        },
-        {
-            "chapterId": 1,
-            "exerciseId": 0,
-            "questions": [
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 4,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 5,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 6,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 2,
-                    "situationData": ""
-                }
-            ]
-        },
-        {
-            "chapterId": 12,
-            "exerciseId": 0,
-            "questions": [
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 1,
-                    "situationData": ""
-                }
-            ]
-        },
-        {
             "chapterId": 21,
             "exerciseId": 0,
             "questions": [
@@ -894,7 +550,58 @@
             ]
         },
         {
-            "chapterId": 3,
+            "chapterId": 1,
+            "exerciseId": 0,
+            "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                }
+            ]
+        },
+        {
+            "chapterId": 37,
             "exerciseId": 0,
             "questions": [
                 {
@@ -907,7 +614,7 @@
                             "templateID": 0,
                             "id": 1,
                             "type": "",
-                            "textA": "t",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -915,14 +622,14 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
                             "templateID": 0,
                             "id": 2,
                             "type": "",
-                            "textA": "f",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -937,7 +644,71 @@
                             "templateID": 0,
                             "id": 3,
                             "type": "",
-                            "textA": "f",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        }
+                    ],
+                    "templateId": 2,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [
+                        {
+                            "templateID": 0,
+                            "id": 1,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 2,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 3,
+                            "type": "",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -953,6 +724,92 @@
                     "situationData": ""
                 }
             ]
+        },
+        {
+            "chapterId": 11,
+            "exerciseId": 0,
+            "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [
+                        {
+                            "templateID": 0,
+                            "id": 1,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 2,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 3,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        }
+                    ],
+                    "templateId": 3,
+                    "situationData": ""
+                }
+            ]
+        },
+        {
+            "chapterId": 16,
+            "exerciseId": 0,
+            "questions": [
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                }
+            ]
+        },
+        {
+            "chapterId": 3,
+            "exerciseId": 0,
+            "questions": []
+        },
+        {
+            "chapterId": 1,
+            "exerciseId": 0,
+            "questions": []
         }
     ]
 }

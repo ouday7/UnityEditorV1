@@ -1,4 +1,5 @@
-﻿using EditorMenu;
+﻿using DG.Tweening;
+using EditorMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -53,7 +54,14 @@ namespace ChapterPanel
             _startSize = RectTransform.sizeDelta.y;
         }
 
-        private void AddQuestion() => MenuController.instance.AddNewQst(this);
+        private void AddQuestion()
+        {
+            addQstBtn.transform.DOScale(0.85f, 0.05f).OnComplete(() =>
+            {
+                addQstBtn.transform.DOScale(1, 0.05f);
+            });
+            MenuController.instance.AddNewQst(this);
+        }
 
         private void InitializeDrag()
         {
@@ -84,7 +92,7 @@ namespace ChapterPanel
         private void Show(int nbChild)
         {
             if (nbChild == 0) return;
-
+            
             UpdateQuestionHolderSize();
             MenuController.instance.UpdateExercisesHolderSize();
             qstHolder.gameObject.SetActive(true);

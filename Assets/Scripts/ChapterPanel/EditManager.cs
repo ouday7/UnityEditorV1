@@ -65,8 +65,8 @@ namespace ChapterPanel
 
         private void ClickQuestion(QuestionBtn qstBtn)
         {
+            qstBtn.Select();
             currentQuestion = qstBtn.Data;
-
             mainQuestionText.text = currentQuestion.mainQst;
             subQuestionText.text = currentQuestion.subQst;
             helpQuestionText.text = currentQuestion.helpQst;

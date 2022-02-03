@@ -47,5 +47,13 @@ namespace ChapterPanel
             _data = quesData;
             return;
         }
+
+        public void Select()
+        {
+            transform.DOScale(0.75f, 0.15f).OnComplete(() =>
+            {
+                transform.DOScale(1, 0.15f);
+            });
+        }
     }
 }

@@ -48,10 +48,6 @@ namespace EditorMenu
             BindData(_data);
             GameDataManager.instance.SaveToJson();
         }
-        public void SetTextColor()
-        {
-            text.color=Color.white;
-        }
         public void ResetTextColor()
         {
             text.color=Color.black;
