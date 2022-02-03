@@ -20,18 +20,23 @@ public class ToggleTextQuizField : QuizFieldBase
         inputFiled.onEndEdit.AddListener(InputValue);
     }
 
+    // private void OnClickToggle(bool newValue)
+    // {
+    //     if (_lastSelected != null)
+    //     {
+    //         _lastSelected.isOn = false;
+    //         ToggleValue(newValue);
+    //         _lastSelected = myToggle;
+    //         return;
+    //     }
+    //
+    //     ToggleValue(newValue);
+    //    _lastSelected = myToggle;
+    // }
+    
     private void OnClickToggle(bool newValue)
     {
-        if (_lastSelected != null)
-        {
-            _lastSelected.isOn = false;
-            ToggleValue(newValue);
-            _lastSelected = myToggle;
-            return;
-        }
-
         ToggleValue(newValue);
-        _lastSelected = myToggle;
     }
 
     public override void BindData(QuizFieldData inData)
