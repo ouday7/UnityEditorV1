@@ -230,5 +230,5 @@ MonoBehaviour:
   toggleText: {fileID: 135009355800997240}
   toggleButton: {fileID: 3600809672620393226}
   mainImage: {fileID: 8794631762126498740}
-  selectedCase: {r: 1, g: 0.8941177, b: 0.09411766, a: 1}
-  unselectedCase: {r: 0.8679245, g: 0, b: 0.0763474, a: 1}
+  selectedCase: {r: 0.9372549, g: 0.80784315, b: 0.22745098, a: 1}
+  unselectedCase: {r: 0.8745098, g: 0.27450982, b: 0.26666668, a: 1}

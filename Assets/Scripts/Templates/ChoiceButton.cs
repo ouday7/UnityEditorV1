@@ -35,14 +35,17 @@ namespace Templates
             IsSelected = true;
             transform.DOScale(0.7f, .15f).OnComplete(()=>
             {
-                transform.DOScale(1.15f, .2f);
+                transform.DOScale(1, .2f);
                 transform.GetComponent<Image>().DOColor(selectedColor,0.05f);
             });
         }
         public void Unselect()
         {
             IsSelected = false;
-            transform.DOScale(1, .25f);
+            transform.DOScale(0.7f, .15f).OnComplete(()=>
+            {
+                transform.DOScale(1, .2f);
+            });
             transform.GetComponent<Image>().DOColor(unselectedColor,0.15f);
         }
 
