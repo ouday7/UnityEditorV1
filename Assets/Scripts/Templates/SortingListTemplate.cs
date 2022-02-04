@@ -26,10 +26,6 @@ namespace Templates
             }
             _optionsList.ShuffleLayout();
         }
-        public void UpdateList()
-        {
-            _optionsList.UpdateLayout();
-        }
 
         public override bool GetResult()
         {
@@ -39,7 +35,6 @@ namespace Templates
                 if (btn.GetComponent<DragController>().data.id != correctSort) return false;
                 correctSort++;
             }
-
             return true;
         }
 

@@ -98,6 +98,7 @@ namespace EditorMenu
                 subjectBtn.Transform.localScale = Vector3.one;
                 _subjectsList.Add(subjectBtn.Transform);
                 if(!isFirst) continue;
+                subjectBtn.AnimateButton();
                 subjectBtn.Select();
                 subjectBtn.SubjectButtonSelected();
                 isFirst = false;

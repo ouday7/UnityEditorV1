@@ -64,9 +64,9 @@ namespace MainEditor
 
         protected void InvokeUpdateChaptersOrder() => OnUpdateIndex?.Invoke();
 
-        private void AnimateButton()
+        public void AnimateButton()
         {
-            Transform.DOScale(0.8f, duration).SetEase(ease).OnComplete( () =>
+            Transform.DOScale(0.75f, duration).SetEase(ease).OnComplete( () =>
             {
                 Transform.DOScale(1f, duration).SetEase(ease);
             });

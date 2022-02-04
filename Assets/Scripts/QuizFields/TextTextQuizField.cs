@@ -28,7 +28,7 @@ public class TextTextQuizField : QuizFieldBase
             EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
         EditManager.Instance.currentQuestionData.quizFields.Remove(data);
         Destroy(gameObject);
-        EditManager.Instance.MaximiseMainContentHolders(EditManager.Instance.currentQuestionData.quizFields.Count);
+        EditManager.Instance.UpdateMainHolderByOneItem(false);
     }
 
 
