@@ -32,46 +32,6 @@
                             "templateID": 0,
                             "id": 2,
                             "type": "",
-                            "textA": "true",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": true,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
-                            "id": 3,
-                            "type": "",
-                            "textA": "false",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": false,
-                            "toggleTwo": false
-                        }
-                    ],
-                    "templateId": 1,
-                    "situationData": ""
-                },
-                {
-                    "questionId": 0,
-                    "mainQst": "",
-                    "subQst": "",
-                    "helpQst": "",
-                    "quizFields": [
-                        {
-                            "templateID": 0,
-                            "id": 1,
-                            "type": "",
                             "textA": "",
                             "textTwo": "",
                             "imageOne": {
@@ -85,24 +45,9 @@
                         },
                         {
                             "templateID": 0,
-                            "id": 2,
-                            "type": "",
-                            "textA": "true",
-                            "textTwo": "",
-                            "imageOne": {
-                                "instanceID": 0
-                            },
-                            "imageTwo": {
-                                "instanceID": 0
-                            },
-                            "toggleA": true,
-                            "toggleTwo": false
-                        },
-                        {
-                            "templateID": 0,
                             "id": 3,
                             "type": "",
-                            "textA": "false",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -114,7 +59,7 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 1,
+                    "templateId": 2,
                     "situationData": ""
                 }
             ]
