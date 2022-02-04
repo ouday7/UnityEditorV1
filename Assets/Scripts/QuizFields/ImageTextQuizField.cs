@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ImageTextQuizField : QuizFieldBase
 {
     [SerializeField] private InputField text1;
-    [SerializeField] private Button _image;
+    [SerializeField] private Button image;
     [SerializeField] private Button buttonRemove;
 
     public override void Initialize()
@@ -21,7 +21,7 @@ public class ImageTextQuizField : QuizFieldBase
     {
         _data = inData;
         text1.text = _data.textA;
-        _image.image.sprite = _data.imageOne;
+        image.image.sprite = _data.imageOne;
     }
 
     private void Remove()
