@@ -30,9 +30,9 @@
                         },
                         {
                             "templateID": 0,
-                            "id": 2,
+                            "id": 4,
                             "type": "",
-                            "textA": "true",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -40,14 +40,29 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
                             "templateID": 0,
-                            "id": 3,
+                            "id": 4,
                             "type": "",
-                            "textA": "false",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 4,
+                            "type": "",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -59,7 +74,7 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 1,
+                    "templateId": 2,
                     "situationData": ""
                 },
                 {
@@ -87,7 +102,7 @@
                             "templateID": 0,
                             "id": 2,
                             "type": "",
-                            "textA": "true",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -95,14 +110,14 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": true,
+                            "toggleA": false,
                             "toggleTwo": false
                         },
                         {
                             "templateID": 0,
                             "id": 3,
                             "type": "",
-                            "textA": "false",
+                            "textA": "",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -114,7 +129,25 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 1,
+                    "templateId": 2,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
+                    "situationData": ""
+                },
+                {
+                    "questionId": 0,
+                    "mainQst": "",
+                    "subQst": "",
+                    "helpQst": "",
+                    "quizFields": [],
+                    "templateId": 0,
                     "situationData": ""
                 }
             ]

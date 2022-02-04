@@ -36,7 +36,16 @@ namespace ChapterPanel
             {
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, 1300), 0.01f);
                 MenuController.instance.mainContent.gameObject.SetActive(true);
-                MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -233), 0.4f);
+                MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -233), 0.4f).OnComplete(() =>
+                {
+                    if (EditManager.Instance.currentQuestionData.quizFields.Count == 0)
+                    {
+                        EditManager.Instance.UpdateGridLayout();
+                        return;
+                    }
+                    EditManager.Instance.UpdateMainContentPosition(false);
+                    EditManager.Instance.UpdateGridLayout();
+                });
                 OnClickQuestion?.Invoke(this);
             });
             _isInitialized = true;
@@ -45,7 +54,6 @@ namespace ChapterPanel
         public void BindData(QuestionData quesData)
         {
             _data = quesData;
-            return;
         }
 
         public void Select()

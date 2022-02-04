@@ -53,7 +53,8 @@ public class ToggleTextQuizField : QuizFieldBase
     
         Destroy(gameObject);
         EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
-        EditManager.Instance.MaximiseMainContentHolder();
+        EditManager.Instance.UpdateMainHolderByOneItem(false);
+        Invoke(nameof(EditManager.Instance.UpdateHolderSize),0.2f);
     }
 
     private void ToggleValue(bool newValue)
