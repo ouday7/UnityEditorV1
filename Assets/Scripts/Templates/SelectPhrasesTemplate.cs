@@ -49,11 +49,20 @@ namespace Templates
                     _currentChoices.Remove(newBtn);
                 });
         }
-        
+
         public override bool GetResult()
         {
-            return _currentChoices.All(choice => choice.data.toggleA);
+            var nbToggle = EditManager.Instance.currentQuestionData.quizFields.Count(quizfield => quizfield.toggleA);
+            if (nbToggle != _currentChoices.Count) return false;
+            foreach (var choice in _currentChoices)
+            {
+                if (choice.data.toggleA) continue;
+                return false;
+            }
+
+            return true;
         }
+
         public override void ResetTemplate()
         {
             var nbChild = _buttonsList.RectTransform.childCount;

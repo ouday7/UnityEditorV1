@@ -7,45 +7,45 @@ public class ConnectTextToText : TemplateBase
 {
     [SerializeField] private AnswerDrag dragObject;
     [SerializeField] private QuestionConnectTextToText question;
-    [SerializeField] private GameObject questionHolder;
-    [SerializeField] private GameObject answerHolder;
+    [SerializeField] private CustomGridLayout questionHolder;
+    [SerializeField] private CustomGridLayout answerHolder;
     private List<AnswerDrag> _dragObjectList;
     private List<QuestionConnectTextToText> _questionBtnList = new List<QuestionConnectTextToText>();
     private bool _result;
     private QuestionData _questionData;
-
+    public QuizFieldData data;
 
     public override void Initialize()
     {
-        
-        //check event here 
     }
 
     public override void BindData(QuestionData inQuestionData)
     {
         _questionData = inQuestionData;
-        GenerateAnswer();
-        GenerateQuestion();
-
+        GenerateAnswer(_questionData);
+        GenerateQuestion(_questionData);
     }
-
-
-    private void GenerateAnswer()
+    
+    private void GenerateAnswer(QuestionData questionData)
     {
-        foreach (var t in _questionData.quizFields)
+        foreach (var t in questionData.quizFields)
         {
             var newAnswerBtn= Instantiate(dragObject, answerHolder.transform);
-            newAnswerBtn.text.text = t.textTwo;
+            newAnswerBtn.Initialise(t);
+            newAnswerBtn.BindData();
         }
+        answerHolder.UpdateLayout();
+        
     }
-    private void GenerateQuestion()
+    private void GenerateQuestion(QuestionData questionData)
     {
-        foreach (var t in _questionData.quizFields)
+        foreach (var t in questionData.quizFields)
         {
             var newQuestionBtn = Instantiate(question, questionHolder.transform);
-            newQuestionBtn.btnRtlText.text = t.textA;
-            
+            newQuestionBtn.Initialise(t);
+            newQuestionBtn.BindData();
         }
+        questionHolder.UpdateLayout();
     }
     public override bool GetResult()
     {

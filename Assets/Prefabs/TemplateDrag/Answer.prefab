@@ -247,4 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTransform: {fileID: 5232070218015389517}
-  Text: {fileID: 1586375461964665676}
+  startTransform: {fileID: 0}
+  text: {fileID: 1586375461964665676}
+  isDrag: 0
+  endDrag: 0
