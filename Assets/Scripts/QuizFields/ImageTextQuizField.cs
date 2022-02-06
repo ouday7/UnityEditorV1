@@ -26,7 +26,7 @@ public class ImageTextQuizField : QuizFieldBase
 
     private void Remove()
     {
-        Destroy(gameObject);
+     //   Destroy(gameObject);
     }
 
     private void InputValue1(string newValue)
