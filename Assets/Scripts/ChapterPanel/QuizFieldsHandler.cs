@@ -38,7 +38,11 @@ public class QuizFieldsHandler : EntryPointSystemBase
 
         Addressables.InstantiateAsync(Instance._map[inName]).Completed += (operation) =>
         {
-            if (operation.Status != AsyncOperationStatus.Succeeded) Debug.Log("Fail to load assets.");
+            if (operation.Status != AsyncOperationStatus.Succeeded)
+            {
+                Debug.Log("Fail to load assets.");
+                return;
+            }
             Debug.Log("Asset Loaded Successfully");
             onCompleteCallback?.Invoke(operation.Result.GetComponent<QuizFieldBase>());
         };

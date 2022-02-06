@@ -34,15 +34,13 @@ namespace ChapterPanel
                 _parentExercise.DeleteQuestion(this));
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
+                
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, 1300), 0.01f);
                 MenuController.instance.mainContent.gameObject.SetActive(true);
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -233), 0.4f).OnComplete(() =>
                 {
-                    if (EditManager.Instance.currentQuestionData.quizFields.Count == 0)
-                    {
-                        EditManager.Instance.UpdateGridLayout();
-                        return;
-                    }
+                    if (EditManager.Instance.QuizFieldsHolder.RectTransform.childCount==0) return;
+                    
                     EditManager.Instance.UpdateMainContentPosition(false);
                     EditManager.Instance.UpdateGridLayout();
                 });

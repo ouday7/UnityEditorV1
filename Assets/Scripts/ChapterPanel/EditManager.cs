@@ -167,7 +167,7 @@ namespace ChapterPanel
             Invoke(nameof(MaximiseMainContentHolder),.05f);
             
             GameDataManager.instance.SaveToJson();
-            mainGridLayout.UpdateLayout();
+            Invoke(nameof(UpdateGridLayout),.05f);
         }
 
         private void GenerateQuestionFields()
@@ -204,6 +204,7 @@ namespace ChapterPanel
                 var quizFieldType = currentTemplate.GetQuizFieldType(i);
                 QuizFieldsHandler.Instance.GetQuizField(quizFieldType,OnGetQuizfields);
             }
+            Invoke(nameof(UpdateGridLayout),.05f);
         }
         private void OnGetQuizfields(QuizFieldBase quizField)
         {
@@ -256,6 +257,7 @@ namespace ChapterPanel
             tempTemplatId++;
             UpdateMainHolderByOneItem(true);
             UpdateMainContentPosition(true);
+            Invoke(nameof(UpdateGridLayout),.05f);
         }
 
         public void UpdateMainHolderByOneItem(bool add)
