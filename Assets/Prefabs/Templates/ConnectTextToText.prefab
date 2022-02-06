@@ -94,6 +94,16 @@ MonoBehaviour:
   question: {fileID: 6816964455434222937, guid: d7d04ef3678470e4d93fd755c680c793, type: 3}
   questionHolder: {fileID: 1859501529075456786}
   answerHolder: {fileID: 2822506116478924462}
+  data:
+    templateID: 0
+    id: 0
+    type: 
+    textA: 
+    textTwo: 
+    imageOne: {fileID: 0}
+    imageTwo: {fileID: 0}
+    toggleA: 0
+    toggleTwo: 0
 --- !u!1 &8218415823765974654
 GameObject:
   m_ObjectHideFlags: 0

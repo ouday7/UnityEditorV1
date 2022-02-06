@@ -27,12 +27,6 @@ MonoBehaviour:
     m_Address: TextTextQuizField
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 5872097149943749217, guid: 3a699577f3b492c4caf14d892bb11da8, type: 3}
-    m_TargetAsset: {fileID: 5872097149943749217, guid: 3a699577f3b492c4caf14d892bb11da8, type: 3}
-  - m_GUID: 53144737174410a42aec4c59e164e050
-    m_Address: Toggle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 65b43c72bc17fab4884f7c6f13de7b15
