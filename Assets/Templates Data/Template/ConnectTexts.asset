@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb8c25dceebc70345856a544a8681f3f, type: 3}
-  m_Name: ConnectTextToText
+  m_Name: ConnectTexts
   m_EditorClassIdentifier: 
   id: 0
   templateName: 6
