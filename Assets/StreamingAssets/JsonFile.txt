@@ -517,8 +517,8 @@
                             "templateID": 0,
                             "id": 1,
                             "type": "",
-                            "textA": "aa",
-                            "textTwo": "cc",
+                            "textA": "",
+                            "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
                             },
@@ -559,7 +559,7 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 2,
+                    "templateId": 0,
                     "situationData": ""
                 },
                 {
