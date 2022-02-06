@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &47452043 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1184054076946000021, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
-  m_PrefabInstance: {fileID: 8677789292906597618}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &121814509 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8677789292784808223, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
@@ -498,6 +487,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &914629827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3879678516113067762, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
+  m_PrefabInstance: {fileID: 8677789292906597618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &968312854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8677789293568427236, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
@@ -676,24 +670,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2739734169568885481, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
   m_PrefabInstance: {fileID: 8677789292906597618}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1367574217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4901950872426757027, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
-  m_PrefabInstance: {fileID: 8677789292906597618}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1367574221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367574217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38bb720a8bb36824882fc67a22a3f836, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ClosePopUp: {fileID: 47452043}
 --- !u!1 &1469677740
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +723,7 @@ MonoBehaviour:
   mainQuestion: {fileID: 121814509}
   subQuestion: {fileID: 968312854}
   resultBtn: {fileID: 431084043}
-  quizoWon: {fileID: 1367574217}
+  quizoWon: {fileID: 914629827}
   quizoLost: {fileID: 1314074018}
 --- !u!114 &1489064517 stripped
 MonoBehaviour:
@@ -1341,7 +1317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7813398651228000071, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -210
+      value: -210.00024
       objectReference: {fileID: 0}
     - target: {fileID: 7813398651277358579, guid: ac8c35cdf9c75f54daef496f94dff0d4, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1661,7 +1637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4901950872426757027, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5663086115681587799, guid: 205f6d527044d0b439646a5c5e22d2cc, type: 3}
       propertyPath: m_Enabled

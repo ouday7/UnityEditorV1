@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 6218875165594719132}
   - component: {fileID: 6218875165594719134}
   - component: {fileID: 6218875165594719135}
-  - component: {fileID: 7751322264032710009}
+  - component: {fileID: 3940924132335415398}
   m_Layer: 5
   m_Name: Happy
   m_TagString: Untagged
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7751322264032710009
+--- !u!114 &3940924132335415398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6218875165594719133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f87f72b68c75632439759360c7c7035d, type: 3}
+  m_Script: {fileID: 11500000, guid: 38bb720a8bb36824882fc67a22a3f836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ClosePopUp: {fileID: 6218875165874820535}
