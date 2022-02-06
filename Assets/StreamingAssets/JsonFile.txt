@@ -1089,8 +1089,8 @@
                             "templateID": 0,
                             "id": 1,
                             "type": "",
-                            "textA": "a",
-                            "textTwo": "b",
+                            "textA": "",
+                            "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
                             },
@@ -1131,7 +1131,7 @@
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 0,
+                    "templateId": 3,
                     "situationData": ""
                 },
                 {
@@ -1139,8 +1139,54 @@
                     "mainQst": "",
                     "subQst": "",
                     "helpQst": "",
-                    "quizFields": [],
-                    "templateId": 0,
+                    "quizFields": [
+                        {
+                            "templateID": 0,
+                            "id": 1,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 2,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 3,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        }
+                    ],
+                    "templateId": 3,
                     "situationData": ""
                 },
                 {
@@ -1148,8 +1194,54 @@
                     "mainQst": "",
                     "subQst": "",
                     "helpQst": "",
-                    "quizFields": [],
-                    "templateId": 0,
+                    "quizFields": [
+                        {
+                            "templateID": 0,
+                            "id": 1,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 2,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        },
+                        {
+                            "templateID": 0,
+                            "id": 3,
+                            "type": "",
+                            "textA": "",
+                            "textTwo": "",
+                            "imageOne": {
+                                "instanceID": 0
+                            },
+                            "imageTwo": {
+                                "instanceID": 0
+                            },
+                            "toggleA": false,
+                            "toggleTwo": false
+                        }
+                    ],
+                    "templateId": 2,
                     "situationData": ""
                 }
             ]
