@@ -39,7 +39,11 @@ namespace ChapterPanel
                 MenuController.instance.mainContent.gameObject.SetActive(true);
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -233), 0.4f).OnComplete(() =>
                 {
-                    if (EditManager.Instance.QuizFieldsHolder.RectTransform.childCount==0) return;
+                    if (EditManager.Instance.QuizFieldsHolder.RectTransform.childCount == 0)
+                    {
+                        EditManager.Instance.UpdateGridLayout();
+                        return;
+                    }
                     
                     EditManager.Instance.UpdateMainContentPosition(false);
                     EditManager.Instance.UpdateGridLayout();
