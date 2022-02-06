@@ -1144,7 +1144,7 @@
                             "templateID": 0,
                             "id": 1,
                             "type": "",
-                            "textA": "",
+                            "textA": "t",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -1152,7 +1152,7 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": false,
+                            "toggleA": true,
                             "toggleTwo": false
                         },
                         {
@@ -1174,7 +1174,7 @@
                             "templateID": 0,
                             "id": 3,
                             "type": "",
-                            "textA": "",
+                            "textA": "t",
                             "textTwo": "",
                             "imageOne": {
                                 "instanceID": 0
@@ -1182,11 +1182,11 @@
                             "imageTwo": {
                                 "instanceID": 0
                             },
-                            "toggleA": false,
+                            "toggleA": true,
                             "toggleTwo": false
                         }
                     ],
-                    "templateId": 3,
+                    "templateId": 1,
                     "situationData": ""
                 },
                 {
