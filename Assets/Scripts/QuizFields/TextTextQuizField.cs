@@ -38,14 +38,12 @@ namespace QuizFields
 
         private void InputValue1(string newValue)
         {
-            Debug.Log($"test");
             _data.textA = newValue;
             GameDataManager.instance.SaveToJson();
         }
 
         private void InputValue2(string newValue)
         {
-            Debug.Log($"test");
             _data.textTwo = newValue;
             GameDataManager.instance.SaveToJson();
         }

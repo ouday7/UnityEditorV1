@@ -7,10 +7,12 @@ using UPersian.Components;
 public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private RectTransform currentTransform;
-    private Vector2 _currentPosition;
-    private Vector2 _startPos;
+    private Vector2 _defaultPosition;
+    private Vector2 firstPos;
+    private Vector2 otherPosition;
     public RtlText text;
     private QuizFieldData data;
+    private bool isTrigger;
 
     public void Initialise(QuizFieldData inQuizFields)
     {
@@ -22,14 +24,16 @@ public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     {
         text.text = data.textA;
     }
-    void Start()
+
+    private void Start()
     {
-        currentTransform = GetComponent<RectTransform>();
+        firstPos =GetComponent<RectTransform>().position;
     }
+        
     public void OnPointerDown(PointerEventData eventData)
     {
-        _currentPosition = currentTransform.position;
-        _startPos = currentTransform.position;
+        currentTransform = GetComponent<RectTransform>();
+        _defaultPosition = currentTransform.position;
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -38,22 +42,26 @@ public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        currentTransform.position =
-            new Vector3(eventData.position.x, eventData.position.y, currentTransform.position.z);
-        var anchoredPosition = currentTransform.anchoredPosition;
-        _currentPosition = new Vector3(anchoredPosition.x, anchoredPosition.y);
-        
-        //this.transform.position = _startPos;
+        if (!isTrigger)
+        {
+            transform.position = firstPos;
+            return;
+        }
+
+        transform.position = new Vector3(otherPosition.x, otherPosition.y);
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.gameObject.CompareTag("question")) return;
+        isTrigger = true;
+        otherPosition = other.transform.position;
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
         if (other.gameObject.CompareTag("question"))
         {
-            Debug.Log("Collision Detected");
-            //this.transform.position = _startPos;
-            // transform.position = other.transform.position;
-            currentTransform.position = other.transform.position;
-            _currentPosition = other.transform.position;
+            isTrigger = false;
         }
     }
 }
