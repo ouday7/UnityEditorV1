@@ -46,15 +46,15 @@ public class ToggleTextQuizField : QuizFieldBase
         myToggle.isOn = _data.toggleA;
     }
 
-    private void Remove(QuizFieldData obj)
+    private void Remove(QuizFieldData data)
     {
         if (EditManager.Instance.currentTemplate.minFields >=
-         EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
-    
+            EditManager.Instance.QuizFieldsHolder.transform.childCount) return;
+        EditManager.Instance.currentQuestionData.quizFields.Remove(data);
+        transform.SetParent(null);
         Destroy(gameObject);
-        EditManager.Instance.currentQuestionData.quizFields.Remove(obj);
+        EditManager.Instance.UpdateHolderSize();
         EditManager.Instance.UpdateMainHolderByOneItem(false);
-        Invoke(nameof(EditManager.Instance.UpdateHolderSize),0.2f);
     }
 
     private void ToggleValue(bool newValue)
