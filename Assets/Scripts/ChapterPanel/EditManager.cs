@@ -215,6 +215,7 @@ namespace ChapterPanel
             quizField.Initialize();
             quizField.BindData(data);
             currentQuestion.quizFields.Add(data);
+            Debug.Log($"saved data : "+data);
             tempTemplatId = nbr;
             nbr++;
             MaximiseMainContentHolder();
