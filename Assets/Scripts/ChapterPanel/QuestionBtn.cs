@@ -40,6 +40,7 @@ namespace ChapterPanel
                 MenuController.instance.mainContent.gameObject.SetActive(true);
                 MenuController.instance.mainContent.DOAnchorPos(new Vector2(0.5f, -233), 0.4f).OnComplete(() =>
                 {
+                    EditManager.Instance.UpdateGridLayout();
                     if (this._data.quizFields.IsNullOrEmpty())
                     {
                         EditManager.Instance.UpdateGridLayout();
@@ -50,6 +51,7 @@ namespace ChapterPanel
                     EditManager.Instance.UpdateGridLayout();
                 });
                 OnClickQuestion?.Invoke(this);
+                EditManager.Instance.UpdateGridLayout();
             });
             _isInitialized = true;
         }

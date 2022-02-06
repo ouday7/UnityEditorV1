@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3935342021457680, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3935342084624098, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -938,6 +942,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3935342084624098, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935342587270329, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3935342988318366, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
