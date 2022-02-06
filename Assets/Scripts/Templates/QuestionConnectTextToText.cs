@@ -11,8 +11,19 @@ public class QuestionConnectTextToText: MonoBehaviour
     public RtlText btnRtlText;
     public ProceduralImage img;
     private QuestionData _questionData;
+    public QuizFieldData data;
 
 
+    public void Initialise(QuizFieldData inQiuzField)
+    {
+        data = inQiuzField;
+        data.textTwo = inQiuzField.textTwo;
+    }
+
+    public void BindData()
+    {
+        btnRtlText.text = data.textTwo; 
+    }
     public void Start()
     {
         

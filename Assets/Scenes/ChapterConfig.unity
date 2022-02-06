@@ -391,7 +391,7 @@ MonoBehaviour:
       m_SubObjectName: 
   - type: 6
     prefab:
-      m_AssetGUID: 8e519a8e8f393b54c887d412c746c4a5
+      m_AssetGUID: 2f295be25a1a8c84c9cfe27281616d7a
       m_SubObjectName: 
 --- !u!4 &450717873
 Transform:
@@ -848,6 +848,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2630252523765239569, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630252523765239569, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630252523765239569, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2630252524219240204, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

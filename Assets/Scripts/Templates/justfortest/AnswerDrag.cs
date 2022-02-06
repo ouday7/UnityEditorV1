@@ -1,18 +1,27 @@
-﻿using UnityEngine;
+﻿using ChapterPanel;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UPersian.Components;
 
 
 public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    public RectTransform currentTransform;
-    public RectTransform startTransform;
+    private RectTransform currentTransform;
     private Vector2 _currentPosition;
     private Vector2 _startPos;
     public RtlText text;
-    public bool isDrag;
-    public bool endDrag;
-    
+    private QuizFieldData data;
+
+    public void Initialise(QuizFieldData inQuizFields)
+    {
+        data = inQuizFields;
+        data.textA= inQuizFields.textA;
+    }
+
+    public void BindData()
+    {
+        text.text = data.textA;
+    }
     void Start()
     {
         currentTransform = GetComponent<RectTransform>();
@@ -33,17 +42,12 @@ public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             new Vector3(eventData.position.x, eventData.position.y, currentTransform.position.z);
         var anchoredPosition = currentTransform.anchoredPosition;
         _currentPosition = new Vector3(anchoredPosition.x, anchoredPosition.y);
-
-        if (endDrag == true)
-        {
-            this.transform.position = _startPos;
-            transform.position = currentTransform.position;
-        }
+        
         //this.transform.position = _startPos;
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("question") && (endDrag))
+        if (other.gameObject.CompareTag("question"))
         {
             Debug.Log("Collision Detected");
             //this.transform.position = _startPos;

@@ -16,6 +16,6 @@ MonoBehaviour:
   templateName: 6
   category: 1
   icon: {fileID: 21300012, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
-  maxFields: 5
+  maxFields: 3
   minFields: 3
   templateFields: 03000000
