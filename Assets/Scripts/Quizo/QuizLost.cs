@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class QuizLost : MonoBehaviour
 {
     [SerializeField] private Button ClosePopUp;
-    public static GameObject lastTemplate;
+    [SerializeField] public static GameObject lastTemplate;
 
     private void Start()
     {
