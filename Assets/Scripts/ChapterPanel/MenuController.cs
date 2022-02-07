@@ -73,12 +73,10 @@ namespace ChapterPanel
             newQuestionButton.BindData(QstData);
             inExerciseBtn.Data.questions.Add(QstData);
             currentQstList.Add(newQuestionButton);
-            
-            UpdateExercisesHolderSize();
             inExerciseBtn.ExpandQuestions();
-            GameDataManager.instance.SaveToJson();
-            
+            UpdateHolder();
             UpdateLayout();
+            GameDataManager.instance.SaveToJson();
         }
         
         public void UpdateExercisesHolderSize()
@@ -86,14 +84,21 @@ namespace ChapterPanel
             UpdateHolderSize();
         }
 
+        private void UpdateHolder()
+        {
+            var newHeight = exerciseHolder.RectTransform.sizeDelta.y + 86;
+            exerciseHolder.RectTransform.sizeDelta = new Vector2(exerciseHolder.RectTransform.sizeDelta.x, newHeight);
+            DelayedUpdateLayout();
+        }
         private void UpdateHolderSize()
         {
             var nb = exerciseHolder.transform.childCount;
             var totalElementsHeight = currentExList.Sum(exerciseBtn => exerciseBtn.GetHeight());
             var exHolderSize = exerciseHolder.RectTransform.sizeDelta;
-            var newHeight = totalElementsHeight + (nb - 1) * exerciseHolder.spacing.y + exerciseHolder.padding.y * 2;
+            var newHeight = totalElementsHeight + (nb - 1) * exerciseHolder.spacing.y + exerciseHolder.padding.y * 2+85;
             exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, newHeight);
             DelayedUpdateLayout();
+            Debug.Log($"call test");
         }
         private void DelayedUpdateLayout()
         {

@@ -27,7 +27,7 @@ namespace ChapterPanel
         private Vector2 _startPos;
         private ExerciseData _data;
         private bool _updateSize;
-        private int qstHeight = 85;
+        private int qstHeight = 87;
         private int holderWeight = 400;
         private bool _isInitialised;
 
@@ -253,6 +253,9 @@ namespace ChapterPanel
             _changePos = false;
         }
 
-        public float GetHeight() => RectTransform.sizeDelta.y;
+        public float GetHeight()
+        {
+            return RectTransform.sizeDelta.y;
+        } 
     }
 }
