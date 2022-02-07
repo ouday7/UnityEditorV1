@@ -659,13 +659,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quizFieldsList:
-  - name: 3
-    prefab:
-      m_AssetGUID: 3a699577f3b492c4caf14d892bb11da8
-      m_SubObjectName: 
   - name: 4
     prefab:
       m_AssetGUID: fe628fb4158c13a4aa9c70695f268206
+      m_SubObjectName: 
+  - name: 3
+    prefab:
+      m_AssetGUID: 3a699577f3b492c4caf14d892bb11da8
       m_SubObjectName: 
   - name: 6
     prefab:

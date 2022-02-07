@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c25dceebc70345856a544a8681f3f, type: 3}
   m_Name: ConnectTexts
   m_EditorClassIdentifier: 
-  id: 0
+  id: 6
   templateName: 6
   category: 1
   icon: {fileID: 21300012, guid: 14da31af0e307d442b0eb658058dc380, type: 3}
