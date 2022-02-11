@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.89411765, b: 0.09411765, a: 1}
+  m_Color: {r: 0.42352945, g: 0.7568628, b: 0.9921569, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68356c3764ad390429ddad9e48ce8c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: {x: 0, y: 0, z: 0, w: 0}
+  radius: {x: 25, y: 25, z: 25, w: 25}
 --- !u!50 &7786598269574566441
 Rigidbody2D:
   serializedVersion: 4
@@ -221,7 +221,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.47854614, y: 1.3715515}
+  m_Offset: {x: 0.47854614, y: 0.19436646}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -232,7 +232,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 396.5185, y: 99.37726}
+  m_Size: {x: 396.5185, y: 97.02289}
   m_EdgeRadius: 0
 --- !u!114 &6816964455434222937
 MonoBehaviour:
@@ -248,3 +248,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnRtlText: {fileID: 1586375461964665676}
   img: {fileID: 7119650411707636550}
+  data:
+    templateID: 0
+    id: 0
+    type: 
+    textA: 
+    textTwo: 
+    imageOne: {fileID: 0}
+    imageTwo: {fileID: 0}
+    toggleA: 0
+    toggleTwo: 0

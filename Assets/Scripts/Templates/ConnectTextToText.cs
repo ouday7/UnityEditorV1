@@ -18,7 +18,7 @@ public class ConnectTextToText : TemplateBase
     public override void Initialize()
     {
     }
-
+    
     public override void BindData(QuestionData inQuestionData)
     {
         _questionData = inQuestionData;
@@ -47,9 +47,26 @@ public class ConnectTextToText : TemplateBase
         }
         questionHolder.UpdateLayout();
     }
+
     public override bool GetResult()
     {
-        return _result;
+        for (var i = 0; i < questionHolder.RectTransform.childCount; i++)
+        {
+            for (var j = 0; j < answerHolder.RectTransform.childCount; j++)
+            {
+                var question = questionHolder.RectTransform.GetChild(i);
+                var answer = answerHolder.RectTransform.GetChild(j);
+
+
+                if (!question.position.Equals(answer.position)) continue;
+                if (!question.GetComponent<QuestionConnectTextToText>().data
+                    .Equals(answer.GetComponent<AnswerDrag>().data))
+                    return false;
+
+            }
+        }
+
+        return true;
     }
     public override void ResetTemplate()
     {

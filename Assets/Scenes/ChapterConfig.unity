@@ -840,6 +840,24 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3935341259674812, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Text
+      value: 'You can''t enter playMode. Check your data.
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935341259674812, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935341259674812, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.227451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935341259674812, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1764706
+      objectReference: {fileID: 0}
     - target: {fileID: 3935341377936329, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -928,6 +946,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3935341799882681, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.06707013
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935341799882681, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935341799882681, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.17633525
+      objectReference: {fileID: 0}
     - target: {fileID: 3935342021457680, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -945,6 +975,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3935342587270329, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935342701270534, guid: 4f7796ac7302ab544b3eecefac7345e8, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

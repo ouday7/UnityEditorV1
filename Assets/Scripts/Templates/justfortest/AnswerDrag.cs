@@ -6,12 +6,13 @@ using UPersian.Components;
 
 public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    private RectTransform currentTransform;
-    private Vector2 _defaultPosition;
     private Vector2 firstPos;
+    private Vector2 _defaultPosition;
     private Vector2 otherPosition;
+    private static Vector2 saturedPos=new Vector2(0,0);
+    
     public RtlText text;
-    private QuizFieldData data;
+    public QuizFieldData data;
     private bool isTrigger;
 
     public void Initialise(QuizFieldData inQuizFields)
@@ -27,28 +28,35 @@ public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     private void Start()
     {
-        firstPos =GetComponent<RectTransform>().position;
-    }
+        _defaultPosition = transform.position;
+         firstPos = _defaultPosition;
         
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        currentTransform = GetComponent<RectTransform>();
-        _defaultPosition = currentTransform.position;
+        _defaultPosition = transform.position;
     }
     public void OnDrag(PointerEventData eventData)
     {
-        currentTransform.position =
-            new Vector3(eventData.position.x, eventData.position.y, currentTransform.position.z);
+        transform.position =
+            new Vector2(eventData.position.x, eventData.position.y);
     }
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)    
     {
         if (!isTrigger)
         {
-            transform.position = firstPos;
+            transform.position = new Vector2(firstPos.x, firstPos.y);
+            return;
+        }
+        
+        if (saturedPos.Equals(otherPosition))
+        {
+            transform.position = new Vector2(firstPos.x, firstPos.y);
             return;
         }
 
-        transform.position = new Vector3(otherPosition.x, otherPosition.y);
+        transform.position = new Vector2(otherPosition.x,otherPosition.y);
+        saturedPos = otherPosition;
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -59,9 +67,7 @@ public class AnswerDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("question"))
-        {
-            isTrigger = false;
-        }
+        if (!other.gameObject.CompareTag("question")) return;
+        isTrigger = false;
     }
 }

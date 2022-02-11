@@ -98,7 +98,6 @@ namespace ChapterPanel
             var newHeight = totalElementsHeight + (nb - 1) * exerciseHolder.spacing.y + exerciseHolder.padding.y * 2+85;
             exerciseHolder.RectTransform.sizeDelta = new Vector2(exHolderSize.x, newHeight);
             DelayedUpdateLayout();
-            Debug.Log($"call test");
         }
         private void DelayedUpdateLayout()
         {
